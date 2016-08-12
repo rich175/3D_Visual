@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+</head>
+<body>
+
+	<script src="js/three.js"></script>
+<script>
+	var renderer = new THREE.WebGLRenderer();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild(renderer.domElement);
+
+	var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+	camera.position.y = -450;
+	camera.position.z = 400;
+	camera.rotation.x = .75;
+
+	var scene = new THREE.Scene();
+
+	var plane = new THREE.Mesh(new THREE.PlaneGeometry(300, 300), new THREE.MeshNormalMaterial);
+	scene.add(plane);
+
+	var cube = new THREE.Mesh(new THREE.CubeGeometry (10, 10, 10, 10, 10, 10), new THREE.MeshPhongMaterial);
+	scene.add(cube);
+
+	renderer.render(scene, camera);
+</script>
+
+
+
+</body>
+
+
+
+
+</html>
