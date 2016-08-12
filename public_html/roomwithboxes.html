@@ -1,60 +1,91 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
 	<meta charset="utf-8">
 
 </head>
+
 <body>
 
 	<script src="js/three.js"></script>
 
-<script>
+	<script>
+		// to set the colour of the background to white instead of the default black, you need to change the var renderer = new THREE.WebGLRenderer(); to include {alpha: true} within the ()as below
+		var renderer = new THREE.WebGLRenderer({
+			alpha: true
+		});
+		// Define the size of the renderer; in this case,
+		// it will fill the entire screen
+		renderer.setSize(window.innerWidth, window.innerHeight);
 
-// to set the colour of the background to white instead of the default black, you need to change the var renderer = new THREE.WebGLRenderer(); to include {alpha: true} within the ()as below
-	var renderer = new THREE.WebGLRenderer({alpha: true});
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	document.body.appendChild(renderer.domElement);
+		document.body.appendChild(renderer.domElement);
 
-	var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.y = -450;
-	camera.position.z = 400;
-	camera.rotation.x = 45 * (Math.PI / 180);
+		var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+		camera.position.y = -400;
+		camera.position.z = 400;
+		camera.rotation.x = 35 * (Math.PI / 180);
 
-	var scene = new THREE.Scene();
+		var scene = new THREE.Scene();
 
-	var plane = new THREE.Mesh(new THREE.PlaneGeometry(window.innerWidth/2, window.innerHeight/2), new THREE.MeshNormalMaterial);
-	scene.add(plane);
+		console.log('Window Width: ' + window.innerWidth);
 
-//bottom right cube
-	var cubebr = new THREE.Mesh(new THREE.CubeGeometry (50, 50, 50), new THREE.MeshPhongMaterial);
-	cubebr.position.y = -150;
-	cubebr.position.x = 170;
-	cubebr.position.z = 50;
-	scene.add(cubebr);
+		var plane = new THREE.Mesh(new THREE.PlaneGeometry(window.innerWidth / 2, window.innerHeight / 2), new THREE.MeshNormalMaterial);
+		scene.add(plane);
 
-//top left cube
-	var cubetl = new THREE.Mesh(new THREE.CubeGeometry (50, 50, 50), new THREE.MeshPhongMaterial);
-	cubetl.position.y = 90;
-	cubetl.position.x = -170;
-	cubetl.position.z = 50;
-	scene.add(cubetl);
+		var cubeDemo = new THREE.Mesh(new THREE.CubeGeometry(200, 100, 100), new THREE.MeshNormalMaterial());
 
-//top right cube
-	var cubetr = new THREE.Mesh(new THREE.CubeGeometry (50, 50, 50), new THREE.MeshPhongMaterial);
-	cubetr.position.y = 90;
-	cubetr.position.x = 170;
-	cubetr.position.z = 50;
-	scene.add(cubetr);
+		cubeDemo.rotation.z = -45 * (Math.PI / 180);
 
-//bottom left cube
-	var cubebl = new THREE.Mesh(new THREE.CubeGeometry (50, 50, 50), new THREE.MeshPhongMaterial);
-	cubebl.position.y = -150;
-	cubebl.position.x = -170;
-	cubebl.position.z = 50;
-	scene.add(cubebl);
+		scene.add(cubeDemo);
 
-	renderer.render(scene, camera);
-</script>
+
+		//bottom right cube
+		var cubebr = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), new THREE.MeshPhongMaterial);
+		cubebr.position.y = -150;
+		cubebr.position.x = (window.innerWidth / 2) - 25;
+		cubebr.position.z = 50;
+		scene.add(cubebr);
+
+		//top left cube
+		var cubetl = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), new THREE.MeshPhongMaterial);
+		cubetl.position.y = 90;
+		cubetl.position.x = -170;
+		cubetl.position.z = 50;
+		scene.add(cubetl);
+
+		//top right cube
+		var cubetr = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), new THREE.MeshPhongMaterial);
+		cubetr.position.y = 90;
+		cubetr.position.x = 170;
+		cubetr.position.z = 50;
+		scene.add(cubetr);
+
+		//bottom left cube
+		var cubebl = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), new THREE.MeshPhongMaterial);
+		cubebl.position.y = -150;
+		cubebl.position.x = -170;
+		cubebl.position.z = 50;
+		scene.add(cubebl);
+
+		function render() {
+
+			renderer.render(scene, camera);
+		}
+		render();
+
+		function handleWindowResize() {
+			// update height and width of the renderer and the camera
+			HEIGHT = window.innerHeight;
+			WIDTH = window.innerWidth;
+			renderer.setSize(WIDTH, HEIGHT);
+			camera.aspect = WIDTH / HEIGHT;
+			camera.updateProjectionMatrix();
+		};
+
+		window.addEventListener('resize', handleWindowResize, false);
+	</script>
 
 </body>
+
 </html>
