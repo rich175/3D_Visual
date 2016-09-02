@@ -302,12 +302,19 @@
 			var loader = new THREE.ObjectLoader();
 			loader.load('images/deskv6.json', function(obj) {
 
+				obj.position.x = Math.floor(10);
+				obj.position.y = Math.floor(10);
+				obj.position.z = Math.floor(10);
 
+				material = new THREE.MeshPhongMaterial({
+					specular: 0xffffff,
+					shading: THREE.FlatShading,
+					vertexColors: THREE.VertexColors
+				});
 
+				var mesh = new THREE.Mesh(obj.children[0].geometry, material);
 
-
-
-					scene.add(obj);
+				scene.add(mesh);
 
 
 			});
