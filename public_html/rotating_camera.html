@@ -48,15 +48,16 @@
             scene.add(line);
 
             var mesh = null;
-function initMesh() {
-    var loader = new THREE.JSONLoader();
-    loader.load('images/desk.json', function(geometry) {
-        mesh = new THREE.Mesh(geometry);
-        scene.add(mesh);
-    });
-}
 
+            function initMesh() {
+                var loader = new THREE.JSONLoader();
+                loader.load('images/desk.json', function(geometry) {
+                    mesh = new THREE.Mesh(geometry);
+                    scene.add(mesh);
+                });
+            }
 
+            initMesh()
 
             render();
 
