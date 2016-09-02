@@ -51,7 +51,6 @@
 <body>
 	<script src="js/three.js"></script>
 	<script src="js/PointerLockControls.js"></script>
-	<script src="js/OBJLoader.js"></script>
 
 	<div id="blocker">
 
@@ -298,8 +297,8 @@
 				face.vertexColors[2] = new THREE.Color().setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
 
 			}
-			/*var loader = new THREE.JSONLoader();
-					loader.load('images/desk5.json', function(geometry) {
+			var loader = new THREE.JSONLoader();
+			loader.load('images/deskv2.json', function(geometry) {
 
 				//scene.add(mesh);
 				for (var i = 0; i < 500; i++) {
@@ -321,33 +320,7 @@
 					objects.push(mesh);
 
 				}
-
-			});*/
-			var texture = new THREE.Texture();
-			var loader = new THREE.OBJLoader(  );
-				loader.load( 'images/desk5.obj', function ( object ) {
-
-					object.traverse( function ( child ) {
-
-						if ( child instanceof THREE.Mesh ) {
-
-							child.material.map = texture;
-
-						}
-
-					} );
-
-					object.position.x = Math.floor(Math.random() * 20 - 10) * 20;
-					object.position.y = Math.floor(Math.random() * 20) * 20 + 10;
-					object.position.z = Math.floor(Math.random() * 20 - 10) * 20;
-					scene.add( object );
-
-				});
-
-				//
-
-
-
+			});
 
 			/*for (var i = 0; i < 500; i++) {
 
