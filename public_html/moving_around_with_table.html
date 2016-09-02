@@ -298,18 +298,18 @@
 
 			}
 			var loader = new THREE.JSONLoader();
-			loader.load('images/properDesk.json', function(geometry) {
+			loader.load('images/deskv4.json', function(geometry) {
 
 				//scene.add(mesh);
 				for (var i = 0; i < 500; i++) {
-				//	mesh = new THREE.Mesh(geometry);
+					mesh = new THREE.Mesh(geometry);
 						material = new THREE.MeshPhongMaterial({
 							specular: 0xffffff,
 							shading: THREE.FlatShading,
 							vertexColors: THREE.VertexColors
 						});
 
-						var mesh = new THREE.Mesh(geometry, material);
+					//	var mesh = new THREE.Mesh(geometry, material);
 					mesh.position.x = Math.floor(Math.random() * 20 - 10) * 20;
 					mesh.position.y = Math.floor(Math.random() * 20) * 20 + 10;
 					mesh.position.z = Math.floor(Math.random() * 20 - 10) * 20;
