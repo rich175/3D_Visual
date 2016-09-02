@@ -47,12 +47,14 @@
             var line = new THREE.Line(geometry, material, THREE.LinePieces);
             scene.add(line);
 
-            //bottom right cube
-            var cubebr = new THREE.Mesh(new THREE.CubeGeometry(20, 20, 20), new THREE.MeshNormalMaterial);
-            cubebr.position.y = 0;
-            cubebr.position.x = 0;
-            cubebr.position.z = 0;
-            scene.add(cubebr);
+            var mesh = null;
+function initMesh() {
+    var loader = new THREE.JSONLoader();
+    loader.load('images/desk.json', function(geometry) {
+        mesh = new THREE.Mesh(geometry);
+        scene.add(mesh);
+    });
+}
 
 
 
