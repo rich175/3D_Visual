@@ -1,0 +1,14 @@
+div.bar {
+    display: inline-block;
+    width: 80%;
+    height: 75px;   /* We'll override this later */
+    background-color: teal;
+    margin-right: 2px;
+}
+.three-div{
+    background: #BADA55;
+    color: #E50000;
+    font-family: Arial, Helvetica, Sans-serif;
+    font-size: 2em;
+    padding: 2em;
+}
