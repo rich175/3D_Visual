@@ -23,7 +23,7 @@
 			position: absolute;
 			width: 100%;
 			height: 100%;
-			background-color: rgba(0, 0, 0, 0.5);
+			background-color: rgba(0, 0, 0, 0);
 		}
 
 		#instructions {
@@ -55,6 +55,8 @@
 	<script src="js/building.js"></script>
 	<script src="js/workstation.js"></script>
 	<script src="js/wip_shelf.js"></script>
+	<script src="js/wip_object.js"></script>
+
 	<div id="blocker">
 
 		<div id="instructions">
@@ -185,50 +187,81 @@
 		/*List of all cubes as THREE.Mesh*/
 		var factoryWIP = [];
 
+		/*List of all shelves as a custom object, see wip_shelf.js*/
+		var factoryShelving = [];
+
 		function addNewStation(ws) {
 			scene.add(ws.object);
 			objects.push(ws.object);
 			factoryWorkstations.push(ws);
 			console.log('Workstation: -' + ws.id + '-, has been added');
 
-			var newShelf = createShelf(ws)
-			scene.add(newShelf);
+			var newShelf = createShelf(ws, ws.id);
+			scene.add(newShelf.three_obj);
+			factoryShelving.push(newShelf);
 		}
 
 		function addNewWIP(id) {
-			var _newBox = addCube(id, 'red');
+			var _newBox = createNewWIPObj(id);
 			factoryWIP.push(_newBox);
-			scene.add(_newBox);
+			scene.add(_newBox.three_obj);
+			scene.add(_newBox.text);
 			console.log('New Cube: -' + id + '-, has been added');
-		}
+		};
 
 		function assignWIPtoWS(cube, ws) {
-			cube.position.x = ws.cube.cube_x;
-			cube.position.y = ws.cube.cube_y;
-			cube.position.z = ws.cube.cube_z;
-		}
+
+			moveWIPObj(ws.cube.cube_x, ws.cube.cube_y, ws.cube.cube_z, cube);
+
+		};
 
 		function fakeAddBox() {
-			addNewWIP();
+			addNewWIP(factoryWIP.length);
 			var _recentIndex = factoryWIP.length - 1;
 
 			var _randomWS = Math.floor(Math.random() * ((factoryWorkstations.length - 1) + 1));
 
 			assignWIPtoWS(factoryWIP[_recentIndex], factoryWorkstations[_randomWS]);
-			addText('yo Kate', factoryWIP[_recentIndex].position.x, factoryWIP[_recentIndex].position.y, factoryWIP[_recentIndex].position.z);
-		}
+			//addText('yo Kate', factoryWIP[_recentIndex].position.x, factoryWIP[_recentIndex].position.y, factoryWIP[_recentIndex].position.z);
+		};
 
-		function fakeMovedBox(){
-			addNewWIP();
-			var _recentIndex = factoryWIP.length - 1;
+		function fakeMovedBox(boxID, wsID, shelfSlotID) {
 
-			var _randomWS = Math.floor(Math.random() * ((factoryWorkstations.length - 1) + 1));
+			var cubeToMove;
+			var shelfToGoTo;
 
-			assignWIPtoWS(factoryWIP[_recentIndex], factoryWorkstations[_randomWS]);
+			for (var i = 0; i < factoryWIP.length; i++) {
+				if (factoryWIP[i].id == boxID) {
+					cubeToMove = factoryWIP[i];
+				}
+			};
+
+			for (var i = 0; i < factoryShelving.length; i++) {
+				if (factoryShelving[i].assoicatedWS == wsID) {
+					shelfToGoTo = factoryShelving[i];
+				}
+			};
+
+			var sSlotx;
+			var sSloty;
+			var sSlotz;
+
+			for (var i = 0; i < shelfToGoTo.slots.length; i++) {
+				if (shelfToGoTo.slots[i].id == shelfSlotID) {
+					sSlotx = shelfToGoTo.slots[i].centre.x;
+					sSloty = shelfToGoTo.slots[i].centre.y;
+					sSlotz = shelfToGoTo.slots[i].centre.z;
+				}
+			}
+
+			var newX = shelfToGoTo.three_obj.position.x + sSlotx;
+			var newY = shelfToGoTo.three_obj.position.y + sSloty;
+			var newZ = shelfToGoTo.three_obj.position.z + sSlotz;
 
 
+			moveWIPObj(newX, newY, newZ, cubeToMove);
 
-		}
+		};
 
 		function addText(text, x, y, z) {
 
@@ -276,12 +309,6 @@
 
 
 
-
-
-
-
-
-
 			raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, -1, 0), 0, 10);
 
 			var _building = returnRoom();
@@ -290,22 +317,11 @@
 			}
 
 
+			createWorkstation(30, 0, 47, 1, addNewStation);
 
+			createWorkstation(10, 0, 47, 2, addNewStation);
 
-
-
-
-
-
-
-
-
-
-			createWorkstation(30, 0, 47, '1', addNewStation);
-
-			createWorkstation(10, 0, 47, '2', addNewStation);
-
-			createWorkstation(-30, 0, 47, '3', addNewStation);
+			createWorkstation(-30, 0, 47, 3, addNewStation);
 
 			renderer = new THREE.WebGLRenderer();
 			renderer.setClearColor(0xffffff);
@@ -412,6 +428,10 @@
 
 					case 66:
 						fakeAddBox();
+						break;
+
+					case 78:
+						fakeMovedBox(1, 1, 1);
 						break;
 
 

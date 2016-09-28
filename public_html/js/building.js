@@ -1,6 +1,6 @@
 function returnRoom() {
 
-    var wallHeight = 10;
+    var wallHeight = 20;
     var texture = THREE.ImageUtils.loadTexture("/images/whiteBrickTexture.jpg");
     material = new THREE.MeshLambertMaterial({
       map: texture
