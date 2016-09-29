@@ -52,7 +52,6 @@
 	<script src="js/three.js"></script>
 	<script src="js/PointerLockControls.js"></script>
 	<script src="js/OBJLoader.js"></script>
-	<script src="js/building.js"></script>
 
 	<div id="blocker">
 
@@ -64,7 +63,6 @@
 	</div>
 
 	<script>
-
 		var camera, scene, renderer;
 		var geometry, material, mesh;
 		var controls;
@@ -259,18 +257,59 @@
 			raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, -1, 0), 0, 10);
 
 			/*Floor*/
+
 			geometry = new THREE.PlaneGeometry(100, 100, 100, 100);
 			geometry.rotateX(-Math.PI / 2);
+
 			material = new THREE.MeshBasicMaterial({
 				color: '#CCCCCC'
 			});
+
 			mesh = new THREE.Mesh(geometry, material);
 			scene.add(mesh);
 
-			var _walls = returnWalls();
-			for (var i = 0; i < _walls.length; i ++){
-				scene.add(_walls[i]);
-			}
+			var wallHeight = 10;
+			var texture = THREE.ImageUtils.loadTexture("/images/whiteBrickTexture.jpg");
+
+			material = new THREE.MeshLambertMaterial({
+				map: texture
+			});
+
+			/*Wall 1*/
+			geometry = new THREE.Mesh(new THREE.PlaneGeometry(100, wallHeight), material);
+			geometry.material.side = THREE.DoubleSide;
+			geometry.rotateY(-Math.PI / 2);
+			geometry.position.x = Math.floor(50);
+			geometry.position.y = Math.floor(wallHeight / 2);
+
+			scene.add(geometry);
+
+			/*Wall 2*/
+			geometry = new THREE.Mesh(new THREE.PlaneGeometry(100, wallHeight), material);
+			geometry.material.side = THREE.DoubleSide;
+			geometry.rotateY(-Math.PI / 2);
+			geometry.position.x = Math.floor(-50);
+			geometry.position.y = Math.floor(wallHeight / 2);
+
+			scene.add(geometry);
+
+			/*Wall 3*/
+			geometry = new THREE.Mesh(new THREE.PlaneGeometry(100, wallHeight), material);
+			geometry.material.side = THREE.DoubleSide;
+			geometry.rotateY(-Math.PI);
+			geometry.position.z = Math.floor(-50);
+			geometry.position.y = Math.floor(wallHeight / 2);
+
+			scene.add(geometry);
+
+			/*Wall 4*/
+			geometry = new THREE.Mesh(new THREE.PlaneGeometry(100, wallHeight), material);
+			geometry.material.side = THREE.DoubleSide;
+			geometry.rotateY(-Math.PI);
+			geometry.position.z = Math.floor(50);
+			geometry.position.y = Math.floor(wallHeight / 2);
+
+			scene.add(geometry);
 
 			// objects
 
@@ -288,6 +327,24 @@
 			var loader = new THREE.ObjectLoader();
 			loader.load('images/deskv7.json', function(obj) {
 
+				//	obj.position.x = Math.floor(10);
+				//obj.position.y = Math.floor(10);
+				//obj.position.z = Math.floor(10);
+
+				/*	material = new THREE.MeshPhongMaterial({
+						specular: 0xffffff,
+						shading: THREE.FlatShading,
+						vertexColors: THREE.VertexColors
+					});*/
+
+				/*var mesh = new THREE.Mesh(obj.children[0].geometry, obj.children[0].material);
+				mesh.position.x = Math.floor(10);
+				mesh.position.y = Math.floor(10);
+				mesh.position.z = Math.floor(10);
+
+				scene.add(mesh);
+				objects.push(mesh);*/
+
 				scene.add(obj);
 
 			});
@@ -302,7 +359,63 @@
 
 			});
 
-		
+			/*var loader = new THREE.JSONLoader();
+			loader.load('images/deskv6.json', function(geometry) {
+
+				//scene.add(mesh);
+				for (var i = 0; i < 500; i++) {
+					mesh = new THREE.Mesh(geometry);
+					material = new THREE.MeshPhongMaterial({
+						specular: 0xffffff,
+						shading: THREE.FlatShading,
+						vertexColors: THREE.VertexColors
+					});
+
+					//	var mesh = new THREE.Mesh(geometry, material);
+					mesh.position.x = Math.floor(Math.random() * 20 - 10) * 20;
+					mesh.position.y = Math.floor(Math.random() * 20) * 20 + 10;
+					mesh.position.z = Math.floor(Math.random() * 20 - 10) * 20;
+					scene.add(mesh);
+
+					material.color.setHSL(Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
+
+					objects.push(mesh);
+
+				}
+			});*/
+
+			/*var loader = new THREE.OBJLoader();
+				loader.load( 'images/deskv6.json', function ( object ) {
+
+					object.position.x = Math.floor(Math.random() * 20 - 10) * 20;
+					object.position.y = Math.floor(Math.random() * 20) * 20 + 10;
+					object.position.z = Math.floor(Math.random() * 20 - 10) * 20;
+					scene.add(object);
+
+
+
+				});*/
+
+			/*for (var i = 0; i < 500; i++) {
+
+				material = new THREE.MeshPhongMaterial({
+					specular: 0xffffff,
+					shading: THREE.FlatShading,
+					vertexColors: THREE.VertexColors
+				});
+
+				var mesh = new THREE.Mesh(geometry, material);
+				mesh.position.x = Math.floor(Math.random() * 20 - 10) * 20;
+				mesh.position.y = Math.floor(Math.random() * 20) * 20 + 10;
+				mesh.position.z = Math.floor(Math.random() * 20 - 10) * 20;
+				scene.add(mesh);
+
+				material.color.setHSL(Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
+
+				objects.push(mesh);
+
+			}*/
+
 			//
 
 			renderer = new THREE.WebGLRenderer();

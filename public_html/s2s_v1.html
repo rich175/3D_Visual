@@ -53,7 +53,8 @@
 	<script src="js/PointerLockControls.js"></script>
 	<script src="js/OBJLoader.js"></script>
 	<script src="js/building.js"></script>
-
+	<script src="js/workstation.js"></script>
+	<script src="js/wip_shelf.js"></script>
 	<div id="blocker">
 
 		<div id="instructions">
@@ -64,7 +65,6 @@
 	</div>
 
 	<script>
-
 		var camera, scene, renderer;
 		var geometry, material, mesh;
 		var controls;
@@ -167,6 +167,7 @@
 		init();
 		animate();
 
+
 		var controlsEnabled = false;
 
 		var moveForward = false;
@@ -177,6 +178,85 @@
 
 		var prevTime = performance.now();
 		var velocity = new THREE.Vector3();
+
+		/*List of all workstations as a custom object, see workstation.js*/
+		var factoryWorkstations = [];
+
+		/*List of all cubes as THREE.Mesh*/
+		var factoryWIP = [];
+
+		function addNewStation(ws) {
+			scene.add(ws.object);
+			objects.push(ws.object);
+			factoryWorkstations.push(ws);
+			console.log('Workstation: -' + ws.id + '-, has been added');
+
+			var newShelf = createShelf(ws)
+			scene.add(newShelf);
+		}
+
+		function addNewWIP(id) {
+			var _newBox = addCube(id, 'red');
+			factoryWIP.push(_newBox);
+			scene.add(_newBox);
+			console.log('New Cube: -' + id + '-, has been added');
+		}
+
+		function assignWIPtoWS(cube, ws) {
+			cube.position.x = ws.cube.cube_x;
+			cube.position.y = ws.cube.cube_y;
+			cube.position.z = ws.cube.cube_z;
+		}
+
+		function fakeAddBox() {
+			addNewWIP();
+			var _recentIndex = factoryWIP.length - 1;
+
+			var _randomWS = Math.floor(Math.random() * ((factoryWorkstations.length - 1) + 1));
+
+			assignWIPtoWS(factoryWIP[_recentIndex], factoryWorkstations[_randomWS]);
+			addText('yo Kate', factoryWIP[_recentIndex].position.x, factoryWIP[_recentIndex].position.y, factoryWIP[_recentIndex].position.z);
+		}
+
+		function fakeMovedBox(){
+			addNewWIP();
+			var _recentIndex = factoryWIP.length - 1;
+
+			var _randomWS = Math.floor(Math.random() * ((factoryWorkstations.length - 1) + 1));
+
+			assignWIPtoWS(factoryWIP[_recentIndex], factoryWorkstations[_randomWS]);
+
+
+
+		}
+
+		function addText(text, x, y, z) {
+
+			var cv = document.createElement("canvas");
+			var xc = cv.getContext("2d");
+			cv.width = cv.height = 128;
+			xc.shadowColor = "#000";
+			xc.shadowBlur = 7;
+			xc.fillStyle = "orange";
+			xc.font = "14pt arial bold";
+			xc.fillText(text, 10, 64);
+
+			var xm = new THREE.MeshBasicMaterial({
+				map: new THREE.Texture(cv),
+				transparent: true
+			});
+			xm.map.needsUpdate = true;
+
+			var mesh = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), xm);
+			mesh.material.side = THREE.DoubleSide;
+			mesh.rotateY(-Math.PI);
+			mesh.position.x = x - 10;
+			mesh.position.y = y;
+			mesh.position.z = z;
+			mesh.doubleSided = true;
+			scene.add(mesh);
+
+		}
 
 		function init() {
 
@@ -192,9 +272,148 @@
 			controls = new THREE.PointerLockControls(camera);
 			scene.add(controls.getObject());
 
+			initKeyStrokes();
+
+
+
+
+
+
+
+
+
+			raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, -1, 0), 0, 10);
+
+			var _building = returnRoom();
+			for (var i = 0; i < _building.length; i++) {
+				scene.add(_building[i]);
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+			createWorkstation(30, 0, 47, '1', addNewStation);
+
+			createWorkstation(10, 0, 47, '2', addNewStation);
+
+			createWorkstation(-30, 0, 47, '3', addNewStation);
+
+			renderer = new THREE.WebGLRenderer();
+			renderer.setClearColor(0xffffff);
+			renderer.setPixelRatio(window.devicePixelRatio);
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			document.body.appendChild(renderer.domElement);
+
+			window.addEventListener('resize', onWindowResize, false);
+
+		}
+
+		function onWindowResize() {
+
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+
+			renderer.setSize(window.innerWidth, window.innerHeight);
+
+		}
+
+		function animate() {
+			var limitXMax = 48;
+			var limitXMin = -48;
+
+			var limitZMax = 48;
+			var limitZMin = -48;
+
+			requestAnimationFrame(animate);
+
+			if (controlsEnabled) {
+
+				var currentX = controls.getObject().position.x;
+				var currentZ = controls.getObject().position.z;
+
+				raycaster.ray.origin.copy(controls.getObject().position);
+				raycaster.ray.origin.y -= 10;
+
+				var intersections = raycaster.intersectObjects(objects);
+
+				var isOnObject = intersections.length > 0;
+
+				var time = performance.now();
+				var delta = (time - prevTime) / 1000;
+
+				velocity.x -= velocity.x * 10.0 * delta;
+				velocity.z -= velocity.z * 10.0 * delta;
+
+				velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+
+				if (moveForward) velocity.z -= 400.0 * delta;
+				if (moveBackward) velocity.z += 400.0 * delta;
+
+				if (moveLeft) velocity.x -= 400.0 * delta;
+				if (moveRight) velocity.x += 400.0 * delta;
+
+				if (isOnObject === true) {
+					velocity.y = Math.max(0, velocity.y);
+
+					canJump = true;
+				}
+
+				if (currentX > limitXMax) {
+					velocity.x = Math.max(0, velocity.x);
+					controls.getObject().position.x = limitXMax;
+				}
+				if (currentX < limitXMin) {
+					velocity.x = Math.min(0, velocity.x);
+					controls.getObject().position.x = limitXMin;
+				}
+				if (currentZ > limitZMax) {
+					velocity.z = Math.max(0, velocity.z);
+					controls.getObject().position.z = limitZMax;
+				}
+				if (currentZ < limitZMin) {
+					velocity.z = Math.min(0, velocity.z);
+					controls.getObject().position.z = limitZMin;
+				}
+
+				controls.getObject().translateX(velocity.x * delta);
+				controls.getObject().translateY(velocity.y * delta);
+				controls.getObject().translateZ(velocity.z * delta);
+
+				if (controls.getObject().position.y < 10) {
+
+					velocity.y = 0;
+					controls.getObject().position.y = 10;
+
+					canJump = true;
+
+				}
+
+				prevTime = time;
+
+			}
+			renderer.render(scene, camera);
+
+		}
+
+
+		function initKeyStrokes() {
 			var onKeyDown = function(event) {
 
 				switch (event.keyCode) {
+
+					case 66:
+						fakeAddBox();
+						break;
+
 
 					case 38: // up
 					case 87: // w
@@ -255,164 +474,6 @@
 
 			document.addEventListener('keydown', onKeyDown, false);
 			document.addEventListener('keyup', onKeyUp, false);
-
-			raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, -1, 0), 0, 10);
-
-			/*Floor*/
-			geometry = new THREE.PlaneGeometry(100, 100, 100, 100);
-			geometry.rotateX(-Math.PI / 2);
-			material = new THREE.MeshBasicMaterial({
-				color: '#CCCCCC'
-			});
-			mesh = new THREE.Mesh(geometry, material);
-			scene.add(mesh);
-
-			var _walls = returnWalls();
-			for (var i = 0; i < _walls.length; i ++){
-				scene.add(_walls[i]);
-			}
-
-			// objects
-
-			geometry = new THREE.BoxGeometry(20, 20, 20);
-
-			for (var i = 0, l = geometry.faces.length; i < l; i++) {
-
-				var face = geometry.faces[i];
-				face.vertexColors[0] = new THREE.Color().setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
-				face.vertexColors[1] = new THREE.Color().setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
-				face.vertexColors[2] = new THREE.Color().setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
-
-			}
-
-			var loader = new THREE.ObjectLoader();
-			loader.load('images/deskv7.json', function(obj) {
-
-				scene.add(obj);
-
-			});
-
-			var loader = new THREE.ObjectLoader();
-			loader.load('images/deskv7.json', function(obj) {
-				obj.position.x = Math.floor(10);
-				obj.position.y = Math.floor(0);
-				obj.position.z = Math.floor(10);
-				obj.rotation.y = Math.PI / 2;
-				scene.add(obj);
-
-			});
-
-		
-			//
-
-			renderer = new THREE.WebGLRenderer();
-			renderer.setClearColor(0xffffff);
-			renderer.setPixelRatio(window.devicePixelRatio);
-			renderer.setSize(window.innerWidth, window.innerHeight);
-			document.body.appendChild(renderer.domElement);
-
-			//
-
-			window.addEventListener('resize', onWindowResize, false);
-
-		}
-
-		function onWindowResize() {
-
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-
-			renderer.setSize(window.innerWidth, window.innerHeight);
-
-		}
-
-		function animate() {
-			var limitXMax = 50;
-			var limitXMin = -50;
-
-			var limitZMax = 50;
-			var limitZMin = -50;
-
-			requestAnimationFrame(animate);
-
-			if (controlsEnabled) {
-				var currentX = controls.getObject().position.x;
-				var currentZ = controls.getObject().position.z;
-
-				var outOfLimitsX = true;
-				var outOfLimitsZ = true;
-
-				if (currentX < limitXMax && currentX > limitXMin) {
-					outOfLimitsX = false;
-				}
-				if (currentZ < limitZMax && currentZ > limitZMin) {
-					outOfLimitsZ = false;
-				}
-
-				if (!outOfLimitsX && !outOfLimitsZ) {
-					raycaster.ray.origin.copy(controls.getObject().position);
-					raycaster.ray.origin.y -= 10;
-
-					var intersections = raycaster.intersectObjects(objects);
-
-					var isOnObject = intersections.length > 0;
-
-					var time = performance.now();
-					var delta = (time - prevTime) / 1000;
-
-					velocity.x -= velocity.x * 10.0 * delta;
-					velocity.z -= velocity.z * 10.0 * delta;
-
-					velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
-
-					if (moveForward) velocity.z -= 400.0 * delta;
-					if (moveBackward) velocity.z += 400.0 * delta;
-
-					if (moveLeft) velocity.x -= 400.0 * delta;
-					if (moveRight) velocity.x += 400.0 * delta;
-
-					if (isOnObject === true) {
-						velocity.y = Math.max(0, velocity.y);
-
-						canJump = true;
-					}
-
-					controls.getObject().translateX(velocity.x * delta);
-					controls.getObject().translateY(velocity.y * delta);
-					controls.getObject().translateZ(velocity.z * delta);
-
-					if (controls.getObject().position.y < 10) {
-
-						velocity.y = 0;
-						controls.getObject().position.y = 10;
-
-						canJump = true;
-
-					}
-
-					prevTime = time;
-
-				} else {
-					if (outOfLimitsX) {
-						if (currentX > 0) {
-							controls.getObject().position.x = controls.getObject().position.x - 10;
-						} else {
-							controls.getObject().position.x = controls.getObject().position.x + 10;
-						}
-					}
-					if (outOfLimitsZ) {
-						if (currentZ > 0) {
-							controls.getObject().position.z = controls.getObject().position.z - 10;
-						} else {
-							controls.getObject().position.z = controls.getObject().position.z + 10;
-						}
-					}
-
-
-				}
-			}
-
-			renderer.render(scene, camera);
 
 		}
 	</script>

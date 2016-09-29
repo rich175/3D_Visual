@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <script src="js/three.js"></script>
+    <script src="js/PointerLockControls.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/OBJLoader.js"></script>
+
+    <script src="js/d3.js"></script>
+    <script src="js/CSS3DRenderer.js"></script>
+</head>
+
+<body>
+    <script>
+        var scene;
+        var camera;
+        var light;
+        var renderer;
+
+        init();
+        animate();
+
+        function init() {
+            // Create the scene and set the scene size.
+            scene = new THREE.Scene();
+            var WIDTH = window.innerWidth,
+                HEIGHT = window.innerHeight;
+
+            // Create a renderer and add it to the DOM.
+            renderer = new THREE.WebGLRenderer({
+                antialias: true
+            });
+            renderer.setSize(WIDTH, HEIGHT);
+            renderer.setClearColor(0xdddddd, 1);
+
+            document.body.appendChild(renderer.domElement);
+
+            // Create a camera, zoom it out from the model a bit, and add it to the scene.
+            camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 0.1, 20000);
+            camera.position.set(0, 6, 0);
+            scene.add(camera);
+
+            var geometry = new THREE.BoxGeometry(5, 5, 5);
+            var material = new THREE.MeshLambertMaterial({
+                color: 0xFF0000
+            });
+            var mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+
+            // create the plane mesh
+            var material = new THREE.MeshBasicMaterial({
+                wireframe: true
+            });
+            var geometry = new THREE.PlaneGeometry();
+            var planeMesh = new THREE.Mesh(geometry, material);
+            // add it to the WebGL scene
+            scene.add(planeMesh);
+
+            // Create a light, set its position, and add it to the scene.
+            var light = new THREE.PointLight(0xffffff);
+            light.position.set(-100, 200, 100);
+            scene.add(light);
+
+            // Add OrbitControls so that we can pan around with the mouse.
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+            // More code goes here next...
+        }
+
+
+        function animate() {
+            // Read more about requestAnimationFrame at http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+            requestAnimationFrame(animate);
+
+            // Render the scene.
+            renderer.render(scene, camera);
+            controls.update();
+        }
+    </script>
+</body>

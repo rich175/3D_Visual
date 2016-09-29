@@ -1,0 +1,62 @@
+{
+  "name": "subunit",
+  "version": "0.2.9",
+  "description": "D3 Selections in THREE.js, D3 Syntax in WebGL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sghall/subunit.git"
+  },
+  "author": {
+    "name": "Steve Hall",
+    "email": "shall@delimited.io",
+    "url": "http://delimited.io/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sghall/subunit/issues"
+  },
+  "homepage": "https://github.com/sghall/subunit",
+  "devDependencies": {
+    "babel": "^5.1.11",
+    "babel-core": "^5.1.11",
+    "es6-module-loader": "^0.16.6",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.8",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "karma-safari-launcher": "^0.1.1",
+    "karma-systemjs": "^0.3.0",
+    "systemjs": "^0.16.10",
+    "tween.js": "^0.14.0"
+  },
+  "dependencies": {
+    "three": "^0.71.0",
+    "d3": "^3.5.5"
+  },
+  "gitHead": "5b5eb6a12cd716e634d704833cc3d835fbd25352",
+  "_id": "subunit@0.2.9",
+  "_shasum": "b828d7db8d98ffd25add85cbd8f9c11ae0e4caa2",
+  "_from": "subunit@*",
+  "_npmVersion": "2.7.5",
+  "_nodeVersion": "0.12.2",
+  "_npmUser": {
+    "name": "sghall",
+    "email": "hall.steven.g@gmail.com"
+  },
+  "dist": {
+    "shasum": "b828d7db8d98ffd25add85cbd8f9c11ae0e4caa2",
+    "tarball": "https://registry.npmjs.org/subunit/-/subunit-0.2.9.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "sghall",
+      "email": "hall.steven.g@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/subunit/-/subunit-0.2.9.tgz"
+}

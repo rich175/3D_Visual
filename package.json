@@ -8,5 +8,9 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "d3": "^4.2.6",
+    "subunit": "^0.2.9"
+  }
 }
