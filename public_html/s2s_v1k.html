@@ -49,6 +49,7 @@
 </head>
 
 <body>
+	<script src="js/bundle.js"></script>
 	<script src="js/three.js"></script>
 	<script src="js/PointerLockControls.js"></script>
 	<script src="js/OBJLoader.js"></script>
@@ -56,6 +57,8 @@
 	<script src="js/workstation.js"></script>
 	<script src="js/wip_shelf.js"></script>
 	<script src="js/wip_object.js"></script>
+
+	<script src="js/s2s_mqtt.js"></script>
 
 	<div id="blocker">
 
@@ -67,6 +70,9 @@
 	</div>
 
 	<script>
+
+		var x = window;
+
 		var camera, scene, renderer;
 		var geometry, material, mesh;
 		var controls;
