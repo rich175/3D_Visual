@@ -324,11 +324,11 @@
 			}
 
 
-			createWorkstation(30, 0, 47, 1, addNewStation);
+			createWorkstation(-27 * meter, 0, -2 * meter, 1, addNewStation);
 
-			createWorkstation(10, 0, 47, 2, addNewStation);
+			createWorkstation(-27 * meter, 0, 2 * meter, 2, addNewStation);
 
-			createWorkstation(-30, 0, 47, 3, addNewStation);
+			createWorkstation(-27 * meter, 0, 4 * meter, 3, addNewStation);
 
 			renderer = new THREE.WebGLRenderer();
 			renderer.setClearColor(0xffffff);
@@ -368,9 +368,9 @@
 			if (controlsEnabled) {
 
 				if (god) {
-					godControls();
+					godControls(limitZMax, limitZMin, limitXMax, limitXMin);
 				} else {
-					marioControls();
+					marioControls(limitZMax, limitZMin, limitXMax, limitXMin);
 				}
 
 
@@ -500,10 +500,10 @@
 			controls.getObject().translateY(velocity.y * delta);
 			controls.getObject().translateZ(velocity.z * delta);
 
-			if (controls.getObject().position.y < 10) {
+			if (controls.getObject().position.y < (0.8 * meter)) {
 
 				velocity.y = 0;
-				controls.getObject().position.y = 10;
+				controls.getObject().position.y = (0.8 * meter);
 
 				canJump = true;
 			}
