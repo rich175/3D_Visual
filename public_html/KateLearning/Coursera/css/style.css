@@ -1,0 +1,23 @@
+.closed{
+display: none;
+
+}
+
+.open{
+
+  display: block;
+}
+
+button{
+
+  width: 100px;
+  color: #ff4455;
+}
+
+h1{
+
+  font-size: 20px;
+  font-family: sans-serif;
+  font-stretch: 100%;
+  color: blue;
+}

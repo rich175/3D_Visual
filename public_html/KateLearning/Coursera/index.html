@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Bad Javascript in HTML</title>
+    <script type="text/javascript" src="js/scripts.js">
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>  My experiments in learning JS and all that jazz </h1>
+
+    <button type="button" onclick="openMe()">
+        Open!
+    </button>
+    <button type="button" onclick="closeMe()"> Close! </button>
+
+    <p id="demo"> This paragraph will go when i click </p>
+
+<form>
+<label id="Name"> Name<label>
+  <input type="text" id="Name" placeholder="Name"> <br/>
+
+</form>
+
+<div id="map" style="width:100%;height:500px"></div>
+
+<script>
+function myMap() {
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {
+    center: new google.maps.LatLng(51.5, -0.2),
+    zoom: 10
+  }
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+}
+</script><script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+</body>
+
+</html>

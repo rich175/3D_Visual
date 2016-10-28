@@ -133,8 +133,151 @@
             obj.push(_newRoom[i]);
         }
 
+        var receiptArea = {
+            originX: -9.8 * meter,
+            originY: 0,
+            originZ: -38.8 * meter,
+
+            walls: [{
+              //the wall at right of receipt area box//
+                x1: -6.89* meter,
+                x2: 8 * meter,
+                z1: 18 * meter,
+                z2: 18 * meter,
+                y: 2.5 * meter
+            },
+            // below code is the wall to the lhs text up//
+            {
+                x1: -6.89 * meter,
+                x2: 8 * meter,
+                z1: 12 * meter,
+                z2: 12 * meter,
+                y: 2.5 * meter
+            },
+            {//bottom wall//
+                x1: -6.89 * meter,
+                x2: -6.89 * meter,
+                z1: 12 * meter,
+                z2: 6* meter,
+                y: 2.5 * meter
+            },
+            {//top wall//
+                x1: 8 * meter,
+                x2: 8 * meter,
+                z1: 12 * meter,
+                z2: 7.9 * meter,
+                y: 2.5 * meter
+            }],
+            floors: []
+        };
+
+        var _newRoom = createRoom(receiptArea);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
+        var processingArea = {
+            originX: -9.8 * meter,
+            originY: 0,
+            originZ: -32.2* meter,
+
+            walls: [{
+              //the wall at right of processing area box//
+                x1: -6.89* meter,
+                x2: 8 * meter,
+                z1: 26.65* meter,
+                z2: 26.65* meter,
+                y: 2.5 * meter
+            },
+            // below code is the wall to the left //
+            {
+                x1: -6.89* meter,
+                x2: 8 * meter,
+                z1: 12 * meter,
+                z2: 12 * meter,
+                y: 2.5 * meter
+            },
+            {//bottom wall//
+                x1: -6.89 * meter,
+                x2: -6.89 * meter,
+                z1: 12 * meter,
+                z2: -2* meter,
+                y: 2.5 * meter
+            },
+
+            {//top wall//
+                x1: 8 * meter,
+                x2: 8 * meter,
+                z1: 12* meter,
+                z2: 2 * meter,
+                y: 2.5 * meter
+            },
+
+          {//top wall right of door//
+              x1: 8 * meter,
+              x2: 8 * meter,
+              z1: 25* meter,
+              z2: 26.65* meter,
+              y: 2.5 * meter
 
 
+
+          }],
+
+
+            floors: []
+        };
+
+        var _newRoom = createRoom(processingArea);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
+
+        var stores = {
+            originX: 0 * meter,
+            originY: 0,
+            originZ: 15.2* meter,
+
+            walls: [
+            // below code is the wall to the left //
+            {
+                x1: -6.89* meter,
+                x2: 11 * meter,
+                z1: 12 * meter,
+                z2: 12 * meter,
+                y: 2.5 * meter
+            },
+            {//bottom wallleft of door//
+                x1: -6.89 * meter,
+                x2: -6.89 * meter,
+                z1: 12 * meter,
+                z2: 9* meter,
+                y: 2.5 * meter
+            },
+            {//bottom wallright of door//
+                x1: -6.89 * meter,
+                x2: -6.89 * meter,
+                z1: 17 * meter,
+                z2:  19.8* meter,
+                y: 2.5 * meter
+            },
+            {//top wall//
+                x1: 11 * meter,
+                x2: 11 * meter,
+                z1: 12* meter,
+                z2: 19.8 * meter,
+                y: 2.5 * meter
+            }
+
+          ],
+
+
+            floors: []
+        };
+
+        var _newRoom = createRoom(stores);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
         return obj;
 
 

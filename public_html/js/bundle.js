@@ -11486,7 +11486,7 @@ function ReInterval (callback, interval, args) {
       self._interval = undefined;
     }
   };
-  
+
   this.destroy = function () {
     if (self._interval) {
       clearInterval(self._interval);
@@ -12064,7 +12064,7 @@ inherits(DestroyableTransform, Transform)
 DestroyableTransform.prototype.destroy = function(err) {
   if (this._destroyed) return
   this._destroyed = true
-  
+
   var self = this
   process.nextTick(function() {
     if (err)
