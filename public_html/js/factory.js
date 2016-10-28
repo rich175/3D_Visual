@@ -132,7 +132,7 @@
 
         var _newRoom = createRoom(phoneRoom);
         for (var i = 0; i < _newRoom.length; i++) {
-            //obj.push(_newRoom[i]);
+            obj.push(_newRoom[i]);
         }
 
 
@@ -398,13 +398,15 @@
 
                     var thickness = 5;
 
-                    var geometry = new THREE.BoxGeometry( thickness, wallLengthZ, wall.y);
-                    var material = new THREE.MeshBasicMaterial({
-                        color: 0x00ff00
+                    var geometry = new THREE.BoxGeometry(thickness, wallLengthZ, wall.y);
+                    var material = new THREE.MeshLambertMaterial({
+                        color: 0x0000ff,
+                        transparent: true,
+                        opacity: 0.5
                     });
                     var mesh = new THREE.Mesh(geometry, material);
                     mesh.position.x = room.originX + wall.x1;
-                    mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1)/2);
+                    mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1) / 2);
                     mesh.rotateX(Math.PI / 2);
 
                     THREERoom.push(mesh);
@@ -413,18 +415,18 @@
                 //Wall is completely in X direction
                 else {
 
-                  var thickness = 5;
+                    var thickness = 5;
 
-                  var geometry = new THREE.BoxGeometry( wallLengthX, thickness, wall.y);
-                  var material = new THREE.MeshBasicMaterial({
-                      color: 0x00ff00
-                  });
-                  var mesh = new THREE.Mesh(geometry, material);
-                  mesh.position.x = room.originX + wall.x1  + ((wall.x2 - wall.x1)/2);
-                  mesh.position.z = room.originZ + wall.z1;
-                  mesh.rotateX(Math.PI / 2);
+                    var geometry = new THREE.BoxGeometry(wallLengthX, thickness, wall.y);
+                    var material = new THREE.MeshBasicMaterial({
+                        color: 0x00ff00
+                    });
+                    var mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.x = room.originX + wall.x1 + ((wall.x2 - wall.x1) / 2);
+                    mesh.position.z = room.originZ + wall.z1;
+                    mesh.rotateX(Math.PI / 2);
 
-                  THREERoom.push(mesh);
+                    THREERoom.push(mesh);
 
                 }
 
