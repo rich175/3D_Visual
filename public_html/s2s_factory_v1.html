@@ -84,7 +84,7 @@
 		var blocker = document.getElementById('blocker');
 		var instructions = document.getElementById('instructions');
 
-		var god = false;
+		var god = true;
 
 		// http://www.html5rocks.com/en/tutorials/pointerlock/intro/
 
@@ -306,9 +306,10 @@
 			scene = new THREE.Scene();
 			//scene.fog = new THREE.Fog(0xffffff, 0, 750);
 
-			var light = new THREE.HemisphereLight(0xeeeeff, 0x777788, 0.75);
-			light.position.set(0.5, 1, 0.75);
+			var light = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6 );
+			light.position.set(200, 2000, 200);
 			scene.add(light);
+
 
 			controls = new THREE.PointerLockControls(camera);
 			scene.add(controls.getObject());
@@ -324,12 +325,10 @@
 				scene.add(_building[i]);
 			}
 
+// workstation digits ()
+		//far right desk in phoneRoom
+			createWorkstation(-27 * meter, 0, 3 * meter, 1, addNewStation);
 
-			createWorkstation(-27 * meter, 0, -2 * meter, 1, addNewStation);
-
-			createWorkstation(-27 * meter, 0, 2 * meter, 2, addNewStation);
-
-			createWorkstation(-27 * meter, 0, 4 * meter, 3, addNewStation);
 
 			renderer = new THREE.WebGLRenderer();
 			renderer.setClearColor(0xffffff);
@@ -354,8 +353,8 @@
 
 			var meter = 25;
 
-			var factoryWidth = 70 * meter;
-			var factoryLength = 55 * meter;
+			var factoryWidth = 80 * meter;
+			var factoryLength = 63 * meter;
 
 
 			var limitZMax = factoryWidth / 2;

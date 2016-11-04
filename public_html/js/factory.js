@@ -2,13 +2,11 @@
 
     function returnFactory() {
 
-        var factoryWidth = 70 * meter;
-        var factoryLength = 55.2 * meter;
-        var wallHeight = 5 * meter;
+
 
         var loader = new THREE.TextureLoader();
         var texture = loader.load('/images/whiteBrickTexture.jpg');
-        var texture2 = loader.load('/images/markedUpLocationShopFloor.jpg');
+        var texture2 = loader.load('/images/shopfloorGrids.jpg');
 
 
 
@@ -20,44 +18,78 @@
             map: texture2
         });
 
+        var factoryWidth = 80 * meter;
+        var factoryLength = 63 * meter;
+        var wallHeight = 5 * meter;
 
         var obj = [];
+        var factoryWalls = {
+            originX: -factoryLength/2,
+            originY: 0,
+            originZ: -factoryWidth/2,
+            walls: [{//bottom left outer factory walls
+                color: '#D6D4CD',
+                x1: 0,
+                x2: 36 * meter,
+                z1: 0,
+                z2: 0,
+                y: wallHeight
+            },
+            { //wall between bay 3 and 2
+                color: '#D6D4CD',
+                x1: 40 * meter,
+                x2: 44 * meter,
+                z1: 0,
+                z2: 0,
+                y: wallHeight
+            },
+            { // wall between bay 2 and 1
+                color: '#D6D4CD',
+                x1: 48.5 * meter,
+                x2: 52.5* meter,
+                z1: 0,
+                z2: 0,
+                y: wallHeight
+            },
+            {
+                color: '#D6D4CD',
+                x1: 56.8 * meter,
+                x2: 63 * meter,
+                z1: 0,
+                z2: 0,
+                y: wallHeight
+            },
+            {
+                color: '#D6D4CD',
+                x1: 0,
+                x2: factoryLength,
+                z1: factoryWidth,
+                z2: factoryWidth,
+                y: wallHeight
+            },
+            {
+                color: '#D6D4CD',
+                x1: 0,
+                x2: 0,
+                z1: 0,
+                z2: factoryWidth,
+                y: wallHeight
+            },
+            {
+                color: '#D6D4CD',
+                x1: factoryLength,
+                x2: factoryLength,
+                z1: 0,
+                z2: factoryWidth,
+                y: wallHeight
+            }],
+            floors: []
+        };
 
-        /*Wall 1*/
-        geometry = new THREE.Mesh(new THREE.PlaneGeometry(factoryWidth, wallHeight), material);
-        geometry.material.side = THREE.DoubleSide;
-        geometry.rotateY(-Math.PI / 2);
-        geometry.position.x = Math.floor(factoryLength / 2);
-        geometry.position.y = Math.floor(wallHeight / 2);
-
-        obj.push(geometry);
-
-        /*Wall 2*/
-        geometry = new THREE.Mesh(new THREE.PlaneGeometry(factoryWidth, wallHeight), material);
-        geometry.material.side = THREE.DoubleSide;
-        geometry.rotateY(-Math.PI / 2);
-        geometry.position.x = Math.floor(-factoryLength / 2);
-        geometry.position.y = Math.floor(wallHeight / 2);
-
-        obj.push(geometry);
-
-        /*Wall 3*/
-        geometry = new THREE.Mesh(new THREE.PlaneGeometry(factoryLength, wallHeight), material);
-        geometry.material.side = THREE.DoubleSide;
-        geometry.rotateY(-Math.PI);
-        geometry.position.z = Math.floor(-factoryWidth / 2);
-        geometry.position.y = Math.floor(wallHeight / 2);
-
-        obj.push(geometry);
-
-        /*Wall 4*/
-        geometry = new THREE.Mesh(new THREE.PlaneGeometry(factoryLength, wallHeight), material);
-        geometry.material.side = THREE.DoubleSide;
-        geometry.rotateY(-Math.PI);
-        geometry.position.z = Math.floor(factoryWidth / 2);
-        geometry.position.y = Math.floor(wallHeight / 2);
-
-        obj.push(geometry);
+        var _newRoom = createRoom(factoryWalls);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
 
 
 
@@ -70,71 +102,76 @@
         material = new THREE.MeshBasicMaterial({
             color: '#CCCCCC'
         });
+
         mesh = new THREE.Mesh(geometry, layout);
+        mesh.position.y = 1;
         obj.push(mesh);
 
         var refurbRoom = {
-            originX: -27.6 * meter,
+            originX: -31.5 * meter,
             originY: 0,
-            originZ: -5 * meter,
+            originZ: -5.5 * meter,
             walls: [{
+                color: '#D6D4CD',
+                transparency: false,
+                opacity: 1,
                 x1: 0 * meter,
-                x2: 8 * meter,
-                z1: 18 * meter,
-                z2: 18 * meter,
+                x2: 9.2 * meter,
+                z1: 20 * meter,
+                z2: 20 * meter,
                 y: 2.5 * meter
             }, {
+
                 x1: 0 * meter,
-                x2: 8 * meter,
+                x2: 9.2 * meter,
                 z1: 0 * meter,
                 z2: 0 * meter,
                 y: 2.5 * meter
             }, {
-                x1: 8 * meter,
-                x2: 8 * meter,
+                x1: 9.2 * meter,
+                x2: 9.2 * meter,
                 z1: 0 * meter,
                 z2: 2 * meter,
                 y: 2.5 * meter
             }, {
-                x1: 8 * meter,
-                x2: 8 * meter,
+                x1: 9.2 * meter,
+                x2: 9.2 * meter,
                 z1: 4 * meter,
-                z2: 18 * meter,
+                z2: 20 * meter,
+                y: 2.5 * meter
+            }, {
+                x1: 3.5 * meter,
+                x2: 3.5 * meter,
+                z1: 0 * meter,
+                z2: 1 * meter,
+                y: 2.5 * meter
+            }, {
+                x1: 3.5 * meter,
+                x2: 3.5 * meter,
+                z1: 2 * meter,
+                z2: 20 * meter,
                 y: 2.5 * meter
             }],
-            floors: []
+            floors: [{
+                x1: 0 * meter,
+                x2: 3.5 * meter,
+                z1: 0 * meter,
+                z2: 20 * meter,
+                colour: '#0F5287'
+            }, {
+                x1: 3 * meter,
+                x2: 8 * meter,
+                z1: 0 * meter,
+                z2: 20 * meter,
+                colour: '#A20016'
+
+            }]
         };
 
         var _newRoom = createRoom(refurbRoom);
         for (var i = 0; i < _newRoom.length; i++) {
             obj.push(_newRoom[i]);
         }
-
-        var phoneRoom = {
-            originX: -27.6 * meter,
-            originY: 0,
-            originZ: -5 * meter,
-            walls: [{
-                x1: 3 * meter,
-                x2: 3 * meter,
-                z1: 0 * meter,
-                z2: 1 * meter,
-                y: 2.5 * meter
-            }, {
-                x1: 3 * meter,
-                x2: 3 * meter,
-                z1: 2 * meter,
-                z2: 18 * meter,
-                y: 2.5 * meter
-            }],
-            floors: []
-        };
-
-        var _newRoom = createRoom(phoneRoom);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
-
 
 
         var receiptArea = {
@@ -174,10 +211,10 @@
             floors: []
         };
 
-        var _newRoom = createRoom(receiptArea);
-        for (var i = 0; i < _newRoom.length; i++) {
+        //var _newRoom = createRoom(receiptArea);
+        //for (var i = 0; i < _newRoom.length; i++) {
             //obj.push(_newRoom[i]);
-        }
+        //}
         var processingArea = {
             originX: -9.8 * meter,
             originY: 0,
@@ -230,21 +267,21 @@
             floors: []
         };
 
-        var _newRoom = createRoom(processingArea);
-        for (var i = 0; i < _newRoom.length; i++) {
+        //var _newRoom = createRoom(processingArea);
+        //for (var i = 0; i < _newRoom.length; i++) {
             //obj.push(_newRoom[i]);
-        }
+        //}
 
         var stores = {
-            originX: -7 * meter,
+            originX: -8 * meter,
             originY: 0,
-            originZ: 27 * meter,
+            originZ: 31 * meter,
 
             walls: [
                 // below code is the wall to the left //
                 {
                     x1: 0 * meter,
-                    x2: 18 * meter,
+                    x2: 20.5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
                     y: 2.5 * meter
@@ -252,19 +289,19 @@
                     x1: 0 * meter,
                     x2: 0 * meter,
                     z1: 0 * meter,
-                    z2: 3 * meter,
+                    z2: 3.5* meter,
                     y: 2.5 * meter
                 }, { //bottom wallright of door//
                     x1: 0 * meter,
                     x2: 0 * meter,
-                    z1: 5 * meter,
-                    z2: 8 * meter,
+                    z1: 5.5 * meter,
+                    z2: 9 * meter,
                     y: 2.5 * meter
                 }, { //top wall//
-                    x1: 18 * meter,
-                    x2: 18 * meter,
+                    x1: 20.5 * meter,
+                    x2: 20.5 * meter,
                     z1: 0 * meter,
-                    z2: 8 * meter,
+                    z2: 9 * meter,
                     y: 2.5 * meter
                 }
 
@@ -283,23 +320,23 @@
 
 
         var secureCage = {
-            originX: -14.5 * meter,
+            originX: -16.5 * meter,
             originY: 0,
-            originZ: 27 * meter,
+            originZ: 31 * meter,
 
             walls: [
                 // below code is the wall to the left //
                 {
                     x1: 0 * meter,
-                    x2: 7.5 * meter,
+                    x2: 8.5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
                     y: 2.5 * meter
-                }, { //bottom wallleft of door//
+                }, { //bottom wall//
                     x1: 0 * meter,
                     x2: 0 * meter,
                     z1: 0 * meter,
-                    z2: 7.5 * meter,
+                    z2: 9 * meter,
                     y: 2.5 * meter
                 }
 
@@ -382,6 +419,20 @@
         for (var i = 0; i < room.walls.length; i++) {
 
             var wall = room.walls[i];
+            if (!wall.color)
+            {
+              wall.color= '#D6D4CD';
+            }
+            if (!wall.transparency){
+
+              wall.transparency= false;
+
+            }
+            if (!wall.opacity){
+
+              wall.opacity= 1;
+            }
+
 
             /*Calculates the length of wall in both directions */
             var wallLengthX = Math.sqrt(Math.pow((wall.x2 - wall.x1), 2));
@@ -400,13 +451,14 @@
 
                     var geometry = new THREE.BoxGeometry(thickness, wallLengthZ, wall.y);
                     var material = new THREE.MeshLambertMaterial({
-                        color: 0x0000ff,
-                        transparent: true,
-                        opacity: 0.5
+                        color: wall.color,
+                        transparent: wall.transparency,
+                        opacity: wall.opacity
                     });
                     var mesh = new THREE.Mesh(geometry, material);
                     mesh.position.x = room.originX + wall.x1;
                     mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1) / 2);
+                    mesh.position.y = room.originY + wall.y / 2;
                     mesh.rotateX(Math.PI / 2);
 
                     THREERoom.push(mesh);
@@ -417,13 +469,17 @@
 
                     var thickness = 5;
 
+
                     var geometry = new THREE.BoxGeometry(wallLengthX, thickness, wall.y);
                     var material = new THREE.MeshBasicMaterial({
-                        color: 0x00ff00
+                        color: wall.color,
+                        transparent: wall.transparency,
+                        opacity: wall.opacity
                     });
                     var mesh = new THREE.Mesh(geometry, material);
                     mesh.position.x = room.originX + wall.x1 + ((wall.x2 - wall.x1) / 2);
                     mesh.position.z = room.originZ + wall.z1;
+                    mesh.position.y = room.originY + wall.y / 2;
                     mesh.rotateX(Math.PI / 2);
 
                     THREERoom.push(mesh);
@@ -433,6 +489,27 @@
 
             }
         }
+
+        //floor stuff
+        for (var i = 0; i < room.floors.length; i++) {
+            var geometry = new THREE.PlaneGeometry((room.floors[i].x2 - room.floors[i].x1), (room.floors[i].z2 - room.floors[i].z1), 100, 100);
+            geometry.rotateX(-Math.PI / 2);
+            // geometry.rotateY(-Math.PI / 2);
+            material = new THREE.MeshBasicMaterial({
+                color: room.floors[i].colour
+
+
+            });
+            mesh = new THREE.Mesh(geometry, material);
+            mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
+            mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
+            mesh.position.y = room.originY;
+            THREERoom.push(mesh);
+
+
+        }
+
+
         return THREERoom;
 
     }
