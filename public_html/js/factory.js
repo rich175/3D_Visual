@@ -6,12 +6,16 @@
         var factoryLength = 55.2 * meter;
         var wallHeight = 5 * meter;
 
-        var texture = THREE.ImageUtils.loadTexture("/images/whiteBrickTexture.jpg");
+        var loader = new THREE.TextureLoader();
+        var texture = loader.load('/images/whiteBrickTexture.jpg');
+        var texture2 = loader.load('/images/markedUpLocationShopFloor.jpg');
+
+
+
         material = new THREE.MeshLambertMaterial({
             map: texture
         });
 
-        var texture2 = THREE.ImageUtils.loadTexture("/images/shopFloor.jpg");
         layout = new THREE.MeshLambertMaterial({
             map: texture2
         });
@@ -91,8 +95,7 @@
                 z1: 0 * meter,
                 z2: 2 * meter,
                 y: 2.5 * meter
-            },
-            {
+            }, {
                 x1: 8 * meter,
                 x2: 8 * meter,
                 z1: 4 * meter,
@@ -117,8 +120,7 @@
                 z1: 0 * meter,
                 z2: 1 * meter,
                 y: 2.5 * meter
-            },
-            {
+            }, {
                 x1: 3 * meter,
                 x2: 3 * meter,
                 z1: 2 * meter,
@@ -133,95 +135,96 @@
             obj.push(_newRoom[i]);
         }
 
+
+
         var receiptArea = {
             originX: -9.8 * meter,
             originY: 0,
             originZ: -38.8 * meter,
 
             walls: [{
-              //the wall at right of receipt area box//
-                x1: -6.89* meter,
-                x2: 8 * meter,
-                z1: 18 * meter,
-                z2: 18 * meter,
-                y: 2.5 * meter
-            },
-            // below code is the wall to the lhs text up//
-            {
-                x1: -6.89 * meter,
-                x2: 8 * meter,
-                z1: 12 * meter,
-                z2: 12 * meter,
-                y: 2.5 * meter
-            },
-            {//bottom wall//
-                x1: -6.89 * meter,
-                x2: -6.89 * meter,
-                z1: 12 * meter,
-                z2: 6* meter,
-                y: 2.5 * meter
-            },
-            {//top wall//
-                x1: 8 * meter,
-                x2: 8 * meter,
-                z1: 12 * meter,
-                z2: 7.9 * meter,
-                y: 2.5 * meter
-            }],
+                    //the wall at right of receipt area box//
+                    x1: -6.89 * meter,
+                    x2: 8 * meter,
+                    z1: 18 * meter,
+                    z2: 18 * meter,
+                    y: 2.5 * meter
+                },
+                // below code is the wall to the lhs text up//
+                {
+                    x1: -6.89 * meter,
+                    x2: 8 * meter,
+                    z1: 12 * meter,
+                    z2: 12 * meter,
+                    y: 2.5 * meter
+                }, { //bottom wall//
+                    x1: -6.89 * meter,
+                    x2: -6.89 * meter,
+                    z1: 12 * meter,
+                    z2: 6 * meter,
+                    y: 2.5 * meter
+                }, { //top wall//
+                    x1: 8 * meter,
+                    x2: 8 * meter,
+                    z1: 12 * meter,
+                    z2: 7.9 * meter,
+                    y: 2.5 * meter
+                }
+            ],
             floors: []
         };
 
         var _newRoom = createRoom(receiptArea);
         for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
+            //obj.push(_newRoom[i]);
         }
         var processingArea = {
             originX: -9.8 * meter,
             originY: 0,
-            originZ: -32.2* meter,
+            originZ: -32.2 * meter,
 
             walls: [{
-              //the wall at right of processing area box//
-                x1: -6.89* meter,
-                x2: 8 * meter,
-                z1: 26.65* meter,
-                z2: 26.65* meter,
-                y: 2.5 * meter
-            },
-            // below code is the wall to the left //
-            {
-                x1: -6.89* meter,
-                x2: 8 * meter,
-                z1: 12 * meter,
-                z2: 12 * meter,
-                y: 2.5 * meter
-            },
-            {//bottom wall//
-                x1: -6.89 * meter,
-                x2: -6.89 * meter,
-                z1: 12 * meter,
-                z2: -2* meter,
-                y: 2.5 * meter
-            },
+                    //the wall at right of processing area box//
+                    x1: -6.89 * meter,
+                    x2: 8 * meter,
+                    z1: 26.65 * meter,
+                    z2: 26.65 * meter,
+                    y: 2.5 * meter
+                },
+                // below code is the wall to the left //
+                {
+                    x1: -6.89 * meter,
+                    x2: 8 * meter,
+                    z1: 12 * meter,
+                    z2: 12 * meter,
+                    y: 2.5 * meter
+                }, { //bottom wall//
+                    x1: -6.89 * meter,
+                    x2: -6.89 * meter,
+                    z1: 12 * meter,
+                    z2: -2 * meter,
+                    y: 2.5 * meter
+                },
 
-            {//top wall//
-                x1: 8 * meter,
-                x2: 8 * meter,
-                z1: 12* meter,
-                z2: 2 * meter,
-                y: 2.5 * meter
-            },
+                { //top wall//
+                    x1: 8 * meter,
+                    x2: 8 * meter,
+                    z1: 12 * meter,
+                    z2: 2 * meter,
+                    y: 2.5 * meter
+                },
 
-          {//top wall right of door//
-              x1: 8 * meter,
-              x2: 8 * meter,
-              z1: 25* meter,
-              z2: 26.65* meter,
-              y: 2.5 * meter
-
+                { //top wall right of door//
+                    x1: 8 * meter,
+                    x2: 8 * meter,
+                    z1: 25 * meter,
+                    z2: 26.65 * meter,
+                    y: 2.5 * meter
 
 
-          }],
+
+                }
+            ],
 
 
             floors: []
@@ -229,52 +232,83 @@
 
         var _newRoom = createRoom(processingArea);
         for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
+            //obj.push(_newRoom[i]);
         }
 
         var stores = {
-            originX: 0 * meter,
+            originX: -7 * meter,
             originY: 0,
-            originZ: 15.2* meter,
+            originZ: 27 * meter,
 
             walls: [
-            // below code is the wall to the left //
-            {
-                x1: -6.89* meter,
-                x2: 11 * meter,
-                z1: 12 * meter,
-                z2: 12 * meter,
-                y: 2.5 * meter
-            },
-            {//bottom wallleft of door//
-                x1: -6.89 * meter,
-                x2: -6.89 * meter,
-                z1: 12 * meter,
-                z2: 9* meter,
-                y: 2.5 * meter
-            },
-            {//bottom wallright of door//
-                x1: -6.89 * meter,
-                x2: -6.89 * meter,
-                z1: 17 * meter,
-                z2:  19.8* meter,
-                y: 2.5 * meter
-            },
-            {//top wall//
-                x1: 11 * meter,
-                x2: 11 * meter,
-                z1: 12* meter,
-                z2: 19.8 * meter,
-                y: 2.5 * meter
-            }
+                // below code is the wall to the left //
+                {
+                    x1: 0 * meter,
+                    x2: 18 * meter,
+                    z1: 0 * meter,
+                    z2: 0 * meter,
+                    y: 2.5 * meter
+                }, { //bottom wallleft of door//
+                    x1: 0 * meter,
+                    x2: 0 * meter,
+                    z1: 0 * meter,
+                    z2: 3 * meter,
+                    y: 2.5 * meter
+                }, { //bottom wallright of door//
+                    x1: 0 * meter,
+                    x2: 0 * meter,
+                    z1: 5 * meter,
+                    z2: 8 * meter,
+                    y: 2.5 * meter
+                }, { //top wall//
+                    x1: 18 * meter,
+                    x2: 18 * meter,
+                    z1: 0 * meter,
+                    z2: 8 * meter,
+                    y: 2.5 * meter
+                }
 
-          ],
+            ],
 
 
             floors: []
         };
 
         var _newRoom = createRoom(stores);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
+
+
+
+
+        var secureCage = {
+            originX: -14.5 * meter,
+            originY: 0,
+            originZ: 27 * meter,
+
+            walls: [
+                // below code is the wall to the left //
+                {
+                    x1: 0 * meter,
+                    x2: 7.5 * meter,
+                    z1: 0 * meter,
+                    z2: 0 * meter,
+                    y: 2.5 * meter
+                }, { //bottom wallleft of door//
+                    x1: 0 * meter,
+                    x2: 0 * meter,
+                    z1: 0 * meter,
+                    z2: 7.5 * meter,
+                    y: 2.5 * meter
+                }
+
+            ],
+
+            floors: []
+        };
+
+        var _newRoom = createRoom(secureCage);
         for (var i = 0; i < _newRoom.length; i++) {
             obj.push(_newRoom[i]);
         }
@@ -288,7 +322,7 @@
     }
 
 
-    function createRoom(room) {
+    function createRoom_old(room) {
 
         var THREERoom = [];
 
@@ -330,6 +364,69 @@
                     geometry.position.y = Math.floor(room.originY);
 
                     THREERoom.push(geometry);
+
+                }
+
+
+            }
+        }
+        return THREERoom;
+
+    };
+
+    function createRoom(room) {
+
+        var THREERoom = [];
+
+
+        for (var i = 0; i < room.walls.length; i++) {
+
+            var wall = room.walls[i];
+
+            /*Calculates the length of wall in both directions */
+            var wallLengthX = Math.sqrt(Math.pow((wall.x2 - wall.x1), 2));
+
+            var wallLengthZ = Math.sqrt(Math.pow((wall.z2 - wall.z1), 2));
+
+            /*is the wall at a wierd angle*/
+            if (wallLengthX != 0 && wallLengthZ != 0) {
+
+
+            } else {
+                //Wall is completely in Z direction
+                if (wallLengthX == 0) {
+
+                    var thickness = 5;
+
+                    var geometry = new THREE.BoxGeometry(thickness, wallLengthZ, wall.y);
+                    var material = new THREE.MeshLambertMaterial({
+                        color: 0x0000ff,
+                        transparent: true,
+                        opacity: 0.5
+                    });
+                    var mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.x = room.originX + wall.x1;
+                    mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1) / 2);
+                    mesh.rotateX(Math.PI / 2);
+
+                    THREERoom.push(mesh);
+
+                }
+                //Wall is completely in X direction
+                else {
+
+                    var thickness = 5;
+
+                    var geometry = new THREE.BoxGeometry(wallLengthX, thickness, wall.y);
+                    var material = new THREE.MeshBasicMaterial({
+                        color: 0x00ff00
+                    });
+                    var mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.x = room.originX + wall.x1 + ((wall.x2 - wall.x1) / 2);
+                    mesh.position.z = room.originZ + wall.z1;
+                    mesh.rotateX(Math.PI / 2);
+
+                    THREERoom.push(mesh);
 
                 }
 
