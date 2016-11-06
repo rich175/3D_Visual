@@ -1,14 +1,14 @@
-var shelfW = 10;
-var shelfD = 5;
-var shelfT = 0.3;
+var shelfW = 5*25;
+var shelfD = 10;
+var shelfT = 1;
 
 
 
 
 function createShelf(workstation, shelfName) {
 
-    var _x = workstation.object.position.x;
-    var _y = workstation.object.position.y + 10;
+    var _x = workstation.object.position.x +10;
+    var _y = workstation.object.position.y + 40;
     var _z = workstation.object.position.z + 1;
 
 
