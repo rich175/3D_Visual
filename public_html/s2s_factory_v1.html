@@ -57,6 +57,7 @@
 	<script src="js/workstation.js"></script>
 	<script src="js/wip_shelf.js"></script>
 	<script src="js/wip_object.js"></script>
+	<script src="js/person.js"></script>
 
 	<script src="js/s2s_mqtt.js"></script>
 
@@ -192,6 +193,8 @@
 		/*List of all workstations as a custom object, see workstation.js*/
 		var factoryWorkstations = [];
 
+/*List of all Persons as a custom object, see person.js*/
+	var factoryPersons = [];
 		/*List of all cubes as THREE.Mesh*/
 		var factoryWIP = [];
 
@@ -208,7 +211,14 @@
 			scene.add(newShelf.three_obj);
 			factoryShelving.push(newShelf);
 		}
+		//NOTE KvL added this section of code trying to add in a human json figure from blender. Use of this figure requires CREDIT to be given to tweediez
+function addNewPerson(ps){
+scene.add(ps.object);
+objects.push(ps.object);
+factoryPerson.push(ps);
+console.log('Person: - ' + person.id + '-, has been added');
 
+}
 		function addNewWIP(id) {
 			var _newBox = createNewWIPObj(id);
 			factoryWIP.push(_newBox);
@@ -328,7 +338,7 @@
 // workstation digits ()
 		//far right desk in phoneRoom location is (x position, ?, Z position, ?, addNewStation)
 			createWorkstation(-31 * meter, 0, 4 * meter, 1, addNewStation);
-
+			createPerson(-29 * meter, 0, 6 * meter, 1, addNewPerson);
 
 			renderer = new THREE.WebGLRenderer();
 			renderer.setClearColor(0xffffff);
