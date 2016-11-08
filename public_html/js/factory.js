@@ -83,7 +83,8 @@
                 z2: factoryWidth,
                 y: wallHeight
             }],
-            floors: []
+            floors: [],
+            ceiling:[]
         };
 
         var _newRoom = createRoom(factoryWalls);
@@ -129,7 +130,8 @@ var bay1 = {
         z2: 19.5 * meter,
         y: 0 * meter,
         colour: '#859DAE'
-    }]
+    }],
+    ceiling:[]
 };
 
 var _newRoom = createRoom(bay1);
@@ -158,7 +160,8 @@ var bay2 = {
         z2: 19.5 * meter,
         y: 15 * meter,
         colour: '#859DAE'
-    }]
+    }],
+    ceiling:[]
 };
 
 var _newRoom = createRoom(bay2);
@@ -187,7 +190,8 @@ var bay3 = {
         z2: 19.5 * meter,
         y: 0 * meter,
         colour: '#859DAE'
-    }]
+    }],
+    ceiling:[]
 };
 
 var _newRoom = createRoom(bay3);
@@ -227,7 +231,8 @@ var receiptCage = {
         z2: 34.5 * meter,
         y: 0 * meter,
         colour: '#ABB6BF'
-    }]
+    }],
+    ceiling:[]
 };
 
 var _newRoom = createRoom(receiptCage);
@@ -314,7 +319,8 @@ for (var i = 0; i < _newRoom.length; i++) {
                 z2: 20 * meter,
                 colour: '#BF4044' //red carpet
 
-            }]
+            }],
+            ceiling:[]
         };
 
         var _newRoom = createRoom(refurbRoom);
@@ -372,7 +378,8 @@ for (var i = 0; i < _newRoom.length; i++) {
                 z1: 0 * meter,
                 z2: 9 * meter,
                 colour: '#ABB6BF' //grey floor
-            }]        };
+            }]  ,
+          ceiling:[]      };
 
         var _newRoom = createRoom(stores);
         for (var i = 0; i < _newRoom.length; i++) {
@@ -417,7 +424,8 @@ for (var i = 0; i < _newRoom.length; i++) {
                     },
                     //cubicle walls
                 ],
-               floors: []
+               floors: [],
+               ceiling:[]
                      };
 
             var _newRoom = createRoom(toiletLeft);
@@ -441,7 +449,8 @@ for (var i = 0; i < _newRoom.length; i++) {
                     }
 
                 ],
-               floors: []
+               floors: [],
+               ceiling:[]
                      };
 
             var _newRoom = createRoom(entranceLobby);
@@ -484,14 +493,15 @@ for (var i = 0; i < _newRoom.length; i++) {
                 z1: 0 * meter,
                 z2: 9 * meter,
                 colour: '#ABB6BF' //grey floor
-            },
+            }],
+            ceiling: [
           //the ceiling (indicating this is a cage not open) NOTE this doesnt draw?
           {
           x1: 0 * meter,
           x2: 8.5 * meter,
           z1: 0 * meter,
           z2: 9 * meter,
-          y: 32.5* meter,
+          y: 2.5* meter,
           colour: '#ABB6BF' //grey floor
           }
         ]
@@ -651,6 +661,26 @@ for (var i = 0; i < _newRoom.length; i++) {
             mesh = new THREE.Mesh(geometry, material);
             mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
             mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
+
+            THREERoom.push(mesh);
+
+
+        }
+        //ceiling stuff
+        for (var i = 0; i < room.ceiling.length; i++) {
+
+            var geometry = new THREE.PlaneGeometry((room.ceiling[i].x2 - room.ceiling[i].x1), (room.ceiling[i].z2 - room.ceiling[i].z1), 100, 100);
+            geometry.rotateX(-Math.PI / 2);
+            // geometry.rotateY(-Math.PI / 2);
+            material = new THREE.MeshBasicMaterial({
+                color: room.ceiling[i].colour,
+
+
+            });
+            mesh = new THREE.Mesh(geometry, material);
+            mesh.position.x = room.ceiling[i].x1 + room.originX + ((room.ceiling[i].x2 - room.ceiling[i].x1) / 2);
+            mesh.position.z = room.ceiling[i].z1 + room.originZ + ((room.ceiling[i].z2 - room.ceiling[i].z1) / 2);
+            mesh.position.y = room.ceiling[i].y;
 
             THREERoom.push(mesh);
 
