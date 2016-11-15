@@ -7,7 +7,7 @@ var shelfT = 1;
 
 function createShelf(workstation, shelfName) {
 
-    var _x = workstation.object.position.x +10;
+    var _x = workstation.object.position.x + 10;
     var _y = workstation.object.position.y + 40;
     var _z = workstation.object.position.z + 1;
 
@@ -15,13 +15,14 @@ function createShelf(workstation, shelfName) {
     var geometry = new THREE.BoxGeometry(shelfW, shelfT, shelfD);
 
     var material = new THREE.MeshLambertMaterial({
-        color: 0x663300
+        color: 0x600300
     });
     var mesh = new THREE.Mesh(geometry, material);
 
     mesh.position.x = _x;
     mesh.position.y = _y;
     mesh.position.z = _z;
+
 
     var shelf = {
         id: shelfName,
