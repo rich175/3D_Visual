@@ -4,19 +4,19 @@
 
 
 
-      var loader = new THREE.TextureLoader();
-      var texture = loader.load('/images/whiteBrickTexture.jpg');
-      var texture2 = loader.load('/images/shopfloorGrids.jpg');
+        var loader = new THREE.TextureLoader();
+        var texture = loader.load('/images/whiteBrickTexture.jpg');
+        var texture2 = loader.load('/images/shopfloorGrids2.jpg');
 
 
 
         material = new THREE.MeshLambertMaterial({
-           map: texture
+            map: texture
         });
 
         layout = new THREE.MeshLambertMaterial({
             map: texture2
-       });
+        });
 
         var factoryWidth = 80 * meter;
         var factoryLength = 63 * meter;
@@ -24,58 +24,52 @@
 
         var obj = [];
         var factoryWalls = {
-            originX: -factoryLength/2,
+            originX: -factoryLength / 2,
             originY: 0,
-            originZ: -factoryWidth/2,
-            walls: [{//bottom left outer factory walls
+            originZ: -factoryWidth / 2,
+            walls: [{ //bottom left outer factory walls
                 color: '#D6D4CD',
                 x1: 0,
                 x2: 36 * meter,
                 z1: 0,
                 z2: 0,
                 y: wallHeight
-            },
-            { //wall between bay 3 and 2
+            }, { //wall between bay 3 and 2
                 color: '#D6D4CD',
                 x1: 40 * meter,
                 x2: 44 * meter,
                 z1: 0,
                 z2: 0,
                 y: wallHeight
-            },
-            { // wall between bay 2 and 1
+            }, { // wall between bay 2 and 1
                 color: '#D6D4CD',
                 x1: 48.5 * meter,
-                x2: 52.5* meter,
+                x2: 52.5 * meter,
                 z1: 0,
                 z2: 0,
                 y: wallHeight
-            },
-            {
+            }, {
                 color: '#D6D4CD',
                 x1: 56.8 * meter,
                 x2: 63 * meter,
                 z1: 0,
                 z2: 0,
                 y: wallHeight
-            },
-            {
+            }, {
                 color: '#D6D4CD',
                 x1: 0,
                 x2: factoryLength,
                 z1: factoryWidth,
                 z2: factoryWidth,
                 y: wallHeight
-            },
-            {
+            }, {
                 color: '#D6D4CD',
                 x1: 0,
                 x2: 0,
                 z1: 0,
                 z2: factoryWidth,
                 y: wallHeight
-            },
-            {
+            }, {
                 color: '#D6D4CD',
                 x1: factoryLength,
                 x2: factoryLength,
@@ -84,7 +78,7 @@
                 y: wallHeight
             }],
             floors: [],
-            ceiling:[]
+            ceiling: []
         };
 
         var _newRoom = createRoom(factoryWalls);
@@ -108,137 +102,135 @@
         mesh.position.y = -0.5;
         obj.push(mesh);
 
-//bay 1 door and floor marking- NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
-var bay1 = {
-    originX: 21 * meter,
-    originY: 0,
-    originZ: -40 * meter,
-    walls: [{
-        color: '#3167B9',
-        transparency: true,
-        opacity: 0.5,
-        x1: 0 * meter,
-        x2: 4.2 * meter,
-        z1: 0 * meter,
-        z2: 0 * meter,
-        y: 5 * meter
-    }],
-    floors: [{
-        x1: 0 * meter,
-        x2: 4.2 * meter,
-        z1: 0 * meter,
-        z2: 19.5 * meter,
-        y: 0 * meter,
-        colour: '#859DAE'
-    }],
-    ceiling:[]
-};
+        //bay 1 door and floor marking- NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
+        var bay1 = {
+            originX: 21 * meter,
+            originY: 0,
+            originZ: -40 * meter,
+            walls: [{
+                color: '#3167B9',
+                transparency: true,
+                opacity: 0.5,
+                x1: 0 * meter,
+                x2: 4.2 * meter,
+                z1: 0 * meter,
+                z2: 0 * meter,
+                y: 5 * meter
+            }],
+            floors: [{
+                x1: 0 * meter,
+                x2: 4.2 * meter,
+                z1: 0 * meter,
+                z2: 19.5 * meter,
+                y: 0 * meter,
+                colour: '#859DAE'
+            }],
+            ceiling: []
+        };
 
-var _newRoom = createRoom(bay1);
-for (var i = 0; i < _newRoom.length; i++) {
-    obj.push(_newRoom[i]);
-}
-//bay 2 door and floor marking - NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
-var bay2 = {
-    originX: 12.5 * meter,
-    originY: 0,
-    originZ: -40 * meter,
-    walls: [{
-        color: '#3167B9',
-        transparency: true,
-        opacity: 0.5,
-        x1: 0 * meter,
-        x2: 4.5 * meter,
-        z1: 0 * meter,
-        z2: 0 * meter,
-        y: 5 * meter
-    }],
-    floors: [{
-        x1: 0 * meter,
-        x2: 4.5 * meter,
-        z1: 0 * meter,
-        z2: 19.5 * meter,
-        y: 15 * meter,
-        colour: '#859DAE'
-    }],
-    ceiling:[]
-};
+        var _newRoom = createRoom(bay1);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
+        //bay 2 door and floor marking - NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
+        var bay2 = {
+            originX: 12.5 * meter,
+            originY: 0,
+            originZ: -40 * meter,
+            walls: [{
+                color: '#3167B9',
+                transparency: true,
+                opacity: 0.5,
+                x1: 0 * meter,
+                x2: 4.5 * meter,
+                z1: 0 * meter,
+                z2: 0 * meter,
+                y: 5 * meter
+            }],
+            floors: [{
+                x1: 0 * meter,
+                x2: 4.5 * meter,
+                z1: 0 * meter,
+                z2: 19.5 * meter,
+                y: 15 * meter,
+                colour: '#859DAE'
+            }],
+            ceiling: []
+        };
 
-var _newRoom = createRoom(bay2);
-for (var i = 0; i < _newRoom.length; i++) {
-    obj.push(_newRoom[i]);
-}
-//bay 3 door and floor marking - NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
-var bay3 = {
-    originX: 4.5 * meter,
-    originY: 0,
-    originZ: -40 * meter,
-    walls: [{
-        color: '#3167B9',
-        transparency: true,
-        opacity: 0.5,
-        x1: 0 * meter,
-        x2: 4 * meter,
-        z1: 0 * meter,
-        z2: 0 * meter,
-        y: 5 * meter
-    }],
-    floors: [{
-        x1: 0 * meter,
-        x2: 4 * meter,
-        z1: 0 * meter,
-        z2: 19.5 * meter,
-        y: 0 * meter,
-        colour: '#859DAE'
-    }],
-    ceiling:[]
-};
+        var _newRoom = createRoom(bay2);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
+        //bay 3 door and floor marking - NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
+        var bay3 = {
+            originX: 4.5 * meter,
+            originY: 0,
+            originZ: -40 * meter,
+            walls: [{
+                color: '#3167B9',
+                transparency: true,
+                opacity: 0.5,
+                x1: 0 * meter,
+                x2: 4 * meter,
+                z1: 0 * meter,
+                z2: 0 * meter,
+                y: 5 * meter
+            }],
+            floors: [{
+                x1: 0 * meter,
+                x2: 4 * meter,
+                z1: 0 * meter,
+                z2: 19.5 * meter,
+                y: 0 * meter,
+                colour: '#859DAE'
+            }],
+            ceiling: []
+        };
 
-var _newRoom = createRoom(bay3);
-for (var i = 0; i < _newRoom.length; i++) {
-    obj.push(_newRoom[i]);
-}
-//receipt cage adjacent to processingArea
-var receiptCage = {
-    originX: -31.5 * meter,
-    originY: 0,
-    originZ: -40 * meter,
-    walls: [{ //left and bottom wall shared with outside,  this is the top lhs wall
-        color: '#D6D4CD',
-        transparency: true,
-        opacity: 0.5,
-        x1: 9.2 * meter,
-        x2: 9.2 * meter,
-        z1: 0 * meter,
-        z2: 4.5 * meter,
-        y: 2.5 * meter
-    },
-  {//this is the top rhs of door wall
-    color: '#D6D4CD',
-    transparency: true,
-    opacity: 0.5,
-    x1: 9.2 * meter,
-    x2: 9.2 * meter,
-    z1: 5.5 * meter,
-    z2: 34.5 * meter,
-    y: 2.5 * meter
-  }
-],
-    floors: [{
-        x1: 0 * meter,
-        x2: 9.2 * meter,
-        z1: 0 * meter,
-        z2: 34.5 * meter,
-        y: 0 * meter,
-        colour: '#ABB6BF'
-    }],
-    ceiling:[]
-};
+        var _newRoom = createRoom(bay3);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
+        //receipt cage adjacent to processingArea
+        var receiptCage = {
+            originX: -31.5 * meter,
+            originY: 0,
+            originZ: -40 * meter,
+            walls: [{ //left and bottom wall shared with outside,  this is the top lhs wall
+                color: '#D6D4CD',
+                transparency: true,
+                opacity: 0.5,
+                x1: 9.2 * meter,
+                x2: 9.2 * meter,
+                z1: 0 * meter,
+                z2: 4.5 * meter,
+                y: 2.5 * meter
+            }, { //this is the top rhs of door wall
+                color: '#D6D4CD',
+                transparency: true,
+                opacity: 0.5,
+                x1: 9.2 * meter,
+                x2: 9.2 * meter,
+                z1: 5.5 * meter,
+                z2: 34.5 * meter,
+                y: 2.5 * meter
+            }],
+            floors: [{
+                x1: 0 * meter,
+                x2: 9.2 * meter,
+                z1: 0 * meter,
+                z2: 34.5 * meter,
+                y: 0 * meter,
+                colour: '#ABB6BF'
+            }],
+            ceiling: []
+        };
 
-var _newRoom = createRoom(receiptCage);
-for (var i = 0; i < _newRoom.length; i++) {
-    obj.push(_newRoom[i]);
-}
+        var _newRoom = createRoom(receiptCage);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
 
 
         var refurbRoom = {
@@ -247,65 +239,66 @@ for (var i = 0; i < _newRoom.length; i++) {
             originZ: -5.5 * meter,
 
             walls: //right side wall lower
-            [{
-                color: '#D6D4CD',
-                transparency: false,
-                opacity: 1,
-                x1: 0 * meter,
-                x2: 1.5 * meter,
-                z1: 20 * meter,
-                z2: 20 * meter,
-                y: 2.5 * meter
-            }, //wall right, top part
-            {
-              x1: 2.5 * meter,
-              x2: 9.2 * meter,
-              z1: 20 * meter,
-              z2: 20 * meter,
-              y: 2.5 * meter
+                [{
+                    color: '#D6D4CD',
+                    transparency: false,
+                    opacity: 1,
+                    x1: 0 * meter,
+                    x2: 1.5 * meter,
+                    z1: 20 * meter,
+                    z2: 20 * meter,
+                    y: 2.5 * meter
+                }, //wall right, top part
+                {
+                    x1: 2.5 * meter,
+                    x2: 9.2 * meter,
+                    z1: 20 * meter,
+                    z2: 20 * meter,
+                    y: 2.5 * meter
 
-            },
+                },
 
-            {
-//wall left lower
-                x1: 0 * meter,
-                x2: 1.5 * meter,
-                z1: 0 * meter,
-                z2: 0 * meter,
-                y: 2.5 * meter
-            },
-            //wall left upper
-            {
-              x1: 2.5 * meter,
-              x2: 9.2 * meter,
-              z1: 0 * meter,
-              z2: 0 * meter,
-              y: 2.5 * meter
-            },{
-                x1: 9.2 * meter,
-                x2: 9.2 * meter,
-                z1: 0 * meter,
-                z2: 2 * meter,
-                y: 2.5 * meter
-            }, {
-                x1: 9.2 * meter,
-                x2: 9.2 * meter,
-                z1: 4 * meter,
-                z2: 20 * meter,
-                y: 2.5 * meter
-            }, {
-                x1: 3.5 * meter,
-                x2: 3.5 * meter,
-                z1: 0 * meter,
-                z2: 1 * meter,
-                y: 2.5 * meter
-            }, {
-                x1: 3.5 * meter,
-                x2: 3.5 * meter,
-                z1: 2 * meter,
-                z2: 20 * meter,
-                y: 2.5 * meter
-            }],
+                {
+                    //wall left lower
+                    x1: 0 * meter,
+                    x2: 1.5 * meter,
+                    z1: 0 * meter,
+                    z2: 0 * meter,
+                    y: 2.5 * meter
+                },
+                //wall left upper
+                {
+                    x1: 2.5 * meter,
+                    x2: 9.2 * meter,
+                    z1: 0 * meter,
+                    z2: 0 * meter,
+                    y: 2.5 * meter
+                }, {
+                    x1: 9.2 * meter,
+                    x2: 9.2 * meter,
+                    z1: 0 * meter,
+                    z2: 2 * meter,
+                    y: 2.5 * meter
+                }, {
+                    x1: 9.2 * meter,
+                    x2: 9.2 * meter,
+                    z1: 4 * meter,
+                    z2: 20 * meter,
+                    y: 2.5 * meter
+                }, {
+                    x1: 3.5 * meter,
+                    x2: 3.5 * meter,
+                    z1: 0 * meter,
+                    z2: 1 * meter,
+                    y: 2.5 * meter
+                }, {
+                    x1: 3.5 * meter,
+                    x2: 3.5 * meter,
+                    z1: 2 * meter,
+                    z2: 20 * meter,
+                    y: 2.5 * meter
+                }
+            ],
             floors: [{
                 x1: 0 * meter,
                 x2: 3.5 * meter,
@@ -320,7 +313,7 @@ for (var i = 0; i < _newRoom.length; i++) {
                 colour: '#BF4044' //red carpet
 
             }],
-            ceiling:[]
+            ceiling: []
         };
 
         var _newRoom = createRoom(refurbRoom);
@@ -344,18 +337,17 @@ for (var i = 0; i < _newRoom.length; i++) {
                     z1: 0 * meter,
                     z2: 0 * meter,
                     y: 2.5 * meter
-                },
-                {
+                }, {
                     x1: 6 * meter,
                     x2: 20.5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
                     y: 2.5 * meter
-                },{ //bottom wallleft of door//
+                }, { //bottom wallleft of door//
                     x1: 0 * meter,
                     x2: 0 * meter,
                     z1: 0 * meter,
-                    z2: 3.5* meter,
+                    z2: 3.5 * meter,
                     y: 2.5 * meter
                 }, { //bottom wallright of door//
                     x1: 0 * meter,
@@ -378,85 +370,138 @@ for (var i = 0; i < _newRoom.length; i++) {
                 z1: 0 * meter,
                 z2: 9 * meter,
                 colour: '#ABB6BF' //grey floor
-            }]  ,
-          ceiling:[]      };
+            }],
+            ceiling: []
+        };
 
         var _newRoom = createRoom(stores);
         for (var i = 0; i < _newRoom.length; i++) {
             obj.push(_newRoom[i]);
         }
 
-            //toilet Left of Entrance
-            var toiletLeft = {
-                originX: -31.5* meter,
-                originY: 0,
-                originZ: 24.5 * meter,
+        //toilet Left of Entrance
+        var toiletLeft = {
+            originX: -31.5 * meter,
+            originY: 0,
+            originZ: 23.5 * meter,
 
-                walls: [
-                    // below code is the wall to the left //
-                    {
-                        x1: 0 * meter,
-                        x2: 2.5 * meter,
-                        z1: 0 * meter,
-                        z2: 0 * meter,
-                        y: 2.5 * meter
-                    },
-                    {
-                        x1: 5 * meter,
-                        x2: 7.5 * meter,
-                        z1: 0 * meter,
-                        z2: 0 * meter,
-                        y: 2.5 * meter
-                    },
-                    {
-                        x1: 7.5 * meter,
-                        x2: 7.5 * meter,
-                        z1: 0 * meter,
-                        z2: 7.2* meter,
-                        y: 2.5 * meter
-                    },
-                    {
-                        x1: 0 * meter,
-                        x2: 7.5 * meter,
-                        z1: 7.2 * meter,
-                        z2: 7.2* meter,
-                        y: 2.5 * meter
-                    },
-                    //cubicle walls
-                ],
-               floors: [],
-               ceiling:[]
-                     };
+            walls: [
+                // below code is the wall to the left //
+                {
+                    x1: 0 * meter,
+                    x2: 2.5 * meter,
+                    z1: 0 * meter,
+                    z2: 0 * meter,
+                    y: 2.5 * meter
+                }, {
+                    x1: 3.5 * meter,
+                    x2: 3.8 * meter,
+                    z1: 0 * meter,
+                    z2: 0 * meter,
+                    y: 2.5 * meter
+                }, {
+                    x1: 4.8 * meter,
+                    x2: 7.5 * meter,
+                    z1: 0 * meter,
+                    z2: 0 * meter,
+                    y: 2.5 * meter
+                }, {
+                    x1: 7.5 * meter,
+                    x2: 7.5 * meter,
+                    z1: 0 * meter,
+                    z2: 5.5 * meter,
+                    y: 2.5 * meter
+                }, {
+                    x1: 0 * meter,
+                    x2: 7.5 * meter,
+                    z1: 5.5 * meter,
+                    z2: 5.5 * meter,
+                    y: 2.5 * meter
+                },
+                {
+                  //toilet divider
+                    x1: 3.65 * meter,
+                    x2: 3.65 * meter,
+                    z1: 0 * meter,
+                    z2: 5.5 * meter,
+                    y: 2.5 * meter
+                },
+                //cubicle walls
+                {
+                    x1: 3.65 * meter,
+                    x2: 5.5 * meter,
+                    z1: 2.6 * meter,
+                    z2: 2.6 * meter,
+                    y: 1.5 * meter
+                },
+                {
+                    x1: 3.65 * meter,
+                    x2: 5.5 * meter,
+                    z1: 3.6 * meter,
+                    z2: 3.6 * meter,
+                    y: 1.5 * meter
+                },
+                {
+                    x1: 3.65 * meter,
+                    x2: 5.5 * meter,
+                    z1: 4.6 * meter,
+                    z2: 4.6 * meter,
+                    y: 1.5 * meter
+                },
+                {
+                    x1: 3.65 * meter,
+                    x2: 1.8 * meter,
+                    z1: 2.6 * meter,
+                    z2: 2.6 * meter,
+                    y: 1.5 * meter
+                },
+                {
+                    x1: 3.65 * meter,
+                    x2: 1.8 * meter,
+                    z1: 3.6 * meter,
+                    z2: 3.6 * meter,
+                    y: 1.5 * meter
+                },
+                {
+                    x1: 3.65 * meter,
+                    x2: 1.8 * meter,
+                    z1: 4.6 * meter,
+                    z2: 4.6 * meter,
+                    y: 1.5 * meter
+                },
+            ],
+            floors: [],
+            ceiling: []
+        };
 
-            var _newRoom = createRoom(toiletLeft);
-            for (var i = 0; i < _newRoom.length; i++) {
-                obj.push(_newRoom[i]);
-            }
+        var _newRoom = createRoom(toiletLeft);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
 
-            //entranceLobby
-            var entranceLobby = {
-                originX: -31.5* meter,
-                originY: 0,
-                originZ: 32 * meter,
+        //entranceLobby
+        var entranceLobby = {
+            originX: -31.5 * meter,
+            originY: 0,
+            originZ: 32 * meter,
 
-                walls: [
-                    {
-                        x1: 5 * meter,
-                        x2: 7.5 * meter,
-                        z1: 0 * meter,
-                        z2: 0 * meter,
-                        y: 2.5 * meter
-                    }
+            walls: [{
+                    x1: 5 * meter,
+                    x2: 7.5 * meter,
+                    z1: 0 * meter,
+                    z2: 0 * meter,
+                    y: 2.5 * meter
+                }
 
-                ],
-               floors: [],
-               ceiling:[]
-                     };
+            ],
+            floors: [],
+            ceiling: []
+        };
 
-            var _newRoom = createRoom(entranceLobby);
-            for (var i = 0; i < _newRoom.length; i++) {
-                obj.push(_newRoom[i]);
-            }
+        var _newRoom = createRoom(entranceLobby);
+        for (var i = 0; i < _newRoom.length; i++) {
+            obj.push(_newRoom[i]);
+        }
 
         var secureCage = {
             originX: -16.5 * meter,
@@ -465,18 +510,19 @@ for (var i = 0; i < _newRoom.length; i++) {
 
             walls: [
                 // below code is the wall to the left //
-                {color: '#D6D4CD',
-                transparency: true,
-                opacity: 0.5,
+                {
+                    color: '#D6D4CD',
+                    transparency: true,
+                    opacity: 0.5,
                     x1: 0 * meter,
                     x2: 8.5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
                     y: 2.5 * meter
                 }, { //bottom wall//
-                  color: '#D6D4CD',
-                  transparency: true,
-                  opacity: 0.5,
+                    color: '#D6D4CD',
+                    transparency: true,
+                    opacity: 0.5,
                     x1: 0 * meter,
                     x2: 0 * meter,
                     z1: 0 * meter,
@@ -487,7 +533,7 @@ for (var i = 0; i < _newRoom.length; i++) {
             ],
 
             floors: [{
-              ///the floor on the ground
+                ///the floor on the ground
                 x1: 0 * meter,
                 x2: 8.5 * meter,
                 z1: 0 * meter,
@@ -495,16 +541,16 @@ for (var i = 0; i < _newRoom.length; i++) {
                 colour: '#ABB6BF' //grey floor
             }],
             ceiling: [
-          //the ceiling (indicating this is a cage not open) NOTE this doesnt draw?
-          {
-          x1: 0 * meter,
-          x2: 8.5 * meter,
-          z1: 0 * meter,
-          z2: 9 * meter,
-          y: 2.5* meter,
-          colour: '#ABB6BF' //grey floor
-          }
-        ]
+                //the ceiling (indicating this is a cage not open) NOTE this doesnt draw?
+                {
+                    x1: 0 * meter,
+                    x2: 8.5 * meter,
+                    z1: 0 * meter,
+                    z2: 9 * meter,
+                    y: 2.5 * meter,
+                    colour: '#ABB6BF' //grey floor
+                }
+            ]
         };
 
         var _newRoom = createRoom(secureCage);
@@ -576,19 +622,19 @@ for (var i = 0; i < _newRoom.length; i++) {
         for (var i = 0; i < room.walls.length; i++) {
 
             var wall = room.walls[i];
-            if (!wall.color)
-            {
-              wall.color= '#D6D4CD';
+            if (!wall.color) {
+                wall.color = '#D6D4CD';
             }
-            if (!wall.transparency){
+            if (!wall.transparency) {
 
-              wall.transparency= false;
+                wall.transparency = false;
 
             }
-            if (!wall.opacity){
+            if (!wall.opacity) {
 
-              wall.opacity= 1;
+                wall.opacity = 1;
             }
+          
 
 
             /*Calculates the length of wall in both directions */
