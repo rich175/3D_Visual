@@ -417,9 +417,8 @@
                     z1: 5.5 * meter,
                     z2: 5.5 * meter,
                     y: 2.5 * meter
-                },
-                {
-                  //toilet divider
+                }, {
+                    //toilet divider
                     x1: 3.65 * meter,
                     x2: 3.65 * meter,
                     z1: 0 * meter,
@@ -432,42 +431,43 @@
                     x2: 5.5 * meter,
                     z1: 2.6 * meter,
                     z2: 2.6 * meter,
-                    y: 1.5 * meter
-                },
-                {
+                    y: 1.5 * meter,
+                    thickness: 2
+                }, {
                     x1: 3.65 * meter,
                     x2: 5.5 * meter,
                     z1: 3.6 * meter,
                     z2: 3.6 * meter,
-                    y: 1.5 * meter
-                },
-                {
+                    y: 1.5 * meter,
+                    thickness: 2
+                }, {
                     x1: 3.65 * meter,
                     x2: 5.5 * meter,
                     z1: 4.6 * meter,
                     z2: 4.6 * meter,
-                    y: 1.5 * meter
-                },
-                {
+                    y: 1.5 * meter,
+                    thickness: 2
+                }, {
                     x1: 3.65 * meter,
                     x2: 1.8 * meter,
                     z1: 2.6 * meter,
                     z2: 2.6 * meter,
-                    y: 1.5 * meter
-                },
-                {
+                    y: 1.5 * meter,
+                    thickness: 2
+                }, {
                     x1: 3.65 * meter,
                     x2: 1.8 * meter,
                     z1: 3.6 * meter,
                     z2: 3.6 * meter,
-                    y: 1.5 * meter
-                },
-                {
+                    y: 1.5 * meter,
+                    thickness: 2
+                }, {
                     x1: 3.65 * meter,
                     x2: 1.8 * meter,
                     z1: 4.6 * meter,
                     z2: 4.6 * meter,
-                    y: 1.5 * meter
+                    y: 1.5 * meter,
+                    thickness: 2
                 },
             ],
             floors: [],
@@ -634,7 +634,10 @@
 
                 wall.opacity = 1;
             }
-          
+            var thickness = 5;
+            if (wall.thickness) {
+                thickness = wall.thickness
+            }
 
 
             /*Calculates the length of wall in both directions */
@@ -650,7 +653,7 @@
                 //Wall is completely in Z direction
                 if (wallLengthX == 0) {
 
-                    var thickness = 5;
+
 
                     var geometry = new THREE.BoxGeometry(thickness, wallLengthZ, wall.y);
                     var material = new THREE.MeshLambertMaterial({
@@ -669,8 +672,6 @@
                 }
                 //Wall is completely in X direction
                 else {
-
-                    var thickness = 5;
 
 
                     var geometry = new THREE.BoxGeometry(wallLengthX, thickness, wall.y);
