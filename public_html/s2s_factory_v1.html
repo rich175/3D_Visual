@@ -176,7 +176,7 @@
 		}
 
 		init();
-		animate();
+
 
 
 		var controlsEnabled = false;
@@ -193,8 +193,8 @@
 		/*List of all workstations as a custom object, see workstation.js*/
 		var factoryWorkstations = [];
 
-/*List of all Persons as a custom object, see person.js*/
-	var factoryPersons = [];
+		/*List of all Persons as a custom object, see person.js*/
+		var factoryPersons = [];
 		/*List of all cubes as THREE.Mesh*/
 		var factoryWIP = [];
 
@@ -212,13 +212,14 @@
 			factoryShelving.push(newShelf);
 		}
 		//NOTE KvL added this section of code trying to add in a human json figure from blender. Use of this figure requires CREDIT to be given to tweediez
-function addNewPerson(ps){
-scene.add(ps.object);
-objects.push(ps.object);
-factoryPerson.push(ps);
-console.log('Person: - ' + person.id + '-, has been added');
+		function addNewPerson(ps) {
+			scene.add(ps.object);
+			objects.push(ps.object);
+			factoryPerson.push(ps);
+			console.log('Person: - ' + person.id + '-, has been added');
 
-}
+		}
+
 		function addNewWIP(id) {
 			var _newBox = createNewWIPObj(id);
 			factoryWIP.push(_newBox);
@@ -316,7 +317,7 @@ console.log('Person: - ' + person.id + '-, has been added');
 			scene = new THREE.Scene();
 			//scene.fog = new THREE.Fog(0xffffff, 0, 750);
 
-			var light = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6 );
+			var light = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
 			light.position.set(200, 2000, 200);
 			scene.add(light);
 
@@ -330,23 +331,27 @@ console.log('Person: - ' + person.id + '-, has been added');
 
 			raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, -1, 0), 0, 10);
 
-			var _building = returnFactory();
-			for (var i = 0; i < _building.length; i++) {
-				scene.add(_building[i]);
-			}
+			returnFactory(function(_building) {
+				for (var i = 0; i < _building.length; i++) {
+					scene.add(_building[i]);
+				}
 
-// workstation digits ()
-		//far right desk in phoneRoom location is (x position, ?, Z position, ?, addNewStation)
-			createWorkstation(-31 * meter, 0, 4 * meter, 1, addNewStation);
-			createPerson(-29 * meter, 0, 6 * meter, 1, addNewPerson);
+				// workstation digits ()
+				//far right desk in phoneRoom location is (x position, ?, Z position, ?, addNewStation)
+				createWorkstation(-31 * meter, 0, 4 * meter, 1, addNewStation);
+				createPerson(-29 * meter, 0, 6 * meter, 1, addNewPerson);
 
-			renderer = new THREE.WebGLRenderer();
-			renderer.setClearColor(0xffffff);
-			renderer.setPixelRatio(window.devicePixelRatio);
-			renderer.setSize(window.innerWidth, window.innerHeight);
-			document.body.appendChild(renderer.domElement);
+				renderer = new THREE.WebGLRenderer();
+				renderer.setClearColor(0xffffff);
+				renderer.setPixelRatio(window.devicePixelRatio);
+				renderer.setSize(window.innerWidth, window.innerHeight);
+				document.body.appendChild(renderer.domElement);
 
-			window.addEventListener('resize', onWindowResize, false);
+				window.addEventListener('resize', onWindowResize, false);
+				animate();
+
+			});
+
 
 		}
 

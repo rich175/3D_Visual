@@ -1,12 +1,13 @@
     var meter = 25;
 
-    function returnFactory() {
+    function returnFactory(on_complete) {
 
 
 
         var loader = new THREE.TextureLoader();
         var texture = loader.load('/images/whiteBrickTexture.jpg');
         var texture2 = loader.load('/images/shopfloorGrids2.jpg');
+
 
 
 
@@ -18,11 +19,29 @@
             map: texture2
         });
 
+
+
+        var AllWalls = [];
+
         var factoryWidth = 80 * meter;
         var factoryLength = 63 * meter;
         var wallHeight = 5 * meter;
-
         var obj = [];
+
+        /*Floor*/
+        geometry = new THREE.PlaneGeometry(factoryWidth, factoryLength, 100, 100);
+        geometry.rotateX(-Math.PI / 2);
+        geometry.rotateY(-Math.PI / 2);
+        material = new THREE.MeshBasicMaterial({
+            color: '#CCCCCC'
+        });
+
+        mesh = new THREE.Mesh(geometry, layout);
+        mesh.position.y = -0.5;
+        obj.push(mesh);
+
+
+
         var factoryWalls = {
             originX: -factoryLength / 2,
             originY: 0,
@@ -81,26 +100,8 @@
             ceiling: []
         };
 
-        var _newRoom = createRoom(factoryWalls);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
+        AllWalls.push(factoryWalls);
 
-
-
-
-
-        /*Floor*/
-        geometry = new THREE.PlaneGeometry(factoryWidth, factoryLength, 100, 100);
-        geometry.rotateX(-Math.PI / 2);
-        geometry.rotateY(-Math.PI / 2);
-        material = new THREE.MeshBasicMaterial({
-            color: '#CCCCCC'
-        });
-
-        mesh = new THREE.Mesh(geometry, layout);
-        mesh.position.y = -0.5;
-        obj.push(mesh);
 
         //bay 1 door and floor marking- NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
         var bay1 = {
@@ -128,10 +129,8 @@
             ceiling: []
         };
 
-        var _newRoom = createRoom(bay1);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
+        AllWalls.push(bay1);
+
         //bay 2 door and floor marking - NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
         var bay2 = {
             originX: 12.5 * meter,
@@ -158,10 +157,8 @@
             ceiling: []
         };
 
-        var _newRoom = createRoom(bay2);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
+        AllWalls.push(bay2);
+
         //bay 3 door and floor marking - NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
         var bay3 = {
             originX: 4.5 * meter,
@@ -188,10 +185,8 @@
             ceiling: []
         };
 
-        var _newRoom = createRoom(bay3);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
+        AllWalls.push(bay3);
+
         //receipt cage adjacent to processingArea
         var receiptCage = {
             originX: -31.5 * meter,
@@ -227,11 +222,7 @@
             ceiling: []
         };
 
-        var _newRoom = createRoom(receiptCage);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
-
+        AllWalls.push(receiptCage);
 
         var refurbRoom = {
             originX: -31.5 * meter,
@@ -316,12 +307,7 @@
             ceiling: []
         };
 
-        var _newRoom = createRoom(refurbRoom);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
-
-
+        AllWalls.push(refurbRoom);
 
 
         var stores = {
@@ -374,10 +360,7 @@
             ceiling: []
         };
 
-        var _newRoom = createRoom(stores);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
+        AllWalls.push(stores);
 
         //toilet Left of Entrance
         var toiletLeft = {
@@ -474,34 +457,144 @@
             ceiling: []
         };
 
-        var _newRoom = createRoom(toiletLeft);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
+        AllWalls.push(toiletLeft);
 
         //entranceLobby
+
         var entranceLobby = {
             originX: -31.5 * meter,
             originY: 0,
-            originZ: 32 * meter,
+            originZ: 29 * meter,
 
             walls: [{
-                    x1: 5 * meter,
-                    x2: 7.5 * meter,
+                    x1: 6.5 * meter,
+                    x2: 6.5 * meter,
                     z1: 0 * meter,
-                    z2: 0 * meter,
+                    z2: 5.5 * meter,
                     y: 2.5 * meter
+                }, {
+                    x1: 6.5 * meter,
+                    x2: 6.5 * meter,
+                    z1: 6.5 * meter,
+                    z2: 11 * meter,
+                    y: 2.5 * meter
+                }, {
+                    x1: 9.2 * meter,
+                    x2: 12.5 * meter,
+                    z1: 5.3 * meter,
+                    z2: 5.3 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
+                }, {
+                    x1: 7.8 * meter,
+                    x2: 12.5 * meter,
+                    z1: 7 * meter,
+                    z2: 7 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
+                }, {
+                    //female toilet
+                    x1: 12.5 * meter,
+                    x2: 12.5 * meter,
+                    z1: 2 * meter,
+                    z2: 5.6 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
+                }, {
+                    //female toilet
+                    x1: 6.5 * meter,
+                    x2: 12.5 * meter,
+                    z1: 2 * meter,
+                    z2: 2 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
+                }, {
+                    //female toilet
+                    x1: 8 * meter,
+                    x2: 8 * meter,
+                    z1: 2 * meter,
+                    z2: 5.3 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
+                }, {
+                    //female toilet cubicle
+                    x1: 9.3 * meter,
+                    x2: 9.3 * meter,
+                    z1: 3.6 * meter,
+                    z2: 5.3 * meter,
+                    y: 1.5 * meter,
+                    thickness: 2
+                }, {
+                    //female toilet cubicle
+                    x1: 10.3 * meter,
+                    x2: 10.3 * meter,
+                    z1: 3.6 * meter,
+                    z2: 5.3 * meter,
+                    y: 1.5 * meter,
+                    thickness: 2
+                }, {
+                    //female toilet cubicle
+                    x1: 11.3 * meter,
+                    x2: 11.3 * meter,
+                    z1: 3.6 * meter,
+                    z2: 5.3 * meter,
+                    y: 1.5 * meter,
+                    thickness: 2
+                }, {
+                    //side room
+                    x1: 12.5 * meter,
+                    x2: 12.5 * meter,
+                    z1: 8.2 * meter,
+                    z2: 11 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
+                }, {
+                    //male toilet
+                    x1: 11.2 * meter,
+                    x2: 11.2 * meter,
+                    z1: 7 * meter,
+                    z2: 11 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
+                }, {
+                    //male toilet cubicle
+                    x1: 10.2 * meter,
+                    x2: 10.2 * meter,
+                    z1: 7 * meter,
+                    z2: 9 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
+                }, {
+                    //male toilet cubicle
+                    x1: 9.2 * meter,
+                    x2: 9.2 * meter,
+                    z1: 7 * meter,
+                    z2: 9 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
+                }, {
+                    //male toilet cubicle
+                    x1: 7.8 * meter,
+                    x2: 7.8 * meter,
+                    z1: 7 * meter,
+                    z2: 9 * meter,
+                    y: 2.5 * meter,
+                    thickness: 2
                 }
 
             ],
-            floors: [],
+            floors: [{
+                x1: 0 * meter,
+                x2: 6.5 * meter,
+                z1: 0 * meter,
+                z2: 11 * meter,
+                texture: '/images/floorTile.jpg'
+            }],
             ceiling: []
         };
 
-        var _newRoom = createRoom(entranceLobby);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
-        }
+        AllWalls.push(entranceLobby);
+
 
         var secureCage = {
             originX: -16.5 * meter,
@@ -553,11 +646,24 @@
             ]
         };
 
-        var _newRoom = createRoom(secureCage);
-        for (var i = 0; i < _newRoom.length; i++) {
-            obj.push(_newRoom[i]);
+        AllWalls.push(secureCage);
+
+        var count = 0;
+        for (var i = 0; i < AllWalls.length; i++) {
+            createRoom(AllWalls[i], function(_newRoom) {
+                for (var i = 0; i < _newRoom.length; i++) {
+                    obj.push(_newRoom[i]);
+                }
+                count++;
+                if (count === AllWalls.length) {
+                    on_complete(obj);
+                }
+            });
+
+
         }
-        return obj;
+
+
     }
 
 
@@ -614,11 +720,42 @@
 
     };
 
-    function createRoom(room) {
+    ///This function converts the room object into THREEJS components
+    function createRoom(room, on_load_complete) {
 
         var THREERoom = [];
 
+        //Create THREEJS components of all the walls
+        loadWalls(room, function(_threeRooms) {
+            for (var i = 0; i < _threeRooms.length; i++) {
+                THREERoom.push(_threeRooms[i]);
+            }
+            //Once walls are complete
+            //Create THREEJS components of all the floors
+            loadFloors(room, function(_threeFloors) {
+                for (var i = 0; i < _threeFloors.length; i++) {
+                    THREERoom.push(_threeFloors[i]);
+                }
+                //Once floors are complete
+                //Create THREEJS components of all the ceilings
+                loadCeiling(room, function(_threeCelings) {
+                    for (var i = 0; i < _threeCelings.length; i++) {
+                        THREERoom.push(_threeCelings[i]);
+                    }
+                    //Once ceilings are complete
+                    //Return the room as a list of THREEJS objects
+                    on_load_complete(THREERoom);
+                });
+            });
 
+        });
+
+    }
+
+    //converts walls into THREEJS components
+    function loadWalls(room, on_load_complete) {
+
+        var THREEWalls = [];
         for (var i = 0; i < room.walls.length; i++) {
 
             var wall = room.walls[i];
@@ -667,7 +804,7 @@
                     mesh.position.y = room.originY + wall.y / 2;
                     mesh.rotateX(Math.PI / 2);
 
-                    THREERoom.push(mesh);
+                    THREEWalls.push(mesh);
 
                 }
                 //Wall is completely in X direction
@@ -686,33 +823,20 @@
                     mesh.position.y = room.originY + wall.y / 2;
                     mesh.rotateX(Math.PI / 2);
 
-                    THREERoom.push(mesh);
+                    THREEWalls.push(mesh);
 
                 }
 
-
             }
         }
+        on_load_complete(THREEWalls);
 
-        //floor stuff
-        for (var i = 0; i < room.floors.length; i++) {
+    };
 
-            var geometry = new THREE.PlaneGeometry((room.floors[i].x2 - room.floors[i].x1), (room.floors[i].z2 - room.floors[i].z1), 100, 100);
-            geometry.rotateX(-Math.PI / 2);
-            // geometry.rotateY(-Math.PI / 2);
-            material = new THREE.MeshBasicMaterial({
-                color: room.floors[i].colour,
+    //converts ceiligns into THREEJS components
+    function loadCeiling(room, on_load_complete) {
 
-
-            });
-            mesh = new THREE.Mesh(geometry, material);
-            mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
-            mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
-
-            THREERoom.push(mesh);
-
-
-        }
+        var THREECeilings = [];
         //ceiling stuff
         for (var i = 0; i < room.ceiling.length; i++) {
 
@@ -729,12 +853,115 @@
             mesh.position.z = room.ceiling[i].z1 + room.originZ + ((room.ceiling[i].z2 - room.ceiling[i].z1) / 2);
             mesh.position.y = room.ceiling[i].y;
 
-            THREERoom.push(mesh);
+            THREECeilings.push(mesh);
 
 
         }
 
+        on_load_complete(THREECeilings);
 
-        return THREERoom;
+    };
+
+    //processes floors, seperate function so it can async load any texture files (this will have to be done for similar functions)
+    function processFloors(room, i, callback) {
+        var THREEFloors;
+        //if no texture assign the colour
+        if (!room.floors[i].texture) {
+            var geometry = new THREE.PlaneGeometry((room.floors[i].x2 - room.floors[i].x1), (room.floors[i].z2 - room.floors[i].z1), 100, 100);
+            geometry.rotateX(-Math.PI / 2);
+            // geometry.rotateY(-Math.PI / 2);
+            material = new THREE.MeshBasicMaterial({
+                color: room.floors[i].colour,
+
+            });
+            mesh = new THREE.Mesh(geometry, material);
+            mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
+            mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
+
+            THREEFloors = mesh;
+            callback(THREEFloors);
+        }
+        //if there is a texture load the file
+        else {
+            // geometry.rotateY(-Math.PI / 2);
+            var tLoader = new THREE.TextureLoader();
+            tLoader.load(room.floors[i].texture, function(texture) {
+                var geometry = new THREE.PlaneGeometry((room.floors[i].x2 - room.floors[i].x1), (room.floors[i].z2 - room.floors[i].z1), 100, 100);
+                geometry.rotateX(-Math.PI / 2);
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+
+                var t_width = texture.image.width / meter;
+                var t_height = texture.image.height / meter;
+
+                var f_width = Math.abs(room.floors[i].z2 - room.floors[i].z1);
+                var f_height = Math.abs(room.floors[i].x2 - room.floors[i].x1);
+
+                texture.repeat.set((f_width/t_width), (f_height/t_height));
+                var material = new THREE.MeshBasicMaterial({
+                    map: texture,
+                    overdraw: 0.5
+                });
+                var mesh = new THREE.Mesh(geometry, material);
+                mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
+                mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
+                THREEFloors = mesh;
+                callback(THREEFloors);
+            });
+        }
 
     }
+    //converts floors into THREEJS components
+    function loadFloors(room, on_load_complete) {
+        var THREEFloors = [];
+        //floor stuff
+        //Below allows a sync For Loop, so each floor can be done, texture loaded,
+        //and then returned.  Without this, the room is returned and drawn before
+        //the texture files have been opened!
+        asyncLoop(room.floors.length, function(loop) {
+                processFloors(room, loop.iteration(), function(result) {
+                    // log the iteration
+                    console.log(loop.iteration());
+                    THREEFloors.push(result);
+                    loop.next();
+                })
+            },
+            function() {
+                console.log('cycle ended');
+                on_load_complete(THREEFloors);
+            }
+        );
+    };
+    // a async for loop from a helpful online guy, this creates a for loop where in each loop
+    // an async function needs to be called.
+    function asyncLoop(iterations, func, callback) {
+        var index = 0;
+        var done = false;
+        var loop = {
+            next: function() {
+                if (done) {
+                    return;
+                }
+
+                if (index < iterations) {
+                    index++;
+                    func(loop);
+
+                } else {
+                    done = true;
+                    callback();
+                }
+            },
+
+            iteration: function() {
+                return index - 1;
+            },
+
+            break: function() {
+                done = true;
+                callback();
+            }
+        };
+        loop.next();
+        return loop;
+    };
