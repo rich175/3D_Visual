@@ -897,7 +897,7 @@
                 var f_width = Math.abs(room.floors[i].z2 - room.floors[i].z1);
                 var f_height = Math.abs(room.floors[i].x2 - room.floors[i].x1);
 
-                texture.repeat.set((f_width/t_width), (f_height/t_height));
+                texture.repeat.set((f_height/t_height), (f_width/t_width));
                 var material = new THREE.MeshBasicMaterial({
                     map: texture,
                     overdraw: 0.5
