@@ -1,4 +1,4 @@
-var shelfW = 5*25;
+var shelfW = 3*25;
 var shelfD = 10;
 var shelfT = 1;
 
@@ -7,8 +7,8 @@ var shelfT = 1;
 
 function createShelf(workstation, shelfName) {
 
-    var _x = workstation.object.position.x + 10;
-    var _y = workstation.object.position.y + 40;
+    var _x = workstation.object.position.x + 0;
+    var _y = workstation.object.position.y + 50;
     var _z = workstation.object.position.z + 1;
 
 
@@ -22,7 +22,7 @@ function createShelf(workstation, shelfName) {
     mesh.position.x = _x;
     mesh.position.y = _y;
     mesh.position.z = _z;
-
+    mesh.rotateY(-Math.PI / 2);
 
     var shelf = {
         id: shelfName,

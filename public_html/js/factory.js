@@ -5,18 +5,18 @@
 
 
         var loader = new THREE.TextureLoader();
-        var texture = loader.load('/images/whiteBrickTexture.jpg');
-        var texture2 = loader.load('/images/shopfloorGrids2.jpg');
+        //var texture = loader.load('/images/whiteBrickTexture.jpg');
+        //var texture2 = loader.load('/images/shopfloorGrids2.jpg');
 
 
 
 
         material = new THREE.MeshLambertMaterial({
-            map: texture
+          //  map: texture
         });
 
         layout = new THREE.MeshLambertMaterial({
-            map: texture2
+            //map: texture2
         });
 
 
@@ -38,7 +38,7 @@
 
         mesh = new THREE.Mesh(geometry, layout);
         mesh.position.y = -0.5;
-        obj.push(mesh);
+        //obj.push(mesh);
 
 
 
@@ -96,14 +96,23 @@
                 z2: factoryWidth,
                 y: wallHeight
             }],
-            floors: [],
+            floors: [{
+                x1: 0 * meter,
+                x2: factoryLength,
+                z1: 0 * meter,
+                z2: factoryWidth,
+                y: -1,
+                texture: '/images/concrete.jpg'
+            }
+
+            ],
             ceiling: []
         };
 
         AllWalls.push(factoryWalls);
 
 
-        //bay 1 door and floor marking- NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
+        //bay 1 door and floor marking
         var bay1 = {
             originX: 21 * meter,
             originY: 0,
@@ -124,14 +133,14 @@
                 z1: 0 * meter,
                 z2: 19.5 * meter,
                 y: 0 * meter,
-                colour: '#859DAE'
+                texture: 'images/concreteBlue.jpg'
             }],
             ceiling: []
         };
 
         AllWalls.push(bay1);
 
-        //bay 2 door and floor marking - NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
+        //bay 2 door and floor marking
         var bay2 = {
             originX: 12.5 * meter,
             originY: 0,
@@ -151,15 +160,15 @@
                 x2: 4.5 * meter,
                 z1: 0 * meter,
                 z2: 19.5 * meter,
-                y: 15 * meter,
-                colour: '#859DAE'
+                y: 0 * meter,
+                texture: 'images/concreteBlue.jpg'
             }],
             ceiling: []
         };
 
         AllWalls.push(bay2);
 
-        //bay 3 door and floor marking - NOTE the floor isnt drawing in correctly, is this to do with texture 2 (the map?)
+        //bay 3 door and floor marking
         var bay3 = {
             originX: 4.5 * meter,
             originY: 0,
@@ -180,7 +189,7 @@
                 z1: 0 * meter,
                 z2: 19.5 * meter,
                 y: 0 * meter,
-                colour: '#859DAE'
+                texture: 'images/concreteBlue.jpg'
             }],
             ceiling: []
         };
@@ -217,7 +226,7 @@
                 z1: 0 * meter,
                 z2: 34.5 * meter,
                 y: 0 * meter,
-                colour: '#ABB6BF'
+                texture: 'images/concreteBlue.jpg'
             }],
             ceiling: []
         };
@@ -295,14 +304,15 @@
                 x2: 3.5 * meter,
                 z1: 0 * meter,
                 z2: 20 * meter,
-                colour: '#6587BA' //blue carpet
+                y: 0  * meter,
+                texture:'images/greyCarpet.jpg'
             }, {
-                x1: 3.5 * meter,
-                x2: 9.2 * meter,
-                z1: 0 * meter,
-                z2: 20 * meter,
-                colour: '#BF4044' //red carpet
-
+                x1: 4.5 * meter,
+                x2: 8.2 * meter,
+                z1: 1 * meter,
+                z2: 19 * meter,
+                y: 0  * meter,
+                texture: 'images/redCarpet.jpg'
             }],
             ceiling: []
         };
@@ -355,7 +365,8 @@
                 x2: 20.5 * meter,
                 z1: 0 * meter,
                 z2: 9 * meter,
-                colour: '#ABB6BF' //grey floor
+                y: 0* meter,
+                texture: 'images/concreteBlue.jpg'
             }],
             ceiling: []
         };
@@ -453,7 +464,16 @@
                     thickness: 2
                 },
             ],
-            floors: [],
+            floors: [{
+                x1: 0 * meter,
+                x2: 7.5 * meter,
+                z1: 0 * meter,
+                z2: 5.5 * meter,
+                y: 0,
+                texture: '/images/linoleumGrey.jpg'
+            }],
+
+
             ceiling: []
         };
 
@@ -583,12 +603,23 @@
                 }
 
             ],
+          //main lobby carpet
             floors: [{
                 x1: 0 * meter,
                 x2: 6.5 * meter,
                 z1: 0 * meter,
                 z2: 11 * meter,
+                y: 0,
                 texture: '/images/floorTile.jpg'
+            },
+          //lobby toilets flooring
+            {
+                x1: 0 * meter,
+                x2: 12.5 * meter,
+                z1: 0 * meter,
+                z2: 5.5 * meter,
+                y: 0,
+                texture: '/images/linoleumGrey.jpg'
             }],
             ceiling: []
         };
@@ -631,10 +662,11 @@
                 x2: 8.5 * meter,
                 z1: 0 * meter,
                 z2: 9 * meter,
-                colour: '#ABB6BF' //grey floor
+                y: 0* meter,
+                texture: 'images/concreteDkBlue.jpg'
             }],
             ceiling: [
-                //the ceiling (indicating this is a cage not open) NOTE this doesnt draw?
+                //the ceiling
                 {
                     x1: 0 * meter,
                     x2: 8.5 * meter,
@@ -877,6 +909,7 @@
             mesh = new THREE.Mesh(geometry, material);
             mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
             mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
+            mesh.position.y = room.floors[i].y;
 
             THREEFloors = mesh;
             callback(THREEFloors);
@@ -905,6 +938,7 @@
                 var mesh = new THREE.Mesh(geometry, material);
                 mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
                 mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
+                mesh.position.y = room.floors[i].y;
                 THREEFloors = mesh;
                 callback(THREEFloors);
             });
