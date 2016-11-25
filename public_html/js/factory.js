@@ -572,7 +572,7 @@
                     //male toilet
                     x1: 11.2 * meter,
                     x2: 11.2 * meter,
-                    z1: 7 * meter,
+                    z1: 8.2 * meter,
                     z2: 11 * meter,
                     y: 2.5 * meter,
                     thickness: 2
@@ -614,10 +614,10 @@
             },
           //lobby toilets flooring
             {
-                x1: 0 * meter,
+                x1: 6.5 * meter,
                 x2: 12.5 * meter,
-                z1: 0 * meter,
-                z2: 5.5 * meter,
+                z1: 2 * meter,
+                z2:12 * meter,
                 y: 0,
                 texture: '/images/linoleumGrey.jpg'
             }],

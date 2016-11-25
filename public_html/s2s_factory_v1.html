@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>three.js - pointerlock controls</title>
+	<title>3D S2S shop floor tour</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<style>
@@ -321,6 +321,9 @@
 			light.position.set(200, 2000, 200);
 			scene.add(light);
 
+			var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+			directionalLight.position.set(0, 1, 0);
+			scene.add(directionalLight);
 
 			controls = new THREE.PointerLockControls(camera);
 			scene.add(controls.getObject());
@@ -338,10 +341,10 @@
 
 				// workstation digits ()
 				//4 desks in phoneRoom location is (x position, ?, Z position, ?, addNewStation)
-				createWorkstation(-30.8 * meter, 0, 4 * meter, 1, addNewStation);
-				createWorkstation(-30.8 * meter, 0, 8 * meter, 1, addNewStation);
-				createWorkstation(-30.8 * meter, 0, 12 * meter, 1, addNewStation);
-				createWorkstation(-30.8 * meter, 0, 0 * meter, 1, addNewStation);
+				createWorkstation(-30.8 * meter, 0, 4 * meter, -0.1, addNewStation);
+				createWorkstation(-30.8 * meter, 0, 8 * meter, 0, addNewStation);
+				createWorkstation(-30.8 * meter, 0, 12 * meter, 0, addNewStation);
+				createWorkstation(-30.8 * meter, 0, 0 * meter, 0, addNewStation);
 				createPerson(-29 * meter, 0, 6 * meter, 1, addNewPerson);
 
 				// desks in data erasure room
