@@ -1,7 +1,7 @@
 function createPerson(x, y, z, id, callback) {
     var loader = new THREE.ObjectLoader();
     loader.load('images/tweediezPerson.json', function(obj) {
-        obj.rotateY(-Math.PI / 2);
+      //  obj.rotateY(-Math.PI / 2);
         obj.scale.set(10,10,10)
 
         obj.position.x = x;
