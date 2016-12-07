@@ -52,49 +52,57 @@
                 x2: 36 * meter,
                 z1: 0,
                 z2: 0,
-                y: wallHeight
+                y: wallHeight,
+                  texture: 'images/metal_wall.jpg'
             }, { //wall between bay 3 and 2
                 color: '#D6D4CD',
                 x1: 40 * meter,
                 x2: 44 * meter,
                 z1: 0,
                 z2: 0,
-                y: wallHeight
+                y: wallHeight,
+                  texture: 'images/metal_wall.jpg'
             }, { // wall between bay 2 and 1
                 color: '#D6D4CD',
                 x1: 48.5 * meter,
                 x2: 52.5 * meter,
                 z1: 0,
                 z2: 0,
-                y: wallHeight
+                y: wallHeight,
+                  texture: 'images/metal_wall.jpg'
             }, {
                 color: '#D6D4CD',
                 x1: 56.8 * meter,
                 x2: 63 * meter,
                 z1: 0,
                 z2: 0,
-                y: wallHeight
+                y: wallHeight,
+                  texture: 'images/metal_wall.jpg'
+
             }, {
                 color: '#D6D4CD',
                 x1: 0,
                 x2: factoryLength,
                 z1: factoryWidth,
                 z2: factoryWidth,
-                y: wallHeight
+                y: wallHeight,
+                  texture: 'images/metal_wall.jpg'
             }, {
                 color: '#D6D4CD',
                 x1: 0,
                 x2: 0,
                 z1: 0,
                 z2: factoryWidth,
-                y: wallHeight
+                y: wallHeight,
+                texture: 'images/metal_wall.jpg'
             }, {
                 color: '#D6D4CD',
                 x1: factoryLength,
                 x2: factoryLength,
                 z1: 0,
                 z2: factoryWidth,
-                y: wallHeight
+                y: wallHeight,
+                  texture: 'images/metal_wall.jpg'
             }],
             floors: [{
                     x1: 0 * meter,
@@ -248,7 +256,7 @@
                     z1: 20 * meter,
                     z2: 20 * meter,
                     y: 2.5 * meter,
-                    texture: 'images/whiteBrick.jpg'
+                    texture: 'images/greybrick.jpg'
                 }, //wall right, top part
                 {
                     x1: 2.5 * meter,
@@ -256,7 +264,7 @@
                     z1: 20 * meter,
                     z2: 20 * meter,
                     y: 2.5 * meter,
-                    texture: 'images/whiteBrick.jpg'
+                    texture: 'images/greybrick.jpg'
 
                 },
 
@@ -266,7 +274,8 @@
                     x2: 1.5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 },
                 //wall left upper
                 {
@@ -274,32 +283,37 @@
                     x2: 9.2 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/whiteBrick.jpg'
+
                 }, {
                     x1: 9.2 * meter,
                     x2: 9.2 * meter,
                     z1: 0 * meter,
                     z2: 2 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 9.2 * meter,
                     x2: 9.2 * meter,
                     z1: 4 * meter,
                     z2: 20 * meter,
                     y: 2.5 * meter,
-                      texture: 'images/whiteBrick.jpg'
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 3.5 * meter,
                     x2: 3.5 * meter,
                     z1: 0 * meter,
                     z2: 1 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 3.5 * meter,
                     x2: 3.5 * meter,
                     z1: 2 * meter,
                     z2: 20 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }
             ],
             floors: [{
@@ -335,31 +349,37 @@
                     x2: 5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
+
                 }, {
                     x1: 6 * meter,
                     x2: 20.5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, { //bottom wallleft of door//
                     x1: 0 * meter,
                     x2: 0 * meter,
                     z1: 0 * meter,
                     z2: 3.5 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, { //bottom wallright of door//
                     x1: 0 * meter,
                     x2: 0 * meter,
                     z1: 5.5 * meter,
                     z2: 9 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, { //top wall//
                     x1: 20.5 * meter,
                     x2: 20.5 * meter,
                     z1: 0 * meter,
                     z2: 9 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }
 
             ],
@@ -389,38 +409,45 @@
                     x2: 2.5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 3.5 * meter,
                     x2: 3.8 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
+
                 }, {
                     x1: 4.8 * meter,
                     x2: 7.5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 7.5 * meter,
                     x2: 7.5 * meter,
                     z1: 0 * meter,
                     z2: 5.5 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 0 * meter,
                     x2: 7.5 * meter,
                     z1: 5.5 * meter,
                     z2: 5.5 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //toilet divider
                     x1: 3.65 * meter,
                     x2: 3.65 * meter,
                     z1: 0 * meter,
                     z2: 5.5 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 },
                 //cubicle walls
                 {
@@ -429,42 +456,48 @@
                     z1: 2.6 * meter,
                     z2: 2.6 * meter,
                     y: 1.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 3.65 * meter,
                     x2: 5.5 * meter,
                     z1: 3.6 * meter,
                     z2: 3.6 * meter,
                     y: 1.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 3.65 * meter,
                     x2: 5.5 * meter,
                     z1: 4.6 * meter,
                     z2: 4.6 * meter,
                     y: 1.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 3.65 * meter,
                     x2: 1.8 * meter,
                     z1: 2.6 * meter,
                     z2: 2.6 * meter,
                     y: 1.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 3.65 * meter,
                     x2: 1.8 * meter,
                     z1: 3.6 * meter,
                     z2: 3.6 * meter,
                     y: 1.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 3.65 * meter,
                     x2: 1.8 * meter,
                     z1: 4.6 * meter,
                     z2: 4.6 * meter,
                     y: 1.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 },
             ],
             floors: [{
@@ -494,27 +527,31 @@
                     x2: 6.5 * meter,
                     z1: 0 * meter,
                     z2: 5.5 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 6.5 * meter,
                     x2: 6.5 * meter,
                     z1: 6.5 * meter,
                     z2: 11 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 9.2 * meter,
                     x2: 12.5 * meter,
                     z1: 5.3 * meter,
                     z2: 5.3 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     x1: 7.8 * meter,
                     x2: 12.5 * meter,
                     z1: 7 * meter,
                     z2: 7 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //female toilet
                     x1: 12.5 * meter,
@@ -522,7 +559,8 @@
                     z1: 2 * meter,
                     z2: 5.6 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //female toilet
                     x1: 6.5 * meter,
@@ -530,7 +568,8 @@
                     z1: 2 * meter,
                     z2: 2 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //female toilet
                     x1: 8 * meter,
@@ -538,7 +577,8 @@
                     z1: 2 * meter,
                     z2: 5.3 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //female toilet cubicle
                     x1: 9.3 * meter,
@@ -546,7 +586,8 @@
                     z1: 3.6 * meter,
                     z2: 5.3 * meter,
                     y: 1.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //female toilet cubicle
                     x1: 10.3 * meter,
@@ -554,7 +595,8 @@
                     z1: 3.6 * meter,
                     z2: 5.3 * meter,
                     y: 1.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //female toilet cubicle
                     x1: 11.3 * meter,
@@ -562,7 +604,8 @@
                     z1: 3.6 * meter,
                     z2: 5.3 * meter,
                     y: 1.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //side room
                     x1: 12.5 * meter,
@@ -570,7 +613,8 @@
                     z1: 8.2 * meter,
                     z2: 11 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //male toilet
                     x1: 11.2 * meter,
@@ -578,7 +622,8 @@
                     z1: 8.2 * meter,
                     z2: 11 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //male toilet cubicle
                     x1: 10.2 * meter,
@@ -586,7 +631,8 @@
                     z1: 7 * meter,
                     z2: 9 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //male toilet cubicle
                     x1: 9.2 * meter,
@@ -594,7 +640,8 @@
                     z1: 7 * meter,
                     z2: 9 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }, {
                     //male toilet cubicle
                     x1: 7.8 * meter,
@@ -602,7 +649,8 @@
                     z1: 7 * meter,
                     z2: 9 * meter,
                     y: 2.5 * meter,
-                    thickness: 2
+                    thickness: 2,
+                    texture: 'images/greybrick.jpg'
                 }
 
             ],
@@ -647,7 +695,8 @@
                     x2: 8.5 * meter,
                     z1: 0 * meter,
                     z2: 0 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }, { //bottom wall//
                     color: '#D6D4CD',
                     transparency: true,
@@ -656,7 +705,8 @@
                     x2: 0 * meter,
                     z1: 0 * meter,
                     z2: 9 * meter,
-                    y: 2.5 * meter
+                    y: 2.5 * meter,
+                    texture: 'images/greybrick.jpg'
                 }
 
             ],
@@ -672,14 +722,7 @@
             }],
             ceiling: [
                 //the ceiling
-                {
-                    x1: 0 * meter,
-                    x2: 8.5 * meter,
-                    z1: 0 * meter,
-                    z2: 9 * meter,
-                    y: 2.5 * meter,
-                    colour: '#ABB6BF' //grey floor
-                }
+
             ]
         };
 
