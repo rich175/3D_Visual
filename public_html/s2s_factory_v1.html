@@ -58,7 +58,7 @@
 	<script src="js/wip_shelf.js"></script>
 	<script src="js/wip_object.js"></script>
 	<script src="js/person.js"></script>
-
+	<script src="js/forklift.js"></script>
 	<script src="js/s2s_mqtt.js"></script>
 
 
@@ -195,6 +195,8 @@
 
 		/*List of all Persons as a custom object, see person.js*/
 		var factoryPersons = [];
+		/*List of all Forklifts as a custom object, see forklift.js*/
+		var factoryForklifts = [];
 		/*List of all cubes as THREE.Mesh*/
 		var factoryWIP = [];
 
@@ -211,7 +213,7 @@
 			scene.add(newShelf.three_obj);
 			factoryShelving.push(newShelf);
 		}
-		//NOTE KvL added this section of code trying to add in a human json figure from blender. Use of this figure requires CREDIT to be given to tweediez
+		//NOTE human json figure from blender. Use of this figure requires CREDIT to be given to tweediez
 		function addNewPerson(ps) {
 			scene.add(ps.object);
 			objects.push(ps.object);
@@ -219,7 +221,13 @@
 			//console.log('Person: - ' + person.id + '-, has been added');
 
 		}
-
+		//NOTE KvL forklift blender model credits not required!
+		function addNewForklift(fk) {
+			scene.add(fk.object);
+			objects.push(fk.object);
+			//factoryForklifts.push(ps);
+			//console.log('Forklift: - ' + forklift.id + '-, has been added');
+		}
 		function addNewWIP(id) {
 			var _newBox = createNewWIPObj(id);
 			factoryWIP.push(_newBox);
@@ -346,6 +354,7 @@
 				createWorkstation(-30.8 * meter, 0, 12 * meter, 0, addNewStation);
 				createWorkstation(-30.8 * meter, 0, 0 * meter, 0, addNewStation);
 				createPerson(-29 * meter, 0, 6 * meter, 1, addNewPerson);
+				createForklift(-18 * meter, 0, -30 * meter, 0, addNewForklift);
 
 				// desks in data erasure room
 				createWorkstation(-27.2 * meter, 0, 4 * meter, 1, addNewStation);
@@ -477,7 +486,7 @@
 			var currentZ = controls.getObject().position.z;
 
 			raycaster.ray.origin.copy(controls.getObject().position);
-			raycaster.ray.origin.y -= 10;
+			raycaster.ray.origin.y -= 20 * meter;
 
 			var intersections = raycaster.intersectObjects(objects);
 
@@ -524,10 +533,10 @@
 			controls.getObject().translateY(velocity.y * delta);
 			controls.getObject().translateZ(velocity.z * delta);
 
-			if (controls.getObject().position.y < (0.8 * meter)) {
+			if (controls.getObject().position.y < (1 * meter)) {
 
 				velocity.y = 0;
-				controls.getObject().position.y = (0.8 * meter);
+				controls.getObject().position.y = (1 * meter);
 
 				canJump = true;
 			}
