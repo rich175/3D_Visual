@@ -287,7 +287,7 @@
                     z1: 4 * meter,
                     z2: 20 * meter,
                     y: 2.5 * meter,
-                      texture: 'images/whiteBrick.jpg'
+                    texture: 'images/whiteBrick.jpg'
                 }, {
                     x1: 3.5 * meter,
                     x2: 3.5 * meter,
@@ -575,7 +575,7 @@
                     //male toilet
                     x1: 11.2 * meter,
                     x2: 11.2 * meter,
-                    z1: 7 * meter,
+                    z1: 8.2 * meter,
                     z2: 11 * meter,
                     y: 2.5 * meter,
                     thickness: 2
@@ -608,12 +608,22 @@
             ],
             //main lobby carpet
             floors: [{
+
                     x1: 0 * meter,
                     x2: 6.5 * meter,
                     z1: 0 * meter,
                     z2: 11 * meter,
                     y: 0,
                     texture: '/images/floorTile.jpg'
+                },
+                //lobby toilets flooring
+                {
+                    x1: 6.5 * meter,
+                    x2: 12.5 * meter,
+                    z1: 2 * meter,
+                    z2: 12 * meter,
+                    y: 0,
+                    texture: '/images/linoleumGrey.jpg'
                 },
                 //lobby toilets flooring
                 {
@@ -881,7 +891,7 @@
 
                 //Wall is completely in Z direction
                 if (wallLengthX == 0) {
-                    var geometry = new THREE.BoxGeometry(thickness,wall.y, wallLengthZ);
+                    var geometry = new THREE.BoxGeometry(thickness, wall.y, wallLengthZ);
                     var mesh = new THREE.Mesh(geometry, material);
                     mesh.position.x = room.originX + wall.x1;
                     mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1) / 2);
@@ -890,12 +900,12 @@
                 }
                 //Wall is completely in X direction
                 else {
-                      var geometry = new THREE.BoxGeometry(wallLengthX, wall.y, thickness);
+                    var geometry = new THREE.BoxGeometry(wallLengthX, wall.y, thickness);
                     var mesh = new THREE.Mesh(geometry, material);
                     mesh.position.x = room.originX + wall.x1 + ((wall.x2 - wall.x1) / 2);
                     mesh.position.z = room.originZ + wall.z1;
                     mesh.position.y = room.originY + wall.y / 2;
-                  
+
                 }
                 THREEWalls = mesh;
                 callback(THREEWalls);
@@ -920,7 +930,7 @@
                             map: texture,
                             overdraw: 0.5
                         });
-                        var geometry = new THREE.BoxGeometry(thickness,wall.y, wallLengthZ);
+                        var geometry = new THREE.BoxGeometry(thickness, wall.y, wallLengthZ);
                         var mesh = new THREE.Mesh(geometry, material);
                         mesh.position.x = room.originX + wall.x1;
                         mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1) / 2);
