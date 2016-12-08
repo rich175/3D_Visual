@@ -53,7 +53,10 @@
 	<script src="js/three.js"></script>
 	<script src="js/factoryControls.js"></script>
 	<script src="js/OBJLoader.js"></script>
+	<script src="js/createRooms.js"></script>
 	<script src="js/factory.js"></script>
+	<script src="js/factory_1_floor.js"></script>
+
 	<script src="js/workstation.js"></script>
 	<script src="js/wip_shelf.js"></script>
 	<script src="js/wip_object.js"></script>
@@ -228,6 +231,7 @@
 			//factoryForklifts.push(ps);
 			//console.log('Forklift: - ' + forklift.id + '-, has been added');
 		}
+
 		function addNewWIP(id) {
 			var _newBox = createNewWIPObj(id);
 			factoryWIP.push(_newBox);
@@ -346,27 +350,31 @@
 				for (var i = 0; i < _building.length; i++) {
 					scene.add(_building[i]);
 				}
+				returnFirstFloorFactory(function(_building) {
+					for (var i = 0; i < _building.length; i++) {
+						scene.add(_building[i]);
+					}
+					// workstation digits ()
+					//4 desks in phoneRoom location is (x position, ?, Z position, ?, addNewStation)
+					createWorkstation(-30.8 * meter, 0, 4 * meter, -0.1, addNewStation);
+					createWorkstation(-30.8 * meter, 0, 8 * meter, 0, addNewStation);
+					createWorkstation(-30.8 * meter, 0, 12 * meter, 0, addNewStation);
+					createWorkstation(-30.8 * meter, 0, 0 * meter, 0, addNewStation);
+					createPerson(-29 * meter, 0, 6 * meter, 1, addNewPerson);
+					createForklift(-18 * meter, 0, -30 * meter, 0, addNewForklift);
 
-				// workstation digits ()
-				//4 desks in phoneRoom location is (x position, ?, Z position, ?, addNewStation)
-				createWorkstation(-30.8 * meter, 0, 4 * meter, -0.1, addNewStation);
-				createWorkstation(-30.8 * meter, 0, 8 * meter, 0, addNewStation);
-				createWorkstation(-30.8 * meter, 0, 12 * meter, 0, addNewStation);
-				createWorkstation(-30.8 * meter, 0, 0 * meter, 0, addNewStation);
-				createPerson(-29 * meter, 0, 6 * meter, 1, addNewPerson);
-				createForklift(-18 * meter, 0, -30 * meter, 0, addNewForklift);
+					// desks in data erasure room
+					createWorkstation(-27.2 * meter, 0, 4 * meter, 1, addNewStation);
 
-				// desks in data erasure room
-				createWorkstation(-27.2 * meter, 0, 4 * meter, 1, addNewStation);
+					renderer = new THREE.WebGLRenderer();
+					renderer.setClearColor(0xffffff);
+					renderer.setPixelRatio(window.devicePixelRatio);
+					renderer.setSize(window.innerWidth, window.innerHeight);
+					document.body.appendChild(renderer.domElement);
 
-				renderer = new THREE.WebGLRenderer();
-				renderer.setClearColor(0xffffff);
-				renderer.setPixelRatio(window.devicePixelRatio);
-				renderer.setSize(window.innerWidth, window.innerHeight);
-				document.body.appendChild(renderer.domElement);
-
-				window.addEventListener('resize', onWindowResize, false);
-				animate();
+					window.addEventListener('resize', onWindowResize, false);
+					animate();
+				});
 
 			});
 
@@ -533,15 +541,29 @@
 			controls.getObject().translateY(velocity.y * delta);
 			controls.getObject().translateZ(velocity.z * delta);
 
-			if (controls.getObject().position.y < (1 * meter)) {
+			if (controls.getObject().position.y < (2 * meter)) {
 
 				velocity.y = 0;
-				controls.getObject().position.y = (1 * meter);
+				controls.getObject().position.y = (2 * meter);
 
 				canJump = true;
 			}
 
 			prevTime = time;
+		};
+
+		function hideFloor(_floorNumber) {
+			scene.traverse(function(node) {
+				if (node instanceof THREE.Mesh) {
+					if (node.name) {
+						var floorNumber = node.name.substring(0, 1);
+						if (floorNumber === String(_floorNumber)) {
+							console.log('Found a floor');
+							node.visible = false;
+						}
+					}
+				}
+			});
 		}
 
 
@@ -549,7 +571,10 @@
 			var onKeyDown = function(event) {
 
 				switch (event.keyCode) {
-
+					//1
+					case 49:
+						hideFloor('0');
+						break;
 					case 66:
 						fakeAddBox();
 						break;
