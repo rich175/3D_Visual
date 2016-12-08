@@ -321,6 +321,14 @@
 			scene.add(mesh);
 
 		}
+		var marioHeight = 2 * meter;
+
+		function changeHeight() {
+
+			marioHeight = 4.5 * meter;
+			controls.getObject().position.y = marioHeight;
+
+		}
 
 		function init() {
 
@@ -541,10 +549,10 @@
 			controls.getObject().translateY(velocity.y * delta);
 			controls.getObject().translateZ(velocity.z * delta);
 
-			if (controls.getObject().position.y < (2 * meter)) {
+			if (controls.getObject().position.y < (marioHeight)) {
 
 				velocity.y = 0;
-				controls.getObject().position.y = (2 * meter);
+				controls.getObject().position.y = (marioHeight);
 
 				canJump = true;
 			}
@@ -562,6 +570,14 @@
 							node.visible = false;
 						}
 					}
+				} else if (node instanceof THREE.Object3D) {
+					if (node.name) {
+						var floorNumber = node.name.substring(0, 1);
+						if (floorNumber === String(_floorNumber)) {
+							console.log('Found a floor');
+							node.visible = false;
+						}
+					}
 				}
 			});
 		}
@@ -571,9 +587,12 @@
 			var onKeyDown = function(event) {
 
 				switch (event.keyCode) {
-					//1
+					case 80:
+						changeHeight();
+						break;
+						//1
 					case 49:
-						hideFloor('0');
+						hideFloor('1');
 						break;
 					case 66:
 						fakeAddBox();

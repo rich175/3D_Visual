@@ -2,6 +2,8 @@
 function createRoom(room, on_load_complete) {
 
     var THREERoom = [];
+    //Add 1st Floor PlaneGeometry
+
     var loader = new THREE.TextureLoader();
     var firstFloor = loader.load('/images/shopFloorFirst2.jpg');
     var layoutFF = new THREE.MeshLambertMaterial({
@@ -16,7 +18,7 @@ function createRoom(room, on_load_complete) {
     });
 
     mesh = new THREE.Mesh(geometryFF, layoutFF);
-    mesh.position.y = 3.0 * meter;
+    mesh.position.y = 2.5 * meter;
     THREERoom.push(mesh);
 
     //Create THREEJS components of all the walls
@@ -219,12 +221,13 @@ function processFloors(room, i, callback) {
         // geometry.rotateY(-Math.PI / 2);
         material = new THREE.MeshBasicMaterial({
             color: room.floors[i].colour,
+            side: THREE.DoubleSide,
 
         });
         mesh = new THREE.Mesh(geometry, material);
         mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
         mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
-        mesh.position.y = room.floors[i].y;
+        mesh.position.y = room.originY + room.floors[i].y;
 
         THREEFloors = mesh;
         callback(THREEFloors);
@@ -235,6 +238,8 @@ function processFloors(room, i, callback) {
         var tLoader = new THREE.TextureLoader();
         tLoader.load(room.floors[i].texture, function(texture) {
             var geometry = new THREE.PlaneGeometry((room.floors[i].x2 - room.floors[i].x1), (room.floors[i].z2 - room.floors[i].z1), 100, 100);
+
+
             geometry.rotateX(-Math.PI / 2);
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
@@ -248,14 +253,45 @@ function processFloors(room, i, callback) {
             texture.repeat.set((f_height / t_height), (f_width / t_width));
             var material = new THREE.MeshBasicMaterial({
                 map: texture,
-                overdraw: 0.5
+                side: THREE.FrontSide
+                    //overdraw: 0.5,
             });
+
+            var material2 = new THREE.MeshBasicMaterial({
+                color: '#ff0000',
+                side: THREE.BackSide
+                    //overdraw: 0.5,
+            });
+
+            var geometry2 = geometry;
+            geometry.rotateY(Math.PI);
+
+            /*var mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+            mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
+            mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
+            mesh.position.y = room.originY + room.floors[i].y;*/
+
+            // card
+            card = new THREE.Object3D();
+            //scene.add(card);
+
+            // mesh
             var mesh = new THREE.Mesh(geometry, material);
             mesh.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
             mesh.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
-            mesh.position.y = room.floors[i].y;
-            THREEFloors = mesh;
+            mesh.position.y = room.originY + room.floors[i].y;
+            card.add(mesh);
+
+            var mesh2 = new THREE.Mesh(geometry2, material2);
+            mesh2.position.x = room.floors[i].x1 + room.originX + ((room.floors[i].x2 - room.floors[i].x1) / 2);
+            mesh2.position.z = room.floors[i].z1 + room.originZ + ((room.floors[i].z2 - room.floors[i].z1) / 2);
+            mesh2.position.y = room.originY + room.floors[i].y;
+            card.add(mesh2);
+
+            THREEFloors = card;
             callback(THREEFloors);
+
+
         });
     }
 
@@ -271,6 +307,7 @@ function loadFloors(room, on_load_complete) {
             processFloors(room, loop.iteration(), function(result) {
                 // log the iteration
                 //console.log(loop.iteration());
+                result.name = room.name;
                 THREEFloors.push(result);
                 loop.next();
             })
