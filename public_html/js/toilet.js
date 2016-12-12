@@ -1,7 +1,7 @@
-function createPerson(x, y, z, rotation, id, callback) {
+function createToilet(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/tweediezPerson.json', function(obj) {
-      obj.rotateY(rotation);
+    loader.load('images/toilet.json', function(obj) {
+        obj.rotateY(rotation);
         obj.scale.set(10,10,10)
 
         obj.position.x = x;
@@ -10,18 +10,19 @@ function createPerson(x, y, z, rotation, id, callback) {
 
         obj.name = id;
 
-        var _thisPerson = {
+        var _thisToilet = {
             id: id,
             object: obj,
             cube: {
                 cube_x: x,
                 cube_y: y + 6,
                 cube_z: z
-            },
-            work_in_progress: []
+              },
+              work_in_progress: []
+
 
         }
 
-        callback(_thisPerson);
+        callback(_thisToilet);
     });
 }
