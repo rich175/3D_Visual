@@ -1,8 +1,8 @@
-function createForklift(x, y, z, id, callback) {
+function createForklift(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
     loader.load('images/simpleForkliftedit.json', function(obj) {
-        obj.rotateY(-Math.PI / 2);
-        obj.scale.set(20,20,20)
+        obj.rotateY(rotation);
+        obj.scale.set(15,15,15)
 
         obj.position.x = x;
         obj.position.y = y;
