@@ -53,7 +53,10 @@
 	<script src="js/three.js"></script>
 	<script src="js/factoryControls.js"></script>
 	<script src="js/OBJLoader.js"></script>
+	<script src="js/createRooms.js"></script>
 	<script src="js/factory.js"></script>
+	<script src="js/factory_1_floor.js"></script>
+
 	<script src="js/workstation.js"></script>
 	<script src="js/wip_shelf.js"></script>
 	<script src="js/wip_object.js"></script>
@@ -194,7 +197,7 @@
 
 		/*List of all workstations as a custom object, see workstation.js*/
 		var factoryWorkstations = [];
-		
+
 		/*List of all Persons as a custom object, see person.js*/
 		var factoryPersons = [];
 		/*List of all Forklifts as a custom object, see forklift.js*/
@@ -202,7 +205,7 @@
 		/*List of all cubes as THREE.Mesh*/
 		var factoryWIP = [];
 		/*List of all toilets as custom object, see toilet.js*/
-	var factorytoilets = [];
+		var factorytoilets = [];
 		/*List of all shelves as a custom object, see wip_shelf.js*/
 		var factoryShelving = [];
 		//lists all lorries in factory as custom object, see lorry.js
@@ -234,6 +237,7 @@
 			//factoryForklifts.push(ps);
 			//console.log('Forklift: - ' + forklift.id + '-, has been added');
 		}
+
 		//NOTE KvL toilet json from blender credits not required
 		function addNewToilet(loo) {
 			scene.add(loo.object);
@@ -250,6 +254,7 @@
 			//factoryLorries.push(ps);
 			//console.log('Lorry: - ' + Lorry.id + '-, has been added');
 		}
+
 		function addNewWIP(id) {
 			var _newBox = createNewWIPObj(id);
 			factoryWIP.push(_newBox);
@@ -339,6 +344,14 @@
 			scene.add(mesh);
 
 		}
+		var marioHeight = 2 * meter;
+
+		function changeHeight() {
+
+			marioHeight = 4.5 * meter;
+			controls.getObject().position.y = marioHeight;
+
+		}
 
 		function init() {
 
@@ -369,48 +382,58 @@
 					scene.add(_building[i]);
 				}
 
-				//4 desks in phoneRoom location is (x position, y position, Z position, rotation in y, id, addNewNamehere)
-				createWorkstation(-30.8 * meter, 0, 4 * meter,  (-Math.PI / 2), '0_refurbD1', addNewStation);
-				createWorkstation(-30.8 * meter, 0, 8 * meter, (-Math.PI / 2), '0_refurbD2', addNewStation);
-				createWorkstation(-30.8 * meter, 0, 12 * meter, (-Math.PI / 2), '0_refurbD3', addNewStation);
-				createWorkstation(-30.8 * meter, 0, 0 * meter,  (-Math.PI / 2), '0_refurbD4', addNewStation);
-				// desks in data erasure room
-				createWorkstation(-26.2 * meter, 0, 12 * meter, 0, '0_dataeraseD1', addNewStation);
+				returnFirstFloorFactory(function(_building) {
+					for (var i = 0; i < _building.length; i++) {
+						scene.add(_building[i]);
+					}
+					//4 desks in phoneRoom location is (x position, y position, Z position, rotation in y, id, addNewNamehere)
+					createWorkstation(-30.8 * meter, 0, 4 * meter, (-Math.PI / 2), '0_refurbD1', addNewStation);
+					createWorkstation(-30.8 * meter, 0, 8 * meter, (-Math.PI / 2), '0_refurbD2', addNewStation);
+					createWorkstation(-30.8 * meter, 0, 12 * meter, (-Math.PI / 2), '0_refurbD3', addNewStation);
+					createWorkstation(-30.8 * meter, 0, 0 * meter, (-Math.PI / 2), '0_refurbD4', addNewStation);
+					// desks in data erasure room
+					createWorkstation(-26.2 * meter, 0, 12 * meter, 0, '0_dataeraseD1', addNewStation);
 
-				//shopfloor person refurbRoom
-				createPerson(-29 * meter, 0, 6 * meter, 0, '0_person1', addNewPerson);
+					//shopfloor person refurbRoom
+					createPerson(-29 * meter, 0, 6 * meter, 0, '0_person1', addNewPerson);
 
-				//forklift near bays
-				createForklift(-18 * meter, 0, -30 * meter, (-Math.PI/2), '0_forklift1', addNewForklift);
-// lorry in bay 1
-createLorry(23 *meter, 0, - 31.5 * meter, (-Math.PI/2), '0_lorryBay1', addNewLorry);
+					//forklift near bays
+					createForklift(-18 * meter, 0, -30 * meter, (-Math.PI / 2), '0_forklift1', addNewForklift);
+					// lorry in bay 1
+					createLorry(23 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_lorryBay1', addNewLorry);
 
-				//toilets accessed from shopfloor
-				createToilet(-28.5 * meter, 0, 26.5* meter, (-Math.PI / 2), '0_toiletShopfloor1', addNewToilet);
-				createToilet(-28.5 * meter, 0, 27.5* meter, (-Math.PI / 2), '0_toiletShopfloor2', addNewToilet);
-				createToilet(-28.5 * meter, 0, 28.5* meter, (-Math.PI / 2), '0_toiletShopfloor3', addNewToilet);
-				createToilet(-27.5 * meter, 0, 26.5* meter, (Math.PI/2), '0_toiletShopfloor4', addNewToilet);
-				createToilet(-27.5 * meter, 0, 27.5* meter, (Math.PI/2), '0_toiletShopfloor5', addNewToilet);
-				createToilet(-27.5 * meter, 0, 28.5* meter, (Math.PI/2), '0_toiletShopfloor6', addNewToilet);
-
-
-				//toilets accessed from lobby
-				createToilet(-21 * meter, 0, 36.5* meter, 0, '0_toiletlobby1', addNewToilet);
-				createToilet(-22 * meter, 0, 36.5* meter, 0, '0_toiletlobby2', addNewToilet);
-				createToilet(-23 * meter, 0, 36.5* meter, 0, '0_toiletlobby3', addNewToilet);
-				createToilet(-19.5 * meter, 0, 33.5* meter, (-Math.PI), '0_toiletlobby4', addNewToilet);
-				createToilet(-20.5 * meter, 0, 33.5* meter, (-Math.PI), '0_toiletlobby5', addNewToilet);
-				createToilet(-21.5* meter, 0, 33.5* meter, (-Math.PI), '0_toiletlobby6', addNewToilet);
+					//toilets accessed from shopfloor
+					createToilet(-28.5 * meter, 0, 26.5 * meter, (-Math.PI / 2), '0_toiletShopfloor1', addNewToilet);
+					createToilet(-28.5 * meter, 0, 27.5 * meter, (-Math.PI / 2), '0_toiletShopfloor2', addNewToilet);
+					createToilet(-28.5 * meter, 0, 28.5 * meter, (-Math.PI / 2), '0_toiletShopfloor3', addNewToilet);
+					createToilet(-27.5 * meter, 0, 26.5 * meter, (Math.PI / 2), '0_toiletShopfloor4', addNewToilet);
+					createToilet(-27.5 * meter, 0, 27.5 * meter, (Math.PI / 2), '0_toiletShopfloor5', addNewToilet);
+					createToilet(-27.5 * meter, 0, 28.5 * meter, (Math.PI / 2), '0_toiletShopfloor6', addNewToilet);
 
 
-				renderer = new THREE.WebGLRenderer();
-				renderer.setClearColor(0xffffff);
-				renderer.setPixelRatio(window.devicePixelRatio);
-				renderer.setSize(window.innerWidth, window.innerHeight);
-				document.body.appendChild(renderer.domElement);
+					//toilets accessed from lobby
+					createToilet(-21 * meter, 0, 36.5 * meter, 0, '0_toiletlobby1', addNewToilet);
+					createToilet(-22 * meter, 0, 36.5 * meter, 0, '0_toiletlobby2', addNewToilet);
+					createToilet(-23 * meter, 0, 36.5 * meter, 0, '0_toiletlobby3', addNewToilet);
+					createToilet(-19.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby4', addNewToilet);
+					createToilet(-20.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby5', addNewToilet);
+					createToilet(-21.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby6', addNewToilet);
 
-				window.addEventListener('resize', onWindowResize, false);
-				animate();
+
+					renderer = new THREE.WebGLRenderer();
+					renderer.setClearColor(0xffffff);
+					renderer.setPixelRatio(window.devicePixelRatio);
+					renderer.setSize(window.innerWidth, window.innerHeight);
+					document.body.appendChild(renderer.domElement);
+
+					window.addEventListener('resize', onWindowResize, false);
+					animate();
+				});
+
+
+
+
+
 
 			});
 
@@ -577,15 +600,37 @@ createLorry(23 *meter, 0, - 31.5 * meter, (-Math.PI/2), '0_lorryBay1', addNewLor
 			controls.getObject().translateY(velocity.y * delta);
 			controls.getObject().translateZ(velocity.z * delta);
 
-			if (controls.getObject().position.y < (1 * meter)) {
+			if (controls.getObject().position.y < (marioHeight)) {
 
 				velocity.y = 0;
-				controls.getObject().position.y = (1 * meter);
+				controls.getObject().position.y = (marioHeight);
 
 				canJump = true;
 			}
 
 			prevTime = time;
+		};
+
+		function hideFloor(_floorNumber) {
+			scene.traverse(function(node) {
+				if (node instanceof THREE.Mesh) {
+					if (node.name) {
+						var floorNumber = node.name.substring(0, 1);
+						if (floorNumber === String(_floorNumber)) {
+							console.log('Found a floor');
+							node.visible = false;
+						}
+					}
+				} else if (node instanceof THREE.Object3D) {
+					if (node.name) {
+						var floorNumber = node.name.substring(0, 1);
+						if (floorNumber === String(_floorNumber)) {
+							console.log('Found a floor');
+							node.visible = false;
+						}
+					}
+				}
+			});
 		}
 
 
@@ -593,7 +638,13 @@ createLorry(23 *meter, 0, - 31.5 * meter, (-Math.PI/2), '0_lorryBay1', addNewLor
 			var onKeyDown = function(event) {
 
 				switch (event.keyCode) {
-
+					case 80:
+						changeHeight();
+						break;
+						//1
+					case 49:
+						hideFloor('1');
+						break;
 					case 66:
 						fakeAddBox();
 						break;
