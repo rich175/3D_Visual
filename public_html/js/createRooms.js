@@ -4,7 +4,7 @@ function createRoom(room, on_load_complete) {
     var THREERoom = [];
     //Add 1st Floor PlaneGeometry
 
-    var loader = new THREE.TextureLoader();
+    /*var loader = new THREE.TextureLoader();
     var firstFloor = loader.load('/images/shopFloorFirst2.jpg');
     var layoutFF = new THREE.MeshLambertMaterial({
         map: firstFloor
@@ -19,7 +19,7 @@ function createRoom(room, on_load_complete) {
 
     mesh = new THREE.Mesh(geometryFF, layoutFF);
     mesh.position.y = 2.5 * meter;
-    THREERoom.push(mesh);
+    THREERoom.push(mesh);*/
 
     //Create THREEJS components of all the walls
     loadWalls(room, function(_threeRooms) {
