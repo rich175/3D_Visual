@@ -23,7 +23,7 @@ var options = {
     rejectUnauthorized: false
 }
 
-var client = mqtt.connect(host, options)
+/*var client = mqtt.connect(host, options)
 
 client.on('error', function(err) {
     console.log(err)
@@ -56,7 +56,7 @@ client.on('message', function(topic, message, pakcet) {
 client.on('close', function() {
     console.log(clientId + ' disconnected')
 })
-
+*/
 
 /*client.on('connect', function() {
     client.subscribe('presence')
