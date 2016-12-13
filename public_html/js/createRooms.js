@@ -71,6 +71,127 @@ function loadWalls(room, on_load_complete) {
 
 };
 
+function processWall(room, i, callback) {
+    var THREEWalls;
+
+    var wall = room.walls[i];
+    if (!wall.color) {
+        wall.color = '#D6D4CD';
+    }
+    if (!wall.transparency) {
+        wall.transparency = false;
+    }
+    if (!wall.opacity) {
+
+        wall.opacity = 1;
+    }
+    var thickness = 5;
+    if (wall.thickness) {
+        thickness = wall.thickness
+    }
+
+    var wall_start_y = room.originY;
+    var wall_height = wall.y;
+    if (wall.y0) {
+        wall_start_y = wall.y0 + room.originY;
+        wall_height = wall.y - wall.y0;
+    }
+    else {
+      wall.y0 = 0;
+    }
+
+
+    /*Calculates the length of wall in both directions */
+    var wallLengthX = Math.sqrt(Math.pow((wall.x2 - wall.x1), 2));
+
+    var wallLengthZ = Math.sqrt(Math.pow((wall.z2 - wall.z1), 2));
+
+    /*is the wall at a wierd angle*/
+    if (wallLengthX != 0 && wallLengthZ != 0) {
+
+    } else {
+
+        if (!room.walls[i].texture) {
+            var material = new THREE.MeshLambertMaterial({
+                color: wall.color,
+                transparent: wall.transparency,
+                opacity: wall.opacity
+            });
+
+            //Wall is completely in Z direction
+            if (wallLengthX == 0) {
+                var geometry = new THREE.BoxGeometry(thickness, wall_height, wallLengthZ);
+                var mesh = new THREE.Mesh(geometry, material);
+                mesh.position.x = room.originX + wall.x1;
+                mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1) / 2);
+                mesh.position.y = wall_start_y + wall_height / 2;
+
+            }
+            //Wall is completely in X direction
+            else {
+                var geometry = new THREE.BoxGeometry(wallLengthX, wall_height, thickness);
+                var mesh = new THREE.Mesh(geometry, material);
+                mesh.position.x = room.originX + wall.x1 + ((wall.x2 - wall.x1) / 2);
+                mesh.position.z = room.originZ + wall.z1;
+                mesh.position.y = wall_start_y + wall_height / 2;
+
+            }
+            THREEWalls = mesh;
+            callback(THREEWalls);
+        } else {
+            var tLoader = new THREE.TextureLoader();
+            tLoader.load(room.walls[i].texture, function(texture) {
+
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+
+                var t_width = texture.image.width / meter;
+                var t_height = texture.image.height / meter;
+
+
+                //Wall is completely in Z direction
+                if (wallLengthX == 0) {
+                    var f_width = Math.abs(room.walls[i].z2 - room.walls[i].z1);
+                    var f_height = Math.abs(room.walls[i].y - wall.y0);
+
+                    texture.repeat.set((f_width / t_width), (f_height / t_height));
+                    var material = new THREE.MeshBasicMaterial({
+                        map: texture,
+                        overdraw: 0.5
+                    });
+                    var geometry = new THREE.BoxGeometry(thickness, wall_height, wallLengthZ);
+                    var mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.x = room.originX + wall.x1;
+                    mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1) / 2);
+                    mesh.position.y = wall_start_y + wall_height / 2;
+                    //mesh.rotateX(Math.PI / 2);
+                }
+                //Wall is completely in X direction
+                else {
+                    var f_width = Math.abs(room.walls[i].x2 - room.walls[i].x1);
+                    var f_height = Math.abs(room.walls[i].y - wall.y0);
+
+                    texture.repeat.set((f_width / t_width), (f_height / t_height));
+                    var material = new THREE.MeshBasicMaterial({
+                        map: texture,
+                        overdraw: 0.5
+                    });
+                    var geometry = new THREE.BoxGeometry(wallLengthX, wall_height, thickness);
+                    var mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.x = room.originX + wall.x1 + ((wall.x2 - wall.x1) / 2);
+                    mesh.position.z = room.originZ + wall.z1;
+                    mesh.position.y = wall_start_y + wall_height / 2;
+                    //mesh.rotateX(Math.PI / 2);
+                }
+                THREEWalls = mesh;
+                callback(THREEWalls);
+
+            });
+        }
+    }
+
+}
+
 //converts ceiligns into THREEJS components
 function loadCeiling(room, on_load_complete) {
 
@@ -99,117 +220,6 @@ function loadCeiling(room, on_load_complete) {
     on_load_complete(THREECeilings);
 
 };
-
-function processWall(room, i, callback) {
-    var THREEWalls;
-
-    var wall = room.walls[i];
-    if (!wall.color) {
-        wall.color = '#D6D4CD';
-    }
-    if (!wall.transparency) {
-        wall.transparency = false;
-    }
-    if (!wall.opacity) {
-
-        wall.opacity = 1;
-    }
-    var thickness = 5;
-    if (wall.thickness) {
-        thickness = wall.thickness
-    }
-
-
-    /*Calculates the length of wall in both directions */
-    var wallLengthX = Math.sqrt(Math.pow((wall.x2 - wall.x1), 2));
-
-    var wallLengthZ = Math.sqrt(Math.pow((wall.z2 - wall.z1), 2));
-
-    /*is the wall at a wierd angle*/
-    if (wallLengthX != 0 && wallLengthZ != 0) {
-
-    } else {
-
-        if (!room.walls[i].texture) {
-            var material = new THREE.MeshLambertMaterial({
-                color: wall.color,
-                transparent: wall.transparency,
-                opacity: wall.opacity
-            });
-
-            //Wall is completely in Z direction
-            if (wallLengthX == 0) {
-                var geometry = new THREE.BoxGeometry(thickness, wall.y, wallLengthZ);
-                var mesh = new THREE.Mesh(geometry, material);
-                mesh.position.x = room.originX + wall.x1;
-                mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1) / 2);
-                mesh.position.y = room.originY + wall.y / 2;
-
-            }
-            //Wall is completely in X direction
-            else {
-                var geometry = new THREE.BoxGeometry(wallLengthX, wall.y, thickness);
-                var mesh = new THREE.Mesh(geometry, material);
-                mesh.position.x = room.originX + wall.x1 + ((wall.x2 - wall.x1) / 2);
-                mesh.position.z = room.originZ + wall.z1;
-                mesh.position.y = room.originY + wall.y / 2;
-
-            }
-            THREEWalls = mesh;
-            callback(THREEWalls);
-        } else {
-            var tLoader = new THREE.TextureLoader();
-            tLoader.load(room.walls[i].texture, function(texture) {
-
-                texture.wrapS = THREE.RepeatWrapping;
-                texture.wrapT = THREE.RepeatWrapping;
-
-                var t_width = texture.image.width / meter;
-                var t_height = texture.image.height / meter;
-
-
-                //Wall is completely in Z direction
-                if (wallLengthX == 0) {
-                    var f_width = Math.abs(room.walls[i].z2 - room.walls[i].z1);
-                    var f_height = Math.abs(room.walls[i].y - room.originY);
-
-                    texture.repeat.set((f_width / t_width), (f_height / t_height));
-                    var material = new THREE.MeshBasicMaterial({
-                        map: texture,
-                        overdraw: 0.5
-                    });
-                    var geometry = new THREE.BoxGeometry(thickness, wall.y, wallLengthZ);
-                    var mesh = new THREE.Mesh(geometry, material);
-                    mesh.position.x = room.originX + wall.x1;
-                    mesh.position.z = room.originZ + wall.z1 + ((wall.z2 - wall.z1) / 2);
-                    mesh.position.y = room.originY + wall.y / 2;
-                    //mesh.rotateX(Math.PI / 2);
-                }
-                //Wall is completely in X direction
-                else {
-                    var f_width = Math.abs(room.walls[i].x2 - room.walls[i].x1);
-                    var f_height = Math.abs(room.walls[i].y - room.originY);
-
-                    texture.repeat.set((f_width / t_width), (f_height / t_height));
-                    var material = new THREE.MeshBasicMaterial({
-                        map: texture,
-                        overdraw: 0.5
-                    });
-                    var geometry = new THREE.BoxGeometry(wallLengthX, wall.y, thickness);
-                    var mesh = new THREE.Mesh(geometry, material);
-                    mesh.position.x = room.originX + wall.x1 + ((wall.x2 - wall.x1) / 2);
-                    mesh.position.z = room.originZ + wall.z1;
-                    mesh.position.y = room.originY + wall.y / 2;
-                    //mesh.rotateX(Math.PI / 2);
-                }
-                THREEWalls = mesh;
-                callback(THREEWalls);
-
-            });
-        }
-    }
-
-}
 
 //processes floors, seperate function so it can async load any texture files (this will have to be done for similar functions)
 function processFloors(room, i, callback) {
@@ -258,7 +268,7 @@ function processFloors(room, i, callback) {
             });
 
             var material2 = new THREE.MeshBasicMaterial({
-                color: '#ff0000',
+                color: '#b0b1b2',
                 side: THREE.BackSide
                     //overdraw: 0.5,
             });
