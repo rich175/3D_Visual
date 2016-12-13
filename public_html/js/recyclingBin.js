@@ -1,8 +1,8 @@
-function createOfficePerson(x, y, z, rotation, id, callback) {
+function createRecycleBin(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/officePerson.json', function(obj) {
+    loader.load('images/recyclingBin.json', function(obj) {
       obj.rotateY(rotation);
-        obj.scale.set(8,8,8)
+        obj.scale.set(6,6,6)
 
         obj.position.x = x;
         obj.position.y = y;
