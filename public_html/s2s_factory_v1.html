@@ -65,7 +65,9 @@
 	<script src="js/s2s_mqtt.js"></script>
 	<script src="js/toilet.js"></script>
 	<script src="js/lorry.js"></script>
-
+	<script src="js/shopfloorPerson.js"></script>
+	<script src="js/recyclingBin.js"></script>
+	<script src="js/shelving.js"></script>
 
 	<div id="blocker">
 
@@ -200,8 +202,13 @@
 
 		/*List of all Persons as a custom object, see person.js*/
 		var factoryPersons = [];
+		var shopfloorPersons = [];
 		/*List of all Forklifts as a custom object, see forklift.js*/
 		var factoryForklifts = [];
+
+		var factoryBleuShelving = [];
+
+		var factoryrecyclingBins = [];
 		/*List of all cubes as THREE.Mesh*/
 		var factoryWIP = [];
 		/*List of all toilets as custom object, see toilet.js*/
@@ -222,7 +229,7 @@
 			factoryShelving.push(newShelf);
 		}
 		//NOTE human json figure from blender. Use of this figure requires CREDIT to be given to tweediez
-		function addNewPerson(ps) {
+		function addNewOfficePerson(ps) {
 			scene.add(ps.object);
 			objects.push(ps.object);
 			//factoryPerson.push(ps);
@@ -237,7 +244,24 @@
 			//factoryForklifts.push(ps);
 			//console.log('Forklift: - ' + forklift.id + '-, has been added');
 		}
+		//NOTE KvL person blender model credits not required!
+		function addNewShopFloorPerson(sfp) {
+			scene.add(sfp.object);
+			objects.push(sfp.object);
 
+		}
+		//NOTE KvL person blender model credits not required!
+		function addNewBlueShelving(blueS) {
+			scene.add(blueS.object);
+			objects.push(blueS.object);
+
+		}
+		//NOTE KvL recycling bin blender model credits not required!
+		function addNewrecycleBin(bin) {
+			scene.add(bin.object);
+			objects.push(bin.object);
+
+		}
 		//NOTE KvL toilet json from blender credits not required
 		function addNewToilet(loo) {
 			scene.add(loo.object);
@@ -347,8 +371,13 @@
 		var marioHeight = 1.7 * meter;
 
 		function changeHeight() {
+			var _1stFloorHeight = 4.5 * meter;
+			if (marioHeight == _1stFloorHeight) {
+				marioHeight = 1.7 * meter;
+			} else {
+				marioHeight = _1stFloorHeight;
+			}
 
-			marioHeight = 4.5 * meter;
 			controls.getObject().position.y = marioHeight;
 
 		}
@@ -395,10 +424,23 @@
 					createWorkstation(-30.8 * meter, 0, 0 * meter, (-Math.PI / 2), '0_refurbD4', addNewStation);
 					// desks in data erasure room
 					createWorkstation(-26.2 * meter, 0, 12 * meter, 0, '0_dataeraseD1', addNewStation);
+					//recycling bins
+					createRecycleBin(-10 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+					createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+					createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+					createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+					createRecycleBin(-10 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+					createRecycleBin(-12 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+					createRecycleBin(-14 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+					createRecycleBin(-16 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+					createShopFloorPerson(-10 * meter, 0, 13 * meter, 0, '0_shopfloorpersonBin1', addNewShopFloorPerson);
 
 					//shopfloor person refurbRoom
-					createPerson(-29 * meter, 0, 6 * meter, 0, '0_person1', addNewPerson);
+					createOfficePerson(-29 * meter, 0, 6 * meter, 0, '0_person1', addNewOfficePerson);
+					createShopFloorPerson(-25 * meter, 0, 6 * meter, 0, '0_shopfloorperson1', addNewShopFloorPerson);
 
+					//blue shelving refurbRoom
+					//createBlueShelving(-28 * meter, 0, 6 * meter, 0, '0_shelving1', addNewBlueShelving);
 					//forklift near bays
 					createForklift(-18 * meter, 0, -30 * meter, (-Math.PI / 2), '0_forklift1', addNewForklift);
 					// lorry in bay 1
@@ -567,7 +609,7 @@
 						collision = true;
 						controls.getObject().position.x = (Math.sign(dir.x) * -5) + controls.getObject().position.x;
 						controls.getObject().position.z = (Math.sign(dir.z) * -5) + controls.getObject().position.z;
-						intersections[i].object.material.color.set(0xff0000);
+						//intersections[i].object.material.color.set(0xff0000);
 					}
 				}
 			};
@@ -586,7 +628,7 @@
 						collision = true;
 						controls.getObject().position.x = (Math.sign(dir.x) * -5) + controls.getObject().position.x;
 						controls.getObject().position.z = (Math.sign(dir.z) * -5) + controls.getObject().position.z;
-						intersections[i].object.material.color.set(0xff0000);
+						//intersections[i].object.material.color.set(0xff0000);
 					}
 				}
 			};
@@ -605,7 +647,7 @@
 						collision = true;
 						controls.getObject().position.x = (Math.sign(dir.x) * -5) + controls.getObject().position.x;
 						controls.getObject().position.z = (Math.sign(dir.z) * -5) + controls.getObject().position.z;
-						intersections[i].object.material.color.set(0xff0000);
+						//intersections[i].object.material.color.set(0xff0000);
 					}
 				}
 			};
@@ -667,6 +709,8 @@
 			prevTime = time;
 		};
 
+		var floor_1_hidden = false;
+
 		function hideFloor(_floorNumber) {
 			scene.traverse(function(node) {
 				if (node instanceof THREE.Mesh) {
@@ -687,8 +731,40 @@
 					}
 				}
 			});
+			floor_1_hidden = true;
 		}
 
+		function showFloor(_floorNumber) {
+			scene.traverse(function(node) {
+				if (node instanceof THREE.Mesh) {
+					if (node.name) {
+						var floorNumber = node.name.substring(0, 1);
+						if (floorNumber === String(_floorNumber)) {
+							console.log('Found a floor');
+							node.visible = true;
+						}
+					}
+				} else if (node instanceof THREE.Object3D) {
+					if (node.name) {
+						var floorNumber = node.name.substring(0, 1);
+						if (floorNumber === String(_floorNumber)) {
+							console.log('Found a floor');
+							node.visible = true;
+						}
+					}
+				}
+			});
+			floor_1_hidden = false;
+		}
+
+		function changeFloorVisibility() {
+			if (floor_1_hidden) {
+				showFloor('1');
+			} else if (!floor_1_hidden) {
+				hideFloor('1');
+			}
+
+		}
 
 		function initKeyStrokes() {
 			var onKeyDown = function(event) {
@@ -699,7 +775,7 @@
 						break;
 						//1
 					case 49:
-						hideFloor('1');
+						changeFloorVisibility();
 						break;
 					case 66:
 						fakeAddBox();

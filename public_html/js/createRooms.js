@@ -93,8 +93,11 @@ function processWall(room, i, callback) {
     var wall_start_y = room.originY;
     var wall_height = wall.y;
     if (wall.y0) {
-        wall_start_y = wall.y0;
+        wall_start_y = wall.y0 + room.originY;
         wall_height = wall.y - wall.y0;
+    }
+    else {
+      wall.y0 = 0;
     }
 
 
@@ -149,7 +152,7 @@ function processWall(room, i, callback) {
                 //Wall is completely in Z direction
                 if (wallLengthX == 0) {
                     var f_width = Math.abs(room.walls[i].z2 - room.walls[i].z1);
-                    var f_height = Math.abs(room.walls[i].y - wall_start_y);
+                    var f_height = Math.abs(room.walls[i].y - wall.y0);
 
                     texture.repeat.set((f_width / t_width), (f_height / t_height));
                     var material = new THREE.MeshBasicMaterial({
@@ -166,7 +169,7 @@ function processWall(room, i, callback) {
                 //Wall is completely in X direction
                 else {
                     var f_width = Math.abs(room.walls[i].x2 - room.walls[i].x1);
-                    var f_height = Math.abs(room.walls[i].y - wall_start_y);
+                    var f_height = Math.abs(room.walls[i].y - wall.y0);
 
                     texture.repeat.set((f_width / t_width), (f_height / t_height));
                     var material = new THREE.MeshBasicMaterial({
@@ -265,7 +268,7 @@ function processFloors(room, i, callback) {
             });
 
             var material2 = new THREE.MeshBasicMaterial({
-                color: '#ff0000',
+                color: '#b0b1b2',
                 side: THREE.BackSide
                     //overdraw: 0.5,
             });

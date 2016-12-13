@@ -1,6 +1,6 @@
-function createWorkstationPC(x, y, z, rotation, id, callback) {
+function createBlueShelving(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/deskwithPC.json', function(obj) {
+    loader.load('images/blueshelves.json', function(obj) {
         obj.rotateY(rotation);
         obj.scale.set(10,10,10)
 

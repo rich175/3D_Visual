@@ -2,7 +2,7 @@ function createWorkstation(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
     loader.load('images/deskv7.json', function(obj) {
         obj.rotateY(rotation);
-        obj.scale.set(10,6,6)
+        obj.scale.set(6,6,4)
 
         obj.position.x = x;
         obj.position.y = y;
