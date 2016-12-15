@@ -17,7 +17,7 @@ function returnFirstFloorFactory(on_complete) {
             z1: 0 * meter,
             z2: 0 * meter,
             y: 3.0 * meter,
-          //  texture: "images/beigewalls.jpg"
+            texture: "images/beigewalls.jpg"
         }, {
             x1: 9 * meter,
             x2: 9 * meter,
@@ -35,6 +35,7 @@ function returnFirstFloorFactory(on_complete) {
             x2: 9 * meter,
             z1: 1.5 * meter,
             z2: 3.7 * meter,
+            y0: 1 * meter,
             y: 3.0 * meter,
 
         }, {
@@ -62,6 +63,7 @@ function returnFirstFloorFactory(on_complete) {
             x2: 9 * meter,
             z1: 6 * meter,
             z2: 7.5 * meter,
+            y0: 1 * meter,
             y: 3.0 * meter
 
         }, {
@@ -183,8 +185,8 @@ function returnFirstFloorFactory(on_complete) {
             x2: 3.5 * meter,
             z1: 5 * meter,
             z2: 5 * meter,
-            y: 3.0 * meter,
-            texture: "images/beigewalls.jpg"
+            y0: 1 * meter,
+            y: 3.0 * meter
 
         }, {
 
