@@ -1,6 +1,6 @@
 function createOfficePerson(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/officePerson.json', function(obj) {
+    loader.load('images/SFperson.json', function(obj) {
       obj.rotateY(rotation);
         obj.scale.set(8,8,8)
 
