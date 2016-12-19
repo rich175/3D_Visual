@@ -1,8 +1,8 @@
-function createRecycleBin(x, y, z, rotation, id, callback) {
+function createurinal(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/recyclingBin.json', function(obj) {
-      obj.rotateY(rotation);
-        obj.scale.set(4,4,4)
+    loader.load('images/urinal.json', function(obj) {
+        obj.rotateY(rotation);
+        obj.scale.set(10,10,10)
 
         obj.position.x = x;
         obj.position.y = y;
@@ -10,18 +10,19 @@ function createRecycleBin(x, y, z, rotation, id, callback) {
 
         obj.name = id;
 
-        var _thisPerson = {
+        var _thisForklift = {
             id: id,
             object: obj,
             cube: {
                 cube_x: x,
                 cube_y: y + 6,
                 cube_z: z
-            },
-            work_in_progress: []
+              },
+              work_in_progress: []
+
 
         }
 
-        callback(_thisPerson);
+        callback(_thisForklift);
     });
 }

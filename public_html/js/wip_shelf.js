@@ -1,15 +1,15 @@
-var shelfW = 3*25;
-var shelfD = 10;
-var shelfT = 1;
+var shelfW = 1*25;
+var shelfD = 5;
+var shelfT = 0.5;
 
 
 
 
 function createShelf(workstation, shelfName) {
 
-    var _x = workstation.object.position.x + 0;
-    var _y = workstation.object.position.y + 50;
-    var _z = workstation.object.position.z + 1;
+    var _x = workstation.object.position.x - 32;
+    var _y = workstation.object.position.y + 30;
+    var _z = workstation.object.position.z + 0;
 
 
     var geometry = new THREE.BoxGeometry(shelfW, shelfT, shelfD);

@@ -1,6 +1,6 @@
-function createBlueShelving(x, y, z, rotation, id, callback) {
+function createBlueShelvingBox(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/BLUESHELVES.json', function(obj) {
+    loader.load('images/BLUESHELVESboxes.json', function(obj) {
         obj.rotateY(rotation);
         obj.scale.set(4,4,4)
 

@@ -1,6 +1,6 @@
 function createWorkstationPC(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/deskwithPCjoined.json', function(obj) {
+    loader.load('images/deskwithPCandChair.json', function(obj) {
         obj.rotateY(rotation);
         obj.scale.set(10,10,10)
 
