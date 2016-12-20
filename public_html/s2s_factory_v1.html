@@ -82,6 +82,9 @@
 <script src ="js/officedeskOccupiedFem.js"></script>
 <script src ="js/van.js"></script>
 <script src ="js/shelvingBox.js"></script>
+<script src ="js/deskwithPallet.js"></script>
+<script src ="js/palletGreyBoxes.js"></script>
+<script src="js/palletBoxes.js"></script>
 
 	<div id="blocker">
 
@@ -277,10 +280,32 @@
 			objects.push(sfD.object);
 
 		}
+		//NOTE KvL person blender model credits not required uses deskwithPallet.JS!
+		function addNewsDeskChairManBoxStood(ManBox) {
+			scene.add(ManBox.object);
+			objects.push(ManBox.object);
+
+		}
 		//NOTE desk json figure  blender  KvL
 		function addNewOfficeDeskPC(oDpc) {
 			scene.add(oDpc.object);
 			objects.push(oDpc.object);
+			//factoryPerson.push(ps);
+			//console.log('Person: - ' + person.id + '-, has been added');
+
+		}
+		//NOTE desk json figure  blender  KvL
+		function addNewPalletBrown(PalB) {
+			scene.add(PalB.object);
+			objects.push(PalB.object);
+			//factoryPerson.push(ps);
+			//console.log('Person: - ' + person.id + '-, has been added');
+
+		}
+		//NOTE desk json figure  blender  KvL
+		function addNewPalletGrey(PalG) {
+			scene.add(PalG.object);
+			objects.push(PalG.object);
 			//factoryPerson.push(ps);
 			//console.log('Person: - ' + person.id + '-, has been added');
 
@@ -557,6 +582,7 @@
 					createBlueShelvingBox(-28.2 * meter,0, 6 *meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
 
 					// desks in data erasure room
+
 					createWorkstation(-26.5 * meter, 0, 12 * meter, 0, '0_dataeraseD1', addNewStation);
 					createBlueShelving(-27.2 * meter,0, 8 *meter, 0, '0_blueshelf1', addNewBlueShelving);
 					createBlueShelving(-27.2 * meter,0, 6 *meter, 0, '0_blueshelf2', addNewBlueShelving);
@@ -609,6 +635,21 @@
 					//createBlueShelving(-28 * meter, 0, 6 * meter, 0, '0_shelving1', addNewBlueShelving);
 					//forklift near bays
 					createForklift(-18 * meter, 0, -30 * meter, (-Math.PI / 2), '0_forklift1', addNewForklift);
+// booking in desk
+					createDeskChairManBoxStood(0 * meter, 0, -38.5 * meter, (-Math.PI / 2), '0_bookingInDesk', addNewsDeskChairManBoxStood);
+
+// pallets in waiting areas
+					createPalletBrown(0* meter, 0, -20 * meter, (-Math.PI), '0_pallet1', addNewPalletBrown);
+					createPalletBrown(0* meter, 0, -18 * meter, 0, '0_pallet2', addNewPalletBrown);
+					createPalletBrown(0* meter, 0, -16 * meter, (-Math.PI / 2), '0_pallet2', addNewPalletBrown);
+					createPalletBrown(0* meter, 0, -14 * meter, (Math.PI), '0_pallet2', addNewPalletBrown);
+					createPalletBrown(0* meter, 0, -22 * meter, 0, '0_pallet2', addNewPalletBrown);
+					createPalletGrey(-4 * meter, 0, -20 * meter, (-Math.PI), '0_pallet3', addNewPalletGrey);
+					createPalletGrey(-4 * meter, 0, -18 * meter, (Math.PI / 2), '0_pallet3', addNewPalletGrey);
+					createPalletGrey(-4 * meter, 0, -16 * meter, 0, '0_pallet3', addNewPalletGrey);
+					createPalletGrey(-4 * meter, 0, -14 * meter, (-Math.PI / 2), '0_pallet3', addNewPalletGrey);
+					createPalletGrey(-4 * meter, 0, -22 * meter, (Math.PI), '0_pallet3', addNewPalletGrey);
+
 					// lorry in bay 1
 					createLorry(23 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_lorryBay1', addNewLorry);
 					//van in bay 2
@@ -631,7 +672,7 @@
 					createToilet(-21.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby6', addNewToilet);
 
 					//first floor characters
-					createOfficeMan(-25 * meter, 3* meter, 4* meter, 0, '1_officeMan_Manager1', addNewOfficeMan);
+					createOfficeMan(-25 * meter, 3.1* meter, 4* meter, 0, '1_officeMan_Manager1', addNewOfficeMan);
 					createOfficeFem(-24 * meter, 3* meter, 15* meter, 0, '1_officeFem_1', addNewOfficeFem);
 
 					//office desk manager office floor 1
