@@ -1484,7 +1484,7 @@
     "materials":[{
         "type":"MeshPhongMaterial",
         "depthTest":true,
-        "shininess":50,
+        "shininess":10,
         "name":"beige shelving",
         "depthWrite":true,
         "color":4865057,
