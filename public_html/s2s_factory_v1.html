@@ -56,6 +56,7 @@
 	<script src="js/createRooms.js"></script>
 	<script src="js/factory.js"></script>
 	<script src="js/factory_1_floor.js"></script>
+	<script src="js/customer1.js"></script>
 
 	<script src="js/workstation.js"></script>
 	<script src="js/wip_shelf.js"></script>
@@ -85,6 +86,7 @@
 <script src ="js/deskwithPallet.js"></script>
 <script src ="js/palletGreyBoxes.js"></script>
 <script src="js/palletBoxes.js"></script>
+<script src="js/customerDeskSell.js"></script>
 
 	<div id="blocker">
 
@@ -218,7 +220,7 @@
 		var factoryWorkstations = [];
 		var factoryWorkstationPCs = [];
 		var officedeskwithPCs = [];
-
+		var CustomerDesks = [];
 		/*List of all Persons as a custom objects*/
 		var factoryPersons = [];
 		var shopfloorPersons = [];
@@ -292,6 +294,12 @@
 			objects.push(oDpc.object);
 			//factoryPerson.push(ps);
 			//console.log('Person: - ' + person.id + '-, has been added');
+
+		}
+		//NOTE desk json figure  blender  KvL
+		function addNewCustomerDesk(cDesk) {
+			scene.add(cDesk.object);
+			objects.push(cDesk.object);
 
 		}
 		//NOTE desk json figure  blender  KvL
@@ -542,8 +550,8 @@
 			scene = new THREE.Scene();
 			//scene.fog = new THREE.Fog(0xffffff, 0, 750);
 
-			var light = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
-			light.position.set(200, 2000, 200);
+			var light = new THREE.HemisphereLight(0x000000, 0xffffff, 0.6);
+			light.position.set(2000, 20000, 2000);
 			scene.add(light);
 
 			var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
@@ -570,6 +578,13 @@
 						scene.add(_building[i]);
 						objects.push(_building[i]);
 					}
+					//attempt to add customer building KvL 11.1.2017
+					returnCust1(function(_building) {
+						for (var i = 0; i < _building.length; i++) {
+							scene.add(_building[i]);
+							objects.push(_building[i]);
+						}
+
 					//4 desks in phoneRoom location is (x position, y position, Z position, rotation in y, id, addNewNamehere)
 					createWorkstation(-30* meter, 0, 4 * meter, 0, '0_refurbD1', addNewStation);
 					createWorkstation(-30 * meter, 0, 8 * meter, 0, '0_refurbD2', addNewStation);
@@ -581,6 +596,8 @@
 					createBlueShelvingBox(-28.2 * meter,0, 8 *meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
 					createBlueShelvingBox(-28.2 * meter,0, 6 *meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
 
+// customer desks
+					createCustomerDesk(-80 * meter,0,-80 * meter,0,'0_CustomerDesk', addNewCustomerDesk);
 					// desks in data erasure room
 
 					createWorkstation(-26.5 * meter, 0, 12 * meter, 0, '0_dataeraseD1', addNewStation);
@@ -711,7 +728,7 @@
 
 
 			});
-
+});
 
 		}
 
