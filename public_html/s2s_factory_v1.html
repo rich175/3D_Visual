@@ -5,47 +5,8 @@
 	<title>3D S2S shop floor tour</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<style>
-		html,
-		body {
-			width: 100%;
-			height: 100%;
-		}
+<link rel="stylesheet" href="css/bar3.css">
 
-		body {
-			background-color: #ffffff;
-			margin: 0;
-			overflow: hidden;
-			font-family: arial;
-		}
-
-		#blocker {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0, 0, 0, 0);
-		}
-
-		#instructions {
-			width: 100%;
-			height: 100%;
-			display: -webkit-box;
-			display: -moz-box;
-			display: box;
-			-webkit-box-orient: horizontal;
-			-moz-box-orient: horizontal;
-			box-orient: horizontal;
-			-webkit-box-pack: center;
-			-moz-box-pack: center;
-			box-pack: center;
-			-webkit-box-align: center;
-			-moz-box-align: center;
-			box-align: center;
-			color: #003D6E;
-			text-align: center;
-			cursor: pointer;
-		}
-	</style>
 </head>
 
 <body>
@@ -56,7 +17,7 @@
 	<script src="js/createRooms.js"></script>
 	<script src="js/factory.js"></script>
 	<script src="js/factory_1_floor.js"></script>
-
+	<script src="js/customer1.js"></script>
 	<script src="js/workstation.js"></script>
 	<script src="js/wip_shelf.js"></script>
 	<script src="js/wip_object.js"></script>
@@ -68,14 +29,32 @@
 	<script src="js/shopfloorPerson.js"></script>
 	<script src="js/recyclingBin.js"></script>
 	<script src="js/shelving.js"></script>
+	<script src="js/officeMan.js"></script>
+	<script src="js/OfficeFemale.js"></script>
+	<script src="js/ShopfloorFem.js"></script>
+	<script src="js/shopfloorAltMan.js"></script>
+	<script src="js/sfDesk.js"></script>
+	<script src="js/urinal.js"></script>
+	<script src="js/workstationPC.js"></script>
+	<script src="js/officeDeskPC.js"></script>
+	<script src="js/standingGreySuit.js"></script>
+	<script src="js/sfDeskBeard.js"></script>
+	<script src="js/officedeskOccupied.js"></script>
+	<script src="js/officedeskOccupiedFem.js"></script>
+	<script src="js/van.js"></script>
+	<script src="js/shelvingBox.js"></script>
+	<script src="js/deskwithPallet.js"></script>
+	<script src="js/palletGreyBoxes.js"></script>
+	<script src="js/palletBoxes.js"></script>
+	<script src="js/customerDeskSell.js"></script>
 
-	<div id="blocker">
 
-		<div id="instructions">
-			<span style="font-size:40px">Please wait while images load, <br/> Click to play</span>
-			<br /> (W, A, S, D = Move, SPACE = Jump, MOUSE = Look around, Escape to release cursor)
-		</div>
-
+	<div id="container">
+		<div id="blocker">
+			<div id="instructions">
+				<span style="font-size:40px"><br/> Click to Tour the Factory</span>
+			 </div>
+		 </div>
 	</div>
 
 	<script>
@@ -199,14 +178,21 @@
 
 		/*List of all workstations as a custom object, see workstation.js*/
 		var factoryWorkstations = [];
-
-		/*List of all Persons as a custom object, see person.js*/
+		var factoryWorkstationPCs = [];
+		var officedeskwithPCs = [];
+		var CustomerDesks = [];
+		/*List of all Persons as a custom objects*/
 		var factoryPersons = [];
 		var shopfloorPersons = [];
+		var OfficeMen = [];
+		var OfficeFems = [];
+		var ShopfloorFems = [];
+		var shopfloorAltMen = [];
+		var greySuits = [];
 		/*List of all Forklifts as a custom object, see forklift.js*/
 		var factoryForklifts = [];
 
-		var factoryBleuShelving = [];
+		var factoryBlueShelving = [];
 
 		var factoryrecyclingBins = [];
 		/*List of all cubes as THREE.Mesh*/
@@ -228,21 +214,125 @@
 			scene.add(newShelf.three_obj);
 			factoryShelving.push(newShelf);
 		}
-		//NOTE human json figure from blender. Use of this figure requires CREDIT to be given to tweediez
-		function addNewOfficePerson(ps) {
-			scene.add(ps.object);
-			objects.push(ps.object);
+
+		function addNewStationPC(wsPC) {
+			scene.add(wsPC.object);
+			objects.push(wsPC.object);
+			factoryWorkstations.push(wsPC);
+			console.log('WorkstationPC: -' + wsPC.id + '-, has been added');
+
+			var newShelfPC = createShelf(wsPC, wsPC.id);
+			scene.add(newShelf.three_obj);
+			factoryShelving.push(newShelfPC);
+		}
+
+		function addNewsfdeskBeard(sfDB) {
+			scene.add(sfDB.object);
+			objects.push(sfDB.object);
+			factoryWorkstations.push(sfDB);
+			console.log('Workstation: -' + sfDB.id + '-, has been added');
+
+			var newShelf = createShelf(sfDB, sfDB.id);
+			scene.add(newShelf.three_obj);
+			factoryShelving.push(newShelf);
+		}
+
+		//NOTE KvL person blender model credits not required!
+		function addNewsfdesk(sfD) {
+			scene.add(sfD.object);
+			objects.push(sfD.object);
+
+		}
+		//NOTE KvL person blender model credits not required uses deskwithPallet.JS!
+		function addNewsDeskChairManBoxStood(ManBox) {
+			scene.add(ManBox.object);
+			objects.push(ManBox.object);
+
+		}
+		//NOTE desk json figure  blender  KvL
+		function addNewOfficeDeskPC(oDpc) {
+			scene.add(oDpc.object);
+			objects.push(oDpc.object);
+			//factoryPerson.push(ps);
+			//console.log('Person: - ' + person.id + '-, has been added');
+
+		}
+		//NOTE desk json figure  blender  KvL
+		function addNewCustomerDesk(cDesk) {
+			scene.add(cDesk.object);
+			objects.push(cDesk.object);
+
+		}
+		//NOTE desk json figure  blender  KvL
+		function addNewPalletBrown(PalB) {
+			scene.add(PalB.object);
+			objects.push(PalB.object);
+			//factoryPerson.push(ps);
+			//console.log('Person: - ' + person.id + '-, has been added');
+
+		}
+		//NOTE desk json figure  blender  KvL
+		function addNewPalletGrey(PalG) {
+			scene.add(PalG.object);
+			objects.push(PalG.object);
 			//factoryPerson.push(ps);
 			//console.log('Person: - ' + person.id + '-, has been added');
 
 		}
 
-		//NOTE KvL forklift blender model credits not required!
-		function addNewForklift(fk) {
-			scene.add(fk.object);
-			objects.push(fk.object);
-			//factoryForklifts.push(ps);
-			//console.log('Forklift: - ' + forklift.id + '-, has been added');
+		function addNewofficedeskOccupied(oDOc) {
+			scene.add(oDOc.object);
+			objects.push(oDOc.object);
+			//factoryPerson.push(ps);
+			//console.log('oDOc: - ' + oDOc.id + '-, has been added');
+
+		}
+
+		function addNewofficedeskOccupiedFem(oDOcF) {
+			scene.add(oDOcF.object);
+			objects.push(oDOcF.object);
+			//factoryPerson.push(ps);
+			//console.log('oDOc: - ' + oDOc.id + '-, has been added');
+
+		}
+		//NOTE human json figure from blender and MakeHuman.org. KvL
+		function addNewOfficeMan(oMan) {
+			scene.add(oMan.object);
+			objects.push(oMan.object);
+			//factoryPerson.push(ps);
+			//console.log('Person: - ' + person.id + '-, has been added');
+
+		}
+		//NOTE human json figure from blender and MakeHuman.org. KvL
+		function addNewShopfloorFem(SfFem) {
+			scene.add(SfFem.object);
+			objects.push(SfFem.object);
+		}
+		//NOTE KvL toilet json from blender credits not required
+		function addNewToilet(loo) {
+			scene.add(loo.object);
+			objects.push(loo.object);
+			//factorytoilets.push(ps);
+			//console.log('toilet: - ' + toilet.id + '-, has been added');
+
+		}
+
+		//NOTE human json figure from blender and MakeHuman.org. KvL
+		function addNewOfficeFem(oFem) {
+			scene.add(oFem.object);
+			objects.push(oFem.object);
+			//factoryPerson.push(ps);
+			//console.log('Person: - ' + person.id + '-, has been added');
+
+		}
+
+		//NOTE human json figure from blender and MakeHuman.org. KvL
+		function addNewStandingGreySuit(GreyS) {
+			scene.add(GreyS.object);
+			objects.push(GreyS.object);
+			//factoryPerson.push(ps);
+			//console.log('Person: - ' + person.id + '-, has been added');
+
 		}
 		//NOTE KvL person blender model credits not required!
 		function addNewShopFloorPerson(sfp) {
@@ -250,10 +340,25 @@
 			objects.push(sfp.object);
 
 		}
-		//NOTE KvL person blender model credits not required!
+		//NOTE KvL forklift blender model credits not required!
+		function addNewForklift(fk) {
+			scene.add(fk.object);
+			objects.push(fk.object);
+			//factoryForklifts.push(ps);
+			//console.log('Forklift: - ' + forklift.id + '-, has been added');
+		}
+
+
+		//NOTE KvL  blender model credits not required!
 		function addNewBlueShelving(blueS) {
 			scene.add(blueS.object);
 			objects.push(blueS.object);
+
+		}
+
+		function addNewBlueShelvingBox(blueSBx) {
+			scene.add(blueSBx.object);
+			objects.push(blueSBx.object);
 
 		}
 		//NOTE KvL recycling bin blender model credits not required!
@@ -270,11 +375,33 @@
 			//console.log('toilet: - ' + toilet.id + '-, has been added');
 
 		}
+		//NOTE KvL toilet json from blender credits not required
+		function addNewurinal(Urin) {
+			scene.add(Urin.object);
+			objects.push(Urin.object);
+			//factorytoilets.push(ps);
+			//console.log('toilet: - ' + toilet.id + '-, has been added');
 
+		}
+		//NOTE KvL toilet json from blender credits not required
+		function addNewshopfloorAltMan(sfAltMan) {
+			scene.add(sfAltMan.object);
+			objects.push(sfAltMan.object);
+			//factorytoilets.push(ps);
+			//console.log('toilet: - ' + toilet.id + '-, has been added');
+
+		}
 		//NOTE KvL lorry blender model credits not required!
 		function addNewLorry(lry) {
 			scene.add(lry.object);
 			objects.push(lry.object);
+			//factoryLorries.push(ps);
+			//console.log('Lorry: - ' + Lorry.id + '-, has been added');
+		}
+
+		function addNewVan(van) {
+			scene.add(van.object);
+			objects.push(van.object);
 			//factoryLorries.push(ps);
 			//console.log('Lorry: - ' + Lorry.id + '-, has been added');
 		}
@@ -371,7 +498,7 @@
 		var marioHeight = 1.7 * meter;
 
 		function changeHeight() {
-			var _1stFloorHeight = 4.5 * meter;
+			var _1stFloorHeight = 4.7 * meter;
 			if (marioHeight == _1stFloorHeight) {
 				marioHeight = 1.7 * meter;
 			} else {
@@ -389,8 +516,8 @@
 			scene = new THREE.Scene();
 			//scene.fog = new THREE.Fog(0xffffff, 0, 750);
 
-			var light = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
-			light.position.set(200, 2000, 200);
+			var light = new THREE.HemisphereLight(0x000000, 0xffffff, 0.6);
+			light.position.set(2000, 20000, 2000);
 			scene.add(light);
 
 			var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
@@ -417,70 +544,162 @@
 						scene.add(_building[i]);
 						objects.push(_building[i]);
 					}
-					//4 desks in phoneRoom location is (x position, y position, Z position, rotation in y, id, addNewNamehere)
-					createWorkstation(-30.8 * meter, 0, 4 * meter, (-Math.PI / 2), '0_refurbD1', addNewStation);
-					createWorkstation(-30.8 * meter, 0, 8 * meter, (-Math.PI / 2), '0_refurbD2', addNewStation);
-					createWorkstation(-30.8 * meter, 0, 12 * meter, (-Math.PI / 2), '0_refurbD3', addNewStation);
-					createWorkstation(-30.8 * meter, 0, 0 * meter, (-Math.PI / 2), '0_refurbD4', addNewStation);
-					// desks in data erasure room
-					createWorkstation(-26.2 * meter, 0, 12 * meter, 0, '0_dataeraseD1', addNewStation);
-					//recycling bins
-					createRecycleBin(-10 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
-					createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
-					createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
-					createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
-					createRecycleBin(-10 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
-					createRecycleBin(-12 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
-					createRecycleBin(-14 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
-					createRecycleBin(-16 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
-					createShopFloorPerson(-10 * meter, 0, 13 * meter, 0, '0_shopfloorpersonBin1', addNewShopFloorPerson);
+					//attempt to add customer building KvL 11.1.2017
+					returnCust1(function(_building) {
+						for (var i = 0; i < _building.length; i++) {
+							scene.add(_building[i]);
+							objects.push(_building[i]);
+						}
 
-					//shopfloor person refurbRoom
-					createOfficePerson(-29 * meter, 0, 6 * meter, 0, '0_person1', addNewOfficePerson);
-					createShopFloorPerson(-25 * meter, 0, 6 * meter, 0, '0_shopfloorperson1', addNewShopFloorPerson);
+						//4 desks in phoneRoom location is (x position, y position, Z position, rotation in y, id, addNewNamehere)
+						createWorkstation(-30 * meter, 0, 4 * meter, 0, '0_refurbD1', addNewStation);
+						createWorkstation(-30 * meter, 0, 8 * meter, 0, '0_refurbD2', addNewStation);
+						createsfDeskBeard(-30 * meter, 0, 12 * meter, 0, '0_refurbD3', addNewsfdeskBeard);
+						createWorkstation(-30 * meter, 0, 0 * meter, 0, '0_refurbD4', addNewStation);
 
-					//blue shelving refurbRoom
-					//createBlueShelving(-28 * meter, 0, 6 * meter, 0, '0_shelving1', addNewBlueShelving);
-					//forklift near bays
-					createForklift(-18 * meter, 0, -30 * meter, (-Math.PI / 2), '0_forklift1', addNewForklift);
-					// lorry in bay 1
-					createLorry(23 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_lorryBay1', addNewLorry);
+						createBlueShelving(-28.2 * meter, 0, 2 * meter, 0, '0_blueshelf1', addNewBlueShelving);
+						createBlueShelving(-28.2 * meter, 0, 4 * meter, 0, '0_blueshelf2', addNewBlueShelving);
+						createBlueShelvingBox(-28.2 * meter, 0, 8 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+						createBlueShelvingBox(-28.2 * meter, 0, 6 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
 
-					//toilets accessed from shopfloor
-					createToilet(-28.5 * meter, 0, 26.5 * meter, (-Math.PI / 2), '0_toiletShopfloor1', addNewToilet);
-					createToilet(-28.5 * meter, 0, 27.5 * meter, (-Math.PI / 2), '0_toiletShopfloor2', addNewToilet);
-					createToilet(-28.5 * meter, 0, 28.5 * meter, (-Math.PI / 2), '0_toiletShopfloor3', addNewToilet);
-					createToilet(-27.5 * meter, 0, 26.5 * meter, (Math.PI / 2), '0_toiletShopfloor4', addNewToilet);
-					createToilet(-27.5 * meter, 0, 27.5 * meter, (Math.PI / 2), '0_toiletShopfloor5', addNewToilet);
-					createToilet(-27.5 * meter, 0, 28.5 * meter, (Math.PI / 2), '0_toiletShopfloor6', addNewToilet);
+						// customer desks
+						createCustomerDesk(-80 * meter, 0, -80 * meter, 0, '0_CustomerDesk', addNewCustomerDesk);
+						// desks in data erasure room
+
+						createWorkstation(-26.5 * meter, 0, 12 * meter, 0, '0_dataeraseD1', addNewStation);
+						createBlueShelving(-27.2 * meter, 0, 8 * meter, 0, '0_blueshelf1', addNewBlueShelving);
+						createBlueShelving(-27.2 * meter, 0, 6 * meter, 0, '0_blueshelf2', addNewBlueShelving);
+						createBlueShelvingBox(-27.2 * meter, 0, 4 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+						createBlueShelvingBox(-27.2 * meter, 0, 2 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+						//recycling bins
+						createRecycleBin(-10 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+						createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+						createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+						createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+						createRecycleBin(-10 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+						createRecycleBin(-12 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+						createRecycleBin(-14 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+						createRecycleBin(-16 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+						createShopFloorPerson(-10 * meter, 0, 13.3 * meter, 0, '0_shopfloorBluemanBin1', addNewShopFloorPerson);
+						createshopfloorAltMan(-12 * meter, 0, 13.3 * meter, 0, '0_shopfloorAltMan1atBin2', addNewshopfloorAltMan);
+
+						//NOTE CAN ONLY BE ADDED WHERE THERE ARE NO UPSTAIRS OR IT CAUSES A CLASH (uniforms.specular.value = material.specular;) shelving
+						// stores - not secure, top wall 3 shelves.
+						createBlueShelving(12.2 * meter, 0, 32.2 * meter, 0, '0_blueshelf1', addNewBlueShelving);
+						createBlueShelving(12.2 * meter, 0, 35.2 * meter, 0, '0_blueshelf2', addNewBlueShelving);
+						createBlueShelving(12.2 * meter, 0, 38.2 * meter, 0, '0_blueshelft3', addNewBlueShelving);
+						// stores - not secure, outer wall
+						createBlueShelving(10 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf4', addNewBlueShelving);
+						createBlueShelving(7 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf5', addNewBlueShelving);
+						createBlueShelving(4 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshel6', addNewBlueShelving);
+						createBlueShelving(1 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf7', addNewBlueShelving);
+						createBlueShelving(-2 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf8', addNewBlueShelving);
+						createBlueShelving(-5 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf9', addNewBlueShelving);
+						// stores - not secure,centre shelving racks
+						createBlueShelving(9 * meter, 0, 32.2 * meter, 0, '0_blueshelf10', addNewBlueShelving);
+						createBlueShelving(9 * meter, 0, 35.2 * meter, 0, '0_blueshelf11', addNewBlueShelving);
+						createBlueShelving(6 * meter, 0, 32.2 * meter, 0, '0_blueshelf12', addNewBlueShelving);
+						createBlueShelving(6 * meter, 0, 35.2 * meter, 0, '0_blueshelf13', addNewBlueShelving);
+						createBlueShelving(3 * meter, 0, 32.2 * meter, 0, '0_blueshelf14', addNewBlueShelving);
+						createBlueShelving(3 * meter, 0, 35.2 * meter, 0, '0_blueshelf15', addNewBlueShelving);
+						createBlueShelving(0 * meter, 0, 32.2 * meter, 0, '0_blueshelf16', addNewBlueShelving);
+						createBlueShelving(0 * meter, 0, 35.2 * meter, 0, '0_blueshelf17', addNewBlueShelving);
+						//stores - not secure,shelving to right of door
+						createBlueShelving(-5 * meter, 0, 32.2 * meter, (-Math.PI / 2), '0_blueshelf18', addNewBlueShelving);
+						createShopfloorFem(4 * meter, 0, 33 * meter, 0, (-Math.PI / 2), '0_ShopfloorFem1', addNewShopfloorFem);
+						//stores secure cage
+						createBlueShelving(-9.2 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf19', addNewBlueShelving);
+						createBlueShelving(-12.2 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf20', addNewBlueShelving);
+						createBlueShelving(-15.2 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf21', addNewBlueShelving);
+						//shopfloor person stores
+						createShopfloorFem(10 * meter, 0, 33 * meter, 0, '0_shopfloorperson1', addNewShopfloorFem);
+
+						//blue shelving refurbRoom
+						//createBlueShelving(-28 * meter, 0, 6 * meter, 0, '0_shelving1', addNewBlueShelving);
+						//forklift near bays
+						createForklift(-18 * meter, 0, -30 * meter, (-Math.PI / 2), '0_forklift1', addNewForklift);
+						// booking in desk
+						createDeskChairManBoxStood(0 * meter, 0, -38.5 * meter, (-Math.PI / 2), '0_bookingInDesk', addNewsDeskChairManBoxStood);
+
+						// pallets in waiting areas
+						createPalletBrown(0 * meter, 0, -20 * meter, (-Math.PI), '0_pallet1', addNewPalletBrown);
+						createPalletBrown(0 * meter, 0, -18 * meter, 0, '0_pallet2', addNewPalletBrown);
+						createPalletBrown(0 * meter, 0, -16 * meter, (-Math.PI / 2), '0_pallet2', addNewPalletBrown);
+						createPalletBrown(0 * meter, 0, -14 * meter, (Math.PI), '0_pallet2', addNewPalletBrown);
+						createPalletBrown(0 * meter, 0, -22 * meter, 0, '0_pallet2', addNewPalletBrown);
+						createPalletGrey(-4 * meter, 0, -20 * meter, (-Math.PI), '0_pallet3', addNewPalletGrey);
+						createPalletGrey(-4 * meter, 0, -18 * meter, (Math.PI / 2), '0_pallet3', addNewPalletGrey);
+						createPalletGrey(-4 * meter, 0, -16 * meter, 0, '0_pallet3', addNewPalletGrey);
+						createPalletGrey(-4 * meter, 0, -14 * meter, (-Math.PI / 2), '0_pallet3', addNewPalletGrey);
+						createPalletGrey(-4 * meter, 0, -22 * meter, (Math.PI), '0_pallet3', addNewPalletGrey);
+
+						// lorry in bay 1
+						createLorry(23 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_lorryBay1', addNewLorry);
+						//van in bay 2
+						createVan(14 * meter, 0, -35.5 * meter, (-Math.PI / 2), '0_vanBay2', addNewVan);
+						//toilets accessed from shopfloor
+						createToilet(-28.5 * meter, 0, 26.5 * meter, (-Math.PI / 2), '0_toiletShopfloor1', addNewToilet);
+						createToilet(-28.5 * meter, 0, 27.5 * meter, (-Math.PI / 2), '0_toiletShopfloor2', addNewToilet);
+						createToilet(-28.5 * meter, 0, 28.5 * meter, (-Math.PI / 2), '0_toiletShopfloor3', addNewToilet);
+						createToilet(-27.5 * meter, 0, 26.5 * meter, (Math.PI / 2), '0_toiletShopfloor4', addNewToilet);
+						createToilet(-27.5 * meter, 0, 27.5 * meter, (Math.PI / 2), '0_toiletShopfloor5', addNewToilet);
+						createToilet(-27.5 * meter, 0, 28.5 * meter, (Math.PI / 2), '0_toiletShopfloor6', addNewToilet);
 
 
-					//toilets accessed from lobby
-					createToilet(-21 * meter, 0, 36.5 * meter, 0, '0_toiletlobby1', addNewToilet);
-					createToilet(-22 * meter, 0, 36.5 * meter, 0, '0_toiletlobby2', addNewToilet);
-					createToilet(-23 * meter, 0, 36.5 * meter, 0, '0_toiletlobby3', addNewToilet);
-					createToilet(-19.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby4', addNewToilet);
-					createToilet(-20.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby5', addNewToilet);
-					createToilet(-21.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby6', addNewToilet);
+						//toilets accessed from lobby
+						createurinal(-23 * meter, 0.7 * meter, 36.2 * meter, (Math.PI / 2), '0_urinaltlobby1', addNewurinal);
+						createurinal(-21.8 * meter, 0.7 * meter, 36.2 * meter, (Math.PI / 2), '0_toiletlobby3', addNewToilet);
+						createToilet(-20.9 * meter, 0 * meter, 36.6 * meter, (Math.PI * 2), '0_toiletlobby2', addNewToilet);
+						createToilet(-19.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby4', addNewToilet);
+						createToilet(-20.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby5', addNewToilet);
+						createToilet(-21.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby6', addNewToilet);
+
+						//first floor characters
+						createOfficeMan(-25 * meter, 3.1 * meter, 4 * meter, 0, '1_officeMan_Manager1', addNewOfficeMan);
+						createOfficeFem(-24 * meter, 3 * meter, 15 * meter, 0, '1_officeFem_1', addNewOfficeFem);
+
+						//office desk manager office floor 1
+						createOfficeDeskPC(-24 * meter, 3 * meter, 1.5 * meter, 0, '1_officeDeskPC_manager1', addNewOfficeDeskPC);
+						// office desks main room
+						createOfficeDeskPC(-24 * meter, 3 * meter, 12 * meter, 0, '1_officeDeskPC_sales1', addNewOfficeDeskPC);
+
+						createOfficeDeskPC(-24 * meter, 3 * meter, 6.5 * meter, (-Math.PI / 2), '1_officeDeskPC_sales1', addNewOfficeDeskPC);
+
+						createOfficeDeskOccupied(-24 * meter, 3 * meter, 20 * meter, 0, '1_officeDeskPC_sales1', addNewofficedeskOccupied);
 
 
-					renderer = new THREE.WebGLRenderer();
-					renderer.setClearColor(0xffffff);
-					renderer.setPixelRatio(window.devicePixelRatio);
-					renderer.setSize(window.innerWidth, window.innerHeight);
-					document.body.appendChild(renderer.domElement);
 
-					window.addEventListener('resize', onWindowResize, false);
-					animate();
+						createOfficeDeskPC(-24 * meter, 3 * meter, 24 * meter, 0, '1_officeDeskPC_sales1', addNewOfficeDeskPC);
+
+						//office desk main room rotated 90 degrees
+						createOfficeDeskOccupiedFem(-30 * meter, 3 * meter, 1.5 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewofficedeskOccupiedFem);
+						createOfficeDeskPC(-30 * meter, 3 * meter, 14 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
+						createOfficeDeskPC(-30 * meter, 3 * meter, 18 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
+						createOfficeDeskPC(-30 * meter, 3 * meter, 22 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
+						createOfficeDeskPC(-30 * meter, 3 * meter, 28 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
+
+						renderer = new THREE.WebGLRenderer();
+						renderer.setClearColor(0xffffff);
+						renderer.setPixelRatio(window.devicePixelRatio);
+						//renderer.setSize(window.innerWidth, window.innerHeight);
+
+						container = document.getElementById('container');
+						renderer.setSize(container.clientWidth, container.clientHeight);
+						container.appendChild(renderer.domElement);
+
+						//document.body.appendChild(renderer.domElement);
+
+						window.addEventListener('resize', onWindowResize, false);
+						animate();
+					});
+
+
+
+
+
+
 				});
-
-
-
-
-
-
 			});
-
 
 		}
 
@@ -497,15 +716,15 @@
 
 			var meter = 25;
 
-			var factoryWidth = 80 * meter;
-			var factoryLength = 63 * meter;
+			var factoryWidth = 100 * meter;
+			var factoryLength = 100 * meter;
 
 
-			var limitZMax = factoryWidth / 2;
-			var limitZMin = -factoryWidth / 2;
+			var limitZMax = factoryWidth;
+			var limitZMin = -factoryWidth;
 
-			var limitXMax = factoryLength / 2;
-			var limitXMin = -factoryLength / 2;
+			var limitXMax = factoryLength;
+			var limitXMin = -factoryLength;
 
 			requestAnimationFrame(animate);
 
@@ -854,6 +1073,9 @@
 
 		}
 	</script>
+	<div id="controlInfo"> W,A,S,D = move, SPACE = Jump, Mousemove = look around</br> Page up for birds eye view </br> Page down for ground level </br>ESCAPE to free cursor </div>
+	<div id="progressBar"> Progress Bar will go here </div>
+	<div class="container" > IMage of storyboard will go here </div>
 </body>
 
 </html>

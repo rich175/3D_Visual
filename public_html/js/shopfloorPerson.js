@@ -1,8 +1,8 @@
 function createShopFloorPerson(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/shopfloorPerson.json', function(obj) {
+    loader.load('images/Manblue.json', function(obj) {
       obj.rotateY(rotation);
-        obj.scale.set(8,8,8)
+        obj.scale.set(2,2,2)
 
         obj.position.x = x;
         obj.position.y = y;

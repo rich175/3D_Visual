@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Shop floor and Sales storyboard - mental models project</title>
+	<meta charset=utf-8>
+	<title>S2S Business Overview</title>
+	<!--Body background image is not supported in HTML5 using CSS instead -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<link href="css/additionalStyle.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="row">
+
+		<div class="row">
+			<h1 class="col-md-5 col-sm-12 col-xs-12">S2S Process Storyboard</h1>
+		</div>
+		<div class="row">
+			<div class="tabbable-panel">
+				<div class="tabbable-line">
+					<ul class="nav nav-tabs ">
+						<li class="active"><a href="#get-items" data-toggle="tab">Get items </a>
+						</li>
+						<li><a href="#items-arrive" data-toggle="tab">Items arrive </a>
+						</li>
+						<li><a href="#start-processing" data-toggle="tab">Start processing </a>
+						</li>
+						<li><a href="#locked-unknown-loop" data-toggle="tab">Locked/unknown loop </a>
+						</li>
+					</ul>
+
+					<div class="tab-content">
+						<div class="tab-pane active" id="get-items">
+							<asp:ValidationSummary runat="server" CssClass="text-danger" />
+							<div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<img src="images/story1.jpg" alt="steps 1 - 3">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											</img>
+											Sales contact customer to arrange collection of waste electronics,</br> sales inform shop floor and arrange collection
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="tab-pane" id="items-arrive">
+							<asp:ValidationSummary runat="server" CssClass="text-danger" />
+							<div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12 picture">
+										<img src="images/story2.jpg" alt="steps 4-6">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											</img>
+											Shop floor receive items or collect them</br> Sales check goods are as expected </br> Shop floor begin processing phones
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-pane" id="start-processing">
+							<asp:ValidationSummary runat="server" CssClass="text-danger" />
+							<div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12 picture">
+										<img src="images/story3.jpg" alt="initial stages processing phones">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											</img>
+											Unpack phones, and connect 10 to charge
+											</br> Begin visual and functional inspection
+											</br>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-pane" id="locked-unknown-loop">
+							<asp:ValidationSummary runat="server" CssClass="text-danger" />
+							<div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12 picture">
+										<img src="images/story4.jpg" alt="steps if phone unknown or unlocked">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											</img>
+											If phone is unknown or locked:
+											</br> shop floor search internet for unlock or identificaion process.
+											</br> If phone is iCloud locked shop floor inform sales and places phone in quarantine
+											</br> sales contact customer, customer confirms when unlocked.
+											</br> Sales inform shop floor to remove quarantine and continue processing phone.
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="checkout-wrap col-md-7 col-sm-12 col-xs-12 ">
+		<ul class="checkout-bar">
+			<li class="active"><a href="#get-items" data-toggle="tab">Get items</a>
+			</li>
+			<li class=""><a href="#items-arrive" data-toggle="tab">Items arrive </a>
+			</li>
+			<li class=""><a href="#start-processing" data-toggle="tab">Start processing</a>
+			</li>
+			<li class=""><a href="#locked-unknown-loop">Locked/unknown loop</a>
+			</li>
+		</ul>
+	</div>
+	</div>
+	<!-- script for the checkout bar -->
+	<script>
+		$(document).ready(function() {
+			$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+
+				var href = $(e.target).attr('href');
+				var $curr = $(".checkout-bar  a[href='" + href + "']").parent();
+
+				$('.checkout-bar li').removeClass();
+
+				$curr.addClass("active");
+				$curr.prevAll().addClass("visited");
+
+
+			});
+		});
+	</script>
+
+</body>
+
+</html>
