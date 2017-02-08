@@ -13,7 +13,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
-	
+
 	<script src="js/bundle.js"></script>
 	<script src="js/three.js"></script>
 	<script src="js/factoryControls.js"></script>
@@ -517,13 +517,13 @@
 			}
 
 			function goToPosition(_x, _y, _z) {
-				controlsEnabled = false;
-				controls.getObject().position.y = _y;
 
-				controls.getObject().position.x = _x;
+				controls.getObject().position.y = _y * meter;
 
-				controls.getObject().position.z = _z;
+				controls.getObject().position.x = _x * meter;
 
+				controls.getObject().position.z = _z * meter;
+				animate();
 				//controls.getObject().translateX(velocity.x * delta);
 				//controls.getObject().translateY(velocity.y * delta);
 				//controls.getObject().translateZ(velocity.z * delta);
@@ -531,25 +531,65 @@
 
 
 			function processJSONRoute(_fileName) {
+				controlsEnabled = false;
 				var json = (function() {
 					var json = null;
 					$.ajax({
-						'async': false,
+						'async': true,
 						'global': false,
 						'url': "json-routes/" + _fileName,
 						'dataType': "json",
 						'success': function(data) {
-							var route = data;
+							var instructions = data;
 
 							//go to start position
-							goToPosition(route.route.start.x, route.route.start.y, route.route.start.z);
+							goToPosition(instructions.route.start.x, instructions.route.start.y, instructions.route.start.z);
+
+							sleep(1500);
 
 
+							/*var _x = instructions.route.path[0].movement.x;
+							var _y = instructions.route.path[0].movement.y;
+							var _z = instructions.route.path[0].movement.z;
+							var _t = instructions.route.path[0].movement.t;
+
+							moveToPosition(_x, _y, _z, _t, function(result) {
+								console.log(result);
+								console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
+									console.log('y: ' + controls.getObject().position.y+ '-- m: ' + controls.getObject().position.y / meter);
+										console.log('z: ' + controls.getObject().position.z+ '-- m: ' + controls.getObject().position.z / meter);
 
 
+								})*/
 
+				
+							///for each movement in the list of instructions
+							var _loopNo = instructions.route.path.length;
+							asyncLoop(_loopNo, function(loop) {
+									var i = loop.iteration();
+									var _x = instructions.route.path[i].movement.x * meter;
+									var _y = instructions.route.path[i].movement.y * meter;
+									var _z = instructions.route.path[i].movement.z * meter;
+									var _t = instructions.route.path[i].movement.t;
+									moveToPosition(_x, _y, _z, _t, function(result) {
+										console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
+										console.log('y: ' + controls.getObject().position.y + '-- m: ' + controls.getObject().position.y / meter);
+										console.log('z: ' + controls.getObject().position.z + '-- m: ' + controls.getObject().position.z / meter);
+										// log the iteration
+										console.log(loop.iteration());
 
-
+										// Okay, for cycle could continue
+										loop.next();
+									})
+								},
+								function() {
+									console.log('cycle ended');
+									console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
+									console.log('y: ' + controls.getObject().position.y + '-- m: ' + controls.getObject().position.y / meter);
+									console.log('z: ' + controls.getObject().position.z + '-- m: ' + controls.getObject().position.z / meter);
+									// log the iteration
+								}
+							);
 
 
 						}
@@ -560,26 +600,120 @@
 
 			}
 
-			function moveToPosition(_tx, _ty, _tz) {
+			function getTDistance(newP, oldP) {
 
-				var startTime = new Date().getTime();
+				var _newP = parseFloat(newP);
+				var _oldP = parseFloat(oldP);
 
-				var _totalTimeMs = 3000;
-				var _totalDistance = 400;
+				var diff = Math.abs(_oldP - _newP);
+
+				if (_oldP > _newP) diff = diff * -1;
+
+				return diff;
+
+			}
+
+			function sleep(ms) {
+				var start = new Date().getTime(),
+					expire = start + ms;
+				while (new Date().getTime() < expire) {}
+				return;
+			}
+
+			function moveToPosition(_nx, _ny, _nz, timeMs, callback) {
+
+
+				var _totalTimeMs = timeMs;
 				var _interval = 5;
 
-				var _step = _totalDistance / (_totalTimeMs / _interval);
+				//New positions
+				var _newX = _nx;
+				var _newY = _ny;
+				var _newZ = _nz;
+				//Existing positions
+				var _existX = controls.getObject().position.x;
+				var _existY = controls.getObject().position.y;
+				var _existZ = controls.getObject().position.z;
+				//Is the position a change?
+				var xChange = false;
+				var yChange = false;
+				var zChange = false;
+				if (_existX != (_newX)) xChange = true;
+				if (_existY != (_newY)) yChange = true;
+				if (_existZ != (_newZ)) zChange = true;
 
+				var _stepX = (getTDistance(_newX, _existX)) / (_totalTimeMs / _interval);
+				var _stepY = (getTDistance(_newY, _existY)) / (_totalTimeMs / _interval);
+				var _stepZ = (getTDistance(_newZ, _existZ)) / (_totalTimeMs / _interval);
+				console.log(getTDistance(_newX, _existX) + '/' + _totalTimeMs + ' / ' + _interval);
+				var startTime = new Date().getTime();
+				var count = 0;
+				//this function fill fire every '_interval' ms
 				var interval = setInterval(function() {
-					if (new Date().getTime() - startTime > _totalTimeMs) {
+					/*if (new Date().getTime() - startTime > _totalTimeMs) {
 						clearInterval(interval);
+						callback({
+							status: 'complete'
+						});
+						return;
+					}*/
+
+					if (xChange) {
+						controls.getObject().position.x = parseFloat(controls.getObject().position.x) + parseFloat(_stepX);
+					}
+					if (yChange) {
+						controls.getObject().position.y = parseFloat(controls.getObject().position.y) + parseFloat(_stepY);
+					}
+					if (zChange) {
+						controls.getObject().position.z = parseFloat(controls.getObject().position.z) + parseFloat(_stepZ);
+					}
+					if (count === (_totalTimeMs / _interval) - 1)
+					{
+						clearInterval(interval);
+						callback({
+							status: 'complete'
+						});
 						return;
 					}
+					count++
 
-					controls.getObject().position.x = controls.getObject().position.x + _step;
 
 				}, _interval);
 
+			}
+
+
+
+			function asyncLoop(iterations, func, callback) {
+				var index = 0;
+				var done = false;
+				var loop = {
+					next: function() {
+						if (done) {
+							return;
+						}
+
+						if (index < iterations) {
+							index++;
+							func(loop);
+
+						} else {
+							done = true;
+							callback();
+						}
+					},
+
+					iteration: function() {
+						return index - 1;
+					},
+
+					break: function() {
+						done = true;
+						callback();
+					}
+				};
+				loop.next();
+				return loop;
 			}
 
 			function init() {
