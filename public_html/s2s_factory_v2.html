@@ -562,7 +562,7 @@
 
 								})*/
 
-				
+
 							///for each movement in the list of instructions
 							var _loopNo = instructions.route.path.length;
 							asyncLoop(_loopNo, function(loop) {
@@ -624,7 +624,9 @@
 
 
 				var _totalTimeMs = timeMs;
-				var _interval = 5;
+				var _interval = 20;
+				//pixels per milliseconds, 25 pixels = 1m
+				var _speed = 25;
 
 				//New positions
 				var _newX = _nx;
@@ -635,40 +637,65 @@
 				var _existY = controls.getObject().position.y;
 				var _existZ = controls.getObject().position.z;
 				//Is the position a change?
-				var xChange = false;
-				var yChange = false;
-				var zChange = false;
-				if (_existX != (_newX)) xChange = true;
-				if (_existY != (_newY)) yChange = true;
-				if (_existZ != (_newZ)) zChange = true;
+				var xChange = true;
+				var yChange = true;
+				var zChange = true;
 
-				var _stepX = (getTDistance(_newX, _existX)) / (_totalTimeMs / _interval);
-				var _stepY = (getTDistance(_newY, _existY)) / (_totalTimeMs / _interval);
-				var _stepZ = (getTDistance(_newZ, _existZ)) / (_totalTimeMs / _interval);
+				//if (_existX != (_newX)) xChange = true;
+				//if (_existY != (_newY)) yChange = true;
+				//if (_existZ != (_newZ)) zChange = true;
+
+				var _miliSOfMovmentX = Math.abs(getTDistance(_newX, _existX) / _speed) * 1000;
+				var _miliSOfMovmentY = Math.abs(getTDistance(_newY, _existY) / _speed) * 1000;
+				var _miliSOfMovmentZ = Math.abs(getTDistance(_newZ, _existZ) / _speed) * 1000;
+
+				var _totalStepsX = _miliSOfMovmentX / _interval;
+				var _totalStepsY = _miliSOfMovmentY / _interval;
+				var _totalStepsZ = _miliSOfMovmentZ / _interval;
+
+				var _stepX = (getTDistance(_newX, _existX)) / (_miliSOfMovmentX / _interval);
+				var _stepY = (getTDistance(_newY, _existY)) / (_miliSOfMovmentY / _interval);
+				var _stepZ = (getTDistance(_newZ, _existZ)) / (_miliSOfMovmentZ / _interval);
 				console.log(getTDistance(_newX, _existX) + '/' + _totalTimeMs + ' / ' + _interval);
 				var startTime = new Date().getTime();
 				var count = 0;
+				var xStop = false;
+				var yStop = false;
+				var zStop = false;
+
+				var _stepCountX = 0;
+				var _stepCountY = 0;
+				var _stepCountZ = 0;
+				console.log('x:' + _totalStepsX + ' y: ' + _totalStepsY + ' z: ' + _totalStepsZ);
+				console.log('xstep:' + _stepX + ' ystep: ' + _stepY + ' zstep: ' + _stepZ);
 				//this function fill fire every '_interval' ms
 				var interval = setInterval(function() {
-					/*if (new Date().getTime() - startTime > _totalTimeMs) {
-						clearInterval(interval);
-						callback({
-							status: 'complete'
-						});
-						return;
-					}*/
 
 					if (xChange) {
-						controls.getObject().position.x = parseFloat(controls.getObject().position.x) + parseFloat(_stepX);
+						if (_stepCountX >= _totalStepsX) {
+							xStop = true;
+						} else {
+							controls.getObject().position.x = parseFloat(controls.getObject().position.x) + parseFloat(_stepX);
+							_stepCountX++;
+						}
 					}
 					if (yChange) {
-						controls.getObject().position.y = parseFloat(controls.getObject().position.y) + parseFloat(_stepY);
+						if (_stepCountY >= _totalStepsY) {
+							yStop = true;
+						} else {
+							controls.getObject().position.y = parseFloat(controls.getObject().position.y) + parseFloat(_stepY);
+							_stepCountY++;
+						}
 					}
 					if (zChange) {
-						controls.getObject().position.z = parseFloat(controls.getObject().position.z) + parseFloat(_stepZ);
+						if (_stepCountZ >= _totalStepsZ) {
+							zStop = true;
+						} else {
+							controls.getObject().position.z = parseFloat(controls.getObject().position.z) + parseFloat(_stepZ);
+							_stepCountZ++
+						}
 					}
-					if (count === (_totalTimeMs / _interval) - 1)
-					{
+					if (xStop && yStop && zStop) {
 						clearInterval(interval);
 						callback({
 							status: 'complete'
@@ -1201,10 +1228,57 @@
 							moveToPosition(100, 0, 0);
 							break;
 
-						case 97:
+						case 191:
 							//goToPosition(-49.80, marioHeight, -942.95);
 							processJSONRoute("route1.json")
 							break;
+
+						case 90:
+							processJSONRoute("routeGetItems.json")
+							break;
+							//
+							// case 90: //key z
+							//goToPosition(-49.80, marioHeight, -942.95);
+							//	processJSONRoute("routeItemsArrive.json")
+							//	break;
+
+							//	case 88: // key x
+							//goToPosition(-49.80, marioHeight, -942.95);
+							// processJSONRoute("routeProcessing.json")
+							//	break;
+
+							//	case 67: //c
+							//goToPosition(-49.80, marioHeight, -942.95);
+							//	processJSONRoute("routeLockedLoop.json")
+							//	break;
+
+							//	case 86: //v
+							//goToPosition(-49.80, marioHeight, -942.95);
+							//		processJSONRoute("routeFunctional.json")
+							//			break;
+							//		case 66: //b
+							//goToPosition(-49.80, marioHeight, -942.95);
+							//		processJSONRoute("routeDataErasure.json")
+							//			break;
+
+							//			case 70: //f
+							//goToPosition(-49.80, marioHeight, -942.95);
+							//				processJSONRoute("routeValueEst.json")
+							//			break;
+							//				case 71: //g
+							//goToPosition(-49.80, marioHeight, -942.95);
+							//			processJSONRoute("routeBlindBid.json")
+							//			break;
+							//				case 75:
+							//goToPosition(-49.80, marioHeight, -942.95);
+							//				processJSONRoute("routeSold.json")
+							//			break;
+							//	case 72: //h
+							//goToPosition(-49.80, marioHeight, -942.95);
+							//		processJSONRoute("routeComplete.json")
+							//	break;
+
+
 						case 80:
 							changeHeight();
 							break;
