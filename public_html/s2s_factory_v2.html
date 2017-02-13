@@ -1256,10 +1256,22 @@
 case 86:
 	processJSONRoute("routeFunctional.json")
 	break;
-	// v for functional test
+	// b for data erasure
 	case 66:
 		processJSONRoute("routeDataErasure.json")
 		break;
+		// f for value est
+		case 70:
+			processJSONRoute("routeValueEst.json")
+			break;
+			// g for blind bidding
+			case 71:
+				processJSONRoute("routeBlindBid.json")
+				break;
+				// k for sold
+				case 75:
+					processJSONRoute("routeSold.json")
+					break;
 							//	case 88: // key x
 							//goToPosition(-49.80, marioHeight, -942.95);
 							// processJSONRoute("routeProcessing.json")
