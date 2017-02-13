@@ -626,7 +626,7 @@
 				var _totalTimeMs = timeMs;
 				var _interval = 20;
 				//pixels per milliseconds, 25 pixels = 1m
-				var _speed = 25;
+				var _speed = 40;
 
 				//New positions
 				var _newX = _nx;
@@ -1232,15 +1232,26 @@
 							//goToPosition(-49.80, marioHeight, -942.95);
 							processJSONRoute("route1.json")
 							break;
-
+//go to position from sales to shopfloor to lorry to customer press z
 						case 90:
 							processJSONRoute("routeGetItems.json")
 							break;
-							//
-							// case 90: //key z
+							//go from customer to
+
+							case 76:
+								processJSONRoute("routeItemsArrive.json")
+								break;
 							//goToPosition(-49.80, marioHeight, -942.95);
 							//	processJSONRoute("routeItemsArrive.json")
 							//	break;
+							// press x for processing route
+							case 88:
+								processJSONRoute("routeProcessing.json")
+								break;
+								//  c for locked route
+								case 67:
+									processJSONRoute("routeLockedLoop.json")
+									break;
 
 							//	case 88: // key x
 							//goToPosition(-49.80, marioHeight, -942.95);
