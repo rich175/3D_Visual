@@ -45,12 +45,15 @@
 	<script src="js/sfDeskBeard.js"></script>
 	<script src="js/officedeskOccupied.js"></script>
 	<script src="js/officedeskOccupiedFem.js"></script>
-	<script src="js/van.js"></script>
+	<script src="js/vanunload.js"></script>
 	<script src="js/shelvingBox.js"></script>
 	<script src="js/deskwithPallet.js"></script>
 	<script src="js/palletGreyBoxes.js"></script>
 	<script src="js/palletBoxes.js"></script>
 	<script src="js/customerDeskSell.js"></script>
+	<script src="js/sfDeskonPhone.js"></script>
+	<script src="js/vandepart.js"></script>
+	<script src="js/sfdeskprocessing.js"></script>
 
 
 	<div id="container">
@@ -195,10 +198,13 @@
 			var OfficeFems = [];
 			var ShopfloorFems = [];
 			var shopfloorAltMen = [];
+			var sfdeskprocessings =[];
 			var greySuits = [];
+			var sfdeskonPhones=[];
 			/*List of all Forklifts as a custom object, see forklift.js*/
 			var factoryForklifts = [];
-
+var vandeparts = [];
+var vanunloads = [];
 			var factoryBlueShelving = [];
 
 			var factoryrecyclingBins = [];
@@ -250,10 +256,28 @@
 				objects.push(sfD.object);
 
 			}
+			//NOTE KvL person blender model credits not required!
+			function addNewsfdeskprocessing(sfDp) {
+				scene.add(sfDp.object);
+				objects.push(sfDp.object);
+
+			}
+			//NOTE KvL person blender model credits not required!
+			function addNewvandepart(vanD) {
+				scene.add(vanD.object);
+				objects.push(vanD.object);
+
+			}
 			//NOTE KvL person blender model credits not required uses deskwithPallet.JS!
 			function addNewsDeskChairManBoxStood(ManBox) {
 				scene.add(ManBox.object);
 				objects.push(ManBox.object);
+
+			}
+			//NOTE KvL person blender model credits not required uses sfDeskonPhone.js!
+			function addNewssfDeskonPhone(sfPhone) {
+				scene.add(sfPhone.object);
+				objects.push(sfPhone.object);
 
 			}
 			//NOTE desk json figure  blender  KvL
@@ -406,9 +430,9 @@
 				//console.log('Lorry: - ' + Lorry.id + '-, has been added');
 			}
 
-			function addNewVan(van) {
-				scene.add(van.object);
-				objects.push(van.object);
+			function addNewvanunload(vanUn) {
+				scene.add(vanUn.object);
+				objects.push(vanUn.object);
 				//factoryLorries.push(ps);
 				//console.log('Lorry: - ' + Lorry.id + '-, has been added');
 			}
@@ -790,6 +814,8 @@
 							createWorkstation(-30 * meter, 0, 8 * meter, 0, '0_refurbD2', addNewStation);
 							createsfDeskBeard(-30 * meter, 0, 12 * meter, 0, '0_refurbD3', addNewsfdeskBeard);
 							createWorkstation(-30 * meter, 0, 0 * meter, 0, '0_refurbD4', addNewStation);
+							createsfDeskonPhone(-30*meter, 0, 6* meter, 0, '0_refurbd5', addNewssfDeskonPhone);
+							createsfdeskprocessing(-30*meter, 0, 2* meter, 0, '0_refurbd6', addNewsfdeskprocessing);
 
 							createBlueShelving(-28.2 * meter, 0, 2 * meter, 0, '0_blueshelf1', addNewBlueShelving);
 							createBlueShelving(-28.2 * meter, 0, 4 * meter, 0, '0_blueshelf2', addNewBlueShelving);
@@ -870,7 +896,9 @@
 							// lorry in bay 1
 							createLorry(23 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_lorryBay1', addNewLorry);
 							//van in bay 2
-							createVan(14 * meter, 0, -35.5 * meter, (-Math.PI / 2), '0_vanBay2', addNewVan);
+							createvanunload(14 * meter, 0, -31.5 * meter, (Math.PI / 2), '0_vanBay2', addNewvanunload);
+createvandepart(6*meter, 0, -31.5*meter, (-Math.PI/2), '0_vanBay3', addNewvandepart);
+
 							//toilets accessed from shopfloor
 							createToilet(-28.5 * meter, 0, 26.5 * meter, (-Math.PI / 2), '0_toiletShopfloor1', addNewToilet);
 							createToilet(-28.5 * meter, 0, 27.5 * meter, (-Math.PI / 2), '0_toiletShopfloor2', addNewToilet);

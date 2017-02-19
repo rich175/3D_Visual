@@ -1,6 +1,6 @@
 function createOfficeDeskOccupied(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/officedeskOccupied.json', function(obj) {
+    loader.load('images/officedeskonPhone.json', function(obj) {
       obj.rotateY(rotation);
         obj.scale.set(8,8,8)
 
