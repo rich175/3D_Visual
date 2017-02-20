@@ -57,6 +57,7 @@
 	<script src="js/secureStores.js"></script>
 <script src="js/dataErase.js"></script>
 <script src="js/dePrint.js"></script>
+<script src="js/sfdeskPacking.js"></script>
 
 	<div id="container">
 		<div id="blocker">
@@ -194,6 +195,8 @@
 			var officedeskwithPCs = [];
 			var CustomerDesks = [];
 			var dataErases=[];
+			var sfdeskPackings=[];
+
 			/*List of all Persons as a custom objects*/
 			var factoryPersons = [];
 			var shopfloorPersons = [];
@@ -394,6 +397,12 @@ var vanunloads = [];
 			function addNewBlueShelving(blueS) {
 				scene.add(blueS.object);
 				objects.push(blueS.object);
+
+			}
+			//NOTE KvL  blender model credits not required!
+			function addNewsfdeskPacking(sfdP) {
+				scene.add(sfdP.object);
+				objects.push(sfdP.object);
 
 			}
 			//NOTE KvL  blender model credits not required!
@@ -834,10 +843,12 @@ var vanunloads = [];
 							//4 desks in phoneRoom location is (x position, y position, Z position, rotation in y, id, addNewNamehere)
 							createWorkstation(-30 * meter, 0, 4 * meter, 0, '0_refurbD1', addNewStation);
 							createWorkstation(-30 * meter, 0, 8 * meter, 0, '0_refurbD2', addNewStation);
+							createWorkstation(-30 * meter, 0, 10 * meter, 0, '0_refurbD2', addNewStation);
+
 							createsfDeskBeard(-30 * meter, 0, 12 * meter, 0, '0_refurbD3', addNewsfdeskBeard);
-							createWorkstation(-30 * meter, 0, 0 * meter, 0, '0_refurbD4', addNewStation);
 							createsfDeskonPhone(-30*meter, 0, 6* meter, 0, '0_refurbd5', addNewssfDeskonPhone);
 							createsfdeskprocessing(-30*meter, 0, 2* meter, 0, '0_refurbd6', addNewsfdeskprocessing);
+							createsfdeskPacking(-30*meter, 0, 0* meter, 0, '0_refurbd7', addNewsfdeskPacking);
 
 							createBlueShelving(-28.2 * meter, 0, 2 * meter, 0, '0_blueshelf1', addNewBlueShelving);
 							createBlueShelving(-28.2 * meter, 0, 4 * meter, 0, '0_blueshelf2', addNewBlueShelving);
@@ -861,46 +872,56 @@ createdePrint(-26.5*meter, 0, 12* meter, (Math.PI/2), '0_dataerasePrint', addNew
 							createBlueShelvingBox(-22 * meter, 0, 0 * meter, 0, '0_blueshelft5', addNewBlueShelvingBox);
 
 							//recycling bins
-							createRecycleBin(-10 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
-							createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
-							createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
-							createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
-							createRecycleBin(-10 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
-							createRecycleBin(-12 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
-							createRecycleBin(-14 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
-							createRecycleBin(-16 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
-							createShopFloorPerson(-10 * meter, 0, 13.3 * meter, 0, '0_shopfloorBluemanBin1', addNewShopFloorPerson);
-							createshopfloorAltMan(-12 * meter, 0, 13.3 * meter, 0, '0_shopfloorAltMan1atBin2', addNewshopfloorAltMan);
+							createRecycleBin(-10 * meter, 0, 12 * meter, (-Math.PI/2), '0_bin1', addNewrecycleBin);
+							// createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-10 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-12 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-14 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-16 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+							//createShopFloorPerson(-10 * meter, 0, 13.3 * meter, 0, '0_shopfloorBluemanBin1', addNewShopFloorPerson);
+							//createshopfloorAltMan(-12 * meter, 0, 13.3 * meter, 0, '0_shopfloorAltMan1atBin2', addNewshopfloorAltMan);
 
 							//NOTE CAN ONLY BE ADDED WHERE THERE ARE NO UPSTAIRS OR IT CAUSES A CLASH (uniforms.specular.value = material.specular;) shelving
 							// stores - not secure, top wall 3 shelves.
-							createBlueShelving(12.2 * meter, 0, 32.2 * meter, 0, '0_blueshelf1', addNewBlueShelving);
+							createBlueShelvingBox(12.2 * meter, 0, 32.2 * meter, 0, '0_blueshelf1', addNewBlueShelvingBox);
 							createBlueShelving(12.2 * meter, 0, 35.2 * meter, 0, '0_blueshelf2', addNewBlueShelving);
 							createBlueShelving(12.2 * meter, 0, 38.2 * meter, 0, '0_blueshelft3', addNewBlueShelving);
 							// stores - not secure, outer wall
 							createBlueShelving(10 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf4', addNewBlueShelving);
-							createBlueShelving(7 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf5', addNewBlueShelving);
+							createBlueShelvingBox(7 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf5', addNewBlueShelvingBox);
 							createBlueShelving(4 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshel6', addNewBlueShelving);
-							createBlueShelving(1 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf7', addNewBlueShelving);
-							createBlueShelving(-2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf8', addNewBlueShelving);
+							createBlueShelvingBox(1 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf7', addNewBlueShelvingBox);
+							createBlueShelvingBox(-2 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf8', addNewBlueShelvingBox);
 							createBlueShelving(-5 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf9', addNewBlueShelving);
 							// stores - not secure,centre shelving racks
 							createBlueShelving(9 * meter, 0, 32.2 * meter, 0, '0_blueshelf10', addNewBlueShelving);
 							createBlueShelving(9 * meter, 0, 35.2 * meter, 0, '0_blueshelf11', addNewBlueShelving);
-							createBlueShelving(6 * meter, 0, 32.2 * meter, 0, '0_blueshelf12', addNewBlueShelving);
+							createBlueShelvingBox(6 * meter, 0, 32.2 * meter, 0, '0_blueshelf12', addNewBlueShelvingBox);
 							createBlueShelving(6 * meter, 0, 35.2 * meter, 0, '0_blueshelf13', addNewBlueShelving);
-							createBlueShelving(3 * meter, 0, 32.2 * meter, 0, '0_blueshelf14', addNewBlueShelving);
+							createBlueShelvingBox(3 * meter, 0, 32.2 * meter, 0, '0_blueshelf14', addNewBlueShelvingBox);
 							createBlueShelving(3 * meter, 0, 35.2 * meter, 0, '0_blueshelf15', addNewBlueShelving);
 							createBlueShelving(0 * meter, 0, 32.2 * meter, 0, '0_blueshelf16', addNewBlueShelving);
 							createBlueShelving(0 * meter, 0, 35.2 * meter, 0, '0_blueshelf17', addNewBlueShelving);
 							//stores - not secure,shelving to right of door
+
 							createBlueShelving(-5 * meter, 0, 32.2 * meter, (-Math.PI / 2), '0_blueshelf18', addNewBlueShelving);
 							createShopfloorFem(4 * meter, 0, 33 * meter, (-Math.PI / 2), '0_ShopfloorFem1', addNewShopfloorFem);
 							//stores secure cage
 							createsecureStores(-9.3 * meter, 0, 38 * meter, (Math.PI / 2), '0_secureStore1', addNewsecureStores);
 							createBlueShelving(-12.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf20', addNewBlueShelving);
 							createBlueShelving(-15.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf21', addNewBlueShelving);
-							//shopfloor person stores
+createBlueShelvingBox(-12.2 * meter, 0, 36.8 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+createBlueShelvingBox(-15.2 * meter, 0, 36.8 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+createBlueShelvingBox(-9.3 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+createBlueShelvingBox(-12.2 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+createBlueShelvingBox(-15.2 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+createBlueShelvingBox(-9.3 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+createBlueShelvingBox(-12.2 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+createBlueShelvingBox(-15.2 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+
+						//shopfloor person stores
 							createShopfloorFem(10 * meter, 0, 33 * meter, 0, '0_shopfloorperson1', addNewShopfloorFem);
 
 							//blue shelving refurbRoom

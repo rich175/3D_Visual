@@ -1,12 +1,13 @@
-function createRecycleBin(x, y, z, rotation, id, callback) {
+function createsfdeskPacking(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/recyclingBins.json', function(obj) {
+    loader.load('images/sfdeskPacking.json', function(obj) {
       obj.rotateY(rotation);
         obj.scale.set(8,8,8)
 
         obj.position.x = x;
         obj.position.y = y;
         obj.position.z = z;
+
 
         obj.name = id;
 
