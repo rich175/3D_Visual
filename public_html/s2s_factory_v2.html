@@ -54,7 +54,7 @@
 	<script src="js/sfDeskonPhone.js"></script>
 	<script src="js/vandepart.js"></script>
 	<script src="js/sfdeskprocessing.js"></script>
-
+	<script src="js/secureStores.js"></script>
 
 	<div id="container">
 		<div id="blocker">
@@ -206,6 +206,7 @@
 var vandeparts = [];
 var vanunloads = [];
 			var factoryBlueShelving = [];
+			var factorysecureStores=[];
 
 			var factoryrecyclingBins = [];
 			/*List of all cubes as THREE.Mesh*/
@@ -384,6 +385,12 @@ var vanunloads = [];
 			function addNewBlueShelving(blueS) {
 				scene.add(blueS.object);
 				objects.push(blueS.object);
+
+			}
+			//NOTE KvL  blender model credits not required!
+			function addNewsecureStores(secure) {
+				scene.add(secure.object);
+				objects.push(secure.object);
 
 			}
 
@@ -821,6 +828,7 @@ var vanunloads = [];
 							createBlueShelving(-28.2 * meter, 0, 4 * meter, 0, '0_blueshelf2', addNewBlueShelving);
 							createBlueShelvingBox(-27.9 * meter, 0, 8 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
 							createBlueShelvingBox(-27.9* meter, 0, 6 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+							createsecureStores(-29.9*meter, 0, 10* meter, (-Math.PI), '0_blueshelfwithmMan', addNewsecureStores);
 
 							// customer desks
 							createCustomerDesk(-80 * meter, 0, -80 * meter, 0, '0_CustomerDesk', addNewCustomerDesk);
@@ -849,12 +857,12 @@ var vanunloads = [];
 							createBlueShelving(12.2 * meter, 0, 35.2 * meter, 0, '0_blueshelf2', addNewBlueShelving);
 							createBlueShelving(12.2 * meter, 0, 38.2 * meter, 0, '0_blueshelft3', addNewBlueShelving);
 							// stores - not secure, outer wall
-							createBlueShelving(10 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf4', addNewBlueShelving);
-							createBlueShelving(7 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf5', addNewBlueShelving);
-							createBlueShelving(4 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshel6', addNewBlueShelving);
-							createBlueShelving(1 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf7', addNewBlueShelving);
-							createBlueShelving(-2 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf8', addNewBlueShelving);
-							createBlueShelving(-5 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf9', addNewBlueShelving);
+							createBlueShelving(10 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf4', addNewBlueShelving);
+							createBlueShelving(7 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf5', addNewBlueShelving);
+							createBlueShelving(4 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshel6', addNewBlueShelving);
+							createBlueShelving(1 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf7', addNewBlueShelving);
+							createBlueShelving(-2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf8', addNewBlueShelving);
+							createBlueShelving(-5 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf9', addNewBlueShelving);
 							// stores - not secure,centre shelving racks
 							createBlueShelving(9 * meter, 0, 32.2 * meter, 0, '0_blueshelf10', addNewBlueShelving);
 							createBlueShelving(9 * meter, 0, 35.2 * meter, 0, '0_blueshelf11', addNewBlueShelving);
@@ -868,9 +876,9 @@ var vanunloads = [];
 							createBlueShelving(-5 * meter, 0, 32.2 * meter, (-Math.PI / 2), '0_blueshelf18', addNewBlueShelving);
 							createShopfloorFem(4 * meter, 0, 33 * meter, (-Math.PI / 2), '0_ShopfloorFem1', addNewShopfloorFem);
 							//stores secure cage
-							createBlueShelving(-9.2 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf19', addNewBlueShelving);
-							createBlueShelving(-12.2 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf20', addNewBlueShelving);
-							createBlueShelving(-15.2 * meter, 0, 40 * meter, (-Math.PI / 2), '0_blueshelf21', addNewBlueShelving);
+							createsecureStores(-9.3 * meter, 0, 38 * meter, (Math.PI / 2), '0_secureStore1', addNewsecureStores);
+							createBlueShelving(-12.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf20', addNewBlueShelving);
+							createBlueShelving(-15.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf21', addNewBlueShelving);
 							//shopfloor person stores
 							createShopfloorFem(10 * meter, 0, 33 * meter, 0, '0_shopfloorperson1', addNewShopfloorFem);
 
