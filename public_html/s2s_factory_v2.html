@@ -55,6 +55,8 @@
 	<script src="js/vandepart.js"></script>
 	<script src="js/sfdeskprocessing.js"></script>
 	<script src="js/secureStores.js"></script>
+<script src="js/dataErase.js"></script>
+<script src="js/dePrint.js"></script>
 
 	<div id="container">
 		<div id="blocker">
@@ -191,6 +193,7 @@
 			var factoryWorkstationPCs = [];
 			var officedeskwithPCs = [];
 			var CustomerDesks = [];
+			var dataErases=[];
 			/*List of all Persons as a custom objects*/
 			var factoryPersons = [];
 			var shopfloorPersons = [];
@@ -255,6 +258,12 @@ var vanunloads = [];
 			function addNewsfdesk(sfD) {
 				scene.add(sfD.object);
 				objects.push(sfD.object);
+
+			}
+			//NOTE KvL person blender model credits not required!
+			function addNewdataErase(de) {
+				scene.add(de.object);
+				objects.push(de.object);
 
 			}
 			//NOTE KvL person blender model credits not required!
@@ -391,6 +400,12 @@ var vanunloads = [];
 			function addNewsecureStores(secure) {
 				scene.add(secure.object);
 				objects.push(secure.object);
+
+			}
+			//NOTE KvL  blender model credits not required!
+			function addNewsfdePrint(print) {
+				scene.add(print.object);
+				objects.push(print.object);
 
 			}
 
@@ -834,11 +849,17 @@ var vanunloads = [];
 							createCustomerDesk(-80 * meter, 0, -80 * meter, 0, '0_CustomerDesk', addNewCustomerDesk);
 							// desks in data erasure room
 
-							createWorkstation(-26.5 * meter, 0, 12 * meter, 0, '0_dataeraseD1', addNewStation);
+							createdataErase(-24 * meter, 0, 11.1 * meter, (-Math.PI), '0_dataerase2', addNewdataErase);
+createdePrint(-26.5*meter, 0, 12* meter, (Math.PI/2), '0_dataerasePrint', addNewsfdePrint);
 							createBlueShelving(-27.3 * meter, 0, 8 * meter, 0, '0_blueshelf1', addNewBlueShelving);
 							createBlueShelving(-27.3 * meter, 0, 6 * meter, 0, '0_blueshelf2', addNewBlueShelving);
 							createBlueShelvingBox(-26.9 * meter, 0, 4 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
-							createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+							createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
+							createBlueShelvingBox(-22 * meter, 0, 2 * meter, 0, '0_blueshelft6', addNewBlueShelvingBox);createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
+							createBlueShelvingBox(-26.9 * meter, 0, 0 * meter, 0, '0_blueshelft6', addNewBlueShelvingBox);
+							createBlueShelvingBox(-26.9 * meter, 0, -2 * meter, 0, '0_blueshelft5', addNewBlueShelvingBox);
+							createBlueShelvingBox(-22 * meter, 0, 0 * meter, 0, '0_blueshelft5', addNewBlueShelvingBox);
+
 							//recycling bins
 							createRecycleBin(-10 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
 							createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
