@@ -55,10 +55,16 @@
 	<script src="js/vandepart.js"></script>
 	<script src="js/sfdeskprocessing.js"></script>
 	<script src="js/secureStores.js"></script>
+<<<<<<< HEAD
 <script src="js/dataErase.js"></script>
 <script src="js/dePrint.js"></script>
 <script src="js/sfdeskPacking.js"></script>
 <script src="js/courier.js"></script>
+=======
+	<script src="js/dataErase.js"></script>
+	<script src="js/dePrint.js"></script>
+	<script src="js/sfdeskPacking.js"></script>
+>>>>>>> rich175/master
 
 	<div id="container">
 		<div id="blocker">
@@ -195,8 +201,8 @@
 			var factoryWorkstationPCs = [];
 			var officedeskwithPCs = [];
 			var CustomerDesks = [];
-			var dataErases=[];
-			var sfdeskPackings=[];
+			var dataErases = [];
+			var sfdeskPackings = [];
 
 			/*List of all Persons as a custom objects*/
 			var factoryPersons = [];
@@ -205,16 +211,21 @@
 			var OfficeFems = [];
 			var ShopfloorFems = [];
 			var shopfloorAltMen = [];
-			var sfdeskprocessings =[];
+			var sfdeskprocessings = [];
 			var greySuits = [];
-			var sfdeskonPhones=[];
+			var sfdeskonPhones = [];
 			/*List of all Forklifts as a custom object, see forklift.js*/
 			var factoryForklifts = [];
-var vandeparts = [];
-var vanunloads = [];
+			var vandeparts = [];
+			var vanunloads = [];
 			var factoryBlueShelving = [];
+<<<<<<< HEAD
 			var factorysecureStores=[];
 var couriers=[];
+=======
+			var factorysecureStores = [];
+
+>>>>>>> rich175/master
 			var factoryrecyclingBins = [];
 			/*List of all cubes as THREE.Mesh*/
 			var factoryWIP = [];
@@ -640,22 +651,6 @@ var couriers=[];
 
 							sleep(1500);
 
-
-							/*var _x = instructions.route.path[0].movement.x;
-							var _y = instructions.route.path[0].movement.y;
-							var _z = instructions.route.path[0].movement.z;
-							var _t = instructions.route.path[0].movement.t;
-
-							moveToPosition(_x, _y, _z, _t, function(result) {
-								console.log(result);
-								console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
-									console.log('y: ' + controls.getObject().position.y+ '-- m: ' + controls.getObject().position.y / meter);
-										console.log('z: ' + controls.getObject().position.z+ '-- m: ' + controls.getObject().position.z / meter);
-
-
-								})*/
-
-
 							///for each movement in the list of instructions
 							var _loopNo = instructions.route.path.length;
 							asyncLoop(_loopNo, function(loop) {
@@ -713,13 +708,19 @@ var couriers=[];
 				return;
 			}
 
+			//DISTANCE IN PIXELS
 			function moveToPosition(_nx, _ny, _nz, timeMs, callback) {
 
 
-				var _totalTimeMs = timeMs;
-				var _interval = 20;
+				var _totalTimeMs = parseFloat(timeMs);
+
+				//every '_interval' the character should move
+				var _interval = 50;
+
+				//speed
+				var _speedMeters = 2;
 				//pixels per milliseconds, 25 pixels = 1m
-				var _speed = 40;
+				var _speed = (2 * 25) / 1000;
 
 				//New positions
 				var _newX = _nx;
@@ -734,21 +735,25 @@ var couriers=[];
 				var yChange = true;
 				var zChange = true;
 
-				//if (_existX != (_newX)) xChange = true;
-				//if (_existY != (_newY)) yChange = true;
-				//if (_existZ != (_newZ)) zChange = true;
+				//Distance in pixels (converted before this function)
+				var _distanceX = getTDistance(_newX, _existX);
+				var _distanceY = getTDistance(_newY, _existY);
+				var _distanceZ = getTDistance(_newZ, _existZ);
 
-				var _miliSOfMovmentX = Math.abs(getTDistance(_newX, _existX) / _speed) * 1000;
-				var _miliSOfMovmentY = Math.abs(getTDistance(_newY, _existY) / _speed) * 1000;
-				var _miliSOfMovmentZ = Math.abs(getTDistance(_newZ, _existZ) / _speed) * 1000;
+				//Time to travel @ _speed
+				var _miliSOfMovmentX = Math.abs(_distanceX / _speed);
+				var _miliSOfMovmentY = Math.abs(_distanceY / _speed);
+				var _miliSOfMovmentZ = Math.abs(_distanceZ / _speed);
 
-				var _totalStepsX = _miliSOfMovmentX / _interval;
-				var _totalStepsY = _miliSOfMovmentY / _interval;
-				var _totalStepsZ = _miliSOfMovmentZ / _interval;
+				//Number of steps (miliseconds / miliseconds)
+				var _totalStepsX = parseFloat(_miliSOfMovmentX / _interval);
+				var _totalStepsY = parseFloat(_miliSOfMovmentY / _interval);
+				var _totalStepsZ = parseFloat(_miliSOfMovmentZ / _interval);
 
-				var _stepX = (getTDistance(_newX, _existX)) / (_miliSOfMovmentX / _interval);
-				var _stepY = (getTDistance(_newY, _existY)) / (_miliSOfMovmentY / _interval);
-				var _stepZ = (getTDistance(_newZ, _existZ)) / (_miliSOfMovmentZ / _interval);
+				var _stepX = parseFloat(_distanceX / _totalStepsX);
+				var _stepY = parseFloat(_distanceY / _totalStepsY);
+				var _stepZ = parseFloat(_distanceZ / _totalStepsZ);
+
 				console.log(getTDistance(_newX, _existX) + '/' + _totalTimeMs + ' / ' + _interval);
 				var startTime = new Date().getTime();
 				var count = 0;
@@ -762,7 +767,18 @@ var couriers=[];
 				console.log('x:' + _totalStepsX + ' y: ' + _totalStepsY + ' z: ' + _totalStepsZ);
 				console.log('xstep:' + _stepX + ' ystep: ' + _stepY + ' zstep: ' + _stepZ);
 				//this function fill fire every '_interval' ms
+
+				var timeXStopMoving = new Date().getTime() + _miliSOfMovmentX;
+				var timeYStopMoving = new Date().getTime() + _miliSOfMovmentY;
+				var timeZStopMoving = new Date().getTime() + _miliSOfMovmentZ;
+
+				var _now = new Date().getTime();
+				var _totalStop = new Date().getTime() + _totalTimeMs;
+
+
 				var interval = setInterval(function() {
+
+					var _now = new Date().getTime();
 
 					if (xChange) {
 						if (_stepCountX >= _totalStepsX) {
@@ -789,14 +805,15 @@ var couriers=[];
 						}
 					}
 					if (xStop && yStop && zStop) {
-						clearInterval(interval);
-						callback({
-							status: 'complete'
-						});
-						return;
+						if (_now > _totalStop) {
+							clearInterval(interval);
+							callback({
+								status: 'complete'
+							});
+							return;
+						}
 					}
 					count++
-
 
 				}, _interval);
 
@@ -886,21 +903,33 @@ addBigText("Processing Room", -29.43*meter, 2*meter, 14.44* meter, (Math.PI));
 							createWorkstation(-30 * meter, 0, 10 * meter, 0, '0_refurbD2', addNewStation);
 
 							createsfDeskBeard(-30 * meter, 0, 12 * meter, 0, '0_refurbD3', addNewsfdeskBeard);
+<<<<<<< HEAD
 addText("On computer", -30.5*meter, 2*meter , 12.5*meter,(Math.PI/2));
 							createsfDeskonPhone(-30*meter, 0, 6* meter, 0, '0_refurbd5', addNewssfDeskonPhone);
 							addText("On phone", -30.5*meter, 2*meter , 6.5*meter, (Math.PI/2));
 
 							createsfdeskprocessing(-30*meter, 0, 2* meter, 0, '0_refurbd6', addNewsfdeskprocessing);
 							addText("Processing items", -30.5*meter, 2*meter , 2.5*meter, (Math.PI/2));
+=======
+							createsfDeskonPhone(-30 * meter, 0, 6 * meter, 0, '0_refurbd5', addNewssfDeskonPhone);
+							createsfdeskprocessing(-30 * meter, 0, 2 * meter, 0, '0_refurbd6', addNewsfdeskprocessing);
+							createsfdeskPacking(-30 * meter, 0, 0 * meter, 0, '0_refurbd7', addNewsfdeskPacking);
+>>>>>>> rich175/master
 
 							createsfdeskPacking(-30*meter, 0, 0* meter, 0, '0_refurbd7', addNewsfdeskPacking);
 addText("Packing items", -30.5*meter, 2*meter , 0*meter, (Math.PI/2));
 							createBlueShelving(-28.2 * meter, 0, 2 * meter, 0, '0_blueshelf1', addNewBlueShelving);
 							createBlueShelving(-28.2 * meter, 0, 4 * meter, 0, '0_blueshelf2', addNewBlueShelving);
 							createBlueShelvingBox(-27.9 * meter, 0, 8 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+<<<<<<< HEAD
 							createBlueShelvingBox(-27.9* meter, 0, 6 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
 							createsecureStores(-29.9*meter, 0, 10* meter, (-Math.PI), '0_blueshelfwithmMan', addNewsecureStores);
 addText("Quarantining items", -28*meter, 2*meter , 10*meter, (-Math.PI/2));
+=======
+							createBlueShelvingBox(-27.9 * meter, 0, 6 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+							createsecureStores(-29.9 * meter, 0, 10 * meter, (-Math.PI), '0_blueshelfwithmMan', addNewsecureStores);
+
+>>>>>>> rich175/master
 							// customer desks
 							createCustomerDesk(-80 * meter, 0, -80 * meter, 0, '0_CustomerDesk', addNewCustomerDesk);
 							addText("Customer", -80*meter, 2*meter , -80*meter, (Math.PI/2));
@@ -910,21 +939,30 @@ addBigText("Data Erasure", -21.68*meter, 2*meter , -2.28*meter, (Math.PI/2));
 							// desks in data erasure room
 
 							createdataErase(-24 * meter, 0, 11.1 * meter, (-Math.PI), '0_dataerase2', addNewdataErase);
+<<<<<<< HEAD
 							addText("Erasing data", -24*meter, 2*meter , 11*meter, (Math.PI/2));
 createdePrint(-26.5*meter, 0, 12* meter, (Math.PI/2), '0_dataerasePrint', addNewsfdePrint);
+=======
+							createdePrint(-26.5 * meter, 0, 12 * meter, (Math.PI / 2), '0_dataerasePrint', addNewsfdePrint);
+>>>>>>> rich175/master
 							createBlueShelving(-27.3 * meter, 0, 8 * meter, 0, '0_blueshelf1', addNewBlueShelving);
 							addText("Temporary storage", -28*meter, 2*meter , 2.5*meter, (Math.PI/2));
 							createBlueShelving(-27.3 * meter, 0, 6 * meter, 0, '0_blueshelf2', addNewBlueShelving);
 							createBlueShelvingBox(-26.9 * meter, 0, 4 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
 							createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
-							createBlueShelvingBox(-22 * meter, 0, 2 * meter, 0, '0_blueshelft6', addNewBlueShelvingBox);createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
+							createBlueShelvingBox(-22 * meter, 0, 2 * meter, 0, '0_blueshelft6', addNewBlueShelvingBox);
+							createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
 							createBlueShelvingBox(-26.9 * meter, 0, 0 * meter, 0, '0_blueshelft6', addNewBlueShelvingBox);
 							createBlueShelvingBox(-26.9 * meter, 0, -2 * meter, 0, '0_blueshelft5', addNewBlueShelvingBox);
 							createBlueShelvingBox(-22 * meter, 0, 0 * meter, 0, '0_blueshelft5', addNewBlueShelvingBox);
 
 							//recycling bins
+<<<<<<< HEAD
 							createRecycleBin(-10 * meter, 0, 12 * meter, (-Math.PI/2), '0_bin1', addNewrecycleBin);
 							addBigText("Recycling items", -10*meter, 2.5*meter , 12*meter, 0);
+=======
+							createRecycleBin(-10 * meter, 0, 12 * meter, (-Math.PI / 2), '0_bin1', addNewrecycleBin);
+>>>>>>> rich175/master
 							// createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
 							//<!--createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
 							//<!--createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
@@ -965,16 +1003,16 @@ createdePrint(-26.5*meter, 0, 12* meter, (Math.PI/2), '0_dataerasePrint', addNew
 							createsecureStores(-9.3 * meter, 0, 38 * meter, (Math.PI / 2), '0_secureStore1', addNewsecureStores);
 							createBlueShelving(-12.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf20', addNewBlueShelving);
 							createBlueShelving(-15.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf21', addNewBlueShelving);
-createBlueShelvingBox(-12.2 * meter, 0, 36.8 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
-createBlueShelvingBox(-15.2 * meter, 0, 36.8 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
-createBlueShelvingBox(-9.3 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
-createBlueShelvingBox(-12.2 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
-createBlueShelvingBox(-15.2 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
-createBlueShelvingBox(-9.3 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
-createBlueShelvingBox(-12.2 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
-createBlueShelvingBox(-15.2 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-12.2 * meter, 0, 36.8 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-15.2 * meter, 0, 36.8 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-9.3 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-12.2 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-15.2 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-9.3 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-12.2 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-15.2 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
 
-						//shopfloor person stores
+							//shopfloor person stores
 							createShopfloorFem(10 * meter, 0, 33 * meter, 0, '0_shopfloorperson1', addNewShopfloorFem);
 
 							//blue shelving refurbRoom
@@ -999,9 +1037,15 @@ createBlueShelvingBox(-15.2 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf
 							// lorry in bay 1
 							createLorry(23 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_lorryBay1', addNewLorry);
 							//van in bay 2
+<<<<<<< HEAD
 							createvanunload(15 * meter, 0, -25 * meter, (Math.PI / 2), '0_vanBay2', addNewvanunload);
 createvandepart(6*meter, 0, -31.5*meter, (-Math.PI/2), '0_vanBay3', addNewvandepart);
 createcourier(15 * meter, 0, -35 * meter, (Math.PI / 2), '0_courier2', addNewcourier);
+=======
+							createvanunload(14 * meter, 0, -31.5 * meter, (Math.PI / 2), '0_vanBay2', addNewvanunload);
+							createvandepart(6 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_vanBay3', addNewvandepart);
+
+>>>>>>> rich175/master
 							//toilets accessed from shopfloor
 							createToilet(-28.5 * meter, 0, 26.5 * meter, (-Math.PI / 2), '0_toiletShopfloor1', addNewToilet);
 							createToilet(-28.5 * meter, 0, 27.5 * meter, (-Math.PI / 2), '0_toiletShopfloor2', addNewToilet);
@@ -1363,50 +1407,50 @@ createcourier(15 * meter, 0, -35 * meter, (Math.PI / 2), '0_courier2', addNewcou
 							//goToPosition(-49.80, marioHeight, -942.95);
 							processJSONRoute("route1.json")
 							break;
-//go to position from sales to shopfloor to lorry to customer press z
+							//go to position from sales to shopfloor to lorry to customer press z
 						case 90:
 							processJSONRoute("routeGetItems.json")
 							break;
 
 							//go from customer to L
-							case 76:
-								processJSONRoute("routeItemsArrive.json")
-								break;
+						case 76:
+							processJSONRoute("routeItemsArrive.json")
+							break;
 							//goToPosition(-49.80, marioHeight, -942.95);
 							//	processJSONRoute("routeItemsArrive.json")
 							//	break;
 							// press x for processing route
-							case 88:
-								processJSONRoute("routeProcessing.json")
-								break;
-								//  c for locked route
-								case 67:
-									processJSONRoute("routeLockedLoop.json")
-									break;
-// v for functional test
-case 86:
-	processJSONRoute("routeFunctional.json")
-	break;
-	// b for data erasure
-	case 66:
-		processJSONRoute("routeDataErasure.json")
-		break;
-		// f for value est
-		case 70:
-			processJSONRoute("routeValueEst.json")
-			break;
-			// g for blind bidding
-			case 71:
-				processJSONRoute("routeBlindBid.json")
-				break;
-				// k for sold
-				case 75:
-					processJSONRoute("routeSold.json")
-					break;
-					// h for complete
-					case 72:
-						processJSONRoute("routeComplete.json")
-						break;
+						case 88:
+							processJSONRoute("routeProcessing.json")
+							break;
+							//  c for locked route
+						case 67:
+							processJSONRoute("routeLockedLoop.json")
+							break;
+							// v for functional test
+						case 86:
+							processJSONRoute("routeFunctional.json")
+							break;
+							// b for data erasure
+						case 66:
+							processJSONRoute("routeDataErasure.json")
+							break;
+							// f for value est
+						case 70:
+							processJSONRoute("routeValueEst.json")
+							break;
+							// g for blind bidding
+						case 71:
+							processJSONRoute("routeBlindBid.json")
+							break;
+							// k for sold
+						case 75:
+							processJSONRoute("routeSold.json")
+							break;
+							// h for complete
+						case 72:
+							processJSONRoute("routeComplete.json")
+							break;
 							//	case 88: // key x
 							//goToPosition(-49.80, marioHeight, -942.95);
 							// processJSONRoute("routeProcessing.json")
