@@ -1,8 +1,8 @@
 function createRecycleBin(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/recyclingBin.json', function(obj) {
+    loader.load('images/recyclingBins.json', function(obj) {
       obj.rotateY(rotation);
-        obj.scale.set(4,4,4)
+        obj.scale.set(8,8,8)
 
         obj.position.x = x;
         obj.position.y = y;

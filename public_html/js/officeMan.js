@@ -1,8 +1,8 @@
 function createOfficeMan(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/OfficeMan.json', function(obj) {
+    loader.load('images/NewOfficeMan.json', function(obj) {
       obj.rotateY(rotation);
-        obj.scale.set(3,3,3)
+        obj.scale.set(7,7,7)
 
         obj.position.x = x;
         obj.position.y = y;
