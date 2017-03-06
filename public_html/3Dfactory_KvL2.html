@@ -1162,6 +1162,32 @@
 			floor_1_hidden = true;
 		}
 
+		function toggleGodText() {
+			scene.traverse(function(node) {
+				if (node instanceof THREE.Mesh) {
+					if (node.name) {
+						var textType = node.name.substring(0, 1);
+						if (textType === 'g') {
+							console.log('Found Overview Text');
+							if (node.visible) node.visible = false;
+							else if (!node.visible) node.visible = true;
+
+						}
+					}
+				} else if (node instanceof THREE.Object3D) {
+					if (node.name) {
+						var textType = node.name.substring(0, 1);
+						if (textType === 'g') {
+							console.log('Found Overview Text');
+							if (node.visible) node.visible = false;
+							else if (!node.visible) node.visible = true;
+
+						}
+					}
+				}
+			});
+		}
+
 		function showFloor(_floorNumber) {
 			scene.traverse(function(node) {
 				if (node instanceof THREE.Mesh) {

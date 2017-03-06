@@ -19,8 +19,8 @@
 	<div class="row">
 
 		<!-- container for header -->
-		<div >
-			<h1 class="col-md-12" >S2S Process Storyboard</h1>
+		<div>
+			<h1 class="title">S2S Process Storyboard</h1>
 		</div>
 		<!-- full image overview -->
 		<div class="row">
@@ -31,43 +31,44 @@
 			</div>
 			<div class="col-md-4">
 				<div style="display: table; height: 200px; overflow: hidden;">
-     <div style="display: table-cell; vertical-align: middle;">
-			 <h2 class="introBullet"> <ul>
-				 <li> Please click tabs 1 to 10 in numerical order to view phone processing steps</li>
-				 <li> Next, please <a href="storyboard.html">CLICK HERE </a>to explore the full size verison </li>
+					<div style="display: table-cell; vertical-align: middle;">
+						<h2 class="introBullet"> <ul>
+				 <li> Please click through tabs from 1 to 10 to view phone processing steps</li>
+				 <li> Next, please <a class="click" href="storyboard.html">CLICK HERE </a>to explore the full size verison </li>
 			 </ul> </h2>
 
-			 </div></div>
-     </div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="tabbable-panel">
 				<div class="tabbable-line">
 					<div class="col-md-12">
-					<ul class="nav nav-tabs ">
-						<li><a href="#get-items" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard1.jpg'">1: Get items </a>
-						</li>
-						<li ><a href="#items-arrive" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard2.jpg'"> 2: Items arrive </a>
-						</li>
-						<li ><a href="#start-processing" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard3.jpg'">3: Start processing </a>
-						</li>
-						<li ><a href="#locked-unknown-loop" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard4.jpg'">4: Locked/unknown loop </a>
-						</li>
-						<li ><a href="#functional-test" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard5.jpg'" >5: Functional test </a>
-						</li>
-						<li ><a href="#data-erasure" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard6.jpg'" >6: Data erasure</a>
-						</li>
-						<li><a href="#value-estimate" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard7.jpg'" >7: Value estimate</a>
-						</li>
-						<li ><a href="#blind-bidding" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard8.jpg'" >8: Blind bidding</a>
-						</li>
-						<li ><a href="#sold" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard9.jpg'" >9: Sold</a>
-						</li>
-						<li ><a href="#sale-complete" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard10.jpg'" >10: Sale complete</a>
-						</li>
-					</ul>
+						<ul class="nav nav-tabs ">
+							<li><a href="#get-items" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard1.jpg'">1: Get items </a>
+							</li>
+							<li><a href="#items-arrive" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard2.jpg'"> 2: Items arrive </a>
+							</li>
+							<li><a href="#start-processing" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard3.jpg'">3: Start processing </a>
+							</li>
+							<li><a href="#locked-unknown-loop" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard4.jpg'">4: Locked/unknown loop </a>
+							</li>
+							<li><a href="#functional-test" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard5.jpg'">5: Functional test </a>
+							</li>
+							<li><a href="#data-erasure" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard6.jpg'">6: Data erasure</a>
+							</li>
+							<li><a href="#value-estimate" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard7.jpg'">7: Value estimate</a>
+							</li>
+							<li><a href="#blind-bidding" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard8.jpg'">8: Blind bidding</a>
+							</li>
+							<li><a href="#sold" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard9.jpg'">9: Sold</a>
+							</li>
+							<li><a href="#sale-complete" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard10.jpg'">10: Sale complete</a>
+							</li>
+						</ul>
+					</div>
 				</div>
-</div>
 				<div class="tab-content">
 
 					<div class="tab-pane active" id="get-items" height="100px" width="100px">
@@ -221,6 +222,34 @@
 					});
 				});
 			</script> -->
+			<div class="buttonGroup">
+				<p><a class="btn btn-primary btn-lg pale" href="index.html" role="button" target="blank">Home</a></p>
+
+
+			</div>
+			<script>
+				function activaTab(tab) {
+					$('.nav-tabs a[href="#' + tab + '"]').tab('show');
+				};
+
+				function initKeyStrokes() {
+					var onKeyDown = function(event) {
+
+						switch (event.keyCode) {
+							case 49:
+								activaTab('get-items');
+								break;
+							case 50:
+								activaTab('items-arrive');
+								break;
+						}
+					}
+					document.addEventListener('keydown', onKeyDown, false);
+				};
+				initKeyStrokes();
+
+			</script>
+
 
 </body>
 
