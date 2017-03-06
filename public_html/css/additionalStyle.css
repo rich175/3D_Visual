@@ -13,6 +13,14 @@ background-color: #ffffff;
 z-index: 1;
 }
 
+a.btn.pale{
+  background-color:#838689;
+}
+
+a.click{
+  color: #3A5F89;
+}
+
 img {
 position: relative;
 height: 70%;

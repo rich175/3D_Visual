@@ -1,0 +1,128 @@
+function addText(text, x, y, z, rotate) {
+
+  var cv = document.createElement("canvas");
+  var xc = cv.getContext("2d");
+  cv.width = 300;
+  cv.height = 300;
+  //xc.shadowColor = "#000";
+  //xc.shadowBlur = 1;
+  xc.fillStyle = "#ff0066";
+  xc.font = "20pt arial bold";
+  xc.fillText(text, 10, 64);
+
+  var xm = new THREE.MeshBasicMaterial({
+    map: new THREE.Texture(cv),
+    transparent: true
+  });
+  xm.map.needsUpdate = true;
+
+  var mesh = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), xm);
+  mesh.material.side = THREE.DoubleSide;
+  mesh.rotateY(rotate);
+  mesh.position.x = x - 10;
+  mesh.position.y = y;
+  mesh.position.z = z;
+  mesh.doubleSided = true;
+  scene.add(mesh);
+
+}
+
+function addBigText(text, x, y, z, rotate) {
+
+  var cv = document.createElement("canvas");
+  var xc = cv.getContext("2d");
+  cv.width = 400;
+  cv.height = 400;
+  //xc.shadowColor = "#000";
+  //xc.shadowBlur = 1;
+  xc.fillStyle = "#cc0066";
+  xc.font = "80pt arial bold";
+  xc.align="centre";
+  xc.fillText(text, 10, 64);
+
+  var xm = new THREE.MeshBasicMaterial({
+    map: new THREE.Texture(cv),
+    transparent: true
+  });
+
+
+//4 desks in phoneRoom location is (x position, y position, Z position, rotation in y, id, addNewNamehere)
+//toilet entry to processing room
+addBigText("Processing Room", -29.43*meter, 2*meter, 14.44* meter, (Math.PI));
+createWorkstation(-30 * meter, 0, 4 * meter, 0, '0_refurbD1', addNewStation);
+createWorkstation(-30 * meter, 0, 8 * meter, 0, '0_refurbD2', addNewStation);
+createWorkstation(-30 * meter, 0, 10 * meter, 0, '0_refurbD2', addNewStation);
+
+createsfDeskBeard(-30 * meter, 0, 12 * meter, 0, '0_refurbD3', addNewsfdeskBeard);
+addText("On computer", -30.5*meter, 2*meter , 12.5*meter,(Math.PI/2));
+createsfDeskonPhone(-30*meter, 0, 6* meter, 0, '0_refurbd5', addNewssfDeskonPhone);
+addText("On phone", -30.5*meter, 2*meter , 6.5*meter, (Math.PI/2));
+
+createsfdeskprocessing(-30*meter, 0, 2* meter, 0, '0_refurbd6', addNewsfdeskprocessing);
+addText("Processing items", -30.5*meter, 2*meter , 2.5*meter, (Math.PI/2));
+
+createsfdeskPacking(-30*meter, 0, 0* meter, 0, '0_refurbd7', addNewsfdeskPacking);
+addText("Packing items", -30.5*meter, 2*meter , 0*meter, (Math.PI/2));
+createBlueShelving(-28.2 * meter, 0, 2 * meter, 0, '0_blueshelf1', addNewBlueShelving);
+createBlueShelving(-28.2 * meter, 0, 4 * meter, 0, '0_blueshelf2', addNewBlueShelving);
+createBlueShelvingBox(-27.9 * meter, 0, 8 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+createBlueShelvingBox(-27.9* meter, 0, 6 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+createsecureStores(-29.9*meter, 0, 10* meter, (-Math.PI), '0_blueshelfwithmMan', addNewsecureStores);
+addText("Quarantining items", -28*meter, 2*meter , 10*meter, (-Math.PI/2));
+// customer desks
+createCustomerDesk(-80 * meter, 0, -80 * meter, 0, '0_CustomerDesk', addNewCustomerDesk);
+addText("Customer", -80*meter, 2*meter , -80*meter, (Math.PI/2));
+
+//Data erasure label
+addBigText("Data Erasure", -21.68*meter, 2*meter , -2.28*meter, (Math.PI/2));
+// desks in data erasure room
+
+createdataErase(-24 * meter, 0, 11.1 * meter, (-Math.PI), '0_dataerase2', addNewdataErase);
+addText("Erasing data", -24*meter, 2*meter , 11*meter, (Math.PI/2));
+createdePrint(-26.5*meter, 0, 12* meter, (Math.PI/2), '0_dataerasePrint', addNewsfdePrint);
+createBlueShelving(-27.3 * meter, 0, 8 * meter, 0, '0_blueshelf1', addNewBlueShelving);
+addText("Temporary storage", -28*meter, 2*meter , 2.5*meter, (Math.PI/2));
+createBlueShelving(-27.3 * meter, 0, 6 * meter, 0, '0_blueshelf2', addNewBlueShelving);
+createBlueShelvingBox(-26.9 * meter, 0, 4 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
+createBlueShelvingBox(-22 * meter, 0, 2 * meter, 0, '0_blueshelft6', addNewBlueShelvingBox);createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
+createBlueShelvingBox(-26.9 * meter, 0, 0 * meter, 0, '0_blueshelft6', addNewBlueShelvingBox);
+createBlueShelvingBox(-26.9 * meter, 0, -2 * meter, 0, '0_blueshelft5', addNewBlueShelvingBox);
+createBlueShelvingBox(-22 * meter, 0, 0 * meter, 0, '0_blueshelft5', addNewBlueShelvingBox);
+
+//recycling bins
+createRecycleBin(-10 * meter, 0, 12 * meter, (-Math.PI/2), '0_bin1', addNewrecycleBin);
+addBigText("Recycling items", -10*meter, 2.5*meter , 12*meter, 0);
+// createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+//<!--createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+//<!--createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+//<!--createRecycleBin(-10 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+//<!--createRecycleBin(-12 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+//<!--createRecycleBin(-14 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+//<!--createRecycleBin(-16 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+//createShopFloorPerson(-10 * meter, 0, 13.3 * meter, 0, '0_shopfloorBluemanBin1', addNewShopFloorPerson);
+//createshopfloorAltMan(-12 * meter, 0, 13.3 * meter, 0, '0_shopfloorAltMan1atBin2', addNewshopfloorAltMan);
+
+//NOTE CAN ONLY BE ADDED WHERE THERE ARE NO UPSTAIRS OR IT CAUSES A CLASH (uniforms.specular.value = material.specular;) shelving
+// stores - not secure, top wall 3 shelves.
+addBigText("Stores", -2.6*meter, 2*meter , 30.8*meter, (-Math.PI));
+createBlueShelvingBox(12.2 * meter, 0, 32.2 * meter, 0, '0_blueshelf1', addNewBlueShelvingBox);
+createBlueShelving(12.2 * meter, 0, 35.2 * meter, 0, '0_blueshelf2', addNewBlueShelving);
+createBlueShelving(12.2 * meter, 0, 38.2 * meter, 0, '0_blueshelft3', addNewBlueShelving);
+// stores - not secure, outer wall
+createBlueShelving(10 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf4', addNewBlueShelving);
+createBlueShelvingBox(7 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf5', addNewBlueShelvingBox);
+createBlueShelving(4 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshel6', addNewBlueShelving);
+createBlueShelvingBox(1 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf7', addNewBlueShelvingBox);
+createBlueShelvingBox(-2 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf8', addNewBlueShelvingBox);
+createBlueShelving(-5 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf9', addNewBlueShelving);
+// stores - not secure,centre shelving racks
+createBlueShelving(9 * meter, 0, 32.2 * meter, 0, '0_blueshelf10', addNewBlueShelving);
+createBlueShelving(9 * meter, 0, 35.2 * meter, 0, '0_blueshelf11', addNewBlueShelving);
+createBlueShelvingBox(6 * meter, 0, 32.2 * meter, 0, '0_blueshelf12', addNewBlueShelvingBox);
+createBlueShelving(6 * meter, 0, 35.2 * meter, 0, '0_blueshelf13', addNewBlueShelving);
+createBlueShelvingBox(3 * meter, 0, 32.2 * meter, 0, '0_blueshelf14', addNewBlueShelvingBox);
+createBlueShelving(3 * meter, 0, 35.2 * meter, 0, '0_blueshelf15', addNewBlueShelving);
+createBlueShelving(0 * meter, 0, 32.2 * meter, 0, '0_blueshelf16', addNewBlueShelving);
+createBlueShelving(0 * meter, 0, 35.2 * meter, 0, '0_blueshelf17', addNewBlueShelving);
+//stores - not secure,shelving to right of door

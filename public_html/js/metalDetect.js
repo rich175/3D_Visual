@@ -1,6 +1,6 @@
-function createVan(x, y, z, rotation, id, callback) {
+function createMetalD(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
-    loader.load('images/van.json', function(obj) {
+    loader.load('images/metalDetect.json', function(obj) {
         obj.rotateY(rotation);
         obj.scale.set(10,10,10)
 
