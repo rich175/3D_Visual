@@ -224,6 +224,54 @@
 
 
 		</div>
+		<script>
+			function activaTab(tab) {
+				$('.nav-tabs a[href="#' + tab + '"]').tab('show');
+			};
+
+			function initKeyStrokes() {
+				var onKeyDown = function(event) {
+
+					switch (event.keyCode) {
+						case 49:
+							activaTab('get-items');
+							break;
+						case 50:
+							activaTab('items-arrive');
+							break;
+							case 51:
+								activaTab('start-processing');
+								break;
+								case 52:
+									activaTab('locked-unknown-loop');
+									break;
+									case 53:
+										activaTab('functional-test');
+										break;
+										case 54:
+											activaTab('data-erasure');
+											break;
+											case 55:
+												activaTab('value-estimate');
+												break;
+												case 56:
+													activaTab('blind-bidding');
+													break;
+													case 57:
+														activaTab('sold');
+														break;
+														case 48:
+															activaTab('sale-complete');
+															break;
+
+
+					}
+				}
+				document.addEventListener('keydown', onKeyDown, false);
+			};
+			initKeyStrokes();
+
+		</script>
 </body>
 
 </html>

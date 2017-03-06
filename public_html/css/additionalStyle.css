@@ -16,11 +16,16 @@ z-index: 1;
 a.btn.pale{
   background-color:#838689;
 }
-
+li.a:visited{
+  background-color:#000000;
+}
 a.click{
   color: #3A5F89;
 }
+div:visited{
+  background-color:#000000;
 
+}
 img {
 position: relative;
 height: 70%;
