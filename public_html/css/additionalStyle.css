@@ -5,7 +5,9 @@ img.bg{
   z-index: -1;
   width:1000px;
 }
-
+li.visited{
+  background-color: #000000
+}
 div.introContainer{
 position: relative;
 opacity: 0.5;

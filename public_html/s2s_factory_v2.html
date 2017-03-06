@@ -578,13 +578,13 @@
 
 			}
 
-			function addBigText(text, x, y, z, rotate) {
+			function addBigText(text, x, y, z, rotate, label, size) {
 				/////// draw text on canvas /////////
 
 				// create a canvas element
 				var canvas1 = document.createElement('canvas');
 				var context1 = canvas1.getContext('2d');
-				context1.font = "Bold 40px Arial";
+				context1.font = "Bold "+ size +" Arial";
 				context1.fillStyle = "rgba(255,0,0,0.95)";
 				context1.fillText(text, 0, 50);
 
@@ -610,38 +610,6 @@
 				scene.add(mesh1);
 			}
 
-			function addBigText_old(text, x, y, z, rotate) {
-
-				var cv = document.createElement("canvas");
-				var xc = cv.getContext("2d");
-				//var _newWidth = 20;
-				//cv.height = (_newWidth / cv.width)* cv.height;
-				//cv.width = _newWidth;
-				cv.width = 1000;
-				cv.height = 1000;
-				//xc.shadowColor = "#000";
-				//xc.shadowBlur = 1;
-				xc.fillStyle = "#cc0066";
-				xc.font = "80pt arial bold";
-				xc.align = "centre";
-				xc.fillText(text, 10, 80);
-
-				var xm = new THREE.MeshBasicMaterial({
-					map: new THREE.Texture(cv),
-					transparent: true
-				});
-				xm.map.needsUpdate = true;
-
-				var mesh = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), xm);
-				mesh.material.side = THREE.DoubleSide;
-				mesh.rotateY(rotate);
-				mesh.position.x = x - 10;
-				mesh.position.y = y;
-				mesh.position.z = z;
-				mesh.doubleSided = true;
-				scene.add(mesh);
-
-			}
 
 			function addGText(text, x, y, z, rotate, label) {
 				var _name = 'g_' + label;

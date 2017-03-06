@@ -66,6 +66,49 @@
 				</ul>
 			</div>
 </div>
+<div class="row">
+	<div class="checkout-wrap col-md-8 col-md-offset-1">
+		<ul class="checkout-bar">
+			<li class="active"><a href="#get-items" data-toggle="tab">Get items</a>
+			</li>
+			<li class=""><a href="#items-arrive" data-toggle="tab">Items arrive </a>
+			</li>
+			<li class=""><a href="#start-processing" data-toggle="tab">Start processing</a>
+			</li>
+			<li class=""><a href="#locked-unknown-loop" data-toggle="tab">Locked/unknown loop</a>
+			</li>
+			<li class=""><a href="#functional-test" data-toggle="tab">Functional test</a>
+			</li>
+			<li class=""><a href="#data-erasure" data-toggle="tab">Data erasure</a>
+			</li>
+			<li class=""><a href="#value-estimate" data-toggle="tab">Value estimate</a>
+			</li>
+			<li class=""><a href="#blind-bidding" data-toggle="tab">Blind bidding</a>
+			</li>
+			<li class=""><a href="#sold" data-toggle="tab">Sold</a>
+			</li>
+			<li class=""><a href="#sale-complete" data-toggle="tab">Sale complete</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- script for the checkout bar -->
+	<script>
+	$(document).ready(function() {
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+
+			var href = $(e.target).attr('href');
+			var $curr = $(".checkout-bar  a[href='" + href + "']").parent();
+
+			$('.checkout-bar li').removeClass();
+
+			$curr.addClass("active");
+			$curr.prevAll().addClass("visited");
+
+
+		});
+	});
+</script>
 			<div class="tab-content">
 
 				<div class="tab-pane active" id="get-items" height="100px" width="100px">
@@ -175,50 +218,8 @@
 
 			</div>
 		</div>
-		<!--
-		<div class="row">
-			<div class="checkout-wrap col-md-10 col-md-offset-1">
-				<ul class="checkout-bar">
-					<li class="active"><a href="#get-items" data-toggle="tab">Get items</a>
-					</li>
-					<li class=""><a href="#items-arrive" data-toggle="tab">Items arrive </a>
-					</li>
-					<li class=""><a href="#start-processing" data-toggle="tab">Start processing</a>
-					</li>
-					<li class=""><a href="#locked-unknown-loop" data-toggle="tab">Locked/unknown loop</a>
-					</li>
-					<li class=""><a href="#functional-test" data-toggle="tab">Functional test</a>
-					</li>
-					<li class=""><a href="#data-erasure" data-toggle="tab">Data erasure</a>
-					</li>
-					<li class=""><a href="#value-estimate" data-toggle="tab">Value estimate</a>
-					</li>
-					<li class=""><a href="#blind-bidding" data-toggle="tab">Blind bidding</a>
-					</li>
-					<li class=""><a href="#sold" data-toggle="tab">Sold</a>
-					</li>
-					<li class=""><a href="#sale-complete" data-toggle="tab">Sale complete</a>
-					</li>
-				</ul>
-			</div>
-		</div> -->
-		<!-- script for the checkout bar -->
-		<!--	<script>
-			$(document).ready(function() {
-				$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-
-					var href = $(e.target).attr('href');
-					var $curr = $(".checkout-bar  a[href='" + href + "']").parent();
-
-					$('.checkout-bar li').removeClass();
-
-					$curr.addClass("active");
-					$curr.prevAll().addClass("visited");
 
 
-				});
-			});
-		</script> -->
 		<div class="buttonGroup">
 			<p><a class="btn btn-primary btn-lg pale" href="index.html" role="button" target="blank">Home</a></p>
 
