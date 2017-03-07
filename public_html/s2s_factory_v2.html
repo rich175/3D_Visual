@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>3D S2S shop floor tour</title>
+	<title>S2S 3D representation of processes</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<link rel="stylesheet" href="css/bar3.css">
@@ -563,7 +563,9 @@
 
 				var xm = new THREE.MeshBasicMaterial({
 					map: new THREE.Texture(cv),
-					transparent: true
+					transparent: true,
+					side: THREE.DoubleSide
+
 				});
 				xm.map.needsUpdate = true;
 
@@ -578,15 +580,17 @@
 
 			}
 
-			function addBigText(text, x, y, z, rotate, label, size) {
+			function addBigText(text, x, y, z, rotate, label) {
 				/////// draw text on canvas /////////
 
 				// create a canvas element
 				var canvas1 = document.createElement('canvas');
 				var context1 = canvas1.getContext('2d');
-				context1.font = "Bold "+ size +" Arial";
-				context1.fillStyle = "rgba(255,0,0,0.95)";
-				context1.fillText(text, 0, 50);
+				canvas1.width = 300;
+				canvas1.height = 300;
+				context1.font = "30px Verdana";
+				context1.fillStyle = "rgba(217, 28, 163, 1)"; //pink text colour
+				context1.fillText(text, 10, 90);
 
 				// canvas contents will be used for a texture
 				var texture1 = new THREE.Texture(canvas1)
@@ -623,9 +627,9 @@
 				//xc.shadowColor = "#000";
 				//xc.shadowBlur = 1;
 				xc.fillStyle = "#cc0066";
-				xc.font = "80pt arial bold";
-				xc.align = "centre";
-				xc.fillText(text, 10, 80);
+				xc.font = "60px Bold Arial";
+				xc.align = "left";
+				xc.fillText(text, 10, 90);
 
 				var xm = new THREE.MeshBasicMaterial({
 					map: new THREE.Texture(cv),
@@ -935,7 +939,7 @@
 
 							//4 desks in phoneRoom location is (x position, y position, Z position, rotation in y, id, addNewNamehere)
 							//toilet entry to processing room
-							addBigText("Processing Room", -29.36 * meter, 2 * meter, 14.9 * meter, (Math.PI));
+							addText("Processing Room", -31. * meter, 1* meter, 15.9 * meter, (Math.PI));
 							createWorkstation(-30 * meter, 0, 4 * meter, 0, '0_refurbD1', addNewStation);
 							createWorkstation(-30 * meter, 0, 8 * meter, 0, '0_refurbD2', addNewStation);
 							createWorkstation(-30 * meter, 0, 10 * meter, 0, '0_refurbD2', addNewStation);
@@ -949,7 +953,7 @@
 							createsfdeskprocessing(-30 * meter, 0, 2 * meter, 0, '0_refurbd6', addNewsfdeskprocessing);
 							addText("Processing items", -30.8 * meter, 2 * meter, 2 * meter, (Math.PI / 2));
 
-							addBigText("Main Warehouse", -29.57 * meter, 2 * meter, 14.24 * meter, (Math.PI));
+							addBigText("Offices", -29.57 * meter, 2 * meter, 14.24 * meter, (Math.PI/2));
 
 							createsfdeskPacking(-30 * meter, 0, 0 * meter, 0, '0_refurbd7', addNewsfdeskPacking);
 							addText("Packing items", -30.8 * meter, 2 * meter, 0 * meter, (Math.PI / 2));
@@ -966,16 +970,21 @@
 							addText("Customer", -80 * meter, 2 * meter, -80 * meter, (Math.PI / 2));
 
 							//Data erasure label
-							addBigText("Data Erasure", -21.68 * meter, 2 * meter, -2.28 * meter, (Math.PI / 2));
+							addBigText("Data Erasure", -21.68 * meter, 0* meter, -2.28 * meter, (Math.PI / 2), 'dataErase');
 							// desks in data erasure room
 
 							createdataErase(-24 * meter, 0, 11.1 * meter, (-Math.PI), '0_dataerase2', addNewdataErase);
 
 							addText("Erasing data", -22.5 * meter, 2 * meter, 11 * meter, (-Math.PI / 2));
+							addText("Erasing data", -24.5 * meter, 2 * meter, 14 * meter, (Math.PI));
 							createdePrint(-26.5 * meter, 0, 12 * meter, (Math.PI / 2), '0_dataerasePrint', addNewsfdePrint);
-							addText("Printing Certificates", -26.5 * meter, 2 * meter, 12 * meter, (Math.PI / 2));
+							addText("Printing Certificates", -27 * meter, 2 * meter, 12 * meter, (Math.PI / 2));
+							addText("Printing Certificates", -27 * meter, 2 * meter, 14 * meter, (Math.PI));
+
 							createBlueShelving(-27.3 * meter, 0, 8 * meter, 0, '0_blueshelf1', addNewBlueShelving);
 							addText("Temporary storage", -27 * meter, 2 * meter, 2.5 * meter, (Math.PI / 2));
+							addText("Temporary storage", -27 * meter, 2 * meter, 4.5 * meter, (Math.PI / 2));
+
 							createBlueShelving(-27.3 * meter, 0, 6 * meter, 0, '0_blueshelf2', addNewBlueShelving);
 							createBlueShelvingBox(-26.9 * meter, 0, 4 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
 							createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
@@ -988,7 +997,7 @@
 							//recycling bins
 
 							createRecycleBin(-10 * meter, 0, 12 * meter, (-Math.PI / 2), '0_bin1', addNewrecycleBin);
-							addGText("Recycling items", -10 * meter, 2.5 * meter, 12 * meter, (-Math.PI), 'bins');
+							addBigText("Recycling", -10 * meter, 2.5 * meter, 12 * meter, (-Math.PI), 'g_bins');
 
 							// createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
 							//<!--createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
@@ -1002,7 +1011,7 @@
 
 							//NOTE CAN ONLY BE ADDED WHERE THERE ARE NO UPSTAIRS OR IT CAUSES A CLASH (uniforms.specular.value = material.specular;) shelving
 							// stores - not secure, top wall 3 shelves.
-							addBigText("Stores", -2.6 * meter, 2 * meter, 30.8 * meter, (-Math.PI));
+							addBigText("Stores", -2.6 * meter, 0* meter, 30.8 * meter, (-Math.PI));
 							createBlueShelvingBox(12.2 * meter, 0, 32.2 * meter, 0, '0_blueshelf1', addNewBlueShelvingBox);
 							createBlueShelving(12.2 * meter, 0, 35.2 * meter, 0, '0_blueshelf2', addNewBlueShelving);
 							createBlueShelving(12.2 * meter, 0, 38.2 * meter, 0, '0_blueshelft3', addNewBlueShelving);
@@ -1014,7 +1023,7 @@
 							createBlueShelvingBox(-2 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf8', addNewBlueShelvingBox);
 							createBlueShelving(-5 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf9', addNewBlueShelving);
 							// stores - not secure,centre shelving racks
-							addBigText("Secure Stores", -7 * meter, 2 * meter, 35.82 * meter, (Math.PI / 2));
+							addBigText("Secure Stores", -12 * meter, 2 * meter, 38.82 * meter, (Math.PI));
 							createBlueShelving(9 * meter, 0, 32.2 * meter, 0, '0_blueshelf10', addNewBlueShelving);
 							createBlueShelving(9 * meter, 0, 35.2 * meter, 0, '0_blueshelf11', addNewBlueShelving);
 							createBlueShelvingBox(6 * meter, 0, 32.2 * meter, 0, '0_blueshelf12', addNewBlueShelvingBox);
@@ -1030,7 +1039,7 @@
 							createShopfloorFem(4 * meter, 0, 33 * meter, (-Math.PI / 2), '0_ShopfloorFem1', addNewShopfloorFem);
 							//stores secure cage
 							createsecureStores(-9.3 * meter, 0, 38 * meter, (Math.PI / 2), '0_secureStore1', addNewsecureStores);
-							addText("Securing items", -9.3 * meter, 2 * meter, 38 * meter, (-Math.PI));
+							addText("Securing items", -9.3 * meter, 2 * meter, 39 * meter, (-Math.PI));
 							createBlueShelving(-12.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf20', addNewBlueShelving);
 							createBlueShelving(-15.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf21', addNewBlueShelving);
 							createBlueShelvingBox(-12.2 * meter, 0, 36.8 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
@@ -1050,15 +1059,55 @@
 							//createBlueShelving(-28 * meter, 0, 6 * meter, 0, '0_shelving1', addNewBlueShelving);
 							//forklift near bays
 							createForklift(-18 * meter, 0, -30 * meter, (-Math.PI / 2), '0_forklift1', addNewForklift);
-							addBigText("Forklift", -18 * meter, 2.5 * meter, -30 * meter, (Math.PI / 2)); // booking in desk
+							addText("Forklift", -18 * meter, 2.5 * meter, -30 * meter, (Math.PI / 2)); // booking in desk
 							createDeskChairManBoxStood(0 * meter, 0, -38.5 * meter, (-Math.PI / 2), '0_bookingInDesk', addNewsDeskChairManBoxStood);
-							addText("Goods Checked In", 0, 2 * meter, -39.5 * meter, (Math.PI));
+							addBigText("Goods Check In", -2*meter, 2 * meter, -39.5 * meter, 0);
 							// pallets in waiting areas
 							addText("Goods Waiting", 0 * meter, 2.5 * meter, -16 * meter, (Math.PI / 2)); // booking in desk
-							addBigText("Secure Waiting Pen", -25.52 * meter, 2 * meter, -5.31 * meter, (-Math.PI));
-							addBigText("Processing Room", -27.4 * meter, 2 * meter, -3.93 * meter, (Math.PI / 2));
-							addBigText("Data Erasure", -28 * meter, 2 * meter, -4.03 * meter, (-Math.PI / 2));
-							addBigText("Main Warehouse", -22 * meter, 2 * meter, -2.74 * meter, (-Math.PI / 2));
+//secure waiting pen
+							addBigText("Secure Waiting Pen", -30.52 * meter, 2 * meter, -15.31 * meter, (Math.PI/2));
+
+							createPalletBrown(-25.52 * meter, 0, -20 * meter, (-Math.PI), '0_pallet1', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -18 * meter, 0, '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -16 * meter, (-Math.PI / 2), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-28.52 * meter, 0, -14 * meter, (Math.PI), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -22 * meter, 0, '0_pallet2', addNewPalletBrown);
+							createPalletGrey(-28.52* meter, 0, -20 * meter, (-Math.PI), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -18 * meter, (Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -16 * meter, 0, '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-25.52 * meter, 0, -14 * meter, (-Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -22 * meter, (Math.PI), '0_pallet3', addNewPalletGrey);
+
+							createPalletBrown(-25.52 * meter, 0, -22 * meter, (-Math.PI), '0_pallet1', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -24 * meter, 0, '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -26 * meter, (-Math.PI / 2), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-28.52 * meter, 0, -28 * meter, (Math.PI), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -30 * meter, 0, '0_pallet2', addNewPalletBrown);
+							createPalletGrey(-28.52* meter, 0, -22 * meter, (-Math.PI), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -24 * meter, (Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -26 * meter, 0, '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-25.52 * meter, 0, -28 * meter, (-Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -30 * meter, (Math.PI), '0_pallet3', addNewPalletGrey);
+
+							createBlueShelving(-31.5 * meter, 0, -22 * meter, (Math.PI), '0_blueshelf20', addNewBlueShelving);
+							createBlueShelving(-31.5 * meter, 0, -24 * meter, (Math.PI), '0_blueshelf21', addNewBlueShelving);
+							createBlueShelvingBox(-31.8* meter, 0, -26 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -28* meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -30 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -32 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -34 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -36 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -38 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -20* meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelving(-31.5 * meter, 0, -18 * meter, (Math.PI), '0_blueshelf20', addNewBlueShelving);
+							createBlueShelving(-31.5 * meter, 0, -16 * meter, (Math.PI), '0_blueshelf21', addNewBlueShelving);
+							createBlueShelvingBox(-31.8* meter, 0, -14 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelving(-31.5 * meter, 0, -12 * meter, (Math.PI), '0_blueshelf20', addNewBlueShelving);
+							createBlueShelving(-31.5 * meter, 0, -10 * meter, (Math.PI), '0_blueshelf21', addNewBlueShelving);
+
+							addBigText("Processing", -30.4 * meter, 1 * meter, -5.93 * meter, (Math.PI / 2));
+							addText("Data Erasure", -28 * meter, 2 * meter, -4.03 * meter, (-Math.PI / 2));
+							//addBigText("Main Warehouse", -22 * meter, 2 * meter, -2.74 * meter, (-Math.PI / 2));
 
 							createPalletBrown(0 * meter, 0, -20 * meter, (-Math.PI), '0_pallet1', addNewPalletBrown);
 							createPalletBrown(0 * meter, 0, -18 * meter, 0, '0_pallet2', addNewPalletBrown);
@@ -1083,15 +1132,15 @@
 							addBigText("Delivered Items", 15 * meter, 2 * meter, -21 * meter, (-Math.PI / 2)); // booking in desk
 
 							createvandepart(6 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_vanBay3', addNewvandepart);
-							addBigText("Collecting Items", 6 * meter, 2 * meter, -29 * meter, (-Math.PI / 2)); // booking in desk
+							addBigText("Collecting Items", 6 * meter, 1 * meter, -29 * meter, 0); // van
 
 							createcourier(15 * meter, 0, -35 * meter, (Math.PI / 2), '0_courier2', addNewcourier);
-							addBigText("Courier", 15 * meter, 2 * meter, -37 * meter, (-Math.PI / 2)); // booking in desk
+							addBigText("Courier", 16 * meter, 2 * meter, -37 * meter, 0); // booking in desk
 
 							//toilets accessed from shopfloor
-							addBigText("Toilets", -19.32 * meter, 2 * meter, 30.6 * meter, (-Math.PI));
-							addBigText("Toilets", -27.85 * meter, 2 * meter, 23.11 * meter, (-Math.PI));
-							addBigText("Main Warehouse", -19 * meter, 2 * meter, 35.25 * meter, (-Math.PI / 2));
+							addText("Toilets", -19.32 * meter, 2 * meter, 30.6 * meter, (-Math.PI));
+							addText("Toilets", -27.85 * meter, 2 * meter, 23.11 * meter, (-Math.PI));
+							//addBigText("Main Warehouse", -19 * meter, 2 * meter, 35.25 * meter, (-Math.PI / 2));
 
 							createToilet(-28.5 * meter, 0, 26.5 * meter, (-Math.PI / 2), '0_toiletShopfloor1', addNewToilet);
 							createToilet(-28.5 * meter, 0, 27.5 * meter, (-Math.PI / 2), '0_toiletShopfloor2', addNewToilet);
@@ -1100,7 +1149,9 @@
 							createToilet(-27.5 * meter, 0, 27.5 * meter, (Math.PI / 2), '0_toiletShopfloor5', addNewToilet);
 							createToilet(-27.5 * meter, 0, 28.5 * meter, (Math.PI / 2), '0_toiletShopfloor6', addNewToilet);
 							//metal detector
+
 							createMetalD(-18 * meter, 0, 30.24 * meter, (Math.PI / 2), '0_metalDetector1', addNewMetalD);
+							addText("Security check", -16 * meter, 2 * meter, 30.3 * meter, (-Math.PI));
 
 							//toilets accessed from lobby
 							createurinal(-23 * meter, 0.7 * meter, 36.2 * meter, (Math.PI / 2), '0_urinaltlobby1', addNewurinal);
@@ -1112,9 +1163,9 @@
 
 							//first floor characters
 							createOfficeMan(-25 * meter, 3.1 * meter, 4 * meter, 0, '1_officeMan_Manager1', addNewOfficeMan);
-							addBigText("Managing Director", -25 * meter, 4.5 * meter, 5 * meter, (Math.PI));
+							addText("Managing Director", -25 * meter, 4.5 * meter, 0 * meter, 0);
 							createOfficeFem(-24 * meter, 3 * meter, 15 * meter, 0, '1_officeFem_1', addNewOfficeFem);
-							addBigText("Office worker", -23 * meter, 4.5 * meter, 15 * meter, (-Math.PI / 2));
+							addText("Office worker", -23 * meter, 4.5 * meter, 15 * meter, 0);
 
 							//office desk manager office floor 1
 							createOfficeDeskPC(-24 * meter, 3 * meter, 1.5 * meter, 0, '1_officeDeskPC_manager1', addNewOfficeDeskPC);
@@ -1124,7 +1175,7 @@
 							createOfficeDeskPC(-24 * meter, 3 * meter, 6.5 * meter, (-Math.PI / 2), '1_officeDeskPC_sales1', addNewOfficeDeskPC);
 
 							createOfficeDeskOccupied(-24 * meter, 3 * meter, 20 * meter, 0, '1_officeDeskPC_sales1', addNewofficedeskOccupied);
-							addBigText("Sales Manager", -23 * meter, 4.5 * meter, 20 * meter, (-Math.PI / 2));
+							addBigText("Sales Manager", -23 * meter, 4.5 * meter, 20 * meter, (Math.PI / 2));
 
 
 
@@ -1132,7 +1183,7 @@
 
 							//office desk main room rotated 90 degrees
 							createOfficeDeskOccupiedFem(-30 * meter, 3 * meter, 1.5 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewofficedeskOccupiedFem);
-							addBigText("Office worker", -30 * meter, 4.5 * meter, 1.5 * meter, (-Math.PI));
+							addText("Office worker", -30 * meter, 4.5 * meter, 1.5 * meter, 0);
 
 							createOfficeDeskPC(-30 * meter, 3 * meter, 14 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
 							createOfficeDeskPC(-30 * meter, 3 * meter, 18 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
