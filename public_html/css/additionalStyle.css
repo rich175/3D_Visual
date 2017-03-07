@@ -5,7 +5,9 @@ img.bg{
   z-index: -1;
   width:1000px;
 }
-
+li.visited{
+  background-color: #000000
+}
 div.introContainer{
 position: relative;
 opacity: 0.5;
@@ -16,11 +18,16 @@ z-index: 1;
 a.btn.pale{
   background-color:#838689;
 }
-
+li.a:visited{
+  background-color:#000000;
+}
 a.click{
   color: #3A5F89;
 }
+div:visited{
+  background-color:#000000;
 
+}
 img {
 position: relative;
 height: 70%;
