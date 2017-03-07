@@ -60,6 +60,7 @@
 	<script src="js/dePrint.js"></script>
 	<script src="js/sfdeskPacking.js"></script>
 	<script src="js/courier.js"></script>
+	<script src="js/recyclingBinsMore.js"></script>
 
 
 	<div id="container">
@@ -199,6 +200,7 @@
 			var CustomerDesks = [];
 			var dataErases = [];
 			var sfdeskPackings = [];
+			var recyclingBinsMore=[];
 
 			/*List of all Persons as a custom objects*/
 			var factoryPersons = [];
@@ -266,6 +268,12 @@
 			function addNewsfdesk(sfD) {
 				scene.add(sfD.object);
 				objects.push(sfD.object);
+
+			}
+			//NOTE KvL person blender model credits not required!
+			function addNewsrecyclingBinsMore(rsBm) {
+				scene.add(rsBm.object);
+				objects.push(rsBm.object);
 
 			}
 			//NOTE KvL person blender model credits not required!
@@ -589,7 +597,7 @@
 				canvas1.width = 300;
 				canvas1.height = 300;
 				context1.font = "30px Verdana";
-				context1.fillStyle = "rgba(217, 28, 163, 1)"; //pink text colour
+				context1.fillStyle = "rgba(168, 0, 67, 1)"; //pink text colour
 				context1.fillText(text, 10, 90);
 
 				// canvas contents will be used for a texture
@@ -998,7 +1006,7 @@
 
 							createRecycleBin(-10 * meter, 0, 12 * meter, (-Math.PI / 2), '0_bin1', addNewrecycleBin);
 							addBigText("Recycling", -10 * meter, 2.5 * meter, 12 * meter, (-Math.PI), 'g_bins');
-
+createRecycleBinsMore(10*meter, 0, 12* meter, (-Math.PI/2), '0_bins2', addNewsrecyclingBinsMore);
 							// createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
 							//<!--createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
 							//<!--createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
@@ -1165,7 +1173,7 @@
 							createOfficeMan(-25 * meter, 3.1 * meter, 4 * meter, 0, '1_officeMan_Manager1', addNewOfficeMan);
 							addText("Managing Director", -25 * meter, 4.5 * meter, 0 * meter, 0);
 							createOfficeFem(-24 * meter, 3 * meter, 15 * meter, 0, '1_officeFem_1', addNewOfficeFem);
-							addText("Office worker", -23 * meter, 4.5 * meter, 15 * meter, 0);
+							addText("Office staff", -23 * meter, 4.5 * meter, 15 * meter, 0);
 
 							//office desk manager office floor 1
 							createOfficeDeskPC(-24 * meter, 3 * meter, 1.5 * meter, 0, '1_officeDeskPC_manager1', addNewOfficeDeskPC);
@@ -1176,14 +1184,13 @@
 
 							createOfficeDeskOccupied(-24 * meter, 3 * meter, 20 * meter, 0, '1_officeDeskPC_sales1', addNewofficedeskOccupied);
 							addBigText("Sales Manager", -23 * meter, 4.5 * meter, 20 * meter, (Math.PI / 2));
-
-
+							addText("Sales Manager", -23.2*meter, 4.5*meter, 20*meter, (-Math.PI/2));
 
 							createOfficeDeskPC(-24 * meter, 3 * meter, 24 * meter, 0, '1_officeDeskPC_sales1', addNewOfficeDeskPC);
 
 							//office desk main room rotated 90 degrees
 							createOfficeDeskOccupiedFem(-30 * meter, 3 * meter, 1.5 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewofficedeskOccupiedFem);
-							addText("Office worker", -30 * meter, 4.5 * meter, 1.5 * meter, 0);
+							addText("Office staff", -30 * meter, 4.5 * meter, 1.5 * meter, 0);
 
 							createOfficeDeskPC(-30 * meter, 3 * meter, 14 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
 							createOfficeDeskPC(-30 * meter, 3 * meter, 18 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
