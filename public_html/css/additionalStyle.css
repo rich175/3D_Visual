@@ -13,10 +13,25 @@ position: relative;
 opacity: 0.5;
 background-color: #ffffff;
 z-index: 1;
+size: 50%;
 }
 
+img.full{
+  color: #000000;
+}
+img.fullBPMN{
+image-resolution: from-image;}
+a.btn{
+  background-color: red;
+}
 a.btn.pale{
   background-color:#838689;
+}
+a.btn.back{
+  background-color:#9FB2C6
+}
+a:visited{
+  background-color: #000000;
 }
 li.a:visited{
   background-color:#000000;
@@ -24,19 +39,27 @@ li.a:visited{
 a.click{
   color: #3A5F89;
 }
+a.tab{
+  font-size: 11px;
+  color: #1B487A;
+
+}
+img.long{
+  width:100%;
+}
 div:visited{
   background-color:#000000;
 
 }
 img {
 position: relative;
-height: 70%;
-width: 70%;
+height: 100%;
+width:100%;
 }
 
 img.full{
-height: 50%;
-width: 50%;
+max-heighth: 70%;
+max-width: 70%;
 }
 
 h2.introBullet{
@@ -48,6 +71,12 @@ h1.title{
 font-size: 20px;
 color: #3A5F89;
 
+}
+p.instruct{
+  font-size: 12px;
+  color:#1C4E80;
+  font-family: sans-serif;
+  padding-top: 20px;
 }
 li.instructions2{
   color:#0657B3;
@@ -61,13 +90,15 @@ body {
 nav:visited{
   color: red;
 }
-a:visited{
-  color: #CED2D5;
-}
+
 a:active{
   color:#39b54a;
 }
 
+a.smallerText{
+  font-size: 12px;
+  color: #39b54a;
+}
 /* text for index page on top of div container*/
 p.introText{
   padding-left: 10px;
@@ -166,6 +197,9 @@ ul.checkout-bar li:nth-child(9):before {
 }
 ul.checkout-bar li:nth-child(10):before {
     content:"10";
+}
+ul.checkout-bar li:nth-child(0):before {
+    content:"0";
 }
 
 ul.checkout-bar a {

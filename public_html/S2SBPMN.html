@@ -2,9 +2,8 @@
 <html>
 
 <head>
-	<title>Shop floor and Sales BPMN - full image</title>
 	<meta charset=utf-8>
-	<title>S2S Business Overview</title>
+	<title>BPMN stages</title>
 	<!--Body background image is not supported in HTML5 using CSS instead -->
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -16,265 +15,127 @@
 </head>
 
 <body>
-	<!-- container for header -->
-	<div >
-		<h1 class="title" >S2S Process BPMN</h1>
-	</div>
-	<!-- full image overview -->
+	<!--  container for full page -->
 	<div class="row">
-		<div class="col-md-6 col-md-offset-1">
-			<a href="S2SStoryboard.html" target="_blank">
-				<img class="full" id="mainPic" src="images/fullPictureStoryboard.jpg" alt="storyboard for s2s phone processing sales and shop floor tasks"> </img>
-			</a>
-		</div>
-		<div class="col-md-4">
-			<div style="display: table; height: 200px; overflow: hidden;">
-	 <div style="display: table-cell; vertical-align: middle;">
-		 <h2 class="introBullet"> <ul>
-			 <li> Please click tabs 1 to 10 in numerical order to view phone processing steps</li>
-			 <li> Next, please <a class="click" href="bpmn.html">CLICK HERE </a>to explore the full size verison </li>
-		 </ul> </h2>
 
-		 </div></div>
-	 </div>
-	</div>
-	<div class="row">
-		<div class="tabbable-panel">
-			<div class="tabbable-line">
-				<div class="col-md-12">
-				<ul class="nav nav-tabs ">
-					<li><a href="#get-items" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard1.jpg'">1: Get items </a>
-					</li>
-					<li ><a href="#items-arrive" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard2.jpg'"> 2: Items arrive </a>
-					</li>
-					<li ><a href="#start-processing" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard3.jpg'">3: Start processing </a>
-					</li>
-					<li ><a href="#locked-unknown-loop" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard4.jpg'">4: Locked/unknown loop </a>
-					</li>
-					<li ><a href="#functional-test" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard5.jpg'" >5: Functional test </a>
-					</li>
-					<li ><a href="#data-erasure" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard6.jpg'" >6: Data erasure</a>
-					</li>
-					<li><a href="#value-estimate" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard7.jpg'" >7: Value estimate</a>
-					</li>
-					<li ><a href="#blind-bidding" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard8.jpg'" >8: Blind bidding</a>
-					</li>
-					<li ><a href="#sold" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard9.jpg'" >9: Sold</a>
-					</li>
-					<li ><a href="#sale-complete" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard10.jpg'" >10: Sale complete</a>
-					</li>
-				</ul>
+		<!-- container for header -->
+		<div class="row">
+			<div class="col-md-6">
+				<div style="text-align: left">
+					<h1 class="title">S2S in Business Process Model and Notation</h1>
+				</div>
 			</div>
-</div>
-<div class="row">
-	<div class="checkout-wrap col-md-8 col-md-offset-1">
-		<ul class="checkout-bar">
-			<li class="active"><a href="#get-items" data-toggle="tab">Get items</a>
-			</li>
-			<li class=""><a href="#items-arrive" data-toggle="tab">Items arrive </a>
-			</li>
-			<li class=""><a href="#start-processing" data-toggle="tab">Start processing</a>
-			</li>
-			<li class=""><a href="#locked-unknown-loop" data-toggle="tab">Locked/unknown loop</a>
-			</li>
-			<li class=""><a href="#functional-test" data-toggle="tab">Functional test</a>
-			</li>
-			<li class=""><a href="#data-erasure" data-toggle="tab">Data erasure</a>
-			</li>
-			<li class=""><a href="#value-estimate" data-toggle="tab">Value estimate</a>
-			</li>
-			<li class=""><a href="#blind-bidding" data-toggle="tab">Blind bidding</a>
-			</li>
-			<li class=""><a href="#sold" data-toggle="tab">Sold</a>
-			</li>
-			<li class=""><a href="#sale-complete" data-toggle="tab">Sale complete</a>
-			</li>
-		</ul>
+			<div class="col-md-4">
+				<div style="text-align: left">
+					<p class="instruct">Please click through tabs 1 - 10, to view full image
+						<a href="images/BPMNoverview.jpg" target="_blank"> CLICK HERE </a></p>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div style="text-align: center">
+					<h1 class="title"></h1>
+					<p><a class="btn btn-primary pale" href="index.html" role="button" target="blank">Home</a></p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="tabbable-panel">
+				<div class="tabbable-line">
+					<div class="col-md-12">
+						<ul class="nav nav-tabs ">
+							<li><a class="tab" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMNoverview.jpg'">Overview </a>
+							</li>
+							<li><a class="tab" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN1.jpg'">1: Get items </a>
+							</li>
+							<li><a class="tab" href="#items-arrive" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN2.jpg'"> 2: Items arrive </a>
+							</li>
+							<li><a class="tab" href="#start-processing" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN3.jpg'">3: Start processing </a>
+							</li>
+							<li><a class="tab" href="#locked-unknown-loop" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN4.jpg'">4: Locked/unknown loop </a>
+							</li>
+							<li><a class="tab" href="#functional-test" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN5.jpg'">5: Functional test </a>
+							</li>
+							<li><a class="tab img.long" href="#data-erasure" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN6.jpg'">6: Data erasure</a>
+							</li>
+							<li><a class="tab" href="#value-estimate" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN7.jpg'">7: Value estimate</a>
+							</li>
+							<li><a class="tab" href="#blind-bidding" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN8.jpg'">8: Blind bidding</a>
+							</li>
+							<li><a class="tab" href="#sold" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN9.jpg'">9: Sold</a>
+							</li>
+							<li><a class="tab" href="#sale-complete" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMN10.jpg'">10: Sale complete</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- full image overview -->
+				<div class="row">
+					<div class="col-md-11 col-md-offset-1">
+						<a href="images/BPMNoverview.jpg" target="_blank">
+							<img class="fullBPMN" id="mainPic" src="images/BPMNoverview.jpg" alt="BPMN for s2s phone processing sales and shop floor tasks"> </img>
+						</a>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
-<!-- script for the checkout bar -->
+
+
+	</div>
+
+
 	<script>
-	$(document).ready(function() {
-		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+		function activaTab(tab) {
+			$('.nav-tabs a[href="#' + tab + '"]').tab('show');
+		};
 
-			var href = $(e.target).attr('href');
-			var $curr = $(".checkout-bar  a[href='" + href + "']").parent();
+		function initKeyStrokes() {
+			var onKeyDown = function(event) {
 
-			$('.checkout-bar li').removeClass();
+				switch (event.keyCode) {
+					case 49:
+						activaTab('get-items');
 
-			$curr.addClass("active");
-			$curr.prevAll().addClass("visited");
-
-
-		});
-	});
-</script>
-			<div class="tab-content">
-
-				<div class="tab-pane active" id="get-items" height="100px" width="100px">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-							<img class="zoomed" src="images/story1.jpg" alt="steps 1 - 3"></img>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="tab-pane" id="items-arrive">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-							<img class="zoomed" src="images/story2.jpg" alt="steps 4-6"> </img>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="tab-pane" id="start-processing">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-							<img class="zoomed" src="images/story3.jpg" alt="initial stages processing phones"></img>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="tab-pane" id="locked-unknown-loop">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-							<img class="zoomed" src="images/story4.jpg" alt="steps if phone unknown or unlocked">
-							</img>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="tab-pane" id="functional-test">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-							<img class="zoomed" src="images/story5.jpg" alt="functional test"></img>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="tab-pane" id="data-erasure">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-							<img class="zoomed" src="images/story6.jpg" alt="Data erasure"></img>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="tab-pane" id="value-estimate">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-							<img class="zoomed" src="images/story7.jpg" alt="Value estimate"></img>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="tab-pane" id="blind-bidding">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-5 col-md-offset-1">
-							<img class="zoomed" src="images/story8.jpg" alt="Blind bidding"></img>
-						</div>
+						break;
+					case 50:
+						activaTab('items-arrive');
+						break;
+					case 51:
+						activaTab('start-processing');
+						break;
+					case 52:
+						activaTab('locked-unknown-loop');
+						break;
+					case 53:
+						activaTab('functional-test');
+						break;
+					case 54:
+						activaTab('data-erasure');
+						break;
+					case 55:
+						activaTab('value-estimate');
+						break;
+					case 56:
+						activaTab('blind-bidding');
+						break;
+					case 57:
+						activaTab('sold');
+						break;
+					case 48:
+						activaTab('sale-complete');
+						break;
 
 
-					</div>
-				</div>
-
-
-				<div class="tab-pane" id="sold">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-							<img class="zoomed" src="images/story9.jpg" alt="sold"></img>
-						</div>
-					</div>
-					<div class="row" align="right">
-
-					</div>
-				</div>
-
-				<div class="tab-pane" id="sale-complete">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-							<img class="zoomed" src="images/story10.jpg" alt="sale complete"></img>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-		</div>
-
-
-		<div class="buttonGroup">
-			<p><a class="btn btn-primary btn-lg pale" href="index.html" role="button" target="blank">Home</a></p>
-
-
-		</div>
-		<script>
-			function activaTab(tab) {
-				$('.nav-tabs a[href="#' + tab + '"]').tab('show');
-			};
-
-			function initKeyStrokes() {
-				var onKeyDown = function(event) {
-
-					switch (event.keyCode) {
-						case 49:
-							activaTab('get-items');
-							break;
-						case 50:
-							activaTab('items-arrive');
-							break;
-							case 51:
-								activaTab('start-processing');
-								break;
-								case 52:
-									activaTab('locked-unknown-loop');
-									break;
-									case 53:
-										activaTab('functional-test');
-										break;
-										case 54:
-											activaTab('data-erasure');
-											break;
-											case 55:
-												activaTab('value-estimate');
-												break;
-												case 56:
-													activaTab('blind-bidding');
-													break;
-													case 57:
-														activaTab('sold');
-														break;
-														case 48:
-															activaTab('sale-complete');
-															break;
-
-
-					}
 				}
-				document.addEventListener('keydown', onKeyDown, false);
-			};
-			initKeyStrokes();
+			}
+			document.addEventListener('keydown', onKeyDown, false);
+		};
+		initKeyStrokes();
+	</script>
 
-		</script>
+
 </body>
 
 </html>
-
-</body>
