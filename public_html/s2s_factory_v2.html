@@ -594,11 +594,22 @@
 				// create a canvas element
 				var canvas1 = document.createElement('canvas');
 				var context1 = canvas1.getContext('2d');
-				canvas1.width = 300;
-				canvas1.height = 300;
-				context1.font = "30px Verdana";
+
+				var _size = '50';
+				var size = _size * 8;
+				var backgroundMargin = 50;
+
+
+				context1.font = size + "pt Arial";
+				var textWidth = context1.measureText(text).width;
+				var textHeight = parseInt(context1.font);
+				canvas1.width = textWidth + backgroundMargin;
+				canvas1.height = textHeight + backgroundMargin;
+				context1 = canvas1.getContext("2d");
+				context1.font = size + "pt Arial";
+
 				context1.fillStyle = "rgba(168, 0, 67, 1)"; //pink text colour
-				context1.fillText(text, 10, 90);
+				context1.fillText(text, 0, textHeight);
 
 				// canvas contents will be used for a texture
 				var texture1 = new THREE.Texture(canvas1)
@@ -611,7 +622,7 @@
 				material1.transparent = true;
 
 				var mesh1 = new THREE.Mesh(
-					new THREE.PlaneGeometry(canvas1.width, canvas1.height),
+					new THREE.PlaneGeometry(canvas1.width/8, canvas1.height/8),
 					material1
 				);
 
@@ -912,11 +923,14 @@
 
 				var light = new THREE.HemisphereLight(0x000000, 0xffffff, 0.6);
 				light.position.set(2000, 20000, 2000);
-				scene.add(light);
+				//scene.add(light);
 
 				var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 				directionalLight.position.set(0, 1, 0);
-				scene.add(directionalLight);
+				//scene.add(directionalLight);
+
+				var light = new THREE.AmbientLight( 0x404040, 5 ); // soft white light
+scene.add( light );
 
 				controls = new THREE.PointerLockControls(camera);
 				scene.add(controls.getObject());
