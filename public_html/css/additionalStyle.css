@@ -57,6 +57,11 @@ height: 100%;
 width:100%;
 }
 
+p.infoText{
+  font-size:20px;
+  color:#1B487A;
+}
+
 img.full{
 max-heighth: 70%;
 max-width: 70%;

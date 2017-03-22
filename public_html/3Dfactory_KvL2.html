@@ -67,14 +67,14 @@
 	<script src="js/recyclingBinsMore.js"></script>
 
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div style="text-align: left">
 				<h1 class="title">S2S 3D factory tour</h1>
 			</div>
 		</div>
-		<div class="col-md-4">
-			<div style="text-align: left">
-				<p class="instruct">Please click through tabs 1 - 10, each will load an animated 'tour' of that stage. For full view please <a href="s2s_factory_v2.html" target="_blank"> CLICK HERE </a></p>
+		<div class="col-md-6">
+			<div style="text-align: left" >
+				<p >Please click through tabs 1 - 10, each will load an animated 'tour' of that stage. </p>
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -90,9 +90,7 @@
 				<div class="tabbable-line">
 					<div class="col-md-12">
 						<ul class="nav nav-tabs ">
-							<li><a class="tab" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/BPMNoverview.jpg'">Overview </a>
-							</li>
-							<li><a  class="tab"data-toggle="tab" onclick="processJSONRoute('routeGetItems.json')">1: Get items </a>
+							<li><a  class="tab" href="#get-items" data-toggle="tab" onclick="processJSONRoute('routeGetItems.json')">1: Get items </a>
 							</li>
 							<li><a class="tab"href="#items-arrive" data-toggle="tab" onclick="processJSONRoute('routeItemsArrive.json')"> 2: Items arrive </a>
 							</li>
@@ -120,14 +118,119 @@
 
 
 
-
 	<div id="container">
 		<div id="blocker">
 			<div id="instructions">
 				<span style="font-size:40px"><br/> </span>
+				<div class="tab-content">
+				<div class="tab-pane active" id="get-items" >
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="infoText">Sales contact customer to arrange collection of waste electronic and electrical items (WEEE). </br> Sales inform shop floor new order for collection. </br> Order collected by shop floor</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="tab-pane" id="items-arrive">
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="infoText">Shop floor tell sales order has arrived. </br> Check items as expected, any discrepancies to be checked with customer</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="tab-pane" id="start-processing">
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="infoText">Charge phones from order, attach unique ID tag. </br> Open asset track system and begin functional test. </br> If damaged beyond repair, fail functional test. If repairable set aside to repair at end of order.  </p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="tab-pane" id="locked-unknown-loop">
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="infoText">If phone iCloud locked, shop floor inform sales and place phone in quarantine. </br> Sales contact customer, customer contacts manufacturer. </br> Customer confirms unlock to sales, sales confirm to shop floor to continue processing.</p>
+							</img>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="tab-pane" id="functional-test">
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="infoText">Shop floor carry out functional tests. </br> Phones processed in batches of at least 10</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="tab-pane" id="data-erasure">
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="infoText">Attach batch of approx. 10 phones to data erasure station. </br> Return to asset tracking for 10 mins. </br> Collect erased phones and complete processing. </br> Add visual inspection grade. </br> Clean and de-label all processed phones. </br> Place in box, label with order number and store in secure stores. </br> Export asset track report to excel, add estimated value and send to sales. </p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="tab-pane" id="value-estimate">
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="infoText">Sales send customer excel list with processed item details. </br> Customer confirms which items to sell to return and which to sell to S2S. </br> Sales update asset tracking and confirm to shop floor (to return or store items) and finance to arrange paperwork.</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="tab-pane" id="blind-bidding">
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+				<p class="infoText">Sales export updated asset report of items available to sell. </br> Email item list to potential buyers for 72 hour blind bidding. </br>Highest bidder wins items, confirmed by sales. </br> Sales inform shop floor to locate items, and finance to invoice.</p>
+						</div>
+
+
+					</div>
+				</div>
+
+
+				<div class="tab-pane" id="sold">
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="infoText"> Finance confirm receipt of payment. </br> Sales confirm to shop floor items ready to be sent </br> Shop floor print data erasure certificates pack with sold items and send to buyer.  </p>
+						</div>
+					</div>
+					<div class="row" align="right">
+
+					</div>
+				</div>
+
+				<div class="tab-pane" id="sale-complete">
+					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="infoText">Shop floor update asset tracking system and confirm to sales that items have been sent. </br> Sales update reports and buyer information with latest sold items.</p>
+						</div>
+					</div>
+
+				</div>
 
 			</div>
 		</div>
+	</div>
 	</div>
 	<!--  container for full page -->
 		<!-- container for header -->
