@@ -1,4 +1,4 @@
-function createRecycleBinsMore(x, y, z, rotation, id, callback) {
+function createRecyclingBinsMore(x, y, z, rotation, id, callback) {
     var loader = new THREE.ObjectLoader();
     loader.load('images/recyclingBinsMore.json', function(obj) {
       obj.rotateY(rotation);
