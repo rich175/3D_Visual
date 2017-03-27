@@ -254,7 +254,7 @@ function returnFactory(on_complete) {
                 x2: 1.5 * meter,
                 z1: 20 * meter,
                 z2: 20 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 1.5 * meter,
@@ -262,14 +262,14 @@ function returnFactory(on_complete) {
                 z1: 20 * meter,
                 z2: 20 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 2.5 * meter,
                 x2: 9.2 * meter,
                 z1: 20 * meter,
                 z2: 20 * meter,
-                y: 3.0 * meter,
+                y:2.99 * meter,
                 thickness: 1.52,
                 texture: 'images/beigewalls.jpg'
             }, {
@@ -278,7 +278,7 @@ function returnFactory(on_complete) {
                 x2: 5 * meter,
                 z1: 0 * meter,
                 z2: 0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
 
             }, {
@@ -288,7 +288,7 @@ function returnFactory(on_complete) {
                 z1: 0 * meter,
                 z2: 0 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
 
             },
@@ -298,7 +298,7 @@ function returnFactory(on_complete) {
                 x2: 9.2 * meter,
                 z1: 0 * meter,
                 z2: 0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
 
             }, {
@@ -306,7 +306,7 @@ function returnFactory(on_complete) {
                 x2: 9.2 * meter,
                 z1: 0 * meter,
                 z2: 2 * meter,
-                y: 3.0 * meter,
+                y: 2.99* meter,
                 texture: 'images/beigewalls.jpg'
             }, {
 
@@ -314,7 +314,7 @@ function returnFactory(on_complete) {
                 x2: 9.2 * meter,
                 z1: 4 * meter,
                 z2: 20 * meter,
-                y: 3.0 * meter,
+                y:3 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 9.2 * meter,
@@ -322,7 +322,7 @@ function returnFactory(on_complete) {
                 z1: 2 * meter,
                 z2: 4 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
 
@@ -330,7 +330,7 @@ function returnFactory(on_complete) {
                 x2: 3.5 * meter,
                 z1: 0 * meter,
                 z2: 1 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 3.5 * meter,
@@ -338,14 +338,14 @@ function returnFactory(on_complete) {
                 z1: 1 * meter,
                 z2: 2 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 3.5 * meter,
                 x2: 3.5 * meter,
                 z1: 2 * meter,
                 z2: 20 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }
         ],
@@ -458,7 +458,7 @@ function returnFactory(on_complete) {
                 x2: 2.5 * meter,
                 z1: 0 * meter,
                 z2: 0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 2.5 * meter,
@@ -466,14 +466,14 @@ function returnFactory(on_complete) {
                 z1: 0 * meter,
                 z2: 0 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 3.5 * meter,
                 x2: 3.8 * meter,
                 z1: 0 * meter,
                 z2: 0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 3.8 * meter,
@@ -481,28 +481,28 @@ function returnFactory(on_complete) {
                 z1: 0 * meter,
                 z2: 0 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 4.8 * meter,
                 x2: 7.5 * meter,
                 z1: 0 * meter,
                 z2: 0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 7.5 * meter,
                 x2: 7.5 * meter,
                 z1: 0 * meter,
                 z2: 5.5 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 x1: 0 * meter,
                 x2: 7.5 * meter,
                 z1: 5.5 * meter,
                 z2: 5.5 * meter,
-                y: 3.0 * meter,
+                y: 2.99* meter,
                 texture: 'images/beigewalls.jpg'
             }, {
                 //toilet divider
@@ -510,7 +510,7 @@ function returnFactory(on_complete) {
                 x2: 3.65 * meter,
                 z1: 0 * meter,
                 z2: 5.5 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             },
             //cubicle walls
@@ -591,7 +591,7 @@ function returnFactory(on_complete) {
                 x2: 6.5 * meter,
                 z1: 0 * meter,
                 z2: 5.5 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
                 x1: 6.5 * meter,
@@ -599,21 +599,21 @@ function returnFactory(on_complete) {
                 z1: 5.5 * meter,
                 z2: 6.5 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
                 x1: 6.5 * meter,
                 x2: 6.5 * meter,
                 z1: 6.5 * meter,
                 z2: 11 * meter,
-                y: 3.0 * meter,
+                y: 2.99* meter,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
                 x1: 9.2 * meter,
                 x2: 12.5 * meter,
                 z1: 5.3 * meter,
                 z2: 5.3 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -621,7 +621,7 @@ function returnFactory(on_complete) {
                 x2: 12.5 * meter,
                 z1: 7 * meter,
                 z2: 7 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -630,7 +630,7 @@ function returnFactory(on_complete) {
                 x2: 12.5 * meter,
                 z1: 2 * meter,
                 z2: 5.6 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -640,7 +640,7 @@ function returnFactory(on_complete) {
                 z1: 5.6 * meter,
                 z2: 8.2 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -649,7 +649,7 @@ function returnFactory(on_complete) {
                 x2: 12.5 * meter,
                 z1: 2 * meter,
                 z2: 2 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -658,7 +658,7 @@ function returnFactory(on_complete) {
                 x2: 8 * meter,
                 z1: 2 * meter,
                 z2: 5.3 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -667,7 +667,7 @@ function returnFactory(on_complete) {
                 x2: 9.3 * meter,
                 z1: 3.6 * meter,
                 z2: 5.3 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -694,7 +694,7 @@ function returnFactory(on_complete) {
                 x2: 12.5 * meter,
                 z1: 8.2 * meter,
                 z2: 11 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -703,7 +703,7 @@ function returnFactory(on_complete) {
                 x2: 11.2 * meter,
                 z1: 7 * meter,
                 z2: 11 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -712,7 +712,7 @@ function returnFactory(on_complete) {
                 x2: 10.2 * meter,
                 z1: 7 * meter,
                 z2: 9 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -721,7 +721,7 @@ function returnFactory(on_complete) {
                 x2: 9.2 * meter,
                 z1: 7 * meter,
                 z2: 9 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -730,7 +730,7 @@ function returnFactory(on_complete) {
                 x2: 7.8 * meter,
                 z1: 7 * meter,
                 z2: 9 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -740,7 +740,7 @@ function returnFactory(on_complete) {
                 z1: 7 * meter,
                 z2: 7 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -750,7 +750,7 @@ function returnFactory(on_complete) {
                 z1: 9 * meter,
                 z2: 9 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -760,7 +760,7 @@ function returnFactory(on_complete) {
                 z1: 5.3 * meter,
                 z2: 5.3 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }, {
@@ -770,7 +770,7 @@ function returnFactory(on_complete) {
                 z1: 3.6 * meter,
                 z2: 3.6 * meter,
                 y0: 2.0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 thickness: 2,
                 texture: 'images/darkerbeigewalls.jpg'
             }
@@ -818,7 +818,7 @@ function returnFactory(on_complete) {
                 x2: 8.5 * meter,
                 z1: 0 * meter,
                 z2: 0 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }, { //bottom wall//
                 color: '#D6D4CD',
@@ -828,7 +828,7 @@ function returnFactory(on_complete) {
                 x2: 0 * meter,
                 z1: 0 * meter,
                 z2: 9 * meter,
-                y: 3.0 * meter,
+                y: 2.99 * meter,
                 texture: 'images/beigewalls.jpg'
             }
 

@@ -74,7 +74,7 @@
 		</div>
 		<div class="col-md-6">
 			<div style="text-align: left" >
-				<p >Please click through tabs 1 - 10, each will load an animated 'tour' of that stage. </p>
+				<p >Please click through tabs 1 - 8, each will load an animated 'tour' of that stage. </br> Please <a href="s2s_factory_v2.html" target="blank"> Click Here </a> to explore full model</p>
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -104,12 +104,9 @@
 							</li>
 							<li><a class="tab"href="#value-estimate" data-toggle="tab" onclick="processJSONRoute('routeValueEst.json')">7: Value estimate</a>
 							</li>
-							<li><a class="tab"href="#blind-bidding" data-toggle="tab" onclick="processJSONRoute('routeBlindBid.json')">8: Blind bidding</a>
+							<li><a class="tab"href="#sell-items" data-toggle="tab" onclick="processJSONRoute('routeSellItems.json')">8: Sell items</a>
 							</li>
-							<li><a class="tab"href="#sold" data-toggle="tab" onclick="processJSONRoute('routeSold.json')">9: Sold</a>
-							</li>
-							<li><a class="tab"href="#sale-complete" data-toggle="tab" onclick="processJSONRoute('routeComplete.json')">10: Sale complete</a>
-							</li>
+
 						</ul>
 					</div>
 				</div>
@@ -194,11 +191,11 @@
 
 				</div>
 
-				<div class="tab-pane" id="blind-bidding">
+				<div class="tab-pane" id="sell-items">
 					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
 					<div class="row">
 						<div class="col-md-12">
-				<p class="infoText">Sales export updated asset report of items available to sell. </br> Email item list to potential buyers for 72 hour blind bidding. </br>Highest bidder wins items, confirmed by sales. </br> Sales inform shop floor to locate items, and finance to invoice.</p>
+				<p class="infoText">Sales export updated asset report of items available to sell. </br> Email item list to potential buyers for 72 hour blind bidding. </br>Highest bidder wins items. </br> Sales inform shop floor to locate items, and finance to invoice. </br> Invoice is paid and items are shipped to buyer. Order is complete</p>
 						</div>
 
 
@@ -218,16 +215,7 @@
 					</div>
 				</div>
 
-				<div class="tab-pane" id="sale-complete">
-					<!--	<asp:ValidationSummary runat="server" CssClass="text-danger" /> -->
-					<div class="row">
-						<div class="col-md-12">
-							<p class="infoText">Shop floor update asset tracking system and confirm to sales that items have been sent. </br> Sales update reports and buyer information with latest sold items.</p>
-						</div>
-					</div>
-
-				</div>
-
+		
 			</div>
 		</div>
 	</div>
