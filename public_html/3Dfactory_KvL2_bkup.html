@@ -88,14 +88,12 @@
 							</li>
 							<li><a href="#data-erasure" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard6.jpg'">6: Data erasure</a>
 							</li>
-							<li><a href="#value-estimate" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard7.jpg'">7: Value estimate</a>
+							<li><a href="#customer-decision" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard7.jpg'">7: Customer decision </a>
 							</li>
-							<li><a href="#blind-bidding" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard8.jpg'">8: Blind bidding</a>
+							<li><a href="#sell-items" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard8.jpg'">8: Sell items</a>
 							</li>
-							<li><a href="#sold" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard9.jpg'">9: Sold</a>
-							</li>
-							<li><a href="#sale-complete" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard10.jpg'">10: Sale complete</a>
-							</li>
+						
+
 						</ul>
 					</div>
 				</div>
@@ -121,7 +119,7 @@
 				<div style="display: table; height: 200px; width:auto; overflow: hidden;">
 					<div style="display: table-cell; vertical-align: middle;">
 						<h2 class="introBullet"> <ul>
-				 <li> Please use number keys 1 - 0 to view phone processing steps 1 - 10 in numerical order</li>
+				 <li> Please use number keys 1 - 9 to view phone processing steps 1 - 9 in numerical order</li>
 				 <li class="instructions2"> Using the 3D view. arrows to move, SPACE = Jump, touchpad or mouse = look around. 'fn' and 'up arrow' = overview </br> 'fn' and 'down arrow' for ground level </br>ESCAPE to free cursor</li>
 			 </ul> </h2>
 
@@ -130,83 +128,7 @@
 			</div>
 
 
-		<div class="row">
-			<div class="tabbable-panel">
-				<div class="tabbable-line">
-					<div class="col-md-12">
-						<ul class="nav nav-tabs ">
-							<li><a class="btn btn-primary pale"href="#get-items" data-toggle="tab">1: Get items </a>
-							</li>
-							<li><a class="btn btn-primary pale"href="#items-arrive" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard2.jpg'"> 2: Items arrive </a>
-							</li>
-							<li><a class="btn btn-primary pale"href="#start-processing" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard3.jpg'">3: Start processing </a>
-							</li>
-							<li><a class="btn btn-primary pale"href="#locked-unknown-loop" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard4.jpg'">4: Locked/unknown loop </a>
-							</li>
-							<li><a class="btn btn-primary pale"href="#functional-test" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard5.jpg'">5: Functional test </a>
-							</li>
-							<li><a class="btn btn-primary pale"href="#data-erasure" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard6.jpg'">6: Data erasure</a>
-							</li>
-							<li><a class="btn btn-primary pale"href="#value-estimate" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard7.jpg'">7: Value estimate</a>
-							</li>
-							<li><a class="btn btn-primary pale"href="#blind-bidding" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard8.jpg'">8: Blind bidding</a>
-							</li>
-							<li><a class="btn btn-primary pale"href="#sold" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard9.jpg'">9: Sold</a>
-							</li>
-							<li><a class="btn btn-primary pale"href="#sale-complete" data-toggle="tab" onclick="document.getElementById('mainPic').src='images/fullPictureStoryboard10.jpg'">10: Sale complete</a>
-							</li>
-							<li><a class="full" href="#sale-complete" data-toggle="tab"><a href="s2s_factory_v2.html" target="blank"> See full image in new window</a>
-							</li>
-						</ul>
-					</div>
-				</div>
 
-			</div>
-			<!--
-			<div class="row">
-				<div class="checkout-wrap col-md-10 col-md-offset-1">
-					<ul class="checkout-bar">
-						<li class="active"><a href="#get-items" data-toggle="tab">Get items</a>
-						</li>
-						<li class=""><a href="#items-arrive" data-toggle="tab">Items arrive </a>
-						</li>
-						<li class=""><a href="#start-processing" data-toggle="tab">Start processing</a>
-						</li>
-						<li class=""><a href="#locked-unknown-loop" data-toggle="tab">Locked/unknown loop</a>
-						</li>
-						<li class=""><a href="#functional-test" data-toggle="tab">Functional test</a>
-						</li>
-						<li class=""><a href="#data-erasure" data-toggle="tab">Data erasure</a>
-						</li>
-						<li class=""><a href="#value-estimate" data-toggle="tab">Value estimate</a>
-						</li>
-						<li class=""><a href="#blind-bidding" data-toggle="tab">Blind bidding</a>
-						</li>
-						<li class=""><a href="#sold" data-toggle="tab">Sold</a>
-						</li>
-						<li class=""><a href="#sale-complete" data-toggle="tab">Sale complete</a>
-						</li>
-					</ul>
-				</div>
-			</div> -->
-			<!-- script for the checkout bar -->
-			<!--	<script>
-				$(document).ready(function() {
-					$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-
-						var href = $(e.target).attr('href');
-						var $curr = $(".checkout-bar  a[href='" + href + "']").parent();
-
-						$('.checkout-bar li').removeClass();
-
-						$curr.addClass("active");
-						$curr.prevAll().addClass("visited");
-
-
-					});
-				});
-			</script> -->
-		</div>
 
 	<script>
 
