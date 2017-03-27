@@ -36,7 +36,7 @@ function returnFirstFloorFactory(on_complete) {
             z1: 1.5 * meter,
             z2: 3.7 * meter,
             y0: 1 * meter,
-            y: 3.0 * meter,
+            y: 3.1 * meter,
 
         }, {
 
@@ -44,7 +44,7 @@ function returnFirstFloorFactory(on_complete) {
             x2: 9 * meter,
             z1: 1.5 * meter,
             z2: 3.7 * meter,
-            y: 1 * meter,
+            y: 3.1 * meter,
             texture: "images/beigewalls.jpg"
 
         }, {
@@ -104,7 +104,7 @@ function returnFirstFloorFactory(on_complete) {
             x2: 9 * meter,
             z1: 0 * meter,
             z2: 29.5 * meter,
-            y: 0 * meter,
+            y: -0.01 * meter,
             texture: 'images/floorTile.jpg'
         }],
         ceiling: []
