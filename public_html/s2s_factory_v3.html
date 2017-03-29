@@ -62,9 +62,9 @@
 	<script src="js/courier.js"></script>
 	<script src="js/recyclingBinsMore.js"></script>
 
-		<script src="js/controls/god_controls.js"></script>
-		<script src="js/controls/mario_controls.js"></script>
-		<script src="js/controls/route_controls.js"></script>
+	<script src="js/controls/god_controls.js"></script>
+	<script src="js/controls/mario_controls.js"></script>
+	<script src="js/controls/route_controls.js"></script>
 
 
 	<div id="container">
@@ -107,6 +107,8 @@
 					if (document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element) {
 
 						controlsEnabled = true;
+
+
 						controls.enabled = true;
 
 						blocker.style.display = 'none';
@@ -142,6 +144,10 @@
 				instructions.addEventListener('click', function(event) {
 
 					instructions.style.display = 'none';
+
+					controlsEnabled = false;
+					god = false;
+					route = false;
 
 					// Ask the browser to lock the pointer
 					element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
@@ -746,9 +752,9 @@
 							addText("On phone to sales", -30.9 * meter, 2 * meter, 6.5 * meter, (Math.PI / 2));
 
 							createsfdeskprocessing(-30 * meter, 0, 2 * meter, 0, '0_refurbd6', addNewsfdeskprocessing);
-							addText("Tagging and asset tracking", -30.9 * meter, 2 * meter, 2.7* meter, (Math.PI / 2));
+							addText("Tagging and asset tracking", -30.9 * meter, 2 * meter, 2.7 * meter, (Math.PI / 2));
 
-							addBigText("Offices", -30.9* meter, 4.5* meter, 14.24 * meter, (Math.PI / 2));
+							addBigText("Offices", -30.9 * meter, 4.5 * meter, 14.24 * meter, (Math.PI / 2));
 
 							createsfdeskPacking(-30 * meter, 0, 0 * meter, 0, '0_refurbd7', addNewsfdeskPacking);
 							addText("Packing items for despatch", -30.9 * meter, 2.4 * meter, 0 * meter, (Math.PI / 2));
@@ -773,7 +779,7 @@
 							addText("Erasing data", -22.5 * meter, 2 * meter, 11 * meter, (-Math.PI / 2));
 							addText("Erasing data", -24.5 * meter, 2 * meter, 14 * meter, (Math.PI));
 							createdePrint(-26.5 * meter, 0, 12 * meter, (Math.PI / 2), '0_dataerasePrint', addNewsfdePrint);
-							addText("Printing Certificates", -27.5* meter, 2 * meter, 12 * meter, (Math.PI / 2));
+							addText("Printing Certificates", -27.5 * meter, 2 * meter, 12 * meter, (Math.PI / 2));
 							addText("Printing Certificates", -27 * meter, 2 * meter, 14 * meter, (Math.PI));
 
 							createBlueShelving(-27.3 * meter, 0, 8 * meter, 0, '0_blueshelf1', addNewBlueShelving);
@@ -795,7 +801,7 @@
 							addBigText("Recycling", -12 * meter, 2.5 * meter, 8 * meter, (-Math.PI), 'g_bins');
 							createRecyclingBinsMore(10 * meter, 0, 12 * meter, (-Math.PI / 2), '0_bins2', addNewrecyclingBinsMore);
 							// createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
-							addBigText("Recycling", 8 * meter, 2.5 * meter, 6* meter, (-Math.PI), 'g_bins');
+							addBigText("Recycling", 8 * meter, 2.5 * meter, 6 * meter, (-Math.PI), 'g_bins');
 
 							//<!--createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
 							//<!--createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
@@ -860,7 +866,7 @@
 							createDeskChairManBoxStood(0 * meter, 0, -38.5 * meter, (-Math.PI / 2), '0_bookingInDesk', addNewsDeskChairManBoxStood);
 							addBigText("Goods Check In", -2 * meter, 3 * meter, -39.5 * meter, 0);
 							addBigText("Driver leaving for collection", 6 * meter, 3 * meter, -39.5 * meter, 0);
-							addBigText("Deliveries", 16* meter, 3 * meter, -39.5 * meter, 0);
+							addBigText("Deliveries", 16 * meter, 3 * meter, -39.5 * meter, 0);
 
 
 							// pallets in waiting areas
@@ -906,7 +912,7 @@
 							createBlueShelving(-31.5 * meter, 0, -12 * meter, (Math.PI), '0_blueshelf20', addNewBlueShelving);
 							createBlueShelving(-31.5 * meter, 0, -10 * meter, (Math.PI), '0_blueshelf21', addNewBlueShelving);
 
-							addBigText("Processing", -30.9* meter, 3.5 * meter, -3.93 * meter, (Math.PI / 2));
+							addBigText("Processing", -30.9 * meter, 3.5 * meter, -3.93 * meter, (Math.PI / 2));
 							addBigText("Data Erasure", -28 * meter, 2.5 * meter, -3 * meter, (-Math.PI / 2));
 							//addBigText("Main Warehouse", -22 * meter, 2 * meter, -2.74 * meter, (-Math.PI / 2));
 
@@ -930,10 +936,10 @@
 							//van in bay 2
 
 							createvanunload(15 * meter, 0, -25 * meter, (Math.PI / 2), '0_vanBay2', addNewvanunload);
-							addBigText("Delivery", 14 * meter, 2* meter, -25 * meter, (-Math.PI / 2)); // booking in desk
+							addBigText("Delivery", 14 * meter, 2 * meter, -25 * meter, (-Math.PI / 2)); // booking in desk
 
 							createvandepart(6 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_vanBay3', addNewvandepart);
-							addBigText("Collecting", 5* meter, 2 * meter, -31 * meter, (-Math.PI / 2)); // van
+							addBigText("Collecting", 5 * meter, 2 * meter, -31 * meter, (-Math.PI / 2)); // van
 
 							createcourier(15 * meter, 0, -35 * meter, (Math.PI / 2), '0_courier2', addNewcourier);
 							addBigText("Courier", 14.2 * meter, 2 * meter, -34 * meter, (-Math.PI / 2)); // booking in desk
@@ -1031,9 +1037,12 @@
 			var limitXMax = factoryLength;
 			var limitXMin = -factoryLength;
 			setGodControls(limitZMax, limitZMin, limitXMax, limitXMin);
+			setMarioControls(limitZMax, limitZMin, limitXMax, limitXMin, objects);
+
+			var route = false;
+			loadAllRoutes();
+
 			function animate() {
-
-
 
 				requestAnimationFrame(animate);
 
@@ -1042,30 +1051,173 @@
 					if (god) {
 						var _newPositions = godControls(controls.getObject().position.x, controls.getObject().position.z, controls.getObject().position.y, moveForward, moveBackward, moveLeft, moveRight);
 
-						/*if (_newPositions.translate)
-						{
-							controls.getObject().translateX(_newPositions.translateX);
-			        controls.getObject().translateY(_newPositions.translateY);
-			        controls.getObject().translateZ(_newPositions.translateZ);
-						}
-						else {
-							if (_newPositions.X != "") controls.getObject().position.x = _newPositions.X;
-							if (_newPositions.Y != "") controls.getObject().position.y = _newPositions.Y;
-							if (_newPositions.Z != "") controls.getObject().position.z = _newPositions.Z;
-						}
-						*/
+					} else {
+
+						var _newPositions = marioControls(controls, moveForward, moveBackward, moveLeft, moveRight);
+					}
+					if (_newPositions.X != "") controls.getObject().position.x = _newPositions.X;
+					if (_newPositions.Y != "") controls.getObject().position.y = _newPositions.Y;
+					if (_newPositions.Z != "") controls.getObject().position.z = _newPositions.Z;
+					if (_newPositions.translateX != "") controls.getObject().translateX(_newPositions.translateX);
+					if (_newPositions.translateY != "") controls.getObject().translateY(_newPositions.translateY);
+					if (_newPositions.translateZ != "") controls.getObject().translateZ(_newPositions.translateZ);
+					console.log(_newPositions);
+				}
+				if (route) {
+					var _newPositions = moveRoute('routeGetItems.json', controls.getObject().position.x, controls.getObject().position.y, controls.getObject().position.z);
+					console.log(_newPositions);
+					if (_newPositions.complete) {
+						route = false;
+					} else {
 						if (_newPositions.X != "") controls.getObject().position.x = _newPositions.X;
 						if (_newPositions.Y != "") controls.getObject().position.y = _newPositions.Y;
 						if (_newPositions.Z != "") controls.getObject().position.z = _newPositions.Z;
 						if (_newPositions.translateX != "") controls.getObject().translateX(_newPositions.translateX);
 						if (_newPositions.translateY != "") controls.getObject().translateY(_newPositions.translateY);
 						if (_newPositions.translateZ != "") controls.getObject().translateZ(_newPositions.translateZ);
-
-					} else {
-						marioControls(limitZMax, limitZMin, limitXMax, limitXMin);
 					}
 				}
 				renderer.render(scene, camera);
+			}
+
+			function processPosition(move, _nx, _ny, _nz, timeMs, callback) {
+				controlsEnabled = false;
+				if (!move) {
+					//Directly go to position
+					goToPosition(_nx, _ny, _nz);
+				} else {
+					//Move slowly to postion
+					moveToPosition(_nx, _ny, _nz, timeMs, callback);
+				}
+			}
+
+			//DISTANCE IN PIXELS
+			function moveToPosition(_nx, _ny, _nz, timeMs, callback) {
+
+
+				var _totalTimeMs = parseFloat(timeMs);
+
+				//every '_interval' the character should move
+				var _interval = 50;
+
+				//speed
+				var _speedMeters = 2;
+				//pixels per milliseconds, 25 pixels = 1m
+				var _speed = (2 * 25) / 1000;
+
+				//New positions
+				var _newX = _nx;
+				var _newY = _ny;
+				var _newZ = _nz;
+				//Existing positions
+				var _existX = controls.getObject().position.x;
+				var _existY = controls.getObject().position.y;
+				var _existZ = controls.getObject().position.z;
+				//Is the position a change?
+				var xChange = true;
+				var yChange = true;
+				var zChange = true;
+
+				//Distance in pixels (converted before this function)
+				var _distanceX = getTDistance(_newX, _existX);
+				var _distanceY = getTDistance(_newY, _existY);
+				var _distanceZ = getTDistance(_newZ, _existZ);
+
+				//Time to travel @ _speed
+				var _miliSOfMovmentX = Math.abs(_distanceX / _speed);
+				var _miliSOfMovmentY = Math.abs(_distanceY / _speed);
+				var _miliSOfMovmentZ = Math.abs(_distanceZ / _speed);
+
+				//Number of steps (miliseconds / miliseconds)
+				var _totalStepsX = parseFloat(_miliSOfMovmentX / _interval);
+				var _totalStepsY = parseFloat(_miliSOfMovmentY / _interval);
+				var _totalStepsZ = parseFloat(_miliSOfMovmentZ / _interval);
+
+				var _stepX = parseFloat(_distanceX / _totalStepsX);
+				var _stepY = parseFloat(_distanceY / _totalStepsY);
+				var _stepZ = parseFloat(_distanceZ / _totalStepsZ);
+
+				console.log(getTDistance(_newX, _existX) + '/' + _totalTimeMs + ' / ' + _interval);
+				var startTime = new Date().getTime();
+				var count = 0;
+				var xStop = false;
+				var yStop = false;
+				var zStop = false;
+
+				var _stepCountX = 0;
+				var _stepCountY = 0;
+				var _stepCountZ = 0;
+				console.log('x:' + _totalStepsX + ' y: ' + _totalStepsY + ' z: ' + _totalStepsZ);
+				console.log('xstep:' + _stepX + ' ystep: ' + _stepY + ' zstep: ' + _stepZ);
+				//this function fill fire every '_interval' ms
+
+				var timeXStopMoving = new Date().getTime() + _miliSOfMovmentX;
+				var timeYStopMoving = new Date().getTime() + _miliSOfMovmentY;
+				var timeZStopMoving = new Date().getTime() + _miliSOfMovmentZ;
+
+				var _now = new Date().getTime();
+				var _totalStop = new Date().getTime() + _totalTimeMs;
+
+
+				var interval = setInterval(function() {
+
+					var _now = new Date().getTime();
+
+					if (xChange) {
+						if (_stepCountX >= _totalStepsX) {
+							xStop = true;
+						} else {
+							controls.getObject().position.x = parseFloat(controls.getObject().position.x) + parseFloat(_stepX);
+							_stepCountX++;
+						}
+					}
+					if (yChange) {
+						if (_stepCountY >= _totalStepsY) {
+							yStop = true;
+						} else {
+							controls.getObject().position.y = parseFloat(controls.getObject().position.y) + parseFloat(_stepY);
+							_stepCountY++;
+						}
+					}
+					if (zChange) {
+						if (_stepCountZ >= _totalStepsZ) {
+							zStop = true;
+						} else {
+							controls.getObject().position.z = parseFloat(controls.getObject().position.z) + parseFloat(_stepZ);
+							_stepCountZ++
+						}
+					}
+					if (xStop && yStop && zStop) {
+						if (_now > _totalStop) {
+							clearInterval(interval);
+							callback({
+								status: 'complete'
+							});
+							return;
+						}
+					}
+					count++
+
+				}, _interval);
+
+			}
+
+			function goToPosition(_x, _y, _z) {
+
+				controls.getObject().position.y = _y * meter;
+
+				controls.getObject().position.x = _x * meter;
+
+				controls.getObject().position.z = _z * meter;
+				sleep(1500);
+				route = true;
+
+			}
+			function sleep(ms) {
+			    var start = new Date().getTime(),
+			        expire = start + ms;
+			    while (new Date().getTime() < expire) {}
+			    return;
 			}
 
 			function toggleGodText() {
@@ -1166,10 +1318,12 @@
 
 						case 191:
 							//goToPosition(-49.80, marioHeight, -942.95);
-							processJSONRoute("route1.json")
+
+							startRoute("routeGetItems.json", processPosition);
+
 							break;
 							//go to position from sales to shopfloor to lorry to customer press1
-						//case 49:
+							//case 49:
 							//processJSONRoute("routeGetItems.json")
 							//break;
 

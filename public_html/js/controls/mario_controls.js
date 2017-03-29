@@ -1,5 +1,6 @@
 var marioHeight = 1.7 * meter;
 
+
 function changeHeight() {
     var _1stFloorHeight = 4.7 * meter;
     if (marioHeight == _1stFloorHeight) {
@@ -10,11 +11,40 @@ function changeHeight() {
     controls.getObject().position.y = marioHeight;
 }
 
+var prevTime = performance.now();
+var velocity = new THREE.Vector3();
+var raycaster = new THREE.Raycaster();
+var objects = [];
 
-function marioControls(limitZMax, limitZMin, limitXMax, limitXMin) {
+var limitZMax = 0;
+var limitZMin = 0;
+var limitXMax = 0;
+var limitXMin = 0;
 
-    var currentX = controls.getObject().position.x;
-    var currentZ = controls.getObject().position.z;
+function setMarioControls(_limitZMax, _limitZMin, _limitXMax, _limitXMin, _objects) {
+    limitZMax = _limitZMax;
+    limitZMin = _limitZMin;
+    limitXMax = _limitXMax;
+    limitXMin = _limitXMin;
+    objects = _objects;
+}
+
+function marioControls(cntrls, moveForward, moveBackward, moveLeft, moveRight) {
+
+    var currentX = cntrls.getObject().position.x;
+    var currentZ = cntrls.getObject().position.z;
+    var currentY = cntrls.getObject().position.y;
+
+
+    var results = {
+        translate: true,
+        translateX: '',
+        translateY: '',
+        translateZ: '',
+        X: '',
+        Y: '',
+        Z: '',
+    }
 
     /*raycaster.ray.origin.copy(controls.getObject().position);
     raycaster.ray.origin.y -= 20 * meter;
@@ -22,9 +52,9 @@ function marioControls(limitZMax, limitZMin, limitXMax, limitXMin) {
     var intersections = raycaster.intersectObjects(objects);*/
 
 
-    raycaster.ray.origin.copy(controls.getObject().position);
+    raycaster.ray.origin.copy(cntrls.getObject().position);
 
-    var dir = controls.getDirection(new THREE.Vector3(0, 0, 0)).clone();
+    var dir = cntrls.getDirection(new THREE.Vector3(0, 0, 0)).clone();
 
     raycaster.ray.direction.copy(dir);
 
@@ -38,8 +68,8 @@ function marioControls(limitZMax, limitZMin, limitXMax, limitXMin) {
             //console.log('OBJECT! : ' + intersections[i].distance);
             if (intersections[i].distance < 25) {
                 collision = true;
-                controls.getObject().position.x = (Math.sign(dir.x) * -5) + controls.getObject().position.x;
-                controls.getObject().position.z = (Math.sign(dir.z) * -5) + controls.getObject().position.z;
+                results.X = (Math.sign(dir.x) * -5) + currentX;
+                results.Z = (Math.sign(dir.z) * -5) + currentZ;
                 //intersections[i].object.material.color.set(0xff0000);
             }
         }
@@ -57,8 +87,8 @@ function marioControls(limitZMax, limitZMin, limitXMax, limitXMin) {
             //console.log('OBJECT! : ' + intersections[i].distance);
             if (intersections[i].distance < 5) {
                 collision = true;
-                controls.getObject().position.x = (Math.sign(dir.x) * -5) + controls.getObject().position.x;
-                controls.getObject().position.z = (Math.sign(dir.z) * -5) + controls.getObject().position.z;
+                results.X = (Math.sign(dir.x) * -5) + currentX;
+                results.Z = (Math.sign(dir.z) * -5) + currentZ;
                 //intersections[i].object.material.color.set(0xff0000);
             }
         }
@@ -76,8 +106,8 @@ function marioControls(limitZMax, limitZMin, limitXMax, limitXMin) {
             //console.log('OBJECT! : ' + intersections[i].distance);
             if (intersections[i].distance < 5) {
                 collision = true;
-                controls.getObject().position.x = (Math.sign(dir.x) * -5) + controls.getObject().position.x;
-                controls.getObject().position.z = (Math.sign(dir.z) * -5) + controls.getObject().position.z;
+                results.X = (Math.sign(dir.x) * -5) + currentX;
+                results.Z = (Math.sign(dir.z) * -5) + currentZ;
                 //intersections[i].object.material.color.set(0xff0000);
             }
         }
@@ -110,32 +140,32 @@ function marioControls(limitZMax, limitZMin, limitXMax, limitXMin) {
 
     if (currentX > limitXMax) {
         velocity.x = Math.max(0, velocity.x);
-        controls.getObject().position.x = limitXMax;
+        results.X = limitXMax;
     }
     if (currentX < limitXMin) {
         velocity.x = Math.min(0, velocity.x);
-        controls.getObject().position.x = limitXMin;
+        results.X = limitXMin;
     }
     if (currentZ > limitZMax) {
         velocity.z = Math.max(0, velocity.z);
-        controls.getObject().position.z = limitZMax;
+        results.Z = limitZMax;
     }
     if (currentZ < limitZMin) {
         velocity.z = Math.min(0, velocity.z);
-        controls.getObject().position.z = limitZMin;
+        results.Z = limitZMin;
     }
 
-    controls.getObject().translateX(velocity.x * delta);
-    controls.getObject().translateY(velocity.y * delta);
-    controls.getObject().translateZ(velocity.z * delta);
+    results.translateX = velocity.x * delta;
+    results.translateY = velocity.y * delta;
+    results.translateZ = velocity.z * delta;
 
-    if (controls.getObject().position.y < (marioHeight)) {
+    if (currentY < (marioHeight)) {
 
         velocity.y = 0;
-        controls.getObject().position.y = (marioHeight);
-
-        canJump = true;
+        results.translate = false;
+        results.Y = marioHeight;
     }
 
     prevTime = time;
+    return results;
 };

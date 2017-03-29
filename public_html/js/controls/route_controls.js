@@ -1,5 +1,4 @@
-function processJSONRoute(_fileName) {
-    controlsEnabled = false;
+function processJSONRoute(_fileName, movementCallback) {
     var json = (function() {
         var json = null;
         $.ajax({
@@ -11,7 +10,7 @@ function processJSONRoute(_fileName) {
                 var instructions = data;
 
                 //go to start position
-                goToPosition(instructions.route.start.x, instructions.route.start.y, instructions.route.start.z);
+                movementCallback(false, instructions.route.start.x, instructions.route.start.y, instructions.route.start.z, '', '');
 
                 sleep(1500);
 
@@ -23,10 +22,10 @@ function processJSONRoute(_fileName) {
                         var _y = instructions.route.path[i].movement.y * meter;
                         var _z = instructions.route.path[i].movement.z * meter;
                         var _t = instructions.route.path[i].movement.t;
-                        moveToPosition(_x, _y, _z, _t, function(result) {
-                            console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
-                            console.log('y: ' + controls.getObject().position.y + '-- m: ' + controls.getObject().position.y / meter);
-                            console.log('z: ' + controls.getObject().position.z + '-- m: ' + controls.getObject().position.z / meter);
+                        movementCallback(true, _x, _y, _z, _t, function(result) {
+                            //console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
+                            //  console.log('y: ' + controls.getObject().position.y + '-- m: ' + controls.getObject().position.y / meter);
+                            //  console.log('z: ' + controls.getObject().position.z + '-- m: ' + controls.getObject().position.z / meter);
                             // log the iteration
                             console.log(loop.iteration());
 
@@ -36,9 +35,9 @@ function processJSONRoute(_fileName) {
                     },
                     function() {
                         console.log('cycle ended');
-                        console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
-                        console.log('y: ' + controls.getObject().position.y + '-- m: ' + controls.getObject().position.y / meter);
-                        console.log('z: ' + controls.getObject().position.z + '-- m: ' + controls.getObject().position.z / meter);
+                        //console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
+                        //console.log('y: ' + controls.getObject().position.y + '-- m: ' + controls.getObject().position.y / meter);
+                        //console.log('z: ' + controls.getObject().position.z + '-- m: ' + controls.getObject().position.z / meter);
                         // log the iteration
                     }
                 );
@@ -49,6 +48,175 @@ function processJSONRoute(_fileName) {
 
 
     })();
+
+}
+
+var _allRoutes = [];
+
+function loadAllRoutes() {
+
+    _fileName = 'routeGetItems.json';
+    var json = (function() {
+        var json = null;
+        $.ajax({
+            'async': true,
+            'global': false,
+            'url': "json-routes/" + _fileName,
+            'dataType': "json",
+            'success': function(data) {
+
+                var _thisRoute = {
+                    name: _fileName,
+                    route: data,
+                    startTime: ''
+                };
+                _allRoutes.push(_thisRoute);
+
+            }
+        });
+
+
+    })();
+}
+
+function startRoute(_route, movementCallback) {
+
+    var _thisRoute;
+    for (var i = 0; i < _allRoutes.length; i++) {
+        if (_allRoutes[i].name === _route) {
+            _thisRoute = _allRoutes[i];
+            _allRoutes[i].startTime = new Date().getTime();
+        }
+    }
+
+    //go to start position
+    movementCallback(false, _thisRoute.route.route.start.x, _thisRoute.route.route.start.y, _thisRoute.route.route.start.z, '', '');
+
+
+}
+
+
+var prevTime = performance.now();
+
+
+function moveRoute(_route, x, y, z) {
+
+  var velocity = new THREE.Vector3();
+    var timeWindowS = 0;
+    var timeWindowE = 0;
+
+
+
+    var currentX = x;
+    var currentY = y;
+    var currentZ = z;
+
+    var results = {
+        complete: false,
+        translate: true,
+        translateX: '',
+        translateY: '',
+        translateZ: '',
+        X: '',
+        Y: '',
+        Z: '',
+    }
+
+    var timeNow = new Date().getTime();
+
+    var _thisRoute;
+    var _routeStart;
+
+    for (var i = 0; i < _allRoutes.length; i++) {
+        if (_allRoutes[i].name === _route) {
+            _routeStart = _allRoutes[i].startTime;
+            _thisRoute = _allRoutes[i].route;
+        }
+    }
+
+    var timeElapsed = timeNow - _routeStart;
+
+
+    var foundWindow = false;
+
+
+    for (var i = 0; i < _thisRoute.route.path.length; i++) {
+
+        timeWindowS = timeWindowE;
+        timeWindowE = timeWindowE + parseInt(_thisRoute.route.path[i].movement.t);
+        console.log('Elapsed Time:' + timeElapsed);
+        console.log('Window:' + timeWindowS + ' - ' + timeWindowE);
+
+        if (timeElapsed < timeWindowE && timeElapsed > timeWindowS) {
+            //WE ARE HERE IN THE ROUTE
+            console.log('In Window');
+            foundWindow = true;
+
+            var time = performance.now();
+            var delta = (time - prevTime) / 1000;
+            var moveForward = false;
+            var moveBackward = false;
+            var moveLeft = false;
+            var moveRight = false;
+            var moveUp = false;
+            var moveDown = false;
+
+            console.log('Moving');
+
+            var error = 5;
+
+            if (_thisRoute.route.path[i].movement.x > (currentX + error)) {
+                moveForward = true;
+                console.log('x+             from:' + currentX + ' to: ' + _thisRoute.route.path[i].movement.x);
+            }
+            if (_thisRoute.route.path[i].movement.x < (currentX - error)) {
+                moveBackward = true;
+                console.log('x-             from:' + currentX + ' to: ' + _thisRoute.route.path[i].movement.x);
+            }
+            if (_thisRoute.route.path[i].movement.z > (currentZ + error)) {
+                moveRight = true;
+                console.log('z+             from:' + currentZ + ' to: ' + _thisRoute.route.path[i].movement.z);
+            }
+            if (_thisRoute.route.path[i].movement.z < (currentZ - error)) {
+                moveLeft = true;
+                console.log('z-             from:' + currentZ + ' to: ' + _thisRoute.route.path[i].movement.z);
+            }
+            if (_thisRoute.route.path[i].movement.y > (currentY + error)) {
+                moveUp = true;
+                console.log('y+             from:' + currentY + ' to: ' + _thisRoute.route.path[i].movement.y);
+            }
+            if (_thisRoute.route.path[i].movement.y < (currentY - error)) {
+                moveDown = true;
+                console.log('y-             from:' + currentY + ' to: ' + _thisRoute.route.path[i].movement.y);
+            }
+
+            var _smooth = 1;
+
+            if (moveBackward) results.X = currentX - _smooth;
+            if (moveForward) results.X = currentX + _smooth;
+            if (moveLeft) results.Z = currentZ - _smooth;
+            if (moveRight)results.Z = currentZ + _smooth;
+            if (moveUp) results.Y = currentY + _smooth;
+            if (moveDown) results.Y = currentY - _smooth;
+            break;
+        }
+
+
+
+    }
+    if (foundWindow) {
+        //results.X = currentX + (velocity.x * 10);
+        //results.Y = currentY + (velocity.y * 10);
+        //results.Z = currentZ + (velocity.z * 10);
+        //results.translateX = velocity.x * delta;
+        //results.translateY = velocity.y * delta;
+      //  results.translateZ = velocity.z * delta;
+    }
+    else {
+      results.complete = true;
+    }
+    prevTime = time;
+    return results;
 
 }
 
@@ -103,129 +271,4 @@ function asyncLoop(iterations, func, callback) {
     };
     loop.next();
     return loop;
-}
-
-
-
-//DISTANCE IN PIXELS
-function moveToPosition(_nx, _ny, _nz, timeMs, callback) {
-
-
-    var _totalTimeMs = parseFloat(timeMs);
-
-    //every '_interval' the character should move
-    var _interval = 50;
-
-    //speed
-    var _speedMeters = 2;
-    //pixels per milliseconds, 25 pixels = 1m
-    var _speed = (2 * 25) / 1000;
-
-    //New positions
-    var _newX = _nx;
-    var _newY = _ny;
-    var _newZ = _nz;
-    //Existing positions
-    var _existX = controls.getObject().position.x;
-    var _existY = controls.getObject().position.y;
-    var _existZ = controls.getObject().position.z;
-    //Is the position a change?
-    var xChange = true;
-    var yChange = true;
-    var zChange = true;
-
-    //Distance in pixels (converted before this function)
-    var _distanceX = getTDistance(_newX, _existX);
-    var _distanceY = getTDistance(_newY, _existY);
-    var _distanceZ = getTDistance(_newZ, _existZ);
-
-    //Time to travel @ _speed
-    var _miliSOfMovmentX = Math.abs(_distanceX / _speed);
-    var _miliSOfMovmentY = Math.abs(_distanceY / _speed);
-    var _miliSOfMovmentZ = Math.abs(_distanceZ / _speed);
-
-    //Number of steps (miliseconds / miliseconds)
-    var _totalStepsX = parseFloat(_miliSOfMovmentX / _interval);
-    var _totalStepsY = parseFloat(_miliSOfMovmentY / _interval);
-    var _totalStepsZ = parseFloat(_miliSOfMovmentZ / _interval);
-
-    var _stepX = parseFloat(_distanceX / _totalStepsX);
-    var _stepY = parseFloat(_distanceY / _totalStepsY);
-    var _stepZ = parseFloat(_distanceZ / _totalStepsZ);
-
-    console.log(getTDistance(_newX, _existX) + '/' + _totalTimeMs + ' / ' + _interval);
-    var startTime = new Date().getTime();
-    var count = 0;
-    var xStop = false;
-    var yStop = false;
-    var zStop = false;
-
-    var _stepCountX = 0;
-    var _stepCountY = 0;
-    var _stepCountZ = 0;
-    console.log('x:' + _totalStepsX + ' y: ' + _totalStepsY + ' z: ' + _totalStepsZ);
-    console.log('xstep:' + _stepX + ' ystep: ' + _stepY + ' zstep: ' + _stepZ);
-    //this function fill fire every '_interval' ms
-
-    var timeXStopMoving = new Date().getTime() + _miliSOfMovmentX;
-    var timeYStopMoving = new Date().getTime() + _miliSOfMovmentY;
-    var timeZStopMoving = new Date().getTime() + _miliSOfMovmentZ;
-
-    var _now = new Date().getTime();
-    var _totalStop = new Date().getTime() + _totalTimeMs;
-
-
-    var interval = setInterval(function() {
-
-        var _now = new Date().getTime();
-
-        if (xChange) {
-            if (_stepCountX >= _totalStepsX) {
-                xStop = true;
-            } else {
-                controls.getObject().position.x = parseFloat(controls.getObject().position.x) + parseFloat(_stepX);
-                _stepCountX++;
-            }
-        }
-        if (yChange) {
-            if (_stepCountY >= _totalStepsY) {
-                yStop = true;
-            } else {
-                controls.getObject().position.y = parseFloat(controls.getObject().position.y) + parseFloat(_stepY);
-                _stepCountY++;
-            }
-        }
-        if (zChange) {
-            if (_stepCountZ >= _totalStepsZ) {
-                zStop = true;
-            } else {
-                controls.getObject().position.z = parseFloat(controls.getObject().position.z) + parseFloat(_stepZ);
-                _stepCountZ++
-            }
-        }
-        if (xStop && yStop && zStop) {
-            if (_now > _totalStop) {
-                clearInterval(interval);
-                callback({
-                    status: 'complete'
-                });
-                return;
-            }
-        }
-        count++
-
-    }, _interval);
-
-}
-
-function goToPosition(_x, _y, _z) {
-
-  controls.getObject().position.y = _y * meter;
-
-  controls.getObject().position.x = _x * meter;
-
-  controls.getObject().position.z = _z * meter;
-
-  animate();
-
 }
