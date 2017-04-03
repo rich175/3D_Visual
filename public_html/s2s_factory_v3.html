@@ -1061,23 +1061,42 @@
 					if (_newPositions.translateX != "") controls.getObject().translateX(_newPositions.translateX);
 					if (_newPositions.translateY != "") controls.getObject().translateY(_newPositions.translateY);
 					if (_newPositions.translateZ != "") controls.getObject().translateZ(_newPositions.translateZ);
-					console.log(_newPositions);
+					//console.log(_newPositions);
 				}
 				if (route) {
-					var _newPositions = moveRoute('routeGetItems.json', controls.getObject().position.x, controls.getObject().position.y, controls.getObject().position.z);
+					var _newPositions = moveRoute('routeGetItems.json', (controls.getObject().position.x / meter), (controls.getObject().position.y / meter), (controls.getObject().position.z / meter));
 					console.log(_newPositions);
 					if (_newPositions.complete) {
 						route = false;
 					} else {
-						if (_newPositions.X != "") controls.getObject().position.x = _newPositions.X;
-						if (_newPositions.Y != "") controls.getObject().position.y = _newPositions.Y;
-						if (_newPositions.Z != "") controls.getObject().position.z = _newPositions.Z;
-						if (_newPositions.translateX != "") controls.getObject().translateX(_newPositions.translateX);
-						if (_newPositions.translateY != "") controls.getObject().translateY(_newPositions.translateY);
-						if (_newPositions.translateZ != "") controls.getObject().translateZ(_newPositions.translateZ);
+						if (isNumeric(_newPositions.X)) controls.getObject().position.x = _newPositions.X * meter;
+
+						if (isNumeric(_newPositions.Y)) controls.getObject().position.y = _newPositions.Y * meter;
+
+						if (isNumeric(_newPositions.Z)) controls.getObject().position.z = _newPositions.Z * meter;
+						
+						if (isNumeric(_newPositions.translateX)) controls.getObject().translateX(_newPositions.translateX * meter);
+						if (isNumeric(_newPositions.translateY)) controls.getObject().translateY(_newPositions.translateY * meter);
+						if (isNumeric(_newPositions.translateZ)) controls.getObject().translateZ(_newPositions.translateZ * meter);
 					}
 				}
 				renderer.render(scene, camera);
+			}
+
+			function isNumeric(_no) {
+				if (_no === '') {
+					return false;
+				} else {
+					var _numeric = false;
+
+					if (isFloat) {
+						_numeric = true;
+					}
+					if (isInteger) {
+						_numeric = true;
+					}
+					return _numeric;
+				}
 			}
 
 			function processPosition(move, _nx, _ny, _nz, timeMs, callback) {
@@ -1213,11 +1232,20 @@
 				route = true;
 
 			}
+
+			function isFloat(n) {
+				return n === +n && n !== (n | 0);
+			}
+
+			function isInteger(n) {
+				return n === +n && n === (n | 0);
+			}
+
 			function sleep(ms) {
-			    var start = new Date().getTime(),
-			        expire = start + ms;
-			    while (new Date().getTime() < expire) {}
-			    return;
+				var start = new Date().getTime(),
+					expire = start + ms;
+				while (new Date().getTime() < expire) {}
+				return;
 			}
 
 			function toggleGodText() {
