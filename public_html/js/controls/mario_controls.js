@@ -171,10 +171,11 @@ function marioControls(cntrls, moveForward, moveBackward, moveLeft, moveRight) {
     results.translateY = velocity.y * delta;
     results.translateZ = velocity.z * delta;
 
-    if (currentY < (marioHeight)) {
+    if (currentY <= (marioHeight)) {
 
         velocity.y = 0;
         results.translate = false;
+        results.translateY = 0;
         results.Y = marioHeight;
     }
 
