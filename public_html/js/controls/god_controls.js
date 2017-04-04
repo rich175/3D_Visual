@@ -42,16 +42,19 @@ function godControls(_currentX, _currentZ, _currentY, moveForward, moveBackward,
     var time = performance.now();
     var delta = (time - prevTime) / 1000;
 
-    velocity.x -= velocity.x * 10.0 * delta;
-    velocity.z -= velocity.z * 10.0 * delta;
+    velocity.x = 0;
+    velocity.z = 0;
+
+    //velocity.x -= velocity.x * 10.0 * delta;
+    //velocity.z -= velocity.z * 10.0 * delta;
 
     velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+    var _gSpeed = 1000;
+    if (moveForward) velocity.z = -_gSpeed;
+    if (moveBackward) velocity.z = _gSpeed;
 
-    if (moveForward) velocity.z -= 2000.0 * delta;
-    if (moveBackward) velocity.z += 2000.0 * delta;
-
-    if (moveLeft) velocity.x -= 2000.0 * delta;
-    if (moveRight) velocity.x += 2000.0 * delta;
+    if (moveLeft) velocity.x = -_gSpeed;
+    if (moveRight) velocity.x = _gSpeed;
 
     if (currentX > limitXMax) {
         velocity.x = Math.max(0, velocity.x);
