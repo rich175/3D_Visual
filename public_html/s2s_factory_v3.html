@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>S2S 3D representation of processes</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="css/bar3.css">
+
+</head>
+
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+
+	<script src="js/bundle.js"></script>
+	<script src="js/three.js"></script>
+	<script src="js/factoryControls.js"></script>
+	<script src="js/OBJLoader.js"></script>
+	<script src="js/createRooms.js"></script>
+	<script src="js/factory.js"></script>
+	<script src="js/factory_1_floor.js"></script>
+	<script src="js/customer1.js"></script>
+	<script src="js/workstation.js"></script>
+	<script src="js/wip_shelf.js"></script>
+	<script src="js/wip_object.js"></script>
+	<script src="js/person.js"></script>
+	<script src="js/forklift.js"></script>
+	<script src="js/s2s_mqtt.js"></script>
+	<script src="js/toilet.js"></script>
+	<script src="js/lorry.js"></script>
+	<script src="js/shopfloorPerson.js"></script>
+	<script src="js/recyclingBin.js"></script>
+	<script src="js/shelving.js"></script>
+	<script src="js/officeMan.js"></script>
+	<script src="js/OfficeFemale.js"></script>
+	<script src="js/ShopfloorFem.js"></script>
+	<script src="js/shopfloorAltMan.js"></script>
+	<script src="js/sfDesk.js"></script>
+	<script src="js/urinal.js"></script>
+	<script src="js/workstationPC.js"></script>
+	<script src="js/officeDeskPC.js"></script>
+	<script src="js/standingGreySuit.js"></script>
+	<script src="js/sfDeskBeard.js"></script>
+	<script src="js/officedeskOccupied.js"></script>
+	<script src="js/officedeskOccupiedFem.js"></script>
+	<script src="js/vanunload.js"></script>
+	<script src="js/shelvingBox.js"></script>
+	<script src="js/deskwithPallet.js"></script>
+	<script src="js/palletGreyBoxes.js"></script>
+	<script src="js/palletBoxes.js"></script>
+	<script src="js/customerDeskSell.js"></script>
+	<script src="js/sfDeskonPhone.js"></script>
+	<script src="js/vandepart.js"></script>
+	<script src="js/sfdeskprocessing.js"></script>
+	<script src="js/secureStores.js"></script>
+	<script src="js/metalDetect.js"></script>
+	<script src="js/dataErase.js"></script>
+	<script src="js/dePrint.js"></script>
+	<script src="js/sfdeskPacking.js"></script>
+	<script src="js/courier.js"></script>
+	<script src="js/recyclingBinsMore.js"></script>
+
+	<script src="js/controls/god_controls.js"></script>
+	<script src="js/controls/mario_controls.js"></script>
+	<script src="js/controls/route_controls.js"></script>
+
+
+	<div id="container">
+		<div id="blocker">
+			<div id="instructions">
+				<span style="font-size:40px"><br/> Initial loading may take a few moments, </br>click left mouse button to explore. </br>Thank you</span>
+			</div>
+		</div>
+	</div>
+	<!--<div id="container2">
+		<div id="blocker2">
+
+				<span style="font-size:40px"><br/> WORKKKKKKKKKKKKKKK </br>Thank you</span>
+
+		</div>
+	</div>-->
+
+
+	<script>
+		$(document).ready(function() {
+			//your code here
+
+			var x = window;
+
+			var camera, scene, renderer;
+			var geometry, material, mesh;
+			var controls;
+
+			var objects = [];
+
+			var raycaster;
+
+			var blocker = document.getElementById('blocker');
+			var instructions = document.getElementById('instructions');
+
+
+
+			// http://www.html5rocks.com/en/tutorials/pointerlock/intro/
+
+			var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
+
+			if (havePointerLock) {
+
+				var element = document.body;
+
+				var pointerlockchange = function(event) {
+
+					if (document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element) {
+
+						controlsEnabled = true;
+
+
+						controls.enabled = true;
+
+						//blocker.style.display = 'none';
+
+					} else {
+
+						controls.enabled = false;
+
+						//blocker.style.display = '-webkit-box';
+						//blocker.style.display = '-moz-box';
+						//blocker.style.display = 'box';
+
+						//instructions.style.display = '';
+
+					}
+				};
+
+				var pointerlockerror = function(event) {
+
+					//instructions.style.display = '';
+
+				};
+
+				// Hook pointer lock state change events
+				document.addEventListener('pointerlockchange', pointerlockchange, false);
+				document.addEventListener('mozpointerlockchange', pointerlockchange, false);
+				document.addEventListener('webkitpointerlockchange', pointerlockchange, false);
+
+				document.addEventListener('pointerlockerror', pointerlockerror, false);
+				document.addEventListener('mozpointerlockerror', pointerlockerror, false);
+				document.addEventListener('webkitpointerlockerror', pointerlockerror, false);
+
+				instructions.addEventListener('click', function(event) {
+
+					//instructions.style.display = 'none';
+
+					controlsEnabled = false;
+					god = false;
+					route = false;
+
+					// Ask the browser to lock the pointer
+					element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+
+					if (/Firefox/i.test(navigator.userAgent)) {
+
+						var fullscreenchange = function(event) {
+
+							if (document.fullscreenElement === element || document.mozFullscreenElement === element || document.mozFullScreenElement === element) {
+
+								document.removeEventListener('fullscreenchange', fullscreenchange);
+								document.removeEventListener('mozfullscreenchange', fullscreenchange);
+
+								element.requestPointerLock();
+							}
+
+						};
+
+						document.addEventListener('fullscreenchange', fullscreenchange, false);
+						document.addEventListener('mozfullscreenchange', fullscreenchange, false);
+
+						element.requestFullscreen = element.requestFullscreen || element.mozRequestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen;
+
+						element.requestFullscreen();
+
+					} else {
+
+						element.requestPointerLock();
+
+					}
+
+				}, false);
+
+			} else {
+
+				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
+
+			}
+
+			init();
+
+
+
+
+
+
+			/*List of all workstations as a custom object, see workstation.js*/
+			var factoryWorkstations = [];
+			var factoryWorkstationPCs = [];
+			var officedeskwithPCs = [];
+			var CustomerDesks = [];
+			var dataErases = [];
+			var sfdeskPackings = [];
+			var recyclingBinsMore = [];
+
+			/*List of all Persons as a custom objects*/
+			var factoryPersons = [];
+			var shopfloorPersons = [];
+			var OfficeMen = [];
+			var OfficeFems = [];
+			var ShopfloorFems = [];
+			var shopfloorAltMen = [];
+			var sfdeskprocessings = [];
+			var greySuits = [];
+			var sfdeskonPhones = [];
+			/*List of all Forklifts as a custom object, see forklift.js*/
+			var factoryForklifts = [];
+			var vandeparts = [];
+			var vanunloads = [];
+			var factoryBlueShelving = [];
+
+			var factorysecureStores = [];
+			var couriers = [];
+
+			var factoryrecyclingBins = [];
+			/*List of all cubes as THREE.Mesh*/
+			var factoryWIP = [];
+			/*List of all toilets as custom object, see toilet.js*/
+			var factorytoilets = [];
+			/*List of all shelves as a custom object, see wip_shelf.js*/
+			var factoryShelving = [];
+			//lists all lorries in factory as custom object, see lorry.js
+			var factoryLorries = [];
+
+			function addNewStation(ws) {
+				scene.add(ws.object);
+				objects.push(ws.object);
+				factoryWorkstations.push(ws);
+				console.log('Workstation: -' + ws.id + '-, has been added');
+
+				var newShelf = createShelf(ws, ws.id);
+				scene.add(newShelf.three_obj);
+				factoryShelving.push(newShelf);
+			}
+
+			function addNewStationPC(wsPC) {
+				scene.add(wsPC.object);
+				objects.push(wsPC.object);
+				factoryWorkstations.push(wsPC);
+				console.log('WorkstationPC: -' + wsPC.id + '-, has been added');
+
+				var newShelfPC = createShelf(wsPC, wsPC.id);
+				scene.add(newShelf.three_obj);
+				factoryShelving.push(newShelfPC);
+			}
+
+			function addNewsfdeskBeard(sfDB) {
+				scene.add(sfDB.object);
+				objects.push(sfDB.object);
+				factoryWorkstations.push(sfDB);
+				console.log('Workstation: -' + sfDB.id + '-, has been added');
+
+				var newShelf = createShelf(sfDB, sfDB.id);
+				scene.add(newShelf.three_obj);
+				factoryShelving.push(newShelf);
+			}
+
+			//NOTE KvL person blender model credits not required!
+			function addNewsfdesk(sfD) {
+				scene.add(sfD.object);
+				objects.push(sfD.object);
+
+			}
+			//NOTE KvL person blender model credits not required!
+			function addNewrecyclingBinsMore(rsBm) {
+				scene.add(rsBm.object);
+				objects.push(rsBm.object);
+
+			}
+			//NOTE KvL person blender model credits not required!
+			function addNewcourier(cour) {
+				scene.add(cour.object);
+				objects.push(cour.object);
+
+			}
+			//NOTE KvL person blender model credits not required!
+			function addNewdataErase(de) {
+				scene.add(de.object);
+				objects.push(de.object);
+
+			}
+			//NOTE KvL person blender model credits not required!
+			function addNewsfdeskprocessing(sfDp) {
+				scene.add(sfDp.object);
+				objects.push(sfDp.object);
+
+			}
+			//NOTE KvL person blender model credits not required!
+			function addNewvandepart(vanD) {
+				scene.add(vanD.object);
+				objects.push(vanD.object);
+
+			}
+			//NOTE KvL person blender model credits not required uses deskwithPallet.JS!
+			function addNewsDeskChairManBoxStood(ManBox) {
+				scene.add(ManBox.object);
+				objects.push(ManBox.object);
+
+			}
+			//NOTE KvL person blender model credits not required uses sfDeskonPhone.js!
+			function addNewssfDeskonPhone(sfPhone) {
+				scene.add(sfPhone.object);
+				objects.push(sfPhone.object);
+
+			}
+			//NOTE desk json figure  blender  KvL
+			function addNewOfficeDeskPC(oDpc) {
+				scene.add(oDpc.object);
+				objects.push(oDpc.object);
+				//factoryPerson.push(ps);
+				//console.log('Person: - ' + person.id + '-, has been added');
+
+			}
+			//NOTE desk json figure  blender  KvL
+			function addNewCustomerDesk(cDesk) {
+				scene.add(cDesk.object);
+				objects.push(cDesk.object);
+
+			}
+			//NOTE desk json figure  blender  KvL
+			function addNewPalletBrown(PalB) {
+				scene.add(PalB.object);
+				objects.push(PalB.object);
+				//factoryPerson.push(ps);
+				//console.log('Person: - ' + person.id + '-, has been added');
+
+			}
+			//NOTE desk json figure  blender  KvL
+			function addNewMetalD(MetD) {
+				scene.add(MetD.object);
+				objects.push(MetD.object);
+				//factoryPerson.push(ps);
+				//console.log('Person: - ' + person.id + '-, has been added');
+
+			}
+			//NOTE desk json figure  blender  KvL
+			function addNewPalletGrey(PalG) {
+				scene.add(PalG.object);
+				objects.push(PalG.object);
+				//factoryPerson.push(ps);
+				//console.log('Person: - ' + person.id + '-, has been added');
+
+			}
+
+			function addNewofficedeskOccupied(oDOc) {
+				scene.add(oDOc.object);
+				objects.push(oDOc.object);
+				//factoryPerson.push(ps);
+				//console.log('oDOc: - ' + oDOc.id + '-, has been added');
+
+			}
+
+			function addNewofficedeskOccupiedFem(oDOcF) {
+				scene.add(oDOcF.object);
+				objects.push(oDOcF.object);
+				//factoryPerson.push(ps);
+				//console.log('oDOc: - ' + oDOc.id + '-, has been added');
+
+			}
+			//NOTE human json figure from blender and MakeHuman.org. KvL
+			function addNewOfficeMan(oMan) {
+				scene.add(oMan.object);
+				objects.push(oMan.object);
+				//factoryPerson.push(ps);
+				//console.log('Person: - ' + person.id + '-, has been added');
+
+			}
+			//NOTE human json figure from blender and MakeHuman.org. KvL
+			function addNewShopfloorFem(SfFem) {
+				scene.add(SfFem.object);
+				objects.push(SfFem.object);
+			}
+			//NOTE KvL toilet json from blender credits not required
+			function addNewToilet(loo) {
+				scene.add(loo.object);
+				objects.push(loo.object);
+				//factorytoilets.push(ps);
+				//console.log('toilet: - ' + toilet.id + '-, has been added');
+
+			}
+
+			//NOTE human json figure from blender and MakeHuman.org. KvL
+			function addNewOfficeFem(oFem) {
+				scene.add(oFem.object);
+				objects.push(oFem.object);
+				//factoryPerson.push(ps);
+				//console.log('Person: - ' + person.id + '-, has been added');
+
+			}
+
+			//NOTE human json figure from blender and MakeHuman.org. KvL
+			function addNewStandingGreySuit(GreyS) {
+				scene.add(GreyS.object);
+				objects.push(GreyS.object);
+				//factoryPerson.push(ps);
+				//console.log('Person: - ' + person.id + '-, has been added');
+
+			}
+			//NOTE KvL person blender model credits not required!
+			function addNewShopFloorPerson(sfp) {
+				scene.add(sfp.object);
+				objects.push(sfp.object);
+
+			}
+			//NOTE KvL forklift blender model credits not required!
+			function addNewForklift(fk) {
+				scene.add(fk.object);
+				objects.push(fk.object);
+				//factoryForklifts.push(ps);
+				//console.log('Forklift: - ' + forklift.id + '-, has been added');
+			}
+
+
+			//NOTE KvL  blender model credits not required!
+			function addNewBlueShelving(blueS) {
+				scene.add(blueS.object);
+				objects.push(blueS.object);
+
+			}
+			//NOTE KvL  blender model credits not required!
+			function addNewsfdeskPacking(sfdP) {
+				scene.add(sfdP.object);
+				objects.push(sfdP.object);
+
+			}
+			//NOTE KvL  blender model credits not required!
+			function addNewsecureStores(secure) {
+				scene.add(secure.object);
+				objects.push(secure.object);
+
+			}
+			//NOTE KvL  blender model credits not required!
+			function addNewsfdePrint(print) {
+				scene.add(print.object);
+				objects.push(print.object);
+
+			}
+
+			function addNewBlueShelvingBox(blueSBx) {
+				scene.add(blueSBx.object);
+				objects.push(blueSBx.object);
+
+			}
+			//NOTE KvL recycling bin blender model credits not required!
+			function addNewrecycleBin(bin) {
+				scene.add(bin.object);
+				objects.push(bin.object);
+
+			}
+			//NOTE KvL toilet json from blender credits not required
+			function addNewToilet(loo) {
+				scene.add(loo.object);
+				objects.push(loo.object);
+				//factorytoilets.push(ps);
+				//console.log('toilet: - ' + toilet.id + '-, has been added');
+
+			}
+			//NOTE KvL toilet json from blender credits not required
+			function addNewurinal(Urin) {
+				scene.add(Urin.object);
+				objects.push(Urin.object);
+				//factorytoilets.push(ps);
+				//console.log('toilet: - ' + toilet.id + '-, has been added');
+
+			}
+			//NOTE KvL toilet json from blender credits not required
+			function addNewshopfloorAltMan(sfAltMan) {
+				scene.add(sfAltMan.object);
+				objects.push(sfAltMan.object);
+				//factorytoilets.push(ps);
+				//console.log('toilet: - ' + toilet.id + '-, has been added');
+
+			}
+			//NOTE KvL lorry blender model credits not required!
+			function addNewLorry(lry) {
+				scene.add(lry.object);
+				objects.push(lry.object);
+				//factoryLorries.push(ps);
+				//console.log('Lorry: - ' + Lorry.id + '-, has been added');
+			}
+
+			function addNewvanunload(vanUn) {
+				scene.add(vanUn.object);
+				objects.push(vanUn.object);
+				//factoryLorries.push(ps);
+				//console.log('Lorry: - ' + Lorry.id + '-, has been added');
+			}
+
+			function addNewWIP(id) {
+				var _newBox = createNewWIPObj(id);
+				factoryWIP.push(_newBox);
+				scene.add(_newBox.three_obj);
+				scene.add(_newBox.text);
+				console.log('New Cube: -' + id + '-, has been added');
+			};
+
+			function assignWIPtoWS(cube, ws) {
+
+				moveWIPObj(ws.cube.cube_x, ws.cube.cube_y, ws.cube.cube_z, cube);
+
+			};
+
+			function fakeAddBox() {
+				addNewWIP(factoryWIP.length);
+				var _recentIndex = factoryWIP.length - 1;
+
+				var _randomWS = Math.floor(Math.random() * ((factoryWorkstations.length - 1) + 1));
+
+				assignWIPtoWS(factoryWIP[_recentIndex], factoryWorkstations[_randomWS]);
+				//addText('yo Kate', factoryWIP[_recentIndex].position.x, factoryWIP[_recentIndex].position.y, factoryWIP[_recentIndex].position.z);
+			};
+
+			function fakeMovedBox(boxID, wsID, shelfSlotID) {
+
+				var cubeToMove;
+				var shelfToGoTo;
+
+				for (var i = 0; i < factoryWIP.length; i++) {
+					if (factoryWIP[i].id == boxID) {
+						cubeToMove = factoryWIP[i];
+					}
+				};
+
+				for (var i = 0; i < factoryShelving.length; i++) {
+					if (factoryShelving[i].assoicatedWS == wsID) {
+						shelfToGoTo = factoryShelving[i];
+					}
+				};
+
+				var sSlotx;
+				var sSloty;
+				var sSlotz;
+
+				for (var i = 0; i < shelfToGoTo.slots.length; i++) {
+					if (shelfToGoTo.slots[i].id == shelfSlotID) {
+						sSlotx = shelfToGoTo.slots[i].centre.x;
+						sSloty = shelfToGoTo.slots[i].centre.y;
+						sSlotz = shelfToGoTo.slots[i].centre.z;
+					}
+				}
+
+				var newX = shelfToGoTo.three_obj.position.x + sSlotx;
+				var newY = shelfToGoTo.three_obj.position.y + sSloty;
+				var newZ = shelfToGoTo.three_obj.position.z + sSlotz;
+
+
+				moveWIPObj(newX, newY, newZ, cubeToMove);
+
+			};
+
+			function addText(text, x, y, z, rotate, label) {
+				/////// draw text on canvas /////////
+
+				// create a canvas element
+				var canvas1 = document.createElement('canvas');
+				var context1 = canvas1.getContext('2d');
+
+				var _size = '10';
+				var size = _size * 2;
+				var backgroundMargin = 50;
+
+
+				context1.font = size + "pt Arial";
+				var textWidth = context1.measureText(text).width;
+				var textHeight = parseInt(context1.font);
+				canvas1.width = textWidth + backgroundMargin;
+				canvas1.height = textHeight + backgroundMargin;
+				context1 = canvas1.getContext("2d");
+				context1.font = size + "pt Arial";
+
+				context1.fillStyle = "rgba(160, 0, 67, 1)"; //pink text colour
+				context1.fillText(text, 0, textHeight);
+
+				// canvas contents will be used for a texture
+				var texture1 = new THREE.Texture(canvas1)
+				texture1.needsUpdate = true;
+
+				var material1 = new THREE.MeshBasicMaterial({
+					map: texture1,
+					side: THREE.DoubleSide
+				});
+				material1.transparent = true;
+
+				var mesh1 = new THREE.Mesh(
+					new THREE.PlaneGeometry(canvas1.width / 8, canvas1.height / 8),
+					material1
+				);
+
+				mesh1.rotateY(rotate);
+				mesh1.position.x = x - 10;
+				mesh1.position.y = y;
+				mesh1.position.z = z;
+				//scene.add(mesh1);
+			}
+
+
+			function addBigText(text, x, y, z, rotate, label) {
+				/////// draw text on canvas /////////
+
+				// create a canvas element
+				var canvas1 = document.createElement('canvas');
+				var context1 = canvas1.getContext('2d');
+
+				var _size = '10';
+				var size = _size * 8;
+				var backgroundMargin = 50;
+
+
+				context1.font = size + "pt Arial";
+				var textWidth = context1.measureText(text).width;
+				var textHeight = parseInt(context1.font);
+				canvas1.width = textWidth + backgroundMargin;
+				canvas1.height = textHeight + backgroundMargin;
+				context1 = canvas1.getContext("2d");
+				context1.font = size + "pt Arial";
+
+				context1.fillStyle = "rgba(160, 0, 67, 1)"; //pink text colour
+				context1.fillText(text, 0, textHeight);
+
+				// canvas contents will be used for a texture
+				var texture1 = new THREE.Texture(canvas1)
+				texture1.needsUpdate = true;
+
+				var material1 = new THREE.MeshBasicMaterial({
+					map: texture1,
+					side: THREE.DoubleSide
+				});
+				material1.transparent = true;
+
+				var mesh1 = new THREE.Mesh(
+					new THREE.PlaneGeometry(canvas1.width / 8, canvas1.height / 8),
+					material1
+				);
+
+				mesh1.rotateY(rotate);
+				mesh1.position.x = x - 10;
+				mesh1.position.y = y;
+				mesh1.position.z = z;
+				//scene.add(mesh1);
+			}
+
+
+			function addGText(text, x, y, z, rotate, label) {
+				var _name = 'g_' + label;
+				var cv = document.createElement("canvas");
+				var xc = cv.getContext("2d");
+				//var _newWidth = 20;
+				//cv.height = (_newWidth / cv.width)* cv.height;
+				//cv.width = _newWidth;
+				cv.width = 1000;
+				cv.height = 1000;
+				//xc.shadowColor = "#000";
+				//xc.shadowBlur = 1;
+				xc.fillStyle = "#cc0066";
+				xc.font = "60px Bold Arial";
+				xc.align = "left";
+				xc.fillText(text, 10, 90);
+
+				var xm = new THREE.MeshBasicMaterial({
+					map: new THREE.Texture(cv),
+					transparent: true
+				});
+				xm.map.needsUpdate = true;
+
+				var mesh = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), xm);
+				mesh.name = _name;
+				mesh.material.side = THREE.DoubleSide;
+				mesh.rotateY(rotate);
+				mesh.position.x = x - 10;
+				mesh.position.y = y;
+				mesh.position.z = z;
+				mesh.doubleSided = true;
+				//scene.add(mesh);
+
+			}
+
+
+			function init() {
+
+				camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+
+				scene = new THREE.Scene();
+				//scene.fog = new THREE.Fog(0xffffff, 0, 750);
+
+				var light = new THREE.HemisphereLight(0x000000, 0xffffff, 0.6);
+				light.position.set(2000, 20000, 2000);
+				//scene.add(light);
+
+				var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+				directionalLight.position.set(0, 1, 0);
+				//scene.add(directionalLight);
+
+				var light = new THREE.AmbientLight(0x404040, 5); // soft white light
+				scene.add(light);
+
+				controls = new THREE.PointerLockControls(camera);
+				scene.add(controls.getObject());
+
+				initKeyStrokes();
+
+
+
+				raycaster = new THREE.Raycaster();
+
+				returnFactory(function(_building) {
+					for (var i = 0; i < _building.length; i++) {
+						scene.add(_building[i]);
+						objects.push(_building[i]);
+					}
+
+					returnFirstFloorFactory(function(_building) {
+						for (var i = 0; i < _building.length; i++) {
+							scene.add(_building[i]);
+							objects.push(_building[i]);
+						}
+						//attempt to add customer building KvL 11.1.2017
+						returnCust1(function(_building) {
+							for (var i = 0; i < _building.length; i++) {
+								scene.add(_building[i]);
+								objects.push(_building[i]);
+							}
+
+							//4 desks in phoneRoom location is (x position, y position, Z position, rotation in y, id, addNewNamehere)
+							//toilet entry to processing room
+							addText("Shop floor", -29. * meter, 2 * meter, 14 * meter, (-Math.PI));
+
+							addText("Processing Room", -29. * meter, 2 * meter, 14.9 * meter, 0);
+							createWorkstation(-30 * meter, 0, 4 * meter, 0, '0_refurbD1', addNewStation);
+							createWorkstation(-30 * meter, 0, 8 * meter, 0, '0_refurbD2', addNewStation);
+							createWorkstation(-30 * meter, 0, 10 * meter, 0, '0_refurbD2', addNewStation);
+
+							createsfDeskBeard(-30 * meter, 0, 12 * meter, 0, '0_refurbD3', addNewsfdeskBeard);
+
+							addText("Checking emails, and orders on computer", -30.9 * meter, 2 * meter, 12.5 * meter, (Math.PI / 2));
+							createsfDeskonPhone(-30 * meter, 0, 6 * meter, 0, '0_refurbd5', addNewssfDeskonPhone);
+							addText("On phone to sales", -30.9 * meter, 2 * meter, 6.5 * meter, (Math.PI / 2));
+
+							createsfdeskprocessing(-30 * meter, 0, 2 * meter, 0, '0_refurbd6', addNewsfdeskprocessing);
+							addText("Tagging and asset tracking", -30.9 * meter, 2 * meter, 2.7 * meter, (Math.PI / 2));
+
+							addBigText("Offices", -30.9 * meter, 4.5 * meter, 14.24 * meter, (Math.PI / 2));
+
+							createsfdeskPacking(-30 * meter, 0, 0 * meter, 0, '0_refurbd7', addNewsfdeskPacking);
+							addText("Packing items for despatch", -30.9 * meter, 2.4 * meter, 0 * meter, (Math.PI / 2));
+							createBlueShelving(-28.2 * meter, 0, 2 * meter, 0, '0_blueshelf1', addNewBlueShelving);
+							createBlueShelving(-28.2 * meter, 0, 4 * meter, 0, '0_blueshelf2', addNewBlueShelving);
+							createBlueShelvingBox(-27.9 * meter, 0, 8 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+
+							createBlueShelvingBox(-27.9 * meter, 0, 6 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+							createsecureStores(-29.9 * meter, 0, 10 * meter, (-Math.PI), '0_blueshelfwithmMan', addNewsecureStores);
+							addText("Quarantining locked phones", -27.9 * meter, 2 * meter, 10 * meter, (-Math.PI / 2));
+
+							// customer desks
+							createCustomerDesk(-80 * meter, 0, -80 * meter, 0, '0_CustomerDesk', addNewCustomerDesk);
+							addText("Customer", -80 * meter, 2 * meter, -80 * meter, (Math.PI / 2));
+
+							//Data erasure label
+							addBigText("Data Erasure", -21.68 * meter, 2.5 * meter, -2.28 * meter, (Math.PI / 2), 'dataErase');
+							// desks in data erasure room
+
+							createdataErase(-24 * meter, 0, 11.1 * meter, (-Math.PI), '0_dataerase2', addNewdataErase);
+
+							addText("Erasing data", -22.5 * meter, 2 * meter, 11 * meter, (-Math.PI / 2));
+							addText("Erasing data", -24.5 * meter, 2 * meter, 14 * meter, (Math.PI));
+							createdePrint(-26.5 * meter, 0, 12 * meter, (Math.PI / 2), '0_dataerasePrint', addNewsfdePrint);
+							addText("Printing Certificates", -27.5 * meter, 2 * meter, 12 * meter, (Math.PI / 2));
+							addText("Printing Certificates", -27 * meter, 2 * meter, 14 * meter, (Math.PI));
+
+							createBlueShelving(-27.3 * meter, 0, 8 * meter, 0, '0_blueshelf1', addNewBlueShelving);
+							addText("Temporary storage", -27.4 * meter, 2 * meter, 2.5 * meter, (Math.PI / 2));
+							addText("Temporary storage", -27.4 * meter, 2 * meter, 4.5 * meter, (Math.PI / 2));
+
+							createBlueShelving(-27.3 * meter, 0, 6 * meter, 0, '0_blueshelf2', addNewBlueShelving);
+							createBlueShelvingBox(-26.9 * meter, 0, 4 * meter, 0, '0_blueshelft3', addNewBlueShelvingBox);
+							createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
+							createBlueShelvingBox(-22 * meter, 0, 2 * meter, 0, '0_blueshelft6', addNewBlueShelvingBox);
+							createBlueShelvingBox(-26.9 * meter, 0, 2 * meter, 0, '0_blueshelft4', addNewBlueShelvingBox);
+							createBlueShelvingBox(-26.9 * meter, 0, 0 * meter, 0, '0_blueshelft6', addNewBlueShelvingBox);
+							createBlueShelvingBox(-26.9 * meter, 0, -2 * meter, 0, '0_blueshelft5', addNewBlueShelvingBox);
+							createBlueShelvingBox(-22 * meter, 0, 0 * meter, 0, '0_blueshelft5', addNewBlueShelvingBox);
+
+							//recycling bins
+
+							createRecycleBin(-10 * meter, 0, 12 * meter, (-Math.PI / 2), '0_bin1', addNewrecycleBin);
+							addBigText("Recycling", -12 * meter, 2.5 * meter, 8 * meter, (-Math.PI), 'g_bins');
+							createRecyclingBinsMore(10 * meter, 0, 12 * meter, (-Math.PI / 2), '0_bins2', addNewrecyclingBinsMore);
+							// createRecycleBin(-12 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+							addBigText("Recycling", 8 * meter, 2.5 * meter, 6 * meter, (-Math.PI), 'g_bins');
+
+							//<!--createRecycleBin(-14 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-16 * meter, 0, 12 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-10 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-12 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-14 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+							//<!--createRecycleBin(-16 * meter, 0, 10 * meter, 0, '0_bin1', addNewrecycleBin);
+							//createShopFloorPerson(-10 * meter, 0, 13.3 * meter, 0, '0_shopfloorBluemanBin1', addNewShopFloorPerson);
+							//createshopfloorAltMan(-12 * meter, 0, 13.3 * meter, 0, '0_shopfloorAltMan1atBin2', addNewshopfloorAltMan);
+
+							//NOTE CAN ONLY BE ADDED WHERE THERE ARE NO UPSTAIRS OR IT CAUSES A CLASH (uniforms.specular.value = material.specular;) shelving
+							// stores - not secure, top wall 3 shelves.
+							addBigText("Stores", -2.6 * meter, 2.5 * meter, 30.8 * meter, (-Math.PI));
+							createBlueShelvingBox(12.2 * meter, 0, 32.2 * meter, 0, '0_blueshelf1', addNewBlueShelvingBox);
+							createBlueShelving(12.2 * meter, 0, 35.2 * meter, 0, '0_blueshelf2', addNewBlueShelving);
+							createBlueShelving(12.2 * meter, 0, 38.2 * meter, 0, '0_blueshelft3', addNewBlueShelving);
+							// stores - not secure, outer wall
+							createBlueShelving(10 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf4', addNewBlueShelving);
+							createBlueShelvingBox(7 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf5', addNewBlueShelvingBox);
+							createBlueShelving(4 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshel6', addNewBlueShelving);
+							createBlueShelvingBox(1 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf7', addNewBlueShelvingBox);
+							createBlueShelvingBox(-2 * meter, 0, 40.5 * meter, (-Math.PI / 2), '0_blueshelf8', addNewBlueShelvingBox);
+							createBlueShelving(-5 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf9', addNewBlueShelving);
+							// stores - not secure,centre shelving racks
+							addBigText("Secure Stores", -12 * meter, 2.5 * meter, 39.5 * meter, (Math.PI));
+							createBlueShelving(9 * meter, 0, 32.2 * meter, 0, '0_blueshelf10', addNewBlueShelving);
+							createBlueShelving(9 * meter, 0, 35.2 * meter, 0, '0_blueshelf11', addNewBlueShelving);
+							createBlueShelvingBox(6 * meter, 0, 32.2 * meter, 0, '0_blueshelf12', addNewBlueShelvingBox);
+							createBlueShelving(6 * meter, 0, 35.2 * meter, 0, '0_blueshelf13', addNewBlueShelving);
+							createBlueShelvingBox(3 * meter, 0, 32.2 * meter, 0, '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelving(3 * meter, 0, 35.2 * meter, 0, '0_blueshelf15', addNewBlueShelving);
+							createBlueShelving(0 * meter, 0, 32.2 * meter, 0, '0_blueshelf16', addNewBlueShelving);
+							createBlueShelving(0 * meter, 0, 35.2 * meter, 0, '0_blueshelf17', addNewBlueShelving);
+							//stores - not secure,shelving to right of door
+
+							createBlueShelving(-5 * meter, 0, 32.2 * meter, (-Math.PI / 2), '0_blueshelf18', addNewBlueShelving);
+							addText("Stock taking", 4 * meter, 2 * meter, 33 * meter, (-Math.PI / 2));
+							createShopfloorFem(4 * meter, 0, 33 * meter, (-Math.PI / 2), '0_ShopfloorFem1', addNewShopfloorFem);
+							//stores secure cage
+							createsecureStores(-9.3 * meter, 0, 38 * meter, (Math.PI / 2), '0_secureStore1', addNewsecureStores);
+							addText("Locating items in secure storage", -9.3 * meter, 2 * meter, 39.5 * meter, (-Math.PI));
+							createBlueShelving(-12.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf20', addNewBlueShelving);
+							createBlueShelving(-15.2 * meter, 0, 39.8 * meter, (-Math.PI / 2), '0_blueshelf21', addNewBlueShelving);
+							createBlueShelvingBox(-12.2 * meter, 0, 36.8 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-15.2 * meter, 0, 36.8 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-9.3 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-12.2 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-15.2 * meter, 0, 34.2 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-9.3 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-12.2 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-15.2 * meter, 0, 32 * meter, (-Math.PI / 2), '0_blueshelf14', addNewBlueShelvingBox);
+
+							//shopfloor person stores
+							createShopfloorFem(10 * meter, 0, 33 * meter, 0, '0_shopfloorperson1', addNewShopfloorFem);
+							addText("Stock taking", 10 * meter, 2 * meter, 33 * meter, (-Math.PI / 2));
+
+							//blue shelving refurbRoom
+							//createBlueShelving(-28 * meter, 0, 6 * meter, 0, '0_shelving1', addNewBlueShelving);
+							//forklift near bays
+							createForklift(-18 * meter, 0, -30 * meter, (-Math.PI / 2), '0_forklift1', addNewForklift);
+							addBigText("Forklift", -18 * meter, 3.5 * meter, -30 * meter, (Math.PI / 2)); // booking in desk
+							createDeskChairManBoxStood(0 * meter, 0, -38.5 * meter, (-Math.PI / 2), '0_bookingInDesk', addNewsDeskChairManBoxStood);
+							addBigText("Goods Check In", -2 * meter, 3 * meter, -39.5 * meter, 0);
+							addBigText("Driver leaving for collection", 6 * meter, 3 * meter, -39.5 * meter, 0);
+							addBigText("Deliveries", 16 * meter, 3 * meter, -39.5 * meter, 0);
+
+
+							// pallets in waiting areas
+							addText("Goods Waiting", 0 * meter, 2.5 * meter, -16 * meter, (Math.PI / 2)); // booking in desk
+							//secure waiting pen
+							addBigText("Secure Waiting Pen", -30.52 * meter, 3.5 * meter, -15.31 * meter, (Math.PI / 2));
+
+							createPalletBrown(-25.52 * meter, 0, -20 * meter, (-Math.PI), '0_pallet1', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -18 * meter, 0, '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -16 * meter, (-Math.PI / 2), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-28.52 * meter, 0, -14 * meter, (Math.PI), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -22 * meter, 0, '0_pallet2', addNewPalletBrown);
+							createPalletGrey(-28.52 * meter, 0, -20 * meter, (-Math.PI), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -18 * meter, (Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -16 * meter, 0, '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-25.52 * meter, 0, -14 * meter, (-Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -22 * meter, (Math.PI), '0_pallet3', addNewPalletGrey);
+
+							createPalletBrown(-25.52 * meter, 0, -22 * meter, (-Math.PI), '0_pallet1', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -24 * meter, 0, '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -26 * meter, (-Math.PI / 2), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-28.52 * meter, 0, -28 * meter, (Math.PI), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(-25.52 * meter, 0, -30 * meter, 0, '0_pallet2', addNewPalletBrown);
+							createPalletGrey(-28.52 * meter, 0, -22 * meter, (-Math.PI), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -24 * meter, (Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -26 * meter, 0, '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-25.52 * meter, 0, -28 * meter, (-Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-28.52 * meter, 0, -30 * meter, (Math.PI), '0_pallet3', addNewPalletGrey);
+
+							createBlueShelving(-31.5 * meter, 0, -22 * meter, (Math.PI), '0_blueshelf20', addNewBlueShelving);
+							createBlueShelving(-31.5 * meter, 0, -24 * meter, (Math.PI), '0_blueshelf21', addNewBlueShelving);
+							createBlueShelvingBox(-31.8 * meter, 0, -26 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -28 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -30 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -32 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -34 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -36 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -38 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelvingBox(-31.8 * meter, 0, -20 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelving(-31.5 * meter, 0, -18 * meter, (Math.PI), '0_blueshelf20', addNewBlueShelving);
+							createBlueShelving(-31.5 * meter, 0, -16 * meter, (Math.PI), '0_blueshelf21', addNewBlueShelving);
+							createBlueShelvingBox(-31.8 * meter, 0, -14 * meter, (Math.PI), '0_blueshelf14', addNewBlueShelvingBox);
+							createBlueShelving(-31.5 * meter, 0, -12 * meter, (Math.PI), '0_blueshelf20', addNewBlueShelving);
+							createBlueShelving(-31.5 * meter, 0, -10 * meter, (Math.PI), '0_blueshelf21', addNewBlueShelving);
+
+							addBigText("Processing", -30.9 * meter, 3.5 * meter, -3.93 * meter, (Math.PI / 2));
+							addBigText("Data Erasure", -28 * meter, 2.5 * meter, -3 * meter, (-Math.PI / 2));
+							//addBigText("Main Warehouse", -22 * meter, 2 * meter, -2.74 * meter, (-Math.PI / 2));
+
+							createPalletBrown(0 * meter, 0, -20 * meter, (-Math.PI), '0_pallet1', addNewPalletBrown);
+							createPalletBrown(0 * meter, 0, -18 * meter, 0, '0_pallet2', addNewPalletBrown);
+							createPalletBrown(0 * meter, 0, -16 * meter, (-Math.PI / 2), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(0 * meter, 0, -14 * meter, (Math.PI), '0_pallet2', addNewPalletBrown);
+							createPalletBrown(0 * meter, 0, -22 * meter, 0, '0_pallet2', addNewPalletBrown);
+							addText("Goods Waiting", -4 * meter, 2.5 * meter, -16 * meter, (Math.PI / 2)); // booking in desk
+
+							createPalletGrey(-4 * meter, 0, -20 * meter, (-Math.PI), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-4 * meter, 0, -18 * meter, (Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-4 * meter, 0, -16 * meter, 0, '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-4 * meter, 0, -14 * meter, (-Math.PI / 2), '0_pallet3', addNewPalletGrey);
+							createPalletGrey(-4 * meter, 0, -22 * meter, (Math.PI), '0_pallet3', addNewPalletGrey);
+
+							// lorry in bay 1
+							createLorry(23 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_lorryBay1', addNewLorry);
+							addBigText("Mobile Shredder", 22 * meter, 3 * meter, -28 * meter, (-Math.PI / 2)); // booking in desk
+
+							//van in bay 2
+
+							createvanunload(15 * meter, 0, -25 * meter, (Math.PI / 2), '0_vanBay2', addNewvanunload);
+							addBigText("Delivery", 14 * meter, 2 * meter, -25 * meter, (-Math.PI / 2)); // booking in desk
+
+							createvandepart(6 * meter, 0, -31.5 * meter, (-Math.PI / 2), '0_vanBay3', addNewvandepart);
+							addBigText("Collecting", 5 * meter, 2 * meter, -31 * meter, (-Math.PI / 2)); // van
+
+							createcourier(15 * meter, 0, -35 * meter, (Math.PI / 2), '0_courier2', addNewcourier);
+							addBigText("Courier", 14.2 * meter, 2 * meter, -34 * meter, (-Math.PI / 2)); // booking in desk
+
+							//toilets accessed from shopfloor
+							addText("Toilets", -19.32 * meter, 2 * meter, 30.6 * meter, (-Math.PI));
+							addText("Toilets", -27.85 * meter, 2 * meter, 23.11 * meter, (-Math.PI));
+							//addBigText("Main Warehouse", -19 * meter, 2 * meter, 35.25 * meter, (-Math.PI / 2));
+
+							createToilet(-28.5 * meter, 0, 26.5 * meter, (-Math.PI / 2), '0_toiletShopfloor1', addNewToilet);
+							createToilet(-28.5 * meter, 0, 27.5 * meter, (-Math.PI / 2), '0_toiletShopfloor2', addNewToilet);
+							createToilet(-28.5 * meter, 0, 28.5 * meter, (-Math.PI / 2), '0_toiletShopfloor3', addNewToilet);
+							createToilet(-27 * meter, 0, 26.5 * meter, (Math.PI / 2), '0_toiletShopfloor4', addNewToilet);
+							createToilet(-27 * meter, 0, 27.5 * meter, (Math.PI / 2), '0_toiletShopfloor5', addNewToilet);
+							createToilet(-27 * meter, 0, 28.5 * meter, (Math.PI / 2), '0_toiletShopfloor6', addNewToilet);
+							//metal detector
+
+							createMetalD(-18 * meter, 0, 30.24 * meter, (Math.PI / 2), '0_metalDetector1', addNewMetalD);
+							addText("Security check", -16 * meter, 2 * meter, 30.3 * meter, (-Math.PI));
+
+							//toilets accessed from lobby
+							createurinal(-23 * meter, 0.7 * meter, 36.2 * meter, (Math.PI / 2), '0_urinaltlobby1', addNewurinal);
+							createurinal(-21.8 * meter, 0.7 * meter, 36.2 * meter, (Math.PI / 2), '0_toiletlobby3', addNewToilet);
+							createToilet(-20.9 * meter, 0 * meter, 36.6 * meter, (Math.PI * 2), '0_toiletlobby2', addNewToilet);
+							createToilet(-19.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby4', addNewToilet);
+							createToilet(-20.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby5', addNewToilet);
+							createToilet(-21.5 * meter, 0, 33.5 * meter, (-Math.PI), '0_toiletlobby6', addNewToilet);
+
+							//first floor characters
+							createOfficeMan(-25 * meter, 3.1 * meter, 4 * meter, 0, '1_officeMan_Manager1', addNewOfficeMan);
+							addText("Managing Director", -25 * meter, 4.5 * meter, 0 * meter, 0);
+							createOfficeFem(-24 * meter, 3.1 * meter, 15 * meter, 0, '1_officeFem_1', addNewOfficeFem);
+							//addText("Office staff", -24 * meter, 4.5 * meter, 15 * meter, 0);
+
+							//office desk manager office floor 1
+							createOfficeDeskPC(-24 * meter, 3 * meter, 1.5 * meter, 0, '1_officeDeskPC_manager1', addNewOfficeDeskPC);
+							// office desks main room
+							createOfficeDeskPC(-24 * meter, 3 * meter, 12 * meter, 0, '1_officeDeskPC_sales1', addNewOfficeDeskPC);
+
+							createOfficeDeskPC(-24 * meter, 3 * meter, 6.5 * meter, (-Math.PI / 2), '1_officeDeskPC_sales1', addNewOfficeDeskPC);
+
+							createOfficeDeskOccupied(-24 * meter, 3 * meter, 20 * meter, 0, '1_officeDeskPC_sales1', addNewofficedeskOccupied);
+							addBigText("Sales Offices", -21.9 * meter, 5.5 * meter, 20 * meter, (Math.PI / 2));
+							addText("Sales Manager", -23.2 * meter, 5.3 * meter, 20 * meter, (-Math.PI / 2));
+							addText("On phone or email to:", -23.2 * meter, 4.9 * meter, 20 * meter, (-Math.PI / 2));
+							addText("shop floor,", -23.2 * meter, 4.7 * meter, 20 * meter, (-Math.PI / 2));
+							addText("customer,", -23.2 * meter, 4.5 * meter, 20 * meter, (-Math.PI / 2));
+							addText("or buyer.", -23.2 * meter, 4.3 * meter, 20 * meter, (-Math.PI / 2));
+
+							createOfficeDeskPC(-24 * meter, 3 * meter, 24 * meter, 0, '1_officeDeskPC_sales1', addNewOfficeDeskPC);
+
+							//office desk main room rotated 90 degrees
+							createOfficeDeskOccupiedFem(-30 * meter, 3 * meter, 1.5 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewofficedeskOccupiedFem);
+							addText("Office staff", -30 * meter, 4.5 * meter, 1.5 * meter, 0);
+
+							createOfficeDeskPC(-30 * meter, 3 * meter, 14 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
+							createOfficeDeskPC(-30 * meter, 3 * meter, 18 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
+							createOfficeDeskPC(-30 * meter, 3 * meter, 22 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
+							createOfficeDeskPC(-30 * meter, 3 * meter, 28 * meter, (-Math.PI / 2), '1_officeFem_desk1', addNewOfficeDeskPC);
+
+							renderer = new THREE.WebGLRenderer();
+							renderer.setClearColor(0xffffff);
+							renderer.setPixelRatio(window.devicePixelRatio);
+							//renderer.setSize(window.innerWidth, window.innerHeight);
+
+							container = document.getElementById('container');
+							renderer.setSize(container.clientWidth, container.clientHeight);
+							container.appendChild(renderer.domElement);
+
+
+							/*renderer = new THREE.WebGLRenderer();
+							renderer.setClearColor(0xffffff);
+							renderer.setPixelRatio(window.devicePixelRatio);
+							container2 = document.getElementById('container2');
+							renderer.setSize(container2.clientWidth, container2.clientHeight);
+							container2.appendChild(renderer.domElement);*/
+
+							//document.body.appendChild(renderer.domElement);
+
+							window.addEventListener('resize', onWindowResize, false);
+							animate();
+						});
+					});
+				});
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize(window.innerWidth, window.innerHeight);
+
+			}
+
+
+
+
+
+			////////////////////////////////////////////////////////////////////
+			///
+			///  This holds all functionality for moving in 3D S2S
+			///
+			////////////////////////////////////////////////////////////////////
+			var meter = 25;
+			var factoryWidth = 100 * meter;
+			var factoryLength = 100 * meter;
+
+			var limitZMax = factoryWidth;
+			var limitZMin = -factoryWidth;
+
+			var limitXMax = factoryLength;
+			var limitXMin = -factoryLength;
+
+			//set up control modes
+			setGodControls(limitZMax, limitZMin, limitXMax, limitXMin);
+			setMarioControls(limitZMax, limitZMin, limitXMax, limitXMin, objects);
+			loadAllRoutes();
+
+			//controls
+			var route = false;
+			var god = true;
+			var controlsEnabled = false;
+
+			var moveForward = false;
+			var moveBackward = false;
+			var moveLeft = false;
+			var moveRight = false;
+			var canJump = false;
+
+
+
+			function animate() {
+
+				requestAnimationFrame(animate);
+
+				if (controlsEnabled) {
+
+					if (god) {
+						var _newPositions = godControls(controls.getObject().position.x, controls.getObject().position.z, controls.getObject().position.y, moveForward, moveBackward, moveLeft, moveRight);
+
+					} else {
+
+						var _newPositions = marioControls(controls, moveForward, moveBackward, moveLeft, moveRight);
+					}
+					if (_newPositions.X != "") controls.getObject().position.x = _newPositions.X;
+					if (_newPositions.Y != "") controls.getObject().position.y = _newPositions.Y;
+					if (_newPositions.Z != "") controls.getObject().position.z = _newPositions.Z;
+					if (_newPositions.translateX != "") controls.getObject().translateX(_newPositions.translateX);
+					if (_newPositions.translateY != "") controls.getObject().translateY(_newPositions.translateY);
+					if (_newPositions.translateZ != "") controls.getObject().translateZ(_newPositions.translateZ);
+					//console.log(_newPositions);
+				}
+				if (route) {
+					var _newPositions = moveRoute('routeGetItems.json', (controls.getObject().position.x / meter), (controls.getObject().position.y / meter), (controls.getObject().position.z / meter));
+					console.log(_newPositions);
+					if (_newPositions.complete) {
+						route = false;
+					} else {
+						if (isNumeric(_newPositions.X)) controls.getObject().position.x = _newPositions.X * meter;
+
+						if (isNumeric(_newPositions.Y)) controls.getObject().position.y = _newPositions.Y * meter;
+
+						if (isNumeric(_newPositions.Z)) controls.getObject().position.z = _newPositions.Z * meter;
+
+						if (isNumeric(_newPositions.translateX)) controls.getObject().translateX(_newPositions.translateX * meter);
+						if (isNumeric(_newPositions.translateY)) controls.getObject().translateY(_newPositions.translateY * meter);
+						if (isNumeric(_newPositions.translateZ)) controls.getObject().translateZ(_newPositions.translateZ * meter);
+					}
+				}
+				renderer.render(scene, camera);
+			}			
+
+
+			function goToPosition(_x, _y, _z) {
+				controlsEnabled = false;
+				route = true;
+
+				controls.getObject().position.y = _y * meter;
+
+				controls.getObject().position.x = _x * meter;
+
+				controls.getObject().position.z = _z * meter;
+				//sleep(1500);
+
+
+			}
+
+			function isNumeric(_no) {
+				if (_no === '') {
+					return false;
+				} else {
+					var _numeric = false;
+
+					if (isFloat) {
+						_numeric = true;
+					}
+					if (isInteger) {
+						_numeric = true;
+					}
+					return _numeric;
+				}
+			}
+
+			function isFloat(n) {
+				return n === +n && n !== (n | 0);
+			}
+
+			function isInteger(n) {
+				return n === +n && n === (n | 0);
+			}
+
+			////////////////////////////////////////////////////////////////////
+			///
+			///  END END END END
+			///
+			////////////////////////////////////////////////////////////////////
+
+
+
+			function sleep(ms) {
+				var start = new Date().getTime(),
+					expire = start + ms;
+				while (new Date().getTime() < expire) {}
+				return;
+			}
+
+			function toggleGodText() {
+				scene.traverse(function(node) {
+					if (node instanceof THREE.Mesh) {
+						if (node.name) {
+							var textType = node.name.substring(0, 1);
+							if (textType === 'g') {
+								console.log('Found Overview Text');
+								if (node.visible) node.visible = false;
+								else if (!node.visible) node.visible = true;
+
+							}
+						}
+					} else if (node instanceof THREE.Object3D) {
+						if (node.name) {
+							var textType = node.name.substring(0, 1);
+							if (textType === 'g') {
+								console.log('Found Overview Text');
+								if (node.visible) node.visible = false;
+								else if (!node.visible) node.visible = true;
+
+							}
+						}
+					}
+				});
+			}
+
+
+			var floor_1_hidden = false;
+
+			function hideFloor(_floorNumber) {
+				scene.traverse(function(node) {
+					if (node instanceof THREE.Mesh) {
+						if (node.name) {
+							var floorNumber = node.name.substring(0, 1);
+							if (floorNumber === String(_floorNumber)) {
+								console.log('Found a floor');
+								node.visible = false;
+							}
+						}
+					} else if (node instanceof THREE.Object3D) {
+						if (node.name) {
+							var floorNumber = node.name.substring(0, 1);
+							if (floorNumber === String(_floorNumber)) {
+								console.log('Found a floor');
+								node.visible = false;
+							}
+						}
+					}
+				});
+				floor_1_hidden = true;
+			}
+
+			function showFloor(_floorNumber) {
+				scene.traverse(function(node) {
+					if (node instanceof THREE.Mesh) {
+						if (node.name) {
+							var floorNumber = node.name.substring(0, 1);
+							if (floorNumber === String(_floorNumber)) {
+								console.log('Found a floor');
+								node.visible = true;
+							}
+						}
+					} else if (node instanceof THREE.Object3D) {
+						if (node.name) {
+							var floorNumber = node.name.substring(0, 1);
+							if (floorNumber === String(_floorNumber)) {
+								console.log('Found a floor');
+								node.visible = true;
+							}
+						}
+					}
+				});
+				floor_1_hidden = false;
+			}
+
+			function changeFloorVisibility() {
+				if (floor_1_hidden) {
+					showFloor('1');
+				} else if (!floor_1_hidden) {
+					hideFloor('1');
+				}
+
+			}
+
+			function initKeyStrokes() {
+				var onKeyDown = function(event) {
+
+					switch (event.keyCode) {
+						case 192:
+							toggleGodText();
+							break;
+
+						case 105:
+							moveToPosition(100, 0, 0);
+							break;
+
+						case 191:
+							//goToPosition(-49.80, marioHeight, -942.95);
+
+							startRoute("routeGetItems.json", goToPosition);
+
+							break;
+							//go to position from sales to shopfloor to lorry to customer press1
+							//case 49:
+							//processJSONRoute("routeGetItems.json")
+							//break;
+
+							//press 2
+						case 50:
+							processJSONRoute("routeItemsArrive.json")
+							break;
+							//goToPosition(-49.80, marioHeight, -942.95);
+							//	processJSONRoute("routeItemsArrive.json")
+							//	break;
+							// press 3 for processing route
+						case 51:
+							processJSONRoute("routeProcessing.json")
+							break;
+							//  4 for locked route
+						case 52:
+							processJSONRoute("routeLockedLoop.json")
+							break;
+							// 5 for functional test
+						case 53:
+							processJSONRoute("routeFunctional.json")
+							break;
+							// 6 for data erasure
+						case 54:
+							processJSONRoute("routeDataErasure.json")
+							break;
+							// 7 for value est
+						case 55:
+							processJSONRoute("routeValueEst.json")
+							break;
+							// 8 for blind bidding
+						case 56:
+							processJSONRoute("routeBlindBid.json")
+							break;
+							// 9 for sold
+						case 57:
+							processJSONRoute("routeSold.json")
+							break;
+							// 0 for complete
+						case 48:
+							processJSONRoute("routeComplete.json")
+							break;
+						case 80:
+							changeHeight();
+							break;
+							//1
+						case 49:
+							changeFloorVisibility();
+							break;
+						case 66:
+							fakeAddBox();
+							break;
+
+						case 78:
+							fakeMovedBox(1, 1, 1);
+							break;
+
+						case 38: // up
+						case 87: // w
+							moveForward = true;
+							break;
+
+						case 37: // left
+						case 65: // a
+							moveLeft = true;
+							break;
+
+						case 40: // down
+						case 83: // s
+							moveBackward = true;
+							break;
+
+						case 39: // right
+						case 68: // d
+							moveRight = true;
+							break;
+						case 33: // d
+							god = true;
+							controlsEnabled = true;
+							break;
+						case 34: // d
+							god = false;
+							controlsEnabled = true;
+							break;
+
+						case 32: // space
+							if (canJump === true && !god) velocity.y += 300;
+							canJump = false;
+							break;
+
+					}
+
+				};
+
+				var onKeyUp = function(event) {
+
+					switch (event.keyCode) {
+
+						case 38: // up
+						case 87: // w
+							moveForward = false;
+							break;
+
+						case 37: // left
+						case 65: // a
+							moveLeft = false;
+							break;
+
+						case 40: // down
+						case 83: // s
+							moveBackward = false;
+							break;
+
+						case 39: // right
+						case 68: // d
+							moveRight = false;
+							break;
+
+					}
+
+				};
+
+				document.addEventListener('keydown', onKeyDown, false);
+				document.addEventListener('keyup', onKeyUp, false);
+
+			}
+		});
+	</script>
+
+</body>
+
+</html>
