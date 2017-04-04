@@ -1,15 +1,13 @@
+////////////////////////////////////////////////////////////////////
+///
+///  This holds all functionality for navigating routes using 'Mario' mode
+///
+////////////////////////////////////////////////////////////////////
+
+
+//Initialising variables
+
 var marioHeight = 1.7 * meter;
-
-
-function changeHeight() {
-    var _1stFloorHeight = 4.7 * meter;
-    if (marioHeight == _1stFloorHeight) {
-        marioHeight = 1.7 * meter;
-    } else {
-        marioHeight = _1stFloorHeight;
-    }
-    controls.getObject().position.y = marioHeight;
-}
 
 var prevTime = performance.now();
 var velocity = new THREE.Vector3();
@@ -21,6 +19,18 @@ var limitZMin = 0;
 var limitXMax = 0;
 var limitXMin = 0;
 
+//function to call if user wants to go to a new floor
+function changeHeight() {
+    var _1stFloorHeight = 4.7 * meter;
+    if (marioHeight == _1stFloorHeight) {
+        marioHeight = 1.7 * meter;
+    } else {
+        marioHeight = _1stFloorHeight;
+    }
+    controls.getObject().position.y = marioHeight;
+}
+
+//Set up parameters for mario mode movement
 function setMarioControls(_limitZMax, _limitZMin, _limitXMax, _limitXMin, _objects) {
     limitZMax = _limitZMax;
     limitZMin = _limitZMin;
@@ -29,6 +39,8 @@ function setMarioControls(_limitZMax, _limitZMin, _limitXMax, _limitXMin, _objec
     objects = _objects;
 }
 
+
+//Function which returns new position based on user input (key pressings)
 function marioControls(cntrls, moveForward, moveBackward, moveLeft, moveRight) {
 
     var currentX = cntrls.getObject().position.x;

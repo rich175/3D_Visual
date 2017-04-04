@@ -1,61 +1,47 @@
-function processJSONRoute(_fileName, movementCallback) {
-    var json = (function() {
-        var json = null;
-        $.ajax({
-            'async': true,
-            'global': false,
-            'url': "json-routes/" + _fileName,
-            'dataType': "json",
-            'success': function(data) {
-                var instructions = data;
-
-                //go to start position
-                movementCallback(false, instructions.route.start.x, instructions.route.start.y, instructions.route.start.z, '', '');
-
-                sleep(1500);
-
-                ///for each movement in the list of instructions
-                var _loopNo = instructions.route.path.length;
-                asyncLoop(_loopNo, function(loop) {
-                        var i = loop.iteration();
-                        var _x = instructions.route.path[i].movement.x * meter;
-                        var _y = instructions.route.path[i].movement.y * meter;
-                        var _z = instructions.route.path[i].movement.z * meter;
-                        var _t = instructions.route.path[i].movement.t;
-                        movementCallback(true, _x, _y, _z, _t, function(result) {
-                            //console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
-                            //  console.log('y: ' + controls.getObject().position.y + '-- m: ' + controls.getObject().position.y / meter);
-                            //  console.log('z: ' + controls.getObject().position.z + '-- m: ' + controls.getObject().position.z / meter);
-                            // log the iteration
-                            console.log(loop.iteration());
-
-                            // Okay, for cycle could continue
-                            loop.next();
-                        })
-                    },
-                    function() {
-                        console.log('cycle ended');
-                        //console.log('x: ' + controls.getObject().position.x + '-- m: ' + controls.getObject().position.x / meter);
-                        //console.log('y: ' + controls.getObject().position.y + '-- m: ' + controls.getObject().position.y / meter);
-                        //console.log('z: ' + controls.getObject().position.z + '-- m: ' + controls.getObject().position.z / meter);
-                        // log the iteration
-                    }
-                );
+////////////////////////////////////////////////////////////////////
+///
+///  This holds all functionality for navigating routes within 3D S2S
+///
+////////////////////////////////////////////////////////////////////
 
 
-            }
-        });
 
+//Add new files to this array!  These are loaded by the application during inital load
+var _fileNames = [
+    'routeGetItems.json',
+    'routeComplete.json',
+    'routeDataErasure.json',
+    'routeFunctional.json',
+    'routeItemsArrive.json',
+    'routeLockedLoop.json',
+    'routeProcessing.json',
+    'routeSold.json',
+    'routeValueEst.json'
+];
 
-    })();
-
-}
-
+//Loaded Routes will be added into this array
 var _allRoutes = [];
+//Initialise a performance time
+var prevTime = performance.now();
 
+
+
+
+
+
+//Loads all files in the "_fileNames" into "_allRoutes"
 function loadAllRoutes() {
 
-    _fileName = 'routeGetItems.json';
+    for (var i = 0; i < _fileNames.length; i++) {
+        _fileName = _fileNames[i];
+        loadRoute(_fileName);
+
+    }
+
+}
+// functionality for loading JSON file
+function loadRoute(_fileName) {
+
     var json = (function() {
         var json = null;
         $.ajax({
@@ -75,10 +61,10 @@ function loadAllRoutes() {
             }
         });
 
-
     })();
 }
 
+// This function starts a route, i.e. sets the start time, it should also make the system move to start point
 function startRoute(_route, movementCallback) {
 
     var _thisRoute;
@@ -88,17 +74,14 @@ function startRoute(_route, movementCallback) {
             _allRoutes[i].startTime = new Date().getTime();
         }
     }
-
     //go to start position
-    movementCallback(false, _thisRoute.route.route.start.x, _thisRoute.route.route.start.y, _thisRoute.route.route.start.z, '', '');
-
-
+    movementCallback(_thisRoute.route.route.start.x, _thisRoute.route.route.start.y, _thisRoute.route.route.start.z);
 }
 
 
-var prevTime = performance.now();
-
-
+//This is called by the main script when a route has been selected.
+//The function finds the route required AND where it should be on the route
+//based on the time the route was initially started ("startRoute")
 function moveRoute(_route, x, y, z) {
 
     var velocity = new THREE.Vector3();
@@ -145,9 +128,9 @@ function moveRoute(_route, x, y, z) {
         timeWindowS = timeWindowE;
         timeWindowE = timeWindowE + parseInt(_thisRoute.route.path[i].movement.t);
         //console.log('Elapsed Time:' + timeElapsed);
-        //console.log('Window:' + timeWindowS + ' - ' + timeWindowE);
+        //console.log('Window:' + timeWindowS + ' - ' + timeWindowE + '  Elapsed Time:' + timeElapsed);
 
-        if (timeElapsed < timeWindowE && timeElapsed > timeWindowS) {
+        if (timeElapsed <= timeWindowE && timeElapsed > timeWindowS) {
             //WE ARE HERE IN THE ROUTE
             console.log('In Window: ' + i);
             foundWindow = true;
@@ -161,15 +144,17 @@ function moveRoute(_route, x, y, z) {
             var moveUp = false;
             var moveDown = false;
 
-
-
+            //when close is close enough
             var error = 0.5;
 
+            //distance moved, in meters, every time function is called (and movement is required)
             var _smooth = 0.2;
             var _fast = 0.5;
 
+            //distance which requires fast movement
             var _distanceLimit = 100;
 
+            //set intially to slow
             var _xMove = _smooth;
             var _yMove = _smooth;
             var _zMove = _smooth;
@@ -206,14 +191,9 @@ function moveRoute(_route, x, y, z) {
             }
 
 
-
             if (moveBackward) results.X = currentX - _xMove;
             if (moveForward) results.X = currentX + _xMove;
-            if (moveLeft) {
-                results.Z = currentZ - _zMove;
-                console.log(currentZ);
-                console.log(results.Z);
-            }
+            if (moveLeft) results.Z = currentZ - _zMove;
             if (moveRight) results.Z = currentZ + _zMove;
             if (moveUp) results.Y = currentY + _yMove;
             if (moveDown) results.Y = currentY - _yMove;
@@ -230,69 +210,11 @@ function moveRoute(_route, x, y, z) {
 
     }
     if (foundWindow) {
-        //results.X = currentX + (velocity.x * 10);
-        //results.Y = currentY + (velocity.y * 10);
-        //results.Z = currentZ + (velocity.z * 10);
-        //results.translateX = velocity.x * delta;
-        //results.translateY = velocity.y * delta;
-        //  results.translateZ = velocity.z * delta;
+
     } else {
         results.complete = true;
     }
     prevTime = time;
     return results;
 
-}
-
-function getTDistance(newP, oldP) {
-
-    var _newP = parseFloat(newP);
-    var _oldP = parseFloat(oldP);
-
-    var diff = Math.abs(_oldP - _newP);
-
-    if (_oldP > _newP) diff = diff * -1;
-
-    return diff;
-
-}
-
-function sleep(ms) {
-    var start = new Date().getTime(),
-        expire = start + ms;
-    while (new Date().getTime() < expire) {}
-    return;
-}
-
-
-function asyncLoop(iterations, func, callback) {
-    var index = 0;
-    var done = false;
-    var loop = {
-        next: function() {
-            if (done) {
-                return;
-            }
-
-            if (index < iterations) {
-                index++;
-                func(loop);
-
-            } else {
-                done = true;
-                callback();
-            }
-        },
-
-        iteration: function() {
-            return index - 1;
-        },
-
-        break: function() {
-            done = true;
-            callback();
-        }
-    };
-    loop.next();
-    return loop;
 }

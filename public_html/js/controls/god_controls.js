@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////
+///
+///  This holds all functionality for navigating routes using 'God' mode
+///
+////////////////////////////////////////////////////////////////////
+
+
+//Initialising variables
 var prevTime = performance.now();
 var velocity = new THREE.Vector3();
 
@@ -6,15 +14,16 @@ var limitZMin = 0;
 var limitXMax = 0;
 var limitXMin = 0;
 
+
+//sets up the limits for movement
 function setGodControls(_limitZMax, _limitZMin, _limitXMax, _limitXMin) {
-  limitZMax = _limitZMax;
-  limitZMin = _limitZMin;
-  limitXMax = _limitXMax;
-  limitXMin = _limitXMin;
-
-
+    limitZMax = _limitZMax;
+    limitZMin = _limitZMin;
+    limitXMax = _limitXMax;
+    limitXMin = _limitXMin;
 }
 
+//Function which returns new position based on user input (key pressings)
 function godControls(_currentX, _currentZ, _currentY, moveForward, moveBackward, moveLeft, moveRight) {
     var currentX = _currentX;
     var currentZ = _currentZ;
@@ -81,15 +90,11 @@ function godControls(_currentX, _currentZ, _currentY, moveForward, moveBackward,
 
     }
 
-//    if (results.translate) {
-  //      results.translate = true;
-        results.translateX = velocity.x * delta;
-        results.translateY = velocity.y * delta;
-        results.translateZ = velocity.z * delta;
-        //controls.getObject().translateX(velocity.x * delta);
-        //controls.getObject().translateY(velocity.y * delta);
-        //controls.getObject().translateZ(velocity.z * delta);
-    //}
+
+    results.translateX = velocity.x * delta;
+    results.translateY = velocity.y * delta;
+    results.translateZ = velocity.z * delta;
+
 
 
 
