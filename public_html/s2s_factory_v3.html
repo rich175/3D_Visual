@@ -153,9 +153,9 @@
 
 					//instructions.style.display = 'none';
 
-					controlsEnabled = false;
-					god = false;
-					route = false;
+					//controlsEnabled = false;
+					//god = false;
+					//route = false;
 
 					// Ask the browser to lock the pointer
 					element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
@@ -1087,13 +1087,13 @@
 
 						var _newPositions = marioControls(controls, moveForward, moveBackward, moveLeft, moveRight);
 					}
-					if (_newPositions.X != "") controls.getObject().position.x = _newPositions.X;
-					if (_newPositions.Y != "") controls.getObject().position.y = _newPositions.Y;
-					if (_newPositions.Z != "") controls.getObject().position.z = _newPositions.Z;
-					if (_newPositions.translateX != "") controls.getObject().translateX(_newPositions.translateX);
-					if (_newPositions.translateY != "") controls.getObject().translateY(_newPositions.translateY);
-					if (_newPositions.translateZ != "") controls.getObject().translateZ(_newPositions.translateZ);
-					//console.log(_newPositions);
+					if (isNumeric(_newPositions.X)) controls.getObject().position.x = _newPositions.X;
+					if (isNumeric(_newPositions.Y)) controls.getObject().position.y = _newPositions.Y;
+					if (isNumeric(_newPositions.Z)) controls.getObject().position.z = _newPositions.Z;
+					if (isNumeric(_newPositions.translateX)) controls.getObject().translateX(_newPositions.translateX);
+					if (isNumeric(_newPositions.translateY)) controls.getObject().translateY(_newPositions.translateY);
+					if (isNumeric(_newPositions.translateZ)) controls.getObject().translateZ(_newPositions.translateZ);
+					console.log(_newPositions);
 				}
 				if (route) {
 					var _newPositions = moveRoute('routeGetItems.json', (controls.getObject().position.x / meter), (controls.getObject().position.y / meter), (controls.getObject().position.z / meter));
@@ -1113,7 +1113,7 @@
 					}
 				}
 				renderer.render(scene, camera);
-			}			
+			}
 
 
 			function goToPosition(_x, _y, _z) {
@@ -1352,10 +1352,12 @@
 						case 33: // d
 							god = true;
 							controlsEnabled = true;
+							route = false;
 							break;
 						case 34: // d
 							god = false;
 							controlsEnabled = true;
+							route = false;
 							break;
 
 						case 32: // space

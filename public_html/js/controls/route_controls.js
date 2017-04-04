@@ -128,9 +128,9 @@ function moveRoute(_route, x, y, z) {
         timeWindowS = timeWindowE;
         timeWindowE = timeWindowE + parseInt(_thisRoute.route.path[i].movement.t);
         //console.log('Elapsed Time:' + timeElapsed);
-        //console.log('Window:' + timeWindowS + ' - ' + timeWindowE + '  Elapsed Time:' + timeElapsed);
+        console.log('Window:' + timeWindowS + ' - ' + timeWindowE + '  Elapsed Time:' + timeElapsed);
 
-        if (timeElapsed <= timeWindowE && timeElapsed > timeWindowS) {
+        if (timeElapsed <= timeWindowE && timeElapsed >= timeWindowS) {
             //WE ARE HERE IN THE ROUTE
             console.log('In Window: ' + i);
             foundWindow = true;
