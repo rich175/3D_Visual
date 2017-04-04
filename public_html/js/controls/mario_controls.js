@@ -27,7 +27,6 @@ function changeHeight() {
     } else {
         marioHeight = _1stFloorHeight;
     }
-    controls.getObject().position.y = marioHeight;
 }
 
 //Set up parameters for mario mode movement
@@ -126,22 +125,28 @@ function marioControls(cntrls, moveForward, moveBackward, moveLeft, moveRight) {
     };
 
 
-    var isOnObject = intersections.length > 0;
+    //var isOnObject = intersections.length > 0;
 
     var time = performance.now();
     var delta = (time - prevTime) / 1000;
 
-    velocity.x -= velocity.x * 10.0 * delta;
-    velocity.z -= velocity.z * 10.0 * delta;
+velocity.x = 0;
+velocity.z = 0;
+
+    //velocity.x -= velocity.x * 20.0 * delta;
+    //velocity.z -= velocity.z * 20.0 * delta;
+
+
 
     velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
 
     if (!collision) {
-        if (moveForward) velocity.z -= 400.0 * delta;
-        if (moveBackward) velocity.z += 400.0 * delta;
+        var _mSpeed = 80;
+        if (moveForward) velocity.z = -_mSpeed;
+        if (moveBackward) velocity.z = _mSpeed;
 
-        if (moveLeft) velocity.x -= 400.0 * delta;
-        if (moveRight) velocity.x += 400.0 * delta;
+        if (moveLeft) velocity.x = -_mSpeed;
+        if (moveRight) velocity.x = _mSpeed;
     }
 
     /*if (isOnObject === true) {

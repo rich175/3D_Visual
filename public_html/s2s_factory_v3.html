@@ -61,7 +61,6 @@
 	<script src="js/sfdeskPacking.js"></script>
 	<script src="js/courier.js"></script>
 	<script src="js/recyclingBinsMore.js"></script>
-
 	<script src="js/controls/god_controls.js"></script>
 	<script src="js/controls/mario_controls.js"></script>
 	<script src="js/controls/route_controls.js"></script>
@@ -608,7 +607,7 @@
 				mesh1.position.x = x - 10;
 				mesh1.position.y = y;
 				mesh1.position.z = z;
-				//scene.add(mesh1);
+				scene.add(mesh1);
 			}
 
 
@@ -654,42 +653,7 @@
 				mesh1.position.x = x - 10;
 				mesh1.position.y = y;
 				mesh1.position.z = z;
-				//scene.add(mesh1);
-			}
-
-
-			function addGText(text, x, y, z, rotate, label) {
-				var _name = 'g_' + label;
-				var cv = document.createElement("canvas");
-				var xc = cv.getContext("2d");
-				//var _newWidth = 20;
-				//cv.height = (_newWidth / cv.width)* cv.height;
-				//cv.width = _newWidth;
-				cv.width = 1000;
-				cv.height = 1000;
-				//xc.shadowColor = "#000";
-				//xc.shadowBlur = 1;
-				xc.fillStyle = "#cc0066";
-				xc.font = "60px Bold Arial";
-				xc.align = "left";
-				xc.fillText(text, 10, 90);
-
-				var xm = new THREE.MeshBasicMaterial({
-					map: new THREE.Texture(cv),
-					transparent: true
-				});
-				xm.map.needsUpdate = true;
-
-				var mesh = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), xm);
-				mesh.name = _name;
-				mesh.material.side = THREE.DoubleSide;
-				mesh.rotateY(rotate);
-				mesh.position.x = x - 10;
-				mesh.position.y = y;
-				mesh.position.z = z;
-				mesh.doubleSided = true;
-				//scene.add(mesh);
-
+				scene.add(mesh1);
 			}
 
 
@@ -1065,6 +1029,7 @@
 			var route = false;
 			var god = true;
 			var controlsEnabled = false;
+			var currentRoute = '';
 
 			var moveForward = false;
 			var moveBackward = false;
@@ -1096,7 +1061,7 @@
 					console.log(_newPositions);
 				}
 				if (route) {
-					var _newPositions = moveRoute('routeGetItems.json', (controls.getObject().position.x / meter), (controls.getObject().position.y / meter), (controls.getObject().position.z / meter));
+					var _newPositions = moveRoute(currentRoute, (controls.getObject().position.x / meter), (controls.getObject().position.y / meter), (controls.getObject().position.z / meter));
 					console.log(_newPositions);
 					if (_newPositions.complete) {
 						route = false;
@@ -1116,7 +1081,8 @@
 			}
 
 
-			function goToPosition(_x, _y, _z) {
+			function goToPosition(_x, _y, _z, _route) {
+				currentRoute = _route;
 				controlsEnabled = false;
 				route = true;
 
@@ -1272,56 +1238,56 @@
 
 							break;
 							//go to position from sales to shopfloor to lorry to customer press1
-							//case 49:
-							//processJSONRoute("routeGetItems.json")
-							//break;
+							case 49:
+							startRoute("routeGetItems.json", goToPosition);
+							break;
 
 							//press 2
 						case 50:
-							processJSONRoute("routeItemsArrive.json")
+							startRoute("routeItemsArrive.json", goToPosition);
 							break;
 							//goToPosition(-49.80, marioHeight, -942.95);
 							//	processJSONRoute("routeItemsArrive.json")
 							//	break;
 							// press 3 for processing route
 						case 51:
-							processJSONRoute("routeProcessing.json")
+							startRoute("routeProcessing.json", goToPosition);
 							break;
 							//  4 for locked route
 						case 52:
-							processJSONRoute("routeLockedLoop.json")
+							startRoute("routeLockedLoop.json", goToPosition);
 							break;
 							// 5 for functional test
 						case 53:
-							processJSONRoute("routeFunctional.json")
+							startRoute("routeFunctional.json", goToPosition);
 							break;
 							// 6 for data erasure
 						case 54:
-							processJSONRoute("routeDataErasure.json")
+							startRoute("routeDataErasure.json", goToPosition);
 							break;
 							// 7 for value est
 						case 55:
-							processJSONRoute("routeValueEst.json")
+							startRoute("routeValueEst.json", goToPosition);
 							break;
 							// 8 for blind bidding
 						case 56:
-							processJSONRoute("routeBlindBid.json")
+							startRoute("routeBlindBid.json", goToPosition);
 							break;
 							// 9 for sold
 						case 57:
-							processJSONRoute("routeSold.json")
+							startRoute("routeSold.json", goToPosition);
 							break;
 							// 0 for complete
 						case 48:
-							processJSONRoute("routeComplete.json")
+							startRoute("routeComplete.json", goToPosition);
 							break;
 						case 80:
 							changeHeight();
 							break;
 							//1
-						case 49:
-							changeFloorVisibility();
-							break;
+						//case 49:
+							//changeFloorVisibility();
+							//break;
 						case 66:
 							fakeAddBox();
 							break;

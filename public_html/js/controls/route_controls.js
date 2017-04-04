@@ -75,7 +75,7 @@ function startRoute(_route, movementCallback) {
         }
     }
     //go to start position
-    movementCallback(_thisRoute.route.route.start.x, _thisRoute.route.route.start.y, _thisRoute.route.route.start.z);
+    movementCallback(_thisRoute.route.route.start.x, _thisRoute.route.route.start.y, _thisRoute.route.route.start.z, _route);
 }
 
 
