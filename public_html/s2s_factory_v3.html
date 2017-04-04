@@ -74,6 +74,14 @@
 			</div>
 		</div>
 	</div>
+	<!--<div id="container2">
+		<div id="blocker2">
+
+				<span style="font-size:40px"><br/> WORKKKKKKKKKKKKKKK </br>Thank you</span>
+
+		</div>
+	</div>-->
+
 
 	<script>
 		$(document).ready(function() {
@@ -111,24 +119,24 @@
 
 						controls.enabled = true;
 
-						blocker.style.display = 'none';
+						//blocker.style.display = 'none';
 
 					} else {
 
 						controls.enabled = false;
 
-						blocker.style.display = '-webkit-box';
-						blocker.style.display = '-moz-box';
-						blocker.style.display = 'box';
+						//blocker.style.display = '-webkit-box';
+						//blocker.style.display = '-moz-box';
+						//blocker.style.display = 'box';
 
-						instructions.style.display = '';
+						//instructions.style.display = '';
 
 					}
 				};
 
 				var pointerlockerror = function(event) {
 
-					instructions.style.display = '';
+					//instructions.style.display = '';
 
 				};
 
@@ -143,7 +151,7 @@
 
 				instructions.addEventListener('click', function(event) {
 
-					instructions.style.display = 'none';
+					//instructions.style.display = 'none';
 
 					controlsEnabled = false;
 					god = false;
@@ -1009,6 +1017,14 @@
 							renderer.setSize(container.clientWidth, container.clientHeight);
 							container.appendChild(renderer.domElement);
 
+
+							/*renderer = new THREE.WebGLRenderer();
+							renderer.setClearColor(0xffffff);
+							renderer.setPixelRatio(window.devicePixelRatio);
+							container2 = document.getElementById('container2');
+							renderer.setSize(container2.clientWidth, container2.clientHeight);
+							container2.appendChild(renderer.domElement);*/
+
 							//document.body.appendChild(renderer.domElement);
 
 							window.addEventListener('resize', onWindowResize, false);
@@ -1074,7 +1090,7 @@
 						if (isNumeric(_newPositions.Y)) controls.getObject().position.y = _newPositions.Y * meter;
 
 						if (isNumeric(_newPositions.Z)) controls.getObject().position.z = _newPositions.Z * meter;
-						
+
 						if (isNumeric(_newPositions.translateX)) controls.getObject().translateX(_newPositions.translateX * meter);
 						if (isNumeric(_newPositions.translateY)) controls.getObject().translateY(_newPositions.translateY * meter);
 						if (isNumeric(_newPositions.translateZ)) controls.getObject().translateZ(_newPositions.translateZ * meter);
@@ -1480,9 +1496,7 @@
 			}
 		});
 	</script>
-	<div id="controlInfo"> W,A,S,D = move, SPACE = Jump, Mousemove = look around</br> Page up for birds eye view </br> Page down for ground level </br>ESCAPE to free cursor </div>
-	<div id="progressBar"> Progress Bar will go here </div>
-	<div class="container"> IMage of storyboard will go here </div>
+
 </body>
 
 </html>

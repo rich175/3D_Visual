@@ -166,7 +166,7 @@ function moveRoute(_route, x, y, z) {
             var error = 0.5;
 
             var _smooth = 0.2;
-            var _fast = 1;
+            var _fast = 0.5;
 
             var _distanceLimit = 100;
 
