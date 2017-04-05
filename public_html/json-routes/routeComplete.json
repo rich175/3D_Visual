@@ -18,7 +18,7 @@
                  "y": "1",
                  "z": "-2.13",
                  "t": "2000",
-                 "text": "Step 1: xyz"
+                 "text": "<span style='font-size:40px'><br/> Step 1: xyz"
              }
          },{
              "movement": {
@@ -26,7 +26,7 @@
                  "y": "1",
                  "z": "-2.73",
                  "t": "2000",
-                 "text": "Step 2: xyz"
+                 "text": "<span style='font-size:40px'><br/> Step 2: xyz"
              }
          },{
              "movement": {
@@ -34,7 +34,7 @@
                  "y": "1",
                  "z": "-4.08",
                  "t": "2000",
-                 "text": "Step 3: xyz"
+                 "text": "<span style='font-size:40px'><br/> Step 3: xyz"
              }
          },{
              "movement": {
@@ -42,7 +42,7 @@
                  "y": "1",
                  "z": "-3.9",
                  "t": "2000",
-                 "text": "Step 4: xyz"
+                 "text": "<span style='font-size:40px'><br/> Step 4: xyz"
              }
          },{
              "movement": {
@@ -50,7 +50,7 @@
                  "y": "1",
                  "z": "11.62",
                  "t": "2000",
-                 "text": "Step 5: xyz"
+                 "text": "<span style='font-size:40px'><br/> Step 5: xyz"
              }
          },{
              "movement": {
@@ -58,7 +58,7 @@
                "y": "4",
                "z": "11.62",
                "t": "2000",
-               "text": "Step 6: xyz"
+               "text": "<span style='font-size:40px'><br/> Step 6: xyz"
              }
          },{
              "movement": {
@@ -66,7 +66,7 @@
                "y": "4",
                "z": "12.16",
                "t": "2000",
-               "text": "Step 7: xyz"
+               "text": "<span style='font-size:40px'><br/> Step 7: xyz"
              }
          },{
              "movement": {
@@ -74,7 +74,7 @@
                "y": "4",
                "z": "19.20",
                "t": "2000",
-               "text": "Step 8: xyz"
+               "text": "<span style='font-size:40px'><br/> Step 8: xyz"
              }
          },{
              "movement": {
@@ -82,7 +82,7 @@
                "y": "4",
                "z": "19.20",
                "t": "2000",
-               "text": "Step 9: xyz"
+               "text": "<span style='font-size:40px'><br/> Step 9: xyz"
              }
          }]
      }

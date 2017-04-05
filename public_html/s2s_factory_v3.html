@@ -1084,7 +1084,7 @@
 						//console.log(_newPositions.text);
 						if (displayText != _newPositions.text) {
 							displayText = _newPositions.text;
-							document.getElementById("instructions").innerHTML = '<span style="font-size:40px"><br/>' + displayText;
+							document.getElementById("instructions").innerHTML = displayText;
 						}
 
 						if (isNumeric(_newPositions.X)) controls.getObject().position.x = _newPositions.X * meter;
