@@ -1037,20 +1037,33 @@
 			var moveRight = false;
 			var canJump = false;
 
-
+			//text for display
+			var displayText = '<span style="font-size:40px"><br/>ehhhh';
+			var prevText = '';
 
 			function animate() {
 
+
+
+
+
 				requestAnimationFrame(animate);
 
+				//if controls enabled, i.e. mario or god
 				if (controlsEnabled) {
 
 					if (god) {
+						displayText = '<span style="font-size:40px"><br/>Overview';
 						var _newPositions = godControls(controls.getObject().position.x, controls.getObject().position.z, controls.getObject().position.y, moveForward, moveBackward, moveLeft, moveRight);
 
 					} else {
+						displayText = '<span style="font-size:40px"><br/>Explore';
 
 						var _newPositions = marioControls(controls, moveForward, moveBackward, moveLeft, moveRight);
+					}
+					if (prevText != displayText) {
+						document.getElementById("instructions").innerHTML = displayText;
+						prevText = displayText;
 					}
 					if (isNumeric(_newPositions.X)) controls.getObject().position.x = _newPositions.X;
 					if (isNumeric(_newPositions.Y)) controls.getObject().position.y = _newPositions.Y;
@@ -1058,20 +1071,25 @@
 					if (isNumeric(_newPositions.translateX)) controls.getObject().translateX(_newPositions.translateX);
 					if (isNumeric(_newPositions.translateY)) controls.getObject().translateY(_newPositions.translateY);
 					if (isNumeric(_newPositions.translateZ)) controls.getObject().translateZ(_newPositions.translateZ);
-					console.log(_newPositions);
+					//console.log(_newPositions);
 				}
+				//if going on a route walk
 				if (route) {
+					var prevText = '';
 					var _newPositions = moveRoute(currentRoute, (controls.getObject().position.x / meter), (controls.getObject().position.y / meter), (controls.getObject().position.z / meter));
-					console.log(_newPositions);
+					//console.log(_newPositions);
 					if (_newPositions.complete) {
 						route = false;
 					} else {
+						//console.log(_newPositions.text);
+						if (displayText != _newPositions.text) {
+							displayText = _newPositions.text;
+							document.getElementById("instructions").innerHTML = '<span style="font-size:40px"><br/>' + displayText;
+						}
+
 						if (isNumeric(_newPositions.X)) controls.getObject().position.x = _newPositions.X * meter;
-
 						if (isNumeric(_newPositions.Y)) controls.getObject().position.y = _newPositions.Y * meter;
-
 						if (isNumeric(_newPositions.Z)) controls.getObject().position.z = _newPositions.Z * meter;
-
 						if (isNumeric(_newPositions.translateX)) controls.getObject().translateX(_newPositions.translateX * meter);
 						if (isNumeric(_newPositions.translateY)) controls.getObject().translateY(_newPositions.translateY * meter);
 						if (isNumeric(_newPositions.translateZ)) controls.getObject().translateZ(_newPositions.translateZ * meter);
@@ -1238,7 +1256,7 @@
 
 							break;
 							//go to position from sales to shopfloor to lorry to customer press1
-							case 49:
+						case 49:
 							startRoute("routeGetItems.json", goToPosition);
 							break;
 
@@ -1285,7 +1303,7 @@
 							changeHeight();
 							break;
 							//1
-						//case 49:
+							//case 49:
 							//changeFloorVisibility();
 							//break;
 						case 66:

@@ -103,6 +103,7 @@ function moveRoute(_route, x, y, z) {
         X: '',
         Y: '',
         Z: '',
+        text:'',
     }
 
     var timeNow = new Date().getTime();
@@ -133,6 +134,11 @@ function moveRoute(_route, x, y, z) {
         if (timeElapsed <= timeWindowE && timeElapsed >= timeWindowS) {
             //WE ARE HERE IN THE ROUTE
             console.log('In Window: ' + i);
+
+            //Set display text
+            results.text = _thisRoute.route.path[i].movement.text;
+
+            
             foundWindow = true;
 
             var time = performance.now();
