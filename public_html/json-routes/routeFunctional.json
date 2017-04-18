@@ -16,8 +16,34 @@
                "x": "-29.8",
                "y": "1",
                "z": "2.92",
-                 "t": "8000"
+                 "t": "8000",
+                 "text": "<span style='font-size:30px'><br/> Complete functional test, note any damage or problems."
              }
-         }]
+         },{
+             "movement": {
+               "x": "-29.8",
+               "y": "1",
+               "z": "2.92",
+                 "t": "4000",
+                 "text": "<span style='font-size:30px'><br/> Damaged or faulty phones fail functional test."
+             }
+         },{
+             "movement": {
+               "x": "-29.8",
+               "y": "1",
+               "z": "2.92",
+                 "t": "8000",
+                 "text": "<span style='font-size:30px'><br/> Damaged but repairable: add note to system (asset track), repair after data erasure."
+             }
+         },{
+             "movement": {
+               "x": "-29.8",
+               "y": "1",
+               "z": "2.92",
+                 "t": "8000",
+                 "text": "<span style='font-size:30px'><br/> Damaged beyond economic repair: fail test, add note to asset track."
+             }
+         }
+       ]
      }
  }

@@ -16,210 +16,248 @@
                "x": "-29.6",
                "y": "1",
                "z": "3",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Process batch of 10 phones"
              }
          },{
              "movement": {
                "x": "-29.6",
                "y": "1",
                "z": "3",
-                 "t": "8000"
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Process batch of 10 phones"
              }
          },{
              "movement": {
                "x": "-29.04",
                "y": "1",
                "z": "-4.12 ",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take phones to data erasure "
              }
          },{
              "movement": {
                "x": "-25.16",
                "y": "1",
                "z": "-3.76",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take phones to data erasure"
              }
          },{
              "movement": {
                "x": "-24.36",
                "y": "1",
                "z": "10.08",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take phones to data erasure"
              }
          },{
              "movement": {
                "x": "-24.36",
                "y": "1",
                "z": "10.08",
-                 "t": "8000"
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Attach phones to data erasure station"
              }
          },{
              "movement": {
                "x": "-25.16",
                "y": "1",
                "z": "-3.76",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing phones"
              }
          },{
              "movement": {
                "x": "-29.04",
                "y": "1",
                "z": "-4.12 ",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing phones"
              }
          },{
              "movement": {
                "x": "-29.6",
                "y": "1",
                "z": "3",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing phones"
              }
          },{
              "movement": {
                "x": "-29.6",
                "y": "1",
                "z": "3",
-                 "t": "8000"
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Continue with processing phones"
              }
          },{
              "movement": {
                "x": "-29.04",
                "y": "1",
                "z": "-4.12 ",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Collect phones from data erasure"
              }
          },{
              "movement": {
                "x": "-25.16",
                "y": "1",
                "z": "-3.76",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Collect phones from data erasure"
              }
          },{
              "movement": {
                "x": "-24.36",
                "y": "1",
                "z": "10.08",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Collect phones from data erasure"
              }
          },{
              "movement": {
                "x": "-24.36",
                "y": "1",
                "z": "10.08",
-                 "t": "8000"
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Remove phones from data erasure"
              }
          },{
              "movement": {
                "x": "-25.16",
                "y": "1",
                "z": "-3.76",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing room"
              }
          },{
              "movement": {
                "x": "-29.04",
                "y": "1",
                "z": "-4.12 ",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing room"
              }
          },{
              "movement": {
                "x": "-29.6",
                "y": "1",
                "z": "3",
-                 "t": "8000"
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Clean and delabel all processed phones from order. </br> Place in box, label with order number."
              }
          },{
              "movement": {
                "x": "-29.52",
                "y": "1",
                "z": "14.92",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take order to secure stores."
              }
          },{
              "movement": {
                "x": "-20.52",
                "y": "1",
                "z": "19.2",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take order to secure stores."
              }
          },{
              "movement": {
                "x": "-2.48",
                "y": "1",
                "z": "30.32",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take order to secure stores."
              }
          },{
              "movement": {
                "x": "-2.76",
                "y": "1",
                "z": "34.6",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take order to secure stores."
              }
          },{
              "movement": {
                "x": "-8.92",
                "y": "1",
                "z": "35.88",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take order to secure stores."
              }
          },{
              "movement": {
                "x": "-9.2",
                "y": "1",
                "z": "37.92",
-                 "t": "6000"
+                 "t": "6000",
+                 "text": "<span style='font-size:20px'><br/> Place in secure stores ready for sale or return to customer"
              }
          },{
              "movement": {
                "x": "-8.92",
                "y": "1",
                "z": "35.88",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing room."
              }
          },{
              "movement": {
                "x": "-2.76",
                "y": "1",
                "z": "34.6",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing room."
              }
          },{
              "movement": {
                "x": "-2.48",
                "y": "1",
                "z": "30.32",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing room."
              }
          },{
              "movement": {
                "x": "-20.52",
                "y": "1",
                "z": "19.2",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing room."
              }
          },{
              "movement": {
                "x": "-29.52",
                "y": "1",
                "z": "14.92",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing room."
              }
          },{
              "movement": {
                "x": "-29.48",
                "y": "1",
                "z": "15.4",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Return to processing room."
              }
          },{
              "movement": {
                "x": "-29.64",
                "y": "1",
                "z": "13.28",
-                 "t": "8000"
+                 "t": "2000",
+                 "text": "<span style='font-size:20px'><br/> Export asset track report to excel. </br> Add inspection grade and value estimate. </br> Email excel report to sales to negotiate with customer."
+             }
+         },{
+             "movement": {
+               "x": "-30.12",
+               "y": "1",
+               "z": "13.28",
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Export asset track report to excel. </br> Add inspection grade and value estimate. </br> Email excel report to sales to negotiate with customer."
              }
          }
        ]

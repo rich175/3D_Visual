@@ -1038,7 +1038,7 @@
 			var canJump = false;
 
 			//text for display
-			var displayText = '<span style="font-size:40px"><br/>ehhhh';
+			var displayText = '<span style="font-size:40px"><br/>';
 			var prevText = '';
 
 			function animate() {
@@ -1265,8 +1265,8 @@
 							startRoute("routeItemsArrive.json", goToPosition);
 							break;
 							//goToPosition(-49.80, marioHeight, -942.95);
-							//	processJSONRoute("routeItemsArrive.json")
-							//	break;
+							//processJSONRoute("routeItemsArrive.json")
+							//break;
 							// press 3 for processing route
 						case 51:
 							startRoute("routeProcessing.json", goToPosition);
@@ -1289,12 +1289,12 @@
 							break;
 							// 8 for blind bidding
 						case 56:
-							startRoute("routeBlindBid.json", goToPosition);
-							break;
-							// 9 for sold
-						case 57:
 							startRoute("routeSold.json", goToPosition);
 							break;
+							// 9 for sold
+						//case 57:
+							//startRoute("routeSold.json", goToPosition);
+							//break;
 							// 0 for complete
 					//	case 48:
 						//	startRoute("routeComplete.json", goToPosition);

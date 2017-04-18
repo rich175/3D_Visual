@@ -16,28 +16,37 @@
                "x": "2.44",
                "y": "1",
                "z": "-32.4",
-                 "t": "2000"
+                 "t": "2000",
+                 "text": "<span style='font-size:20px'><br/> Goods arrive, either by shop floor staff"
+
+
              }
          },{
              "movement": {
                  "x": "2.44",
                  "y": "1",
                  "z": "-36.6",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Or by courier"
+
              }
          },{
              "movement": {
                  "x": "12",
                  "y": "1",
                  "z": "-35.48",
-                 "t": "8000"
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Or by courier"
+
              }
          },{
              "movement": {
                  "x": "0",
                  "y": "1",
                  "z": "-36.6",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Shop floor tell sales the new order has arrived. Check order is as expected, check discrepancies with customer "
+
              }
          }]
      }
