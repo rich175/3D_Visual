@@ -950,10 +950,10 @@
 							createOfficeDeskOccupied(-24 * meter, 3 * meter, 20 * meter, 0, '1_officeDeskPC_sales1', addNewofficedeskOccupied);
 							addBigText("Sales Offices", -21.9 * meter, 5.5 * meter, 20 * meter, (Math.PI / 2));
 							addText("Sales Manager", -23.2 * meter, 5.3 * meter, 20 * meter, (-Math.PI / 2));
-							addText("On phone or email to:", -23.2 * meter, 4.9 * meter, 20 * meter, (-Math.PI / 2));
-							addText("shop floor,", -23.2 * meter, 4.7 * meter, 20 * meter, (-Math.PI / 2));
-							addText("customer,", -23.2 * meter, 4.5 * meter, 20 * meter, (-Math.PI / 2));
-							addText("or buyer.", -23.2 * meter, 4.3 * meter, 20 * meter, (-Math.PI / 2));
+							//addText("On phone or email to:", -23.2 * meter, 4.9 * meter, 20 * meter, (-Math.PI / 2));
+							//addText("shop floor,", -23.2 * meter, 4.7 * meter, 20 * meter, (-Math.PI / 2));
+							//addText("customer,", -23.2 * meter, 4.5 * meter, 20 * meter, (-Math.PI / 2));
+							//addText("or buyer.", -23.2 * meter, 4.3 * meter, 20 * meter, (-Math.PI / 2));
 
 							createOfficeDeskPC(-24 * meter, 3 * meter, 24 * meter, 0, '1_officeDeskPC_sales1', addNewOfficeDeskPC);
 
@@ -1053,7 +1053,7 @@
 				if (controlsEnabled) {
 
 					if (god) {
-						displayText = '<span style="font-size:40px"><br/>Overview';
+						displayText = '<span style="font-size:40px"><br/>Overview: to explore on the floor, press "fn" and down arrow';
 						var _newPositions = godControls(controls.getObject().position.x, controls.getObject().position.z, controls.getObject().position.y, moveForward, moveBackward, moveLeft, moveRight);
 
 					} else {
@@ -1249,12 +1249,12 @@
 							moveToPosition(100, 0, 0);
 							break;
 
-						case 191:
+						//case 191:
 							//goToPosition(-49.80, marioHeight, -942.95);
 
-							startRoute("routeGetItems.json", goToPosition);
+							//startRoute("routeGetItems.json", goToPosition);
 
-							break;
+//							break;
 							//go to position from sales to shopfloor to lorry to customer press1
 						case 49:
 							startRoute("routeGetItems.json", goToPosition);
@@ -1296,9 +1296,9 @@
 							startRoute("routeSold.json", goToPosition);
 							break;
 							// 0 for complete
-						case 48:
-							startRoute("routeComplete.json", goToPosition);
-							break;
+					//	case 48:
+						//	startRoute("routeComplete.json", goToPosition);
+							//break;
 						case 80:
 							changeHeight();
 							break;
