@@ -16,7 +16,17 @@
                "x": "-26.28",
                "y": "4",
                "z": "18.96",
-               "t": "8000"
+               "t": "8000",
+               "text": "<span style='font-size:20px'><br/> Sales send excel list to customer. Customer confirms which items to return and which to sell to S2S. "
+
+           }
+       },{
+           "movement": {
+               "x": "-26.28",
+               "y": "4",
+               "z": "18.96",
+               "t": "8000",
+               "text": "<span style='font-size:20px'><br/> Sales update asset tracking. Confirm customer decision to shop floor and finance.  "
 
            }
        },{
@@ -24,7 +34,8 @@
                "x": "-25.52",
                "y": "4",
                "z": "28.04",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -32,7 +43,8 @@
                "x": "-24.28",
                "y": "4",
                "z": "28",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -40,7 +52,8 @@
                "x": "-24.48",
                "y": "4",
                "z": "32.48",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -48,7 +61,8 @@
                "x": "-23.04",
                "y": "4",
                "z": "32.56",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -56,7 +70,8 @@
                "x": "-22.92",
                "y": "4",
                "z": "34.52",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },
@@ -65,7 +80,8 @@
                "x": "-25.72",
                "y": "4",
                "z": "34.6",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -73,7 +89,8 @@
                "x": "-25.64",
                "y": "4",
                "z": "36.44",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -81,7 +98,8 @@
                "x": "-25.36",
                "y": "1",
                "z": "35.2",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -89,7 +107,8 @@
                "x": "-18.08",
                "y": "1",
                "z": "35.44",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -97,7 +116,8 @@
                "x": "-18.08",
                "y": "1",
                "z": "23.36",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -105,7 +125,8 @@
                "x": "-19.96",
                "y": "1",
                "z": "18.6",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -113,7 +134,8 @@
                "x": "-29.68",
                "y": "1",
                "z": "17.4",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -121,7 +143,8 @@
                "x": "-29.8",
                "y": "1",
                "z": "7.2",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales confirm customer decision to shop floor)"
 
            }
        },{
@@ -129,7 +152,8 @@
                "x": "-29.8",
                "y": "1",
                "z": "7.2",
-               "t": "8000"
+               "t": "8000",
+               "text": "<span style='font-size:20px'><br/> Shop floor are informed which items are to be returned to customer."
 
            }
        },{
@@ -137,140 +161,216 @@
              "x": "-29.52",
              "y": "1",
              "z": "14.92",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (collect items from store)"
            }
        },{
            "movement": {
              "x": "-20.52",
              "y": "1",
              "z": "19.2",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (collect items from store)"
            }
        },{
            "movement": {
              "x": "-2.48",
              "y": "1",
              "z": "30.32",
-               "t": "1000"
+               "t": "2000",
+               "text": "<span style='font-size:20px'><br/> (collect items from store)"
            }
        },{
            "movement": {
              "x": "-2.76",
              "y": "1",
              "z": "34.6",
-               "t": "1000"
+               "t": "2000",
+               "text": "<span style='font-size:20px'><br/> (collect items from store)"
            }
        },{
            "movement": {
              "x": "-8.92",
              "y": "1",
              "z": "35.88",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (collect items from store)"
            }
        },{
            "movement": {
              "x": "-9.2",
              "y": "1",
              "z": "37.92",
-               "t": "6000"
+               "t": "6000",
+               "text": "<span style='font-size:20px'><br/> Collect items for return to customer"
            }
        },{
            "movement": {
              "x": "-8.92",
              "y": "1",
              "z": "35.88",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (return with items)"
            }
        },{
            "movement": {
              "x": "-2.76",
              "y": "1",
              "z": "34.6",
-               "t": "1000"
+               "t": "3000",
+               "text": "<span style='font-size:20px'><br/> (return with items)"
            }
        },{
            "movement": {
              "x": "-2.48",
              "y": "1",
              "z": "30.32",
-               "t": "1000"
+               "t": "3000",
+               "text": "<span style='font-size:20px'><br/> (return with items)"
            }
        },{
            "movement": {
              "x": "-20.52",
              "y": "1",
              "z": "19.2",
-               "t": "1000"
+               "t": "3000",
+               "text": "<span style='font-size:20px'><br/> (return with items)"
            }
        },{
            "movement": {
              "x": "-29.52",
              "y": "1",
              "z": "14.92",
-               "t": "1000"
+               "t": "2000",
+               "text": "<span style='font-size:20px'><br/> (return with items)"
            }
        },{
            "movement": {
              "x": "-29.48",
              "y": "1",
              "z": "15.4",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (return with items)"
            }
        },{
            "movement": {
              "x": "-29.64",
              "y": "1",
              "z": "13.28",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (return with items)"
            }
        },{
            "movement": {
              "x": "-29.24",
              "y": "1",
              "z": "0.52",
-               "t": "8000"
+               "t": "2000",
+               "text": "<span style='font-size:20px'><br/> (return with items)"
            }
        },{
            "movement": {
              "x": "-29.52",
              "y": "1",
              "z": "-3.56",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (collect erasure certificates)"
+           }
+       },{
+           "movement": {
+             "x": "-29.6",
+             "y": "1",
+             "z": "-3.64",
+               "t": "3000",
+               "text": "<span style='font-size:20px'><br/> (collect erasure certificates)"
+           }
+       },{
+           "movement": {
+             "x": "-24.92",
+             "y": "1",
+             "z": "-3.92",
+               "t": "3000",
+               "text": "<span style='font-size:20px'><br/> (collect erasure certificates)"
+           }
+       },{
+           "movement": {
+             "x": "-26.12",
+             "y": "1",
+             "z": "11.76",
+               "t": "4000",
+               "text": "<span style='font-size:20px'><br/> Printing data erasure certificates"
+           }
+       },{
+           "movement": {
+             "x": "-29.6",
+             "y": "1",
+             "z": "-3.64",
+               "t": "3000",
+               "text": "<span style='font-size:20px'><br/> (return with items and erasure certificates)"
+           }
+       },{
+           "movement": {
+             "x": "-30.24",
+             "y": "1",
+             "z": "-1.8",
+               "t": "4000",
+               "text": "<span style='font-size:20px'><br/> Packing items and certificates"
+           }
+       },{
+           "movement": {
+             "x": "-29.6",
+             "y": "1",
+             "z": "-3.64",
+               "t": "2000",
+               "text": "<span style='font-size:20px'><br/> (Despatch items)"
            }
        },{
            "movement": {
              "x": "-28.64",
              "y": "1",
              "z": "-4.12",
-               "t": "1000"
+               "t": "2000",
+               "text": "<span style='font-size:20px'><br/> (Despatch items)"
+           }
+       },{
+           "movement": {
+             "x": "-28.64",
+             "y": "1",
+             "z": "-4.12",
+               "t": "2000",
+               "text": "<span style='font-size:20px'><br/> (Despatch items)"
            }
        },{
            "movement": {
              "x": "-27.24",
              "y": "1",
              "z": "-4",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Despatch items)"
            }
        },{
            "movement": {
              "x": "-22.16",
              "y": "1",
              "z": "-2.52",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Despatch items)"
            }
        },{
            "movement": {
              "x": "10.12",
              "y": "1",
              "z": "-3.8",
-               "t": "1000"
+               "t": "3000",
+               "text": "<span style='font-size:20px'><br/> (Despatch items)"
            }
        },{
            "movement": {
-             "x": "11.16",
+             "x": "12.24",
              "y": "1",
-             "z": "-35.56",
-               "t": "1000"
+             "z": "-20.56",
+               "t": "3000",
+               "text": "<span style='font-size:20px'><br/> Goods despatched to customer (by courier)"
            }
        }]
      }

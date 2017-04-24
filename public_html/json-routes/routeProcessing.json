@@ -16,38 +16,48 @@
                  "x": "0",
                  "y": "1",
                  "z": "-36.6",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take phones to processing room"
+
              }
          },{
              "movement": {
-                 "x": "-10.76",
+                 "x": "--4.48",
                  "y": "1",
-                 "z": "-35.2",
-                 "t": "1000"
+                 "z": "-35.56",
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> Take phones to processing room"
+
              }
          },
          {
              "movement": {
-                 "x": "-12.68",
+                 "x": "-11.04",
                  "y": "1",
-                 "z": "-3.04",
-                 "t": "1000"
+                 "z": "-3",
+                 "t": "3000",
+                 "text": "<span style='font-size:20px'><br/> Take phones to processing room"
+
              }
          },
          {
              "movement": {
-                 "x": "-24.8",
+                 "x": "-22.08",
                  "y": "1",
-                 "z": "-2.64",
-                 "t": "1000"
+                 "z": "-2.4",
+                 "t": "3000",
+                 "text": "<span style='font-size:20px'><br/> Take phones to processing room"
+
              }
          },
          {
              "movement": {
-                 "x": "-27.44",
+                 "x": "-27.48",
                  "y": "1",
-                 "z": "-4.12",
-                 "t": "1000"
+                 "z": "-3.92",
+                 "t": "3000",
+                 "text": "<span style='font-size:20px'><br/> Take phones to processing room"
+
              }
          },
          {
@@ -55,7 +65,9 @@
                  "x": "-29.6",
                  "y": "1",
                  "z": "-4.12",
-                 "t": "1000"
+                 "t": "2000",
+                 "text": "<span style='font-size:20px'><br/> Take phones to processing room"
+
              }
          },
          {
@@ -63,14 +75,36 @@
                  "x": "-30.08",
                  "y": "1",
                  "z": "-1.48",
-                 "t": "1000"
+                 "t": "1000",
+                 "text": "<span style='font-size:20px'><br/> "
+
              }
          },{
              "movement": {
                  "x": "-29.64",
                  "y": "1",
                  "z": "1.52",
-                 "t": "1000"
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Charge phones. Attach unique ID tag to first phone. </br>Place on tag reader to register."
+
+             }
+         },{
+             "movement": {
+                 "x": "-29.64",
+                 "y": "1",
+                 "z": "1.52",
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Open Asset Track system. Input phone details.</br> Identify unfamiliar phone using internet search."
+
+             }
+         },{
+             "movement": {
+                 "x": "-29.64",
+                 "y": "1",
+                 "z": "1.52",
+                 "t": "8000",
+                 "text": "<span style='font-size:20px'><br/> Check for damage, carrier lock and functionality."
+
              }
          }]
      }

@@ -16,7 +16,16 @@
                "x": "-29.64",
                "y": "1",
                "z": "1.52",
-                 "t": "2000"
+                 "t": "2000",
+                 "text": "<span style='font-size:20px'><br/> Phone is iCloud Locked"
+             }
+         },{
+             "movement": {
+               "x": "-29.64",
+               "y": "1",
+               "z": "1.52",
+                 "t": "2000",
+                 "text": "<span style='font-size:20px'><br/> Phone sales to inform ID of iCloud locked phone"
              }
          },
          {
@@ -24,196 +33,224 @@
                "x": "-29.64",
                "y": "1",
                "z": "5.64",
-               "t": "8000"
+               "t": "8000",
+               "text": "<span style='font-size:20px'><br/> Tell sales the ID of the iCloud locked phone"
              }
          },{
              "movement": {
                "x": "-29.64",
                "y": "1",
                "z": "9.44",
-               "t": "8000"
+               "t": "8000",
+               "text": "<span style='font-size:20px'><br/> Place locked phone in quarantine"
              }
          },{
              "movement": {
                "x": "-29.64",
                "y": "1",
                "z": "16.28",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock) "
              }
          },{
              "movement": {
                "x": "-19.16",
                "y": "1",
                "z": "22.68",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/>(sales informed of iCloud lock) "
              }
          },{
              "movement": {
                "x": "-18.04",
                "y": "1",
                "z": "35.36",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock)"
              }
          },{
              "movement": {
                "x": "-26",
                "y": "1",
                "z": "35.28",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock)"
              }
          },{
              "movement": {
                "x": "-26.12",
                "y": "1",
                "z": "36.12",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock)"
              }
          },{
              "movement": {
                "x": "-26.12",
                "y": "4",
                "z": "36.12",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock)"
              }
          },{
              "movement": {
                "x": "-26.04",
                "y": "4",
                "z": "34.8",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock)"
              }
          },{
              "movement": {
                "x": "-23.68",
                "y": "4",
                "z": "34.8",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock)"
              }
          },{
              "movement": {
                "x": "-23.24",
                "y": "4",
                "z": "31.8",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock)"
              }
          },{
              "movement": {
                "x": "-24.2",
                "y": "4",
                "z": "29.92",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock)"
              }
          },{
              "movement": {
                "x": "-26.6",
                "y": "4",
                "z": "26.32",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (sales informed of iCloud lock)"
              }
          },{
              "movement": {
                "x": "-26.4",
                "y": "4",
                "z": "19.48",
-               "t": "8000"
+               "t": "9000",
+               "text": "<span style='font-size:20px'><br/> Sales inform customer the phone is locked. </br> Customer arranges for phone to be unlocked. </br> Customer confirms unlock to sales.  </br> Sales confirm to shop floor. "
              }
          },{
              "movement": {
                "x": "-26.6",
                "y": "4",
                "z": "26.32",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-24.2",
                "y": "4",
                "z": "29.92",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-23.24",
                "y": "4",
                "z": "31.8",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-23.68",
                "y": "4",
                "z": "34.8",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-26.04",
                "y": "4",
                "z": "34.8",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-26.12",
                "y": "4",
                "z": "36.12",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-26.12",
                "y": "1",
                "z": "36.12",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/>(Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-26",
                "y": "1",
                "z": "35.28",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-18.04",
                "y": "1",
                "z": "35.36",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-18.04",
                "y": "1",
                "z": "22.68",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-29.64",
                "y": "1",
                "z": "16.28",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-29.64",
                "y": "1",
                "z": "5.64",
-               "t": "1000"
+               "t": "1000",
+               "text": "<span style='font-size:20px'><br/> (Sales confirm to shop floor)"
              }
          },{
              "movement": {
                "x": "-29.64",
                "y": "1",
                "z": "5.64",
-               "t": "8000"
+               "t": "8000",
+               "text": "<span style='font-size:20px'><br/>Shop floor receive confirmation from sales that phone is unlocked. "
              }
          },{
              "movement": {
                "x": "-29.64",
                "y": "1",
                "z": "9.44",
-               "t": "8000"
+               "t": "8000",
+               "text": "<span style='font-size:20px'><br/> Remove phone from quarantine."
              }
          }
          ]
